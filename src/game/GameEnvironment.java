@@ -1,4 +1,4 @@
-package game;
+package src.game;
 /**
  * This class implements the game environment.
  * It handles setting up and running a game.
