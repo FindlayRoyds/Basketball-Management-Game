@@ -1,4 +1,3 @@
-package src.game;
 /**
  * This class implements the game environment.
  * It handles setting up and running a game.
@@ -6,6 +5,7 @@ package src.game;
  * @author Jake van Keulen
  *
  */
+package src.game;
 
 import java.util.HashMap;
 
