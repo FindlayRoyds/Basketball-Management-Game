@@ -1,9 +1,9 @@
-package enumeration;
 /**
  * 
  * @author Jake van Keulen
  *
  */
+package src.enumeration;
 
 public enum Location {
 	MAP,
