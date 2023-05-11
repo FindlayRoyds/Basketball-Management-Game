@@ -1,4 +1,9 @@
 package enumeration;
+/**
+ * 
+ * @author Jake van Keulen
+ *
+ */
 
 public enum Location {
 	MAP,
