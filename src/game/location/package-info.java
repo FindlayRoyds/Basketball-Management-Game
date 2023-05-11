@@ -5,4 +5,4 @@
  * @author Findlay Royds
  *
  */
-package game.location;
+package src.game.location;

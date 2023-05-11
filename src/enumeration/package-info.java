@@ -5,4 +5,4 @@
  * @author Findlay Royds
  *
  */
-package enumeration;
+package src.enumeration;

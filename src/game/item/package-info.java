@@ -5,4 +5,4 @@
  * @author Findlay Royds
  *
  */
-package game.item;
+package src.game.item;
