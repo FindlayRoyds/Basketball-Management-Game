@@ -102,7 +102,7 @@ public class Athlete extends Purchasable {
 	 * @param e						The class of the enumeration
 	 * @return						an array of strings of the names of the enum
 	 */
-	public static String[] getEnumNames(Class<? extends Enum<?>> e) {
+	private static String[] getEnumNames(Class<? extends Enum<?>> e) {
 	    return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
 	}
 	
@@ -131,7 +131,7 @@ public class Athlete extends Purchasable {
 				// Get an array of strings describing each position
 				String[] positionNames = getEnumNames(Position.class);
 				int selectedIndex = gameEnvironment.getUIEnvironment().displayPopup(
-						popupMessage, positionNames) == 0;
+						popupMessage, positionNames);
 				Position selectedPosition = Position.values()[selectedIndex];
 				playerTeam.addAthleteToActive(this, selectedPosition);
 			} else {
