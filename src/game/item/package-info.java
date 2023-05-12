@@ -1,5 +1,7 @@
 /**
- * @author Findlay Royds
  * a package containing item classes
+ * 
+ * @author Findlay Royds
+ * @version 1.0, May 2023.
  */
-package src.game.item;
+package game.item;

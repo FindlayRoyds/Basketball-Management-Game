@@ -1,9 +1,10 @@
 /**
+ * This enum defines the locations in the game
  * 
  * @author Jake van Keulen
- *
+ * @version 1.0, May 2023.
  */
-package src.enumeration;
+package enumeration;
 
 public enum Location {
 	MAP,

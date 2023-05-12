@@ -1,5 +1,7 @@
 /**
+ * a package containing enumerations
+ * 
  * @author Findlay Royds
- * a package containing all enumerations
+ * @version 1.0, May 2023.
  */
-package src.enumeration;
+package enumeration;
