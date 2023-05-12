@@ -39,9 +39,15 @@ public class Player {
 	 * Removes a given amount from the Player's money.
 	 * 
 	 * @param amountOfMoney		The amount of money to be removed.
+	 * @return					If the charge was successful
 	 */
-	public void chargeMoney(float amountOfMoney) {
-		money -= amountOfMoney;
+	public boolean chargeMoney(float amountOfMoney) {
+		if (money >= amountOfMoney) {
+			money -= amountOfMoney;
+			return true;
+		} else {
+			return false;
+		}
 	}
 	/**
 	 * Gets and returns the team owned by the player.
