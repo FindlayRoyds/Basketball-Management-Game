@@ -10,7 +10,7 @@ public abstract class Purchasable {
 	/**
 	 * The amount of money the player is charged when purchasing from a market
 	 */
-	private float price;
+	protected float price;
 	
 	/**
 	 * @param player				The player attempting to make the purchase
