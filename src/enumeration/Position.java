@@ -1,11 +1,8 @@
-/**
- * 
- */
 package src.enumeration;
 
 /**
- * @author Findlay Royds
  * This enum defines all the positions available for athletes to play in a team
+ * @author Findlay Royds
  */
 public enum Position {
 	SHORT_SHOOTER,

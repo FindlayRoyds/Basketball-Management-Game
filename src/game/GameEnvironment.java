@@ -1,16 +1,16 @@
+package src.game;
+
+import java.util.HashMap;
+
+import src.enumeration.Location;
+
 /**
  * This class implements the game environment.
  * It handles setting up and running a game.
  * 
  * @author Jake van Keulen
- *
+ * @version 1.0, May 2023.
  */
-package src.game;
-
-import java.util.HashMap;
-
-import enumeration.Location;
-
 public class GameEnvironment {
 	/**
 	 * The player who is playing the game.
