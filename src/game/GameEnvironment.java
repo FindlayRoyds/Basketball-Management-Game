@@ -3,9 +3,9 @@
  * It handles setting up and running a game.
  * 
  * @author Jake van Keulen
- *
+ * @version 1.0, May 2023.
  */
-package src.game;
+package game;
 
 import java.util.HashMap;
 
