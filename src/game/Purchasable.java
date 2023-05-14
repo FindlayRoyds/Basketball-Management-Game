@@ -13,6 +13,15 @@ public abstract class Purchasable {
 	protected float price;
 	
 	/**
+	 * A constructor for for Purchasable
+	 * 
+	 * @param price					The price of the purchasable
+	 */
+	public Purchasable(int price) {
+		this.price = price;
+	}
+	
+	/**
 	 * @param player				The player attempting to make the purchase
 	 * @return						If the purchase was successful
 	 */
