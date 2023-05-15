@@ -7,7 +7,7 @@ import game.Player;
 import game.Purchasable;
 import game.GameEnvironment;
 import game.item.Bandaid;
-import game.item.StatBoost;
+import game.item.StatisticBoost;
 
 /**
  * This class is the abstract class for items in game
@@ -42,11 +42,11 @@ public abstract class Item extends Purchasable {
 	 * @param price							The cost of purchasing the item
 	 * @param gameEnvironment				The current gameEnvironment
 	 */
-	public Item(String itemName, boolean itemIsLegal, String itemDescription, float price) {
+	public Item(String name, boolean isLegal, String description, float price) {
 		super(price);
-		name = itemName;
-		isLegal = itemIsLegal;
-		description = itemDescription;
+		this.name = name;
+		this.isLegal = isLegal;
+		this.description = description;
 	}
 	
 	/**
@@ -75,7 +75,7 @@ public abstract class Item extends Purchasable {
 		if (randomInteger == 0) {
 			return Bandaid.generateRandom(qualityLevel, rng);
 		}
-		return StatBoost.generateRandom(qualityLevel, rng);
+		return StatisticBoost.generateRandom(qualityLevel, rng);
 	}
 	
 	/**

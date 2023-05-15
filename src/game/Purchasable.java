@@ -17,8 +17,8 @@ public abstract class Purchasable {
 	 * 
 	 * @param price					The price of the purchasable
 	 */
-	public Purchasable(float purchasablePrice) {
-		price = purchasablePrice;
+	public Purchasable(float price) {
+		this.price = price;
 	}
 	
 	/**
