@@ -1,13 +1,13 @@
+package game;
+
+import java.util.HashSet;
+
 /**
  * This class defines a player and the things they own and can do in the game.
  * 
  * @author Jake van Keulen
  * @version 1.0, May 2023.
  */
-package game;
-
-import java.util.HashSet;
-
 public class Player {
 	/**
 	 * The team the Player owns.
