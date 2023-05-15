@@ -6,6 +6,7 @@ import java.util.Random;
 import game.Player;
 import game.Purchasable;
 import game.GameEnvironment;
+import game.Athlete;
 import game.item.Bandaid;
 import game.item.StatisticBoost;
 
@@ -15,7 +16,7 @@ import game.item.StatisticBoost;
  * and determining whether an item is legal
  * 
  * @author Findlay Royds
- * @version 1.0, May 2023.
+ * @version 1.1, May 2023.
  */
 public abstract class Item extends Purchasable {
 	/**
@@ -42,12 +43,20 @@ public abstract class Item extends Purchasable {
 	 * @param price							The cost of purchasing the item
 	 * @param gameEnvironment				The current gameEnvironment
 	 */
-	public Item(String name, boolean isLegal, String description, float price) {
+	public Item(String name, boolean isLegal, String description, int price) {
 		super(price);
 		this.name = name;
 		this.isLegal = isLegal;
 		this.description = description;
 	}
+	
+	/**
+	 * The abstract apply item method
+	 * Calling this method with any item will apply the item's effects to the given athlete
+	 * 
+	 * @param athlete						The athlete to whom the affect is being applied
+	 */
+	public abstract void applyItem(Athlete athlete);
 	
 	/**
 	 * Purchase the item and put it into the player's inventory
@@ -92,7 +101,6 @@ public abstract class Item extends Purchasable {
 	 * 
 	 * @return 								The name of the item
 	 */
-	
 	public String getName() {
 		return name;
 	}
