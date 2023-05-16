@@ -7,7 +7,6 @@
 package enumeration;
 
 public enum Statistic {
-	STAMINA,
 	FITNESS,
 	OFFENCE,
 	DEFENCE,
