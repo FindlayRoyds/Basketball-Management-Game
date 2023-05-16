@@ -14,7 +14,7 @@ public abstract class GameLocation {
 	/**
 	 * The game environment object to which the location belongs
 	 */
-	private GameEnvironment gameEnvironment;
+	protected GameEnvironment gameEnvironment;
 	
 	/**
 	 * Get the game environment object to which the location belongs
