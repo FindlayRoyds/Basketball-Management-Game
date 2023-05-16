@@ -1,0 +1,63 @@
+package game.item;
+
+import java.util.Random;
+
+import game.Athlete;
+import game.Purchasable;
+import game.GameEnvironment;
+
+/**
+ * The class for bandaid. Restores an athlete's stamina if they're injured
+ * 
+ * @author Findlay Royds
+ * @version 1.0, May 2023.
+ */
+public class Bandaid extends Item {
+	/**
+	 * An array of default descriptions for a bandaid item
+	 */
+	private final static String[] DESCRIPTIONS = {
+			"Fixes cuts, scrapes, broken bones, spinal cord trauma, and all other injuries known to human kind",
+			"Doctors hate this one simple trick",
+			"I've run out of description ideas sorry"
+	};
+
+	/**
+	 * The constructor for Bandaid
+	 * 
+	 * @param itemIsLegal					Whether the item is legal or illegal
+	 * @param itemDescription				Text describing the item
+	 * @param price							The cost of purchasing the item
+	 */
+	public Bandaid(String description, int price, GameEnvironment gameEnvironment) {
+		super("Bandaid", true, description, price, gameEnvironment);
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @param qualityLevel						The quality level of the item. Influences randomness of generation
+	 * @param rng								The random noise generator used by this instance of the game
+	 * @return									The randomly generated bandaid purchasable item
+	 */
+	public static Item generateRandom(int qualityLevel, GameEnvironment gameEnvironment) {
+		Random rng = gameEnvironment.getRng();
+		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
+		int randomPrice = rng.nextInt(qualityLevel / 2, qualityLevel) / 4;
+		return new Bandaid(randomDescription, randomPrice, gameEnvironment);
+	}
+	
+	/**
+	 * If the athlete is injured their stamina will be restored and the bandaid consumed
+	 * 
+	 * @param athlete						The athlete to whom the affect is being applied
+	 */
+	@Override
+	public void applyItem(Athlete athlete) {
+		if (athlete.isInjured()) {
+			athlete.setStamina(100);
+			this.consume();
+		}
+	}
+
+}
