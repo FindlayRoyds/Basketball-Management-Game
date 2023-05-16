@@ -14,13 +14,13 @@ public abstract class GameLocation {
 	/**
 	 * The game environment object to which the location belongs
 	 */
-	protected GameEnvironment gameEnvironment;
+	private GameEnvironment gameEnvironment;
 	
 	/**
 	 * Get the game environment object to which the location belongs
 	 * @return		A GameEnvironment object.
 	 */
-	private GameEnvironment getGameEnvironment() {
+	protected GameEnvironment getGameEnvironment() {
 		return gameEnvironment;
 	}
 	
