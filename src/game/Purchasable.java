@@ -1,16 +1,25 @@
+package game;
+
 /**
  * abstract class for everything sold at markets in-game
  * 
  * @author Findlay Royds
- * @version 1.0, May 2023.
+ * @version 1.3, May 2023.
  */
-package game;
-
 public abstract class Purchasable {
 	/**
 	 * The amount of money the player is charged when purchasing from a market
 	 */
-	protected float price;
+	protected int price;
+	
+	/**
+	 * A constructor for for Purchasable
+	 * 
+	 * @param price					The price of the purchasable
+	 */
+	public Purchasable(int price) {
+		this.price = price;
+	}
 	
 	/**
 	 * @param player				The player attempting to make the purchase
@@ -23,7 +32,7 @@ public abstract class Purchasable {
 	 * 
 	 * @return 						The price of the purchasable
 	 */
-	public float getPrice() {
+	public int getPrice() {
 		return price;
 	}
 }
