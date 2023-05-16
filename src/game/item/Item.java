@@ -3,8 +3,8 @@ package game.item;
 import java.util.Map;
 import java.util.Random;
 
-import game.Player;
 import game.Purchasable;
+import game.Player;
 import game.GameEnvironment;
 import game.Athlete;
 import game.item.Bandaid;
@@ -16,13 +16,18 @@ import game.item.StatisticBoost;
  * and determining whether an item is legal
  * 
  * @author Findlay Royds
- * @version 1.1, May 2023.
+ * @version 1.2, May 2023.
  */
 public abstract class Item extends Purchasable {
 	/**
 	 * The name describing the item
 	 */
 	private String name;
+	
+	/**
+	 * The game environment the item was created in
+	 */
+	private GameEnvironment gameEnvironment;
 	
 	/**
 	 * A text description of the item
@@ -41,13 +46,13 @@ public abstract class Item extends Purchasable {
 	 * @param itemIsLegal					Whether the item is legal or illegal
 	 * @param itemDescription				Text describing the item
 	 * @param price							The cost of purchasing the item
-	 * @param gameEnvironment				The current gameEnvironment
 	 */
-	public Item(String name, boolean isLegal, String description, int price) {
+	public Item(String name, boolean isLegal, String description, int price, GameEnvironment gameEnvironment) {
 		super(price);
 		this.name = name;
 		this.isLegal = isLegal;
 		this.description = description;
+		this.gameEnvironment = gameEnvironment;
 	}
 	
 	/**
@@ -79,12 +84,19 @@ public abstract class Item extends Purchasable {
 	 * @param qualityLevel					The quality of the item in range: [0, 100]
 	 * @return								A randomly generated legal item
 	 */
-	public static Item generateLegalItem(int qualityLevel, Random rng) {
-		int randomInteger = rng.nextInt(10);
+	public static Item generateLegalItem(int qualityLevel, GameEnvironment gameEnvironment) {
+		int randomInteger = gameEnvironment.getRng().nextInt(10);
 		if (randomInteger == 0) {
-			return Bandaid.generateRandom(qualityLevel, rng);
+			return Bandaid.generateRandom(qualityLevel, gameEnvironment);
 		}
-		return StatisticBoost.generateRandom(qualityLevel, rng);
+		return StatisticBoost.generateRandom(qualityLevel, gameEnvironment);
+	}
+	
+	/**
+	 * Removes the item from the player's inventory
+	 */
+	public void consume() {
+		gameEnvironment.getPlayer().removeFromInventory(this);
 	}
 	
 	/**

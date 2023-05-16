@@ -4,13 +4,15 @@ import java.util.Random;
 
 import game.Athlete;
 import game.Purchasable;
+import game.Player;
+import game.GameEnvironment;
 import enumeration.Statistic;
 
 /**
  * 
  * 
  * @author Findlay Royds
- * @version 1.0, May 2023.
+ * @version 1.1, May 2023.
  */
 public class Steroid extends Item {
 	/**
@@ -19,7 +21,7 @@ public class Steroid extends Item {
 	private int boostAmount;
 	
 	/**
-	 * The default description for a steroid item
+	 * An array of default descriptions for a steroid item
 	 */
 	private final static String[] DESCRIPTIONS = {
 			"Made from a high quality second hand syringe.",
@@ -32,13 +34,11 @@ public class Steroid extends Item {
 	/**
 	 * The constructor for Steroid
 	 * 
-	 * @param itemName							The name displayed with the item
-	 * @param itemIsLegal						Whether the item is legal or illegal
 	 * @param itemDescription					The text description displayed with the item
 	 * @param price								The price it costs the player to purchase the steroid
 	 */
-	public Steroid(String name, boolean isLegal, String description, int price, int boostAmount) {
-		super(name, isLegal, description, price);
+	public Steroid(String description, int price, int boostAmount, GameEnvironment gameEnvironment) {
+		super("Steroid", false, description, price, gameEnvironment);
 		this.boostAmount = boostAmount;
 	}
 	
@@ -49,11 +49,12 @@ public class Steroid extends Item {
 	 * @param rng								The random noise generator used by this instance of the game
 	 * @return									The randomly generated steroid purchasable item
 	 */
-	public static Purchasable generateRandom(int qualityLevel, Random rng) {
+	public static Item generateRandom(int qualityLevel, GameEnvironment gameEnvironment) {
+		Random rng = gameEnvironment.getRng();
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
 		int randomBoostAmount = rng.nextInt(qualityLevel / 2, qualityLevel) / 5;
 		int randomPrice = rng.nextInt(qualityLevel / 2, qualityLevel) / 2;
-		return new Steroid("Steroid", false, randomDescription, randomPrice, randomBoostAmount);
+		return new Steroid(randomDescription, randomPrice, randomBoostAmount, gameEnvironment);
 	}
 
 	/**
@@ -66,6 +67,7 @@ public class Steroid extends Item {
 		for (Statistic statisticToIncrease : Statistic.values()) {
 			int originalStatisticAmount = athlete.getStatistic(statisticToIncrease);
 			athlete.setStatistic(statisticToIncrease, originalStatisticAmount + boostAmount);
+			this.consume();
 		}
 	}
 	
