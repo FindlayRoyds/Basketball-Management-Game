@@ -26,8 +26,11 @@ public class Player {
 	/**
 	 * The amount of money in dollars that the player has.
 	 */
-	private float money;
-	
+	private int money;
+	/**
+	 * Whether the player has purchased an illegal item
+	 */
+	private boolean isLawAbiding;
 	/**
 	 * Adds an item to the Player's inventory.
 	 * 
@@ -51,6 +54,14 @@ public class Player {
 		}
 	}
 	/**
+	 * Removes and item from the player's inventory
+	 * 
+	 * @param item				The item to remove from the inventory
+	 */
+	public void removeFromInventory(Item item) {
+		inventory.remove(item);
+	}
+	/**
 	 * Gets and returns the team owned by the player.
 	 * 
 	 * @return		The Player's team.
@@ -65,5 +76,13 @@ public class Player {
 	 */
 	public HashSet<Item> getInventory() {
 		return inventory;
+	}
+	/**
+	 * Gets and returns whether the player has purchased an illegal item
+	 * 
+	 * @return					Whether the player is law abiding
+	 */
+	public boolean getIsLawAbiding() {
+		return isLawAbiding;
 	}
 }
