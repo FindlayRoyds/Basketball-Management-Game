@@ -1,15 +1,8 @@
-/**
- * This class implements an athlete
- * An athlete belongs to a team,
- * And has several statistics to gauge their performance
- * 
- * @author Findlay Royds
- * @version 1.0, May 2023.
- */
 package game;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 import java.util.Arrays;
@@ -17,7 +10,15 @@ import java.util.Arrays;
 import enumeration.Position;
 import enumeration.Statistic;
 
-public class Athlete extends Purchasable {
+/**
+ * This class implements an athlete
+ * An athlete belongs to a team,
+ * And has several statistics to gauge their performance
+ * 
+ * @author Findlay Royds, Jake van Keulen
+ * @version 1.1, May 2023.
+ */
+public class Athlete extends Purchasable {	
 	/**
 	 * The name of the athlete
 	 */
@@ -58,6 +59,19 @@ public class Athlete extends Purchasable {
 	 * @param statisticToGet		The statistic to get from the athlete
 	 * @return 						The integer value of the specific statistic
 	 */
+
+	public Athlete(String name, Position role, int stamina, Team team, GameEnvironment gameEnvironment) {
+		this.name = name;
+		this.role = role;
+		this.stamina = stamina;
+		this.team = team;
+		this.gameEnvironment = gameEnvironment;
+
+		// Initialize all statistics to 0;
+		for (Statistic statistic: Statistic.values()) {
+			statistics.put(statistic, 0);
+		}
+	}
 	
 	public int getStatistic(Statistic statisticToGet) {
 		return statistics.get(statisticToGet);
@@ -187,5 +201,40 @@ public class Athlete extends Purchasable {
 	 */
 	public boolean isInjured() {
 		return stamina == 0;
+	}
+	
+	/**
+	 * Update's the Athlete's team property.
+	 * 
+	 * @param newTeam		The team to assign the athlete to.
+	 */
+	public void setTeam(Team newTeam) {
+		team = newTeam;
+	}
+	
+	/**
+	 * Generates and returns an Athlete with pseudo-random properties.
+	 * 
+	 * @param qualityLevel			The "quality" of the Athlete's statistics.
+	 * 								A higher quality level makes higher statistics more likely to be generated.
+	 * @param rng					An instance of Random; Used to generate random stats, roles, and names
+	 * @param team					The team to which the Athlete belongs.
+	 * @param gameEnvironment		The GameEnvironment object the Athlete belongs to.
+	 * @return						A randomly generated Athlete.
+	 */
+	public static Athlete generateAthlete(int qualityLevel, Random rng, Team team, GameEnvironment gameEnvironment) {
+		String name = Utils.generateName("playerFirstNames", "playerLastNames", rng);
+		
+		Position[] positions = Position.values();
+		Position role = positions[rng.nextInt(positions.length)];
+
+		int stamina = rng.nextInt(100);
+		
+		Athlete resultingAthlete = new Athlete(name, role, stamina, team, gameEnvironment);
+		for (Statistic statistic: Statistic.values()) {
+			resultingAthlete.statistics.put(statistic, rng.nextInt(qualityLevel));
+		}
+		
+		return resultingAthlete;
 	}
 }
