@@ -84,7 +84,7 @@ public abstract class Item extends Purchasable {
 	 * @param qualityLevel					The quality of the item in range: [0, 100]
 	 * @return								A randomly generated legal item
 	 */
-	public static Item generateLegalItem(int qualityLevel, GameEnvironment gameEnvironment) {
+	public static Purchasable generateLegalItem(int qualityLevel, GameEnvironment gameEnvironment) {
 		int randomInteger = gameEnvironment.getRng().nextInt(10);
 		if (randomInteger == 0) {
 			return Bandaid.generateRandom(qualityLevel, gameEnvironment);

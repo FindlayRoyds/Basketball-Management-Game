@@ -37,10 +37,10 @@ public class Bandaid extends Item {
 	 * 
 	 * 
 	 * @param qualityLevel						The quality level of the item. Influences randomness of generation
-	 * @param rng								The random noise generator used by this instance of the game
+	 * @param gameEnvironment					The game environment the game is being created in
 	 * @return									The randomly generated bandaid purchasable item
 	 */
-	public static Item generateRandom(int qualityLevel, GameEnvironment gameEnvironment) {
+	public static Purchasable generateRandom(int qualityLevel, GameEnvironment gameEnvironment) {
 		Random rng = gameEnvironment.getRng();
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
 		int randomPrice = rng.nextInt(qualityLevel / 2, qualityLevel) / 4;

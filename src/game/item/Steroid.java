@@ -46,10 +46,10 @@ public class Steroid extends Item {
 	 * 
 	 * 
 	 * @param qualityLevel						The quality level of the item. Influences randomness of generation
-	 * @param rng								The random noise generator used by this instance of the game
+	 * @param gameEnvironment					The game environment the game is being created in
 	 * @return									The randomly generated steroid purchasable item
 	 */
-	public static Item generateRandom(int qualityLevel, GameEnvironment gameEnvironment) {
+	public static Purchasable generateRandom(int qualityLevel, GameEnvironment gameEnvironment) {
 		Random rng = gameEnvironment.getRng();
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
 		int randomBoostAmount = rng.nextInt(qualityLevel / 2, qualityLevel) / 5;
@@ -67,8 +67,8 @@ public class Steroid extends Item {
 		for (Statistic statisticToIncrease : Statistic.values()) {
 			int originalStatisticAmount = athlete.getStatistic(statisticToIncrease);
 			athlete.setStatistic(statisticToIncrease, originalStatisticAmount + boostAmount);
-			this.consume();
 		}
+		this.consume();
 	}
 	
 }
