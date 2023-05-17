@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import enumeration.Position;
@@ -60,7 +61,9 @@ public class Athlete extends Purchasable {
 	 * @return 						The integer value of the specific statistic
 	 */
 
-	public Athlete(String name, Position role, int stamina, Team team, GameEnvironment gameEnvironment) {
+	public Athlete(String name, Position role, int stamina, Team team, GameEnvironment gameEnvironment, int price) {
+		super(price);
+
 		this.name = name;
 		this.role = role;
 		this.stamina = stamina;
@@ -116,8 +119,8 @@ public class Athlete extends Purchasable {
 	 * @param e						The class of the enumeration
 	 * @return						an array of strings of the names of the enum
 	 */
-	private static String[] getEnumNames(Class<? extends Enum<?>> e) {
-	    return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
+	private static List<String> getEnumNames(Class<? extends Enum<?>> e) {
+	    return Arrays.asList(Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new));
 	}
 	
 	/**
@@ -137,13 +140,13 @@ public class Athlete extends Purchasable {
 			
 			// Give player option to add athlete to active or reserve team
 			String popupMessage = "Please select where to add the athlete";
-			String[] popupOptions = {"Active Team", "Reserve Team"};
+			List<String> popupOptions = Arrays.asList("Active Team", "Reserve Team");
 			boolean addToActive = gameEnvironment.getUIEnvironment().displayPopup(
 					popupMessage, popupOptions) == 0;
 			if (addToActive) {
 				popupMessage = "What role should the athlete be placed into?";
 				// Get an array of strings describing each position
-				String[] positionNames = getEnumNames(Position.class);
+				List<String> positionNames = getEnumNames(Position.class);
 				int selectedIndex = gameEnvironment.getUIEnvironment().displayPopup(
 						popupMessage, positionNames);
 				Position selectedPosition = Position.values()[selectedIndex];
@@ -229,8 +232,9 @@ public class Athlete extends Purchasable {
 		Position role = positions[rng.nextInt(positions.length)];
 
 		int stamina = rng.nextInt(100);
+		int price = rng.nextInt(1000);
 		
-		Athlete resultingAthlete = new Athlete(name, role, stamina, team, gameEnvironment);
+		Athlete resultingAthlete = new Athlete(name, role, stamina, team, gameEnvironment, price);
 		for (Statistic statistic: Statistic.values()) {
 			resultingAthlete.statistics.put(statistic, rng.nextInt(qualityLevel));
 		}
