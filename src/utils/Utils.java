@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -89,5 +90,16 @@ public class Utils {
 	 */
 	public static int clampValue(int value) {
 		return Math.max(0, Math.min(100, value));
+	}
+	
+	/**
+	 * generates an array of names for an enumeration
+	 * 
+	 * @author https://stackoverflow.com/users/256196/bohemian
+	 * @param e						The class of the enumeration
+	 * @return						an array of strings of the names of the enum
+	 */
+	public static List<String> getEnumerationNames(Class<? extends Enum<?>> e) {
+	    return Arrays.asList(Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new));
 	}
 }

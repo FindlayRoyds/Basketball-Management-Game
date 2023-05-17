@@ -1,11 +1,9 @@
 package game;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Stream;
-import java.util.stream.Collectors;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import enumeration.Position;
@@ -56,6 +54,62 @@ public class Athlete extends Purchasable {
 	private GameEnvironment gameEnvironment;
 	
 	/**
+	 * How much effect each statistic has in a match based on the athlete's position
+	 */
+	private final static Map<Position, Map<Statistic, Integer>> MATCH_POSITION_STATISTIC_WEIGHTS = Map.of(
+			Position.DEFENDER, Map.of(
+					Statistic.DEFENCE, 100,
+					Statistic.DRIBBLING, 100,
+					Statistic.FITNESS, 100,
+					Statistic.HEIGHT, 100,
+					Statistic.JUMPING, 100,
+					Statistic.OFFENCE, 100,
+					Statistic.SHOOTING_ACCURACY, 100,
+					Statistic.SHOOTING_POWER, 100
+					),
+			Position.DRIBBLER, Map.of(
+					Statistic.DEFENCE, 100,
+					Statistic.DRIBBLING, 100,
+					Statistic.FITNESS, 100,
+					Statistic.HEIGHT, 100,
+					Statistic.JUMPING, 100,
+					Statistic.OFFENCE, 100,
+					Statistic.SHOOTING_ACCURACY, 100,
+					Statistic.SHOOTING_POWER, 100
+					),
+			Position.DUNKER, Map.of(
+					Statistic.DEFENCE, 100,
+					Statistic.DRIBBLING, 100,
+					Statistic.FITNESS, 100,
+					Statistic.HEIGHT, 100,
+					Statistic.JUMPING, 100,
+					Statistic.OFFENCE, 100,
+					Statistic.SHOOTING_ACCURACY, 100,
+					Statistic.SHOOTING_POWER, 100
+					),
+			Position.LONG_SHOOTER, Map.of(
+					Statistic.DEFENCE, 100,
+					Statistic.DRIBBLING, 100,
+					Statistic.FITNESS, 100,
+					Statistic.HEIGHT, 100,
+					Statistic.JUMPING, 100,
+					Statistic.OFFENCE, 100,
+					Statistic.SHOOTING_ACCURACY, 100,
+					Statistic.SHOOTING_POWER, 100
+					),
+			Position.SHORT_SHOOTER, Map.of(
+					Statistic.DEFENCE, 100,
+					Statistic.DRIBBLING, 100,
+					Statistic.FITNESS, 100,
+					Statistic.HEIGHT, 100,
+					Statistic.JUMPING, 100,
+					Statistic.OFFENCE, 100,
+					Statistic.SHOOTING_ACCURACY, 100,
+					Statistic.SHOOTING_POWER, 100
+					)
+			);
+	
+	/**
 	 * Get a specific statistic from the athlete
 	 * 
 	 * @param statisticToGet		The statistic to get from the athlete
@@ -97,17 +151,6 @@ public class Athlete extends Purchasable {
 	}
 	
 	/**
-	 * generates an array of names for an enumeration
-	 * created by https://stackoverflow.com/users/256196/bohemian
-	 * 
-	 * @param e						The class of the enumeration
-	 * @return						an array of strings of the names of the enum
-	 */
-	private static List<String> getEnumNames(Class<? extends Enum<?>> e) {
-	    return Arrays.asList(Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new));
-	}
-	
-	/**
 	 * Attempts to charge the player the price of the athlete
 	 * If the player can afford it, the athlete is added to the player's team
 	 * 
@@ -127,13 +170,15 @@ public class Athlete extends Purchasable {
 			List<String> popupOptions = Arrays.asList("Active Team", "Reserve Team");
 			boolean addToActive = gameEnvironment.getUIEnvironment().displayPopup(
 					popupMessage, popupOptions) == 0;
+			
 			if (addToActive) {
+				// Create a popup with a button for each position
+				List<String> positionNames = Utils.getEnumerationNames(Position.class);
 				popupMessage = "What role should the athlete be placed into?";
-				// Get an array of strings describing each position
-				List<String> positionNames = getEnumNames(Position.class);
 				int selectedIndex = gameEnvironment.getUIEnvironment().displayPopup(
 						popupMessage, positionNames);
 				Position selectedPosition = Position.values()[selectedIndex];
+				
 				playerTeam.addAthleteToActive(this, selectedPosition);
 			} else {
 				playerTeam.addAthleteToReserve(this);
