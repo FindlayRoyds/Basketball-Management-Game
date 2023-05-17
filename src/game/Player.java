@@ -34,7 +34,7 @@ public class Player {
 	/**
 	 * Whether the player has purchased an illegal item
 	 */
-	private boolean isLawAbiding;
+	private boolean hasUsedSteroids;
 
 	/**
 	 * Adds an item to the Player's inventory.
@@ -106,7 +106,7 @@ public class Player {
 	 * 
 	 * @return					Whether the player is law abiding
 	 */
-	public boolean getIsLawAbiding() {
-		return isLawAbiding;
+	public boolean getHasUsedSteroids() {
+		return hasUsedSteroids;
 	}
 }
