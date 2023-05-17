@@ -73,6 +73,21 @@ public class GameEnvironment {
 	}
 	
 	/**
+	 * @return			The season length in weeks.
+	 */
+	public int getSeasonLength() {
+		return seasonLength;
+	}
+	
+	/**
+	 * @return			The number of the current week.
+	 * 					Starts from 1.
+	 */
+	public int getWeek() {
+		return currentWeek;
+	}
+	
+	/**
 	 * @return The GameEnvironment's current location.
 	 */
 	private Location getCurrentLocation() {

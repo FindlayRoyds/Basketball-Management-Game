@@ -14,23 +14,28 @@ public class Player {
 	 * The team the Player owns.
 	 */
 	private Team team;
+
 	/**
 	 * The Player's inventory.
 	 * Contains all their items.
 	 */
 	private HashSet<Item> inventory;
+
 	/**
 	 * The Player's score.
 	 */
 	private int score;
+
 	/**
 	 * The amount of money in dollars that the player has.
 	 */
 	private int money;
+
 	/**
 	 * Whether the player has purchased an illegal item
 	 */
 	private boolean isLawAbiding;
+
 	/**
 	 * Adds an item to the Player's inventory.
 	 * 
@@ -39,6 +44,7 @@ public class Player {
 	public void addToInventory(Item item) {
 		inventory.add(item);
 	}
+
 	/**
 	 * Removes a given amount from the Player's money.
 	 * 
@@ -53,6 +59,7 @@ public class Player {
 			return false;
 		}
 	}
+
 	/**
 	 * Removes and item from the player's inventory
 	 * 
@@ -61,6 +68,7 @@ public class Player {
 	public void removeFromInventory(Item item) {
 		inventory.remove(item);
 	}
+
 	/**
 	 * Gets and returns the team owned by the player.
 	 * 
@@ -69,6 +77,21 @@ public class Player {
 	public Team getTeam() {
 		return team;
 	}
+	
+	/**
+	 * @return		The amount of money in dollars that the Player has.
+	 */
+	public int getMoney() {
+		return money;
+	}
+
+	/**
+	 * @return		The Player's score.
+	 */
+	public int getScore() {
+		return score;
+	}
+
 	/**
 	 * Gets and returns the set of items owned by the player.
 	 * 
@@ -77,6 +100,7 @@ public class Player {
 	public HashSet<Item> getInventory() {
 		return inventory;
 	}
+
 	/**
 	 * Gets and returns whether the player has purchased an illegal item
 	 * 
