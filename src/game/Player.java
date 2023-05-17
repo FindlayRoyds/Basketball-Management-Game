@@ -45,19 +45,27 @@ public class Player {
 		inventory.add(item);
 	}
 
+	private void setMoney(int newMoney) {
+		money = newMoney;
+	}
+	
 	/**
 	 * Removes a given amount from the Player's money.
 	 * 
 	 * @param amountOfMoney		The amount of money to be removed.
 	 * @return					If the charge was successful
 	 */
-	public boolean chargeMoney(float amountOfMoney) {
+	public boolean chargeMoney(int amountOfMoney) {
 		if (money >= amountOfMoney) {
 			money -= amountOfMoney;
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	public void giveMoney(int amountOfMoney) {
+		setMoney(getMoney() - amountOfMoney);
 	}
 
 	/**
