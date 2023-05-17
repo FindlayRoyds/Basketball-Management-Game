@@ -1,6 +1,7 @@
 package game;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Set;
 
 import enumeration.Location;
@@ -60,9 +61,21 @@ public class GameEnvironment {
 	private UIEnvironment uiEnvironment;
 	
 	/**
+	 * Random object used for generating random numbers.
+	 */
+	private Random rng;
+	
+	/**
+	 * @return 			Random object used for generating random numbers.
+	 */
+	public Random getRng() {
+		return rng;
+	}
+	
+	/**
 	 * @return The GameEnvironment's current location.
 	 */
-	Location getCurrentLocation() {
+	private Location getCurrentLocation() {
 		return currentLocation;
 	}
 

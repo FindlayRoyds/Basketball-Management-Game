@@ -34,7 +34,7 @@ public class Inventory extends GameLocation {
 	 * 
 	 * @return 		The Set of Items in the Player's inventory.
 	 */
-	Set<Item> getItems() {
+	public Set<Item> getItems() {
 		return getGameEnvironment().getPlayer().getInventory();
 	}
 
