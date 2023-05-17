@@ -1,5 +1,7 @@
 package game.randomEvent;
 
+import java.util.Random;
+
 import game.GameEnvironment;
 
 /**
@@ -25,9 +27,27 @@ public abstract class RandomEvent {
 	}
 	
 	/**
-	 * The abstract trigger method.
-	 * When called the random event should randomly determine whether the event should occur.
-	 * If the event should occur, this method should contain the functionality for the event
+	 * The abstract method that causes the random event to actually happen.
 	 */
-	public abstract void trigger();
+	protected abstract void occur();
+	
+	/**
+	 * Calculates and returns the probability that the event will actually occur.
+	 * 
+	 * @return								The probability of the event occuring in range: [0.0, 1.0)
+	 */
+	protected abstract float getProbability();
+	
+	/**
+	 * Randomly determines whether the event should occur based on the event's probability.
+	 * If it should, the occur() method is called by this method
+	 */
+	public void trigger() {
+		Random rng = gameEnvironment.getRng();
+		float probability = getProbability();
+		
+		if (rng.nextFloat() < probability) {
+			occur();
+		}
+	}
 }
