@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Random;
 
 import enumeration.Position;
-import utils.Utils;
+import util.NameGenerator;
 
 
 /**
@@ -153,7 +153,7 @@ public class Team {
 	 * @return			A randomly generated Team name.
 	 */
 	private static String generateTeamName(Random rng) {
-		return "The " + Utils.generateName("teamNameList1", "teamNameList2", rng);
+		return "The " + NameGenerator.generateName("teamNameList1", "teamNameList2", rng);
 	}
 	
 	/**

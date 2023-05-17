@@ -8,7 +8,8 @@ import java.util.Arrays;
 
 import enumeration.Position;
 import enumeration.Statistic;
-import utils.Utils;
+import util.MiscUtil;
+import util.NameGenerator;
 
 /**
  * This class implements an athlete
@@ -154,7 +155,7 @@ public class Athlete extends Purchasable {
 	 */
 	
 	public void setStamina(int value) {
-		stamina = Utils.clampValue(value);
+		stamina = MiscUtil.clampValue(value);
 	}
 	
 	/**
@@ -180,7 +181,7 @@ public class Athlete extends Purchasable {
 			
 			if (addToActive) {
 				// Create a popup with a button for each position
-				List<String> positionNames = Utils.getEnumerationNames(Position.class);
+				List<String> positionNames = MiscUtil.getEnumerationNames(Position.class);
 				popupMessage = "What role should the athlete be placed into?";
 				int selectedIndex = gameEnvironment.getUIEnvironment().displayPopup(
 						popupMessage, positionNames);
@@ -294,7 +295,7 @@ public class Athlete extends Purchasable {
 	 * @return						A randomly generated Athlete.
 	 */
 	public static Athlete generateAthlete(int qualityLevel, Random rng, Team team, GameEnvironment gameEnvironment) {
-		String name = Utils.generateName("playerFirstNames", "playerLastNames", rng);
+		String name = NameGenerator.generateName("playerFirstNames", "playerLastNames", rng);
 		
 		Position[] positions = Position.values();
 		Position role = positions[rng.nextInt(positions.length)];

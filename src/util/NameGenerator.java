@@ -1,4 +1,4 @@
-package utils;
+package util;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,7 +14,7 @@ import java.util.Random;
  * @author Jake van Keulen
  * @version 1.0
  */
-public class Utils {
+public class NameGenerator {
 	/**
 	 * Reads lines (words) from a file and returns them in a 2D ArrayList format,
 	 * where result[i] contains all lines in the file starting with the ith
@@ -79,27 +79,5 @@ public class Utils {
 		String word2 = word2Candidates.get(rng.nextInt(word2Candidates.size()));
 		
 		return word1 + " " + word2;
-	}
-	
-	/**
-	 * Clamp an integer between the values 0 and 100 (inclusive)
-	 * Used for setting an athletes statistic or stamina
-	 * 
-	 * @param value					the integer value to be clamped
-	 * @return 						the integer value clamped between 0 and 100
-	 */
-	public static int clampValue(int value) {
-		return Math.max(0, Math.min(100, value));
-	}
-	
-	/**
-	 * generates an array of names for an enumeration
-	 * 
-	 * @author https://stackoverflow.com/users/256196/bohemian
-	 * @param e						The class of the enumeration
-	 * @return						an array of strings of the names of the enum
-	 */
-	public static List<String> getEnumerationNames(Class<? extends Enum<?>> e) {
-	    return Arrays.asList(Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new));
 	}
 }
