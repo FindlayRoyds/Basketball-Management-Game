@@ -6,8 +6,10 @@ import game.Athlete;
 import game.Team;
 
 /**
- * A class defining the Match location.
- * From the Match location, a player can... 
+ * A class defining the Match location, where matches take place between 2 teams.
+ * A involves pairing up players between teams based on their positions,
+ * then deciding who wins each individual pairing.
+ * The team that wins the most pairings wins the match overall
  * 
  * @author Jake van Keulen
  * @version 1.0
