@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 import enumeration.Position;
 import enumeration.Statistic;
+import game.Utils;
 
 /**
  * This class implements an athlete
@@ -76,17 +77,6 @@ public class Athlete extends Purchasable {
 	}
 	
 	/**
-	 * Clamp an integer between the values 0 and 100 (inclusive)
-	 * Used for setting an athletes statistic or stamina
-	 * 
-	 * @param value					the integer value to be clamped
-	 * @return 						the integer value clamped between 0 and 100
-	 */
-	private int clampValue(int value) {
-		return Math.max(0, Math.min(100, value));
-	}
-	
-	/**
 	 * Set a specific statistic to an integer value
 	 * 
 	 * @param statisticToSet		The statistic to set the value of
@@ -103,7 +93,7 @@ public class Athlete extends Purchasable {
 	 */
 	
 	public void setStamina(int value) {
-		stamina = clampValue(value);
+		stamina = Utils.clampValue(value);
 	}
 	
 	/**

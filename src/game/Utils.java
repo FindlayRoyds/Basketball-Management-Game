@@ -79,4 +79,15 @@ public class Utils {
 		
 		return word1 + " " + word2;
 	}
+	
+	/**
+	 * Clamp an integer between the values 0 and 100 (inclusive)
+	 * Used for setting an athletes statistic or stamina
+	 * 
+	 * @param value					the integer value to be clamped
+	 * @return 						the integer value clamped between 0 and 100
+	 */
+	public static int clampValue(int value) {
+		return Math.max(0, Math.min(100, value));
+	}
 }
