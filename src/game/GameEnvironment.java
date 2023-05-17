@@ -78,6 +78,16 @@ public class GameEnvironment {
 	private Location getCurrentLocation() {
 		return currentLocation;
 	}
+	
+	/**
+	 * Gets the corresponding GameLocation object for a given Location.
+	 * 
+	 * @param location			A value from the Location enum
+	 * @return 					A GameLocation object
+	 */
+	public GameLocation getGameLocation(Location location) {
+		return locations.get(location);
+	}
 
 	/**
 	 * Change the current game location.
@@ -86,7 +96,7 @@ public class GameEnvironment {
 	 */
 	public void changeLocation(Location newLocation) {
 		this.currentLocation = newLocation;
-		this.uiEnvironment.changeLocation(locations.get(getCurrentLocation()));
+		this.uiEnvironment.changeLocation(getGameLocation(getCurrentLocation()));
 	}
 
 	/**
