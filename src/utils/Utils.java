@@ -1,4 +1,4 @@
-package game;
+package utils;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -64,7 +64,7 @@ public class Utils {
 	 * @param rng				A Random object used for random number generation.
 	 * @return					An alliterative name in the format "word1 word1"
 	 */
-	static String generateName(String wordList1, String wordList2, Random rng) {
+	public static String generateName(String wordList1, String wordList2, Random rng) {
 		ArrayList<ArrayList<String>> words1 = readWordList(wordList1);
 		ArrayList<ArrayList<String>> words2 = readWordList(wordList2);
 

@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 import enumeration.Position;
 import enumeration.Statistic;
-import game.Utils;
+import utils.Utils;
 
 /**
  * This class implements an athlete
