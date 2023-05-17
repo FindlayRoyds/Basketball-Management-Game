@@ -54,58 +54,60 @@ public class Athlete extends Purchasable {
 	private GameEnvironment gameEnvironment;
 	
 	/**
-	 * How much effect each statistic has in a match based on the athlete's position
+	 * How much effect each statistic has in a match based on the athlete's position.
+	 * The weight of each statistic is in the range: [0, 100].
+	 * The greater the weight the more important the statistic is to that position
 	 */
 	private final static Map<Position, Map<Statistic, Integer>> MATCH_POSITION_STATISTIC_WEIGHTS = Map.of(
 			Position.DEFENDER, Map.of(
 					Statistic.DEFENCE, 100,
-					Statistic.DRIBBLING, 100,
-					Statistic.FITNESS, 100,
-					Statistic.HEIGHT, 100,
-					Statistic.JUMPING, 100,
-					Statistic.OFFENCE, 100,
-					Statistic.SHOOTING_ACCURACY, 100,
-					Statistic.SHOOTING_POWER, 100
+					Statistic.DRIBBLING, 10,
+					Statistic.FITNESS, 30,
+					Statistic.HEIGHT, 50,
+					Statistic.JUMPING, 60,
+					Statistic.OFFENCE, 10,
+					Statistic.SHOOTING_ACCURACY, 20,
+					Statistic.SHOOTING_POWER, 30
 					),
 			Position.DRIBBLER, Map.of(
-					Statistic.DEFENCE, 100,
+					Statistic.DEFENCE, 70,
 					Statistic.DRIBBLING, 100,
-					Statistic.FITNESS, 100,
-					Statistic.HEIGHT, 100,
-					Statistic.JUMPING, 100,
-					Statistic.OFFENCE, 100,
-					Statistic.SHOOTING_ACCURACY, 100,
-					Statistic.SHOOTING_POWER, 100
+					Statistic.FITNESS, 80,
+					Statistic.HEIGHT, 10,
+					Statistic.JUMPING, 10,
+					Statistic.OFFENCE, 70,
+					Statistic.SHOOTING_ACCURACY, 20,
+					Statistic.SHOOTING_POWER, 30
 					),
 			Position.DUNKER, Map.of(
-					Statistic.DEFENCE, 100,
-					Statistic.DRIBBLING, 100,
-					Statistic.FITNESS, 100,
+					Statistic.DEFENCE, 20,
+					Statistic.DRIBBLING, 70,
+					Statistic.FITNESS, 800,
 					Statistic.HEIGHT, 100,
 					Statistic.JUMPING, 100,
-					Statistic.OFFENCE, 100,
-					Statistic.SHOOTING_ACCURACY, 100,
-					Statistic.SHOOTING_POWER, 100
+					Statistic.OFFENCE, 90,
+					Statistic.SHOOTING_ACCURACY, 10,
+					Statistic.SHOOTING_POWER, 10
 					),
 			Position.LONG_SHOOTER, Map.of(
-					Statistic.DEFENCE, 100,
-					Statistic.DRIBBLING, 100,
-					Statistic.FITNESS, 100,
-					Statistic.HEIGHT, 100,
-					Statistic.JUMPING, 100,
-					Statistic.OFFENCE, 100,
+					Statistic.DEFENCE, 20,
+					Statistic.DRIBBLING, 10,
+					Statistic.FITNESS, 10,
+					Statistic.HEIGHT, 60,
+					Statistic.JUMPING, 40,
+					Statistic.OFFENCE, 10,
 					Statistic.SHOOTING_ACCURACY, 100,
 					Statistic.SHOOTING_POWER, 100
 					),
 			Position.SHORT_SHOOTER, Map.of(
-					Statistic.DEFENCE, 100,
-					Statistic.DRIBBLING, 100,
-					Statistic.FITNESS, 100,
-					Statistic.HEIGHT, 100,
-					Statistic.JUMPING, 100,
-					Statistic.OFFENCE, 100,
-					Statistic.SHOOTING_ACCURACY, 100,
-					Statistic.SHOOTING_POWER, 100
+					Statistic.DEFENCE, 30,
+					Statistic.DRIBBLING, 80,
+					Statistic.FITNESS, 40,
+					Statistic.HEIGHT, 80,
+					Statistic.JUMPING, 40,
+					Statistic.OFFENCE, 90,
+					Statistic.SHOOTING_ACCURACY, 80,
+					Statistic.SHOOTING_POWER, 30
 					)
 			);
 	
@@ -212,9 +214,22 @@ public class Athlete extends Purchasable {
 	 * @param playedPosition		the position the athlete is playing
 	 * @return						a numerical value for the athlete's effectiveness
 	 */
-	public int getMatchScore(Position playerPosition) {
-		//TODO make this work
-		return 0;
+	public int getMatchScore(Position playedPosition) {
+		int totalScore = 0;
+		Map<Statistic, Integer> statisticWeights = MATCH_POSITION_STATISTIC_WEIGHTS.get(playedPosition);
+		
+		//add up the athlete's statistics * the statistic's weight for the position
+		for (Statistic statistic: Statistic.values()) {
+			int statisticWeight = statisticWeights.get(statistic);
+			totalScore += getStatistic(statistic) * statisticWeight;
+		}
+		
+		//apply a 20% bonus if the athlete's role matches the position being played 
+		if (role == playedPosition) {
+			totalScore *= 1.2;
+		}
+		
+		return totalScore;
 	}
 	
 	/**
