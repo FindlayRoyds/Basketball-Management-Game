@@ -52,6 +52,11 @@ public class Athlete extends Purchasable {
 	 * Required to show a pop up message when an athlete is purchased
 	 */
 	private GameEnvironment gameEnvironment;
+
+	/**
+	 * Whether or not the athlete has had a steroid item applied
+	 */
+	private boolean hasUsedSteroids;
 	
 	/**
 	 * How much effect each statistic has in a match based on the athlete's position.
@@ -303,5 +308,20 @@ public class Athlete extends Purchasable {
 		}
 		
 		return resultingAthlete;
+	}
+	
+	
+	/**
+	 * @return		Whether or not the athlete has used steroids
+	 */
+	public boolean getHasUsedSteroids() {
+		return hasUsedSteroids;
+	}
+	
+	/**
+	 * @param		Whether or not the athlete has used steroids
+	 */
+	public void setHasUsedSteroids(boolean usedSteroids) {
+		hasUsedSteroids = usedSteroids;
 	}
 }

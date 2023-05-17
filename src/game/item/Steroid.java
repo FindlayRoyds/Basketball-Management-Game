@@ -68,6 +68,10 @@ public class Steroid extends Item {
 			int originalStatisticAmount = athlete.getStatistic(statisticToIncrease);
 			athlete.setStatistic(statisticToIncrease, originalStatisticAmount + boostAmount);
 		}
+		
+		//make the athlete able to be detected by a random drug test
+		athlete.setHasUsedSteroids(true);
+		
 		this.consume();
 	}
 	
