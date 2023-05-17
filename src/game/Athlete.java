@@ -60,7 +60,6 @@ public class Athlete extends Purchasable {
 	 * @param statisticToGet		The statistic to get from the athlete
 	 * @return 						The integer value of the specific statistic
 	 */
-
 	public Athlete(String name, Position role, int stamina, Team team, GameEnvironment gameEnvironment, int price) {
 		super(price);
 
@@ -76,10 +75,6 @@ public class Athlete extends Purchasable {
 		}
 	}
 	
-	public int getStatistic(Statistic statisticToGet) {
-		return statistics.get(statisticToGet);
-	}
-	
 	/**
 	 * Clamp an integer between the values 0 and 100 (inclusive)
 	 * Used for setting an athletes statistic or stamina
@@ -87,7 +82,6 @@ public class Athlete extends Purchasable {
 	 * @param value					the integer value to be clamped
 	 * @return 						the integer value clamped between 0 and 100
 	 */
-	
 	private int clampValue(int value) {
 		return Math.max(0, Math.min(100, value));
 	}
@@ -158,13 +152,32 @@ public class Athlete extends Purchasable {
 		return chargeSuccess;
 	}
 	
+	
+	/**
+	 * Gets the Athlete's skill value for a given statistic.
+	 * This value is an integer in the range [0, 100]
+	 * 
+	 * @param statisticToGet		The statistic to get.
+	 * @return						The integer value of the given statistic.
+	 */
+	public int getStatistic(Statistic statisticToGet) {
+		return statistics.get(statisticToGet);
+	}
+	
+	/**
+	 * @return		The Team the Athlete is on.
+	 */
+	public Team getTeam() {
+		return team;
+	}
+
 	/**
 	 * determines a value representing the athlete's effectiveness in a certain position
 	 * 
 	 * @param playedPosition		the position the athlete is playing
 	 * @return						a numerical value for the athlete's effectiveness
 	 */
-	public float getMatchScore(Position playerPosition) {
+	public int getMatchScore(Position playerPosition) {
 		//TODO make this work
 		return 0;
 	}
