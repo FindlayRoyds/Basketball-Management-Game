@@ -6,8 +6,8 @@ import java.util.Set;
 
 import enumeration.Location;
 import game.location.GameLocation;
-import game.randomEvent.RandomEvent;
-import userInterface.UIEnvironment;
+import game.randomevent.RandomEvent;
+import userinterface.UIEnvironment;
 
 /**
  * This class implements the game environment.

@@ -1,4 +1,4 @@
-package game.randomEvent;
+package game.randomevent;
 
 import java.util.Random;
 
