@@ -1,4 +1,4 @@
-package game;
+package util;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,7 +13,7 @@ import java.util.Random;
  * @author Jake van Keulen
  * @version 1.0
  */
-public class Utils {
+public class NameGenerator {
 	/**
 	 * Reads lines (words) from a file and returns them in a 2D ArrayList format,
 	 * where result[i] contains all lines in the file starting with the ith
@@ -64,7 +64,7 @@ public class Utils {
 	 * @param rng				A Random object used for random number generation.
 	 * @return					An alliterative name in the format "word1 word1"
 	 */
-	static String generateName(String wordList1, String wordList2, Random rng) {
+	public static String generateName(String wordList1, String wordList2, Random rng) {
 		ArrayList<ArrayList<String>> words1 = readWordList(wordList1);
 		ArrayList<ArrayList<String>> words2 = readWordList(wordList2);
 

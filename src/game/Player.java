@@ -32,11 +32,6 @@ public class Player {
 	private int money;
 
 	/**
-	 * Whether the player has purchased an illegal item
-	 */
-	private boolean isLawAbiding;
-
-	/**
 	 * Adds an item to the Player's inventory.
 	 * 
 	 * @param item		The item to be added.
@@ -78,8 +73,6 @@ public class Player {
 	}
 
 	/**
-	 * Gets and returns the team owned by the player.
-	 * 
 	 * @return		The Player's team.
 	 */
 	public Team getTeam() {
@@ -101,20 +94,9 @@ public class Player {
 	}
 
 	/**
-	 * Gets and returns the set of items owned by the player.
-	 * 
 	 * @return		A HashSet of Items owned by the player
 	 */
 	public HashSet<Item> getInventory() {
 		return inventory;
-	}
-
-	/**
-	 * Gets and returns whether the player has purchased an illegal item
-	 * 
-	 * @return					Whether the player is law abiding
-	 */
-	public boolean getIsLawAbiding() {
-		return isLawAbiding;
 	}
 }

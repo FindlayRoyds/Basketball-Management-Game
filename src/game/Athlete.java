@@ -1,15 +1,15 @@
 package game;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Stream;
-import java.util.stream.Collectors;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import enumeration.Position;
 import enumeration.Statistic;
+import util.MiscUtil;
+import util.NameGenerator;
 
 /**
  * This class implements an athlete
@@ -53,6 +53,69 @@ public class Athlete extends Purchasable {
 	 * Required to show a pop up message when an athlete is purchased
 	 */
 	private GameEnvironment gameEnvironment;
+
+	/**
+	 * Whether or not the athlete has had a steroid item applied
+	 */
+	private boolean hasUsedSteroids;
+	
+	/**
+	 * How much effect each statistic has in a match based on the athlete's position.
+	 * The weight of each statistic is in the range: [0, 100].
+	 * The greater the weight the more important the statistic is to that position
+	 */
+	private final static Map<Position, Map<Statistic, Integer>> MATCH_POSITION_STATISTIC_WEIGHTS = Map.of(
+			Position.DEFENDER, Map.of(
+					Statistic.DEFENCE, 100,
+					Statistic.DRIBBLING, 10,
+					Statistic.FITNESS, 30,
+					Statistic.HEIGHT, 50,
+					Statistic.JUMPING, 60,
+					Statistic.OFFENCE, 10,
+					Statistic.SHOOTING_ACCURACY, 20,
+					Statistic.SHOOTING_POWER, 30
+					),
+			Position.DRIBBLER, Map.of(
+					Statistic.DEFENCE, 70,
+					Statistic.DRIBBLING, 100,
+					Statistic.FITNESS, 80,
+					Statistic.HEIGHT, 10,
+					Statistic.JUMPING, 10,
+					Statistic.OFFENCE, 70,
+					Statistic.SHOOTING_ACCURACY, 20,
+					Statistic.SHOOTING_POWER, 30
+					),
+			Position.DUNKER, Map.of(
+					Statistic.DEFENCE, 20,
+					Statistic.DRIBBLING, 70,
+					Statistic.FITNESS, 800,
+					Statistic.HEIGHT, 100,
+					Statistic.JUMPING, 100,
+					Statistic.OFFENCE, 90,
+					Statistic.SHOOTING_ACCURACY, 10,
+					Statistic.SHOOTING_POWER, 10
+					),
+			Position.LONG_SHOOTER, Map.of(
+					Statistic.DEFENCE, 20,
+					Statistic.DRIBBLING, 10,
+					Statistic.FITNESS, 10,
+					Statistic.HEIGHT, 60,
+					Statistic.JUMPING, 40,
+					Statistic.OFFENCE, 10,
+					Statistic.SHOOTING_ACCURACY, 100,
+					Statistic.SHOOTING_POWER, 100
+					),
+			Position.SHORT_SHOOTER, Map.of(
+					Statistic.DEFENCE, 30,
+					Statistic.DRIBBLING, 80,
+					Statistic.FITNESS, 40,
+					Statistic.HEIGHT, 80,
+					Statistic.JUMPING, 40,
+					Statistic.OFFENCE, 90,
+					Statistic.SHOOTING_ACCURACY, 80,
+					Statistic.SHOOTING_POWER, 30
+					)
+			);
 	
 	/**
 	 * Get a specific statistic from the athlete
@@ -76,17 +139,6 @@ public class Athlete extends Purchasable {
 	}
 	
 	/**
-	 * Clamp an integer between the values 0 and 100 (inclusive)
-	 * Used for setting an athletes statistic or stamina
-	 * 
-	 * @param value					the integer value to be clamped
-	 * @return 						the integer value clamped between 0 and 100
-	 */
-	private int clampValue(int value) {
-		return Math.max(0, Math.min(100, value));
-	}
-	
-	/**
 	 * Set a specific statistic to an integer value
 	 * 
 	 * @param statisticToSet		The statistic to set the value of
@@ -103,18 +155,7 @@ public class Athlete extends Purchasable {
 	 */
 	
 	public void setStamina(int value) {
-		stamina = clampValue(value);
-	}
-	
-	/**
-	 * generates an array of names for an enumeration
-	 * created by https://stackoverflow.com/users/256196/bohemian
-	 * 
-	 * @param e						The class of the enumeration
-	 * @return						an array of strings of the names of the enum
-	 */
-	private static List<String> getEnumNames(Class<? extends Enum<?>> e) {
-	    return Arrays.asList(Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new));
+		stamina = MiscUtil.clampValue(value);
 	}
 	
 	/**
@@ -137,13 +178,15 @@ public class Athlete extends Purchasable {
 			List<String> popupOptions = Arrays.asList("Active Team", "Reserve Team");
 			boolean addToActive = gameEnvironment.getUIEnvironment().displayPopup(
 					popupMessage, popupOptions) == 0;
+			
 			if (addToActive) {
+				// Create a popup with a button for each position
+				List<String> positionNames = MiscUtil.getEnumerationNames(Position.class);
 				popupMessage = "What role should the athlete be placed into?";
-				// Get an array of strings describing each position
-				List<String> positionNames = getEnumNames(Position.class);
 				int selectedIndex = gameEnvironment.getUIEnvironment().displayPopup(
 						popupMessage, positionNames);
 				Position selectedPosition = Position.values()[selectedIndex];
+				
 				playerTeam.addAthleteToActive(this, selectedPosition);
 			} else {
 				playerTeam.addAthleteToReserve(this);
@@ -177,9 +220,22 @@ public class Athlete extends Purchasable {
 	 * @param playedPosition		the position the athlete is playing
 	 * @return						a numerical value for the athlete's effectiveness
 	 */
-	public int getMatchScore(Position playerPosition) {
-		//TODO make this work
-		return 0;
+	public int getMatchScore(Position playedPosition) {
+		int totalScore = 0;
+		Map<Statistic, Integer> statisticWeights = MATCH_POSITION_STATISTIC_WEIGHTS.get(playedPosition);
+		
+		//add up the athlete's statistics * the statistic's weight for the position
+		for (Statistic statistic: Statistic.values()) {
+			int statisticWeight = statisticWeights.get(statistic);
+			totalScore += getStatistic(statistic) * statisticWeight;
+		}
+		
+		//apply a 20% bonus if the athlete's role matches the position being played 
+		if (role == playedPosition) {
+			totalScore *= 1.2;
+		}
+		
+		return totalScore;
 	}
 	
 	/**
@@ -239,7 +295,7 @@ public class Athlete extends Purchasable {
 	 * @return						A randomly generated Athlete.
 	 */
 	public static Athlete generateAthlete(int qualityLevel, Random rng, Team team, GameEnvironment gameEnvironment) {
-		String name = Utils.generateName("playerFirstNames", "playerLastNames", rng);
+		String name = NameGenerator.generateName("playerFirstNames", "playerLastNames", rng);
 		
 		Position[] positions = Position.values();
 		Position role = positions[rng.nextInt(positions.length)];
@@ -253,5 +309,20 @@ public class Athlete extends Purchasable {
 		}
 		
 		return resultingAthlete;
+	}
+	
+	
+	/**
+	 * @return		Whether or not the athlete has used steroids
+	 */
+	public boolean getHasUsedSteroids() {
+		return hasUsedSteroids;
+	}
+	
+	/**
+	 * @param		Whether or not the athlete has used steroids
+	 */
+	public void setHasUsedSteroids(boolean usedSteroids) {
+		hasUsedSteroids = usedSteroids;
 	}
 }
