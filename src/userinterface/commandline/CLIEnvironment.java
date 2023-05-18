@@ -88,10 +88,7 @@ public class CLIEnvironment implements UIEnvironment {
 		currentLocation = CLILocations.get(location);
 		
 		clearScreen();
-		String[] options = currentLocation.display();
-		int selectedOption = displayOptions(options);
-		
-		currentLocation.processOption(selectedOption);
+		currentLocation.display();
 	}
 	
 	/**
