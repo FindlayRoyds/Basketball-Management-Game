@@ -49,7 +49,7 @@ public class Steroid extends Item {
 	 * @param gameEnvironment					The game environment the game is being created in
 	 * @return									The randomly generated steroid purchasable item
 	 */
-	public static Purchasable generateRandom(int qualityLevel, GameEnvironment gameEnvironment) {
+	public static Purchasable generateSteroid(int qualityLevel, GameEnvironment gameEnvironment) {
 		Random rng = gameEnvironment.getRng();
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
 		int randomBoostAmount = rng.nextInt(qualityLevel / 2, qualityLevel) / 5;

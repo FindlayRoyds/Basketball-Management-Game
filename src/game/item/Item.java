@@ -1,14 +1,9 @@
 package game.item;
 
-import java.util.Map;
-import java.util.Random;
-
 import game.Purchasable;
 import game.Player;
 import game.GameEnvironment;
 import game.Athlete;
-import game.item.Bandaid;
-import game.item.StatisticBoost;
 
 /**
  * This class is the abstract class for items in game
@@ -87,9 +82,9 @@ public abstract class Item extends Purchasable {
 	public static Purchasable generateLegalItem(int qualityLevel, GameEnvironment gameEnvironment) {
 		int randomInteger = gameEnvironment.getRng().nextInt(10);
 		if (randomInteger == 0) {
-			return Bandaid.generateRandom(qualityLevel, gameEnvironment);
+			return Bandaid.generateBandaid(qualityLevel, gameEnvironment);
 		}
-		return StatisticBoost.generateRandom(qualityLevel, gameEnvironment);
+		return StatisticBoost.generateStatisticBoost(qualityLevel, gameEnvironment);
 	}
 	
 	/**

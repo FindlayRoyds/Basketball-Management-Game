@@ -40,7 +40,7 @@ public class Bandaid extends Item {
 	 * @param gameEnvironment					The game environment the game is being created in
 	 * @return									The randomly generated bandaid purchasable item
 	 */
-	public static Purchasable generateRandom(int qualityLevel, GameEnvironment gameEnvironment) {
+	public static Purchasable generateBandaid(int qualityLevel, GameEnvironment gameEnvironment) {
 		Random rng = gameEnvironment.getRng();
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
 		int randomPrice = rng.nextInt(qualityLevel / 2, qualityLevel) / 4;
