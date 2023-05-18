@@ -17,7 +17,7 @@ import util.NameGenerator;
  * And has several statistics to gauge their performance
  * 
  * @author Findlay Royds, Jake van Keulen
- * @version 1.1, May 2023.
+ * @version 1.2, May 2023.
  */
 public class Athlete extends Purchasable {	
 	/**

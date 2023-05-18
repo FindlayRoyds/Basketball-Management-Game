@@ -4,7 +4,7 @@ package game;
  * abstract class for everything sold at markets in-game
  * 
  * @author Findlay Royds
- * @version 1.3, May 2023.
+ * @version 1.4, May 2023.
  */
 public abstract class Purchasable {
 	/**

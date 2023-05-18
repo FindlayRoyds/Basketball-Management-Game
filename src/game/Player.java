@@ -6,7 +6,7 @@ import game.item.Item;
 /**
  * This class defines a player and the things they own and can do in the game.
  * 
- * @author Jake van Keulen
+ * @author Jake van Keulen, Findlay Royds
  * @version 1.2, May 2023.
  */
 public class Player {

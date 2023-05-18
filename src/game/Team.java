@@ -13,8 +13,8 @@ import util.NameGenerator;
  * which can be active players or reserves.
  * Active players each occupy a different position on the team.
  * 
- * @author Jake van Keulen
- * @version 1.0
+ * @author Jake van Keulen, Findlay Royds
+ * @version 1.1
  */
 public class Team {
 	/**
