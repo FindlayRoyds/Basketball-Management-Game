@@ -1,19 +1,20 @@
 package game;
 
-import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
+import java.util.EnumMap;
 
 import enumeration.Location;
 import game.location.GameLocation;
 import game.randomevent.RandomEvent;
 import userinterface.UIEnvironment;
+import userinterface.commandline.CLIEnvironment;
 
 /**
  * This class implements the game environment.
  * It handles setting up and running a game.
  * 
- * @author Jake van Keulen
+ * @author Jake van Keulen, Findlay Royds
  * @version 1.0, May 2023.
  */
 public class GameEnvironment {
@@ -31,7 +32,7 @@ public class GameEnvironment {
 	 * Map of location types (from the Location enum) to GameLocation
 	 * classes that implement the given locations.
 	 */
-	private HashMap<Location, GameLocation> locations;
+	private EnumMap<Location, GameLocation> gameLocations;
 
 	/**
 	 * The number of the current week in the season.
@@ -64,6 +65,31 @@ public class GameEnvironment {
 	 * Random object used for generating random numbers.
 	 */
 	private Random rng;
+	
+	/**
+	 * The main method of game environment.
+	 * Responsible for starting the game.
+	 * 
+	 * @param args		The command line arguments.
+	 */
+	public static void main(String[] args) {
+		GameEnvironment gameEnvironment = new GameEnvironment();
+		gameEnvironment.changeLocation(Location.MAP);
+	}
+	
+	/**
+	 * The constructor for game environment. Responsible for creating the objects required to start the game.
+	 */
+	public GameEnvironment() {
+		player = new Player();
+		
+		// Create game locations
+		gameLocations = new EnumMap<Location, GameLocation>(Location.class);
+		gameLocations.put(Location.MAP, new game.location.Map(this));
+		gameLocations.put(Location.END, new game.location.End(this));
+		
+		uiEnvironment = new CLIEnvironment(gameLocations);
+	}
 	
 	/**
 	 * @return 			Random object used for generating random numbers.
@@ -101,7 +127,7 @@ public class GameEnvironment {
 	 * @return 					A GameLocation object
 	 */
 	public GameLocation getGameLocation(Location location) {
-		return locations.get(location);
+		return gameLocations.get(location);
 	}
 
 	/**
