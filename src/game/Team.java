@@ -37,7 +37,7 @@ public class Team {
 	/**
 	 * The maximum number of reserve athletes permitted on a team.
 	 */
-	private final static int MAX_NUMBER_OF_RESERVES = 5; // shouldnb't this be 5 the spec says so I think
+	private final static int MAX_NUMBER_OF_RESERVES = 5;
 	
 	/**
 	 * Initializes an empty team with the given team name.

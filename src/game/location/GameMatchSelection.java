@@ -15,7 +15,7 @@ import game.Team;
  * @author Jake van Keulen
  * @version 1.0
  */
-public class MatchSelection extends GameLocation {
+public class GameMatchSelection extends GameLocation {
 	/**
 	 * The number of teams to be generated and shown.
 	 */
@@ -29,7 +29,7 @@ public class MatchSelection extends GameLocation {
 	/**
 	 * Constructor for Map
 	 */
-	public MatchSelection(GameEnvironment gameEnvironment) {
+	public GameMatchSelection(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
 	}
 	
@@ -62,7 +62,7 @@ public class MatchSelection extends GameLocation {
 	 * @param opposingTeam		The team for the Player to play against.
 	 */
 	public void playMatch(Team opposingTeam) {
-		Match matchGameLocation = (Match) getGameEnvironment().getGameLocation(Location.MATCH);
+		GameMatch matchGameLocation = (GameMatch) getGameEnvironment().getGameLocation(Location.MATCH);
 		Team playerTeam = getGameEnvironment().getPlayer().getTeam();
 
 		matchGameLocation.setTeams(playerTeam, opposingTeam);

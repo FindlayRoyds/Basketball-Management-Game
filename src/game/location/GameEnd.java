@@ -10,11 +10,11 @@ import game.GameEnvironment;
  * @author Jake van Keulen
  * @version 1.0
  */
-public class End extends GameLocation {
+public class GameEnd extends GameLocation {
 	/**
 	 * Constructor for End
 	 */
-	public End(GameEnvironment gameEnvironment) {
+	public GameEnd(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
 	}
 	

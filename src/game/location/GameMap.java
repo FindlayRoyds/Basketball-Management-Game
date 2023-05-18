@@ -11,11 +11,11 @@ import enumeration.Location;
  * @author Jake van Keulen
  * @version 1.0
  */
-public class Map extends GameLocation {
+public class GameMap extends GameLocation {
 	/**
 	 * Constructor for Map
 	 */
-	public Map(GameEnvironment gameEnvironment) {
+	public GameMap(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
 	}
 	

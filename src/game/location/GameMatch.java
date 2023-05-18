@@ -15,7 +15,7 @@ import game.Team;
  * @author Jake van Keulen
  * @version 1.0
  */
-public class Match extends GameLocation {
+public class GameMatch extends GameLocation {
 	/**
 	 * The 2 teams that are playing in the match.
 	 */
@@ -30,7 +30,7 @@ public class Match extends GameLocation {
 	/**
 	 * Constructor for Map
 	 */
-	public Match(GameEnvironment gameEnvironment) {
+	public GameMatch(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
 	}
 	

@@ -3,10 +3,12 @@ package game;
 import java.util.Random;
 import java.util.Set;
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.EnumMap;
 
 import enumeration.Location;
 import game.location.GameLocation;
+import game.location.GameMarket;
 import game.randomevent.RandomEvent;
 import userinterface.UIEnvironment;
 import userinterface.commandline.CLIEnvironment;
@@ -87,8 +89,8 @@ public class GameEnvironment {
 		
 		// Create game locations
 		gameLocations = new EnumMap<Location, GameLocation>(Location.class);
-		gameLocations.put(Location.MAP, new game.location.Map(this));
-		gameLocations.put(Location.END, new game.location.End(this));
+		gameLocations.put(Location.MAP, new game.location.GameMap(this));
+		gameLocations.put(Location.END, new game.location.GameEnd(this));
 		
 		uiEnvironment = new CLIEnvironment(gameLocations);
 	}
@@ -150,7 +152,31 @@ public class GameEnvironment {
 	 */
 	public boolean hasEnded() {
 		if (currentWeek > seasonLength) return true;
-		// TODO: return true if a player can't make a full team
+		
+		Team team = getPlayer().getTeam();
+		int numberOfAthletesNeeded = 5 - (team.getReserveAthletes().size() + team.getActiveAthletes().size());
+		
+		// Get list of available athletes in the athlete market and sort by price.
+		GameMarket athleteMarket = (GameMarket)getGameLocation(Location.ATHLETE_MARKET);
+		ArrayList<Purchasable> availableAthletes = new ArrayList<Purchasable>(athleteMarket.getAvailablePurchasables());
+		availableAthletes.sort((athlete1, athlete2) ->
+				athlete1.getPrice() - athlete2.getPrice());
+
+		// Greedily simulate purchasing the cheapest athletes first,
+		// to see the maximum number of athletes the player can afford.
+		int canPurchase = 0, remainingMoney = getPlayer().getMoney();
+		for (Purchasable athlete: availableAthletes) {
+			if (athlete.getPrice() <= remainingMoney) {
+				++canPurchase;
+				remainingMoney -= athlete.getPrice();
+			}
+			else break;
+		}
+
+		// Check if the player can purchase enough athletes to make a full team.
+		if (canPurchase < numberOfAthletesNeeded)
+			return true;
+		
 		return false;
 	}
 
