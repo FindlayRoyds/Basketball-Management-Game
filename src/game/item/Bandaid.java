@@ -43,7 +43,7 @@ public class Bandaid extends Item {
 	public static Purchasable generateBandaid(int qualityLevel, GameEnvironment gameEnvironment) {
 		Random rng = gameEnvironment.getRng();
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
-		int randomPrice = rng.nextInt(qualityLevel / 2, qualityLevel) / 4;
+		int randomPrice = (qualityLevel / 8 + rng.nextInt(qualityLevel / 8 + 1));
 		return new Bandaid(randomDescription, randomPrice, gameEnvironment);
 	}
 	

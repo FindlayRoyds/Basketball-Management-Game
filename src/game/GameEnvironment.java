@@ -2,6 +2,7 @@ package game;
 
 import java.util.Random;
 import java.util.Set;
+import java.util.Map;
 import java.util.EnumMap;
 
 import enumeration.Location;
@@ -15,7 +16,7 @@ import userinterface.commandline.CLIEnvironment;
  * It handles setting up and running a game.
  * 
  * @author Jake van Keulen, Findlay Royds
- * @version 1.0, May 2023.
+ * @version 1.2, May 2023.
  */
 public class GameEnvironment {
 	/**
@@ -32,7 +33,7 @@ public class GameEnvironment {
 	 * Map of location types (from the Location enum) to GameLocation
 	 * classes that implement the given locations.
 	 */
-	private EnumMap<Location, GameLocation> gameLocations;
+	private Map<Location, GameLocation> gameLocations;
 
 	/**
 	 * The number of the current week in the season.
@@ -73,15 +74,16 @@ public class GameEnvironment {
 	 * @param args		The command line arguments.
 	 */
 	public static void main(String[] args) {
-		GameEnvironment gameEnvironment = new GameEnvironment();
+		GameEnvironment gameEnvironment = new GameEnvironment(1); //temporary random seed
 		gameEnvironment.changeLocation(Location.MAP);
 	}
 	
 	/**
 	 * The constructor for game environment. Responsible for creating the objects required to start the game.
 	 */
-	public GameEnvironment() {
-		player = new Player();
+	public GameEnvironment(int randomSeed) {
+		rng = new Random(randomSeed);
+		player = new Player(this);
 		
 		// Create game locations
 		gameLocations = new EnumMap<Location, GameLocation>(Location.class);

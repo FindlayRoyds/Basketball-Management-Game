@@ -62,8 +62,8 @@ public class StatisticBoost extends Item {
 		Statistic randomStatistic = Statistic.values()[randomIndex];
 		String randomName = StatisticBoostTypes.get(randomStatistic)[0];
 		String randomDescription = StatisticBoostTypes.get(randomStatistic)[1];
-		int randomBoostAmount = rng.nextInt(qualityLevel / 2, qualityLevel) / 5;
-		int randomPrice = rng.nextInt(qualityLevel / 2, qualityLevel) / 2;
+		int randomBoostAmount = (qualityLevel / 2 + rng.nextInt(qualityLevel / 2)) / 5;
+		int randomPrice = (qualityLevel / 2 + rng.nextInt(qualityLevel / 2)) / 2;
 		
 		return new StatisticBoost(randomName, randomDescription, randomPrice, randomBoostAmount, randomStatistic, gameEnvironment);
 	}

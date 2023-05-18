@@ -1,6 +1,6 @@
 package game.randomevent;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import game.GameEnvironment;
@@ -36,7 +36,7 @@ public class DrugTest extends RandomEvent {
 	protected void occur() {
 		boolean passedDrugTest = true;
 		final Team playerTeam = gameEnvironment.getPlayer().getTeam();
-		final HashMap<Position, Athlete> activeAthletes = playerTeam.getActiveAthletes();
+		final Map<Position, Athlete> activeAthletes = playerTeam.getActiveAthletes();
 		final Set<Athlete> reserveAthletes = playerTeam.getReserveAthletes();
 		
 		// Test if any athletes have used steroids

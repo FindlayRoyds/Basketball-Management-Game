@@ -1,7 +1,9 @@
 package game;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.HashSet;
+import java.util.Set;
+import java.util.Map;
 import java.util.Random;
 
 import enumeration.Position;
@@ -14,18 +16,18 @@ import util.NameGenerator;
  * Active players each occupy a different position on the team.
  * 
  * @author Jake van Keulen, Findlay Royds
- * @version 1.1
+ * @version 1.2
  */
 public class Team {
 	/**
 	 * Map of Positions to the athlete that has been assigned that position on the Team.
 	 */
-	private HashMap<Position, Athlete> activeAthletes;
+	private Map<Position, Athlete> activeAthletes;
 
 	/**
 	 * Set of Athletes who are reserves in the Team.
 	 */
-	private HashSet<Athlete> reserveAthletes;
+	private Set<Athlete> reserveAthletes;
 
 	/**
 	 * Name of the Team.
@@ -35,7 +37,7 @@ public class Team {
 	/**
 	 * The maximum number of reserve athletes permitted on a team.
 	 */
-	private final static int MAX_NUMBER_OF_RESERVES = 4;
+	private final static int MAX_NUMBER_OF_RESERVES = 5; // shouldnb't this be 5 the spec says so I think
 	
 	/**
 	 * Initializes an empty team with the given team name.
@@ -44,6 +46,8 @@ public class Team {
 	 */
 	public Team(String teamName) {
 		name = teamName;
+		activeAthletes = new EnumMap<Position, Athlete>(Position.class);
+		reserveAthletes = new HashSet<Athlete>();
 	}
 	
 	/**
@@ -60,7 +64,7 @@ public class Team {
 	 * 
 	 * @return		Map of Positions to the Athlete that has been assigned that Position.
 	 */
-	public HashMap<Position, Athlete> getActiveAthletes() {
+	public Map<Position, Athlete> getActiveAthletes() {
 		return activeAthletes;
 	}
 
@@ -69,7 +73,7 @@ public class Team {
 	 * 
 	 * @return		Set of the team's reserve Athletes.
 	 */
-	public HashSet<Athlete> getReserveAthletes() {
+	public Set<Athlete> getReserveAthletes() {
 		return reserveAthletes;
 	}
 

@@ -52,8 +52,8 @@ public class Steroid extends Item {
 	public static Purchasable generateSteroid(int qualityLevel, GameEnvironment gameEnvironment) {
 		Random rng = gameEnvironment.getRng();
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
-		int randomBoostAmount = rng.nextInt(qualityLevel / 2, qualityLevel) / 5;
-		int randomPrice = rng.nextInt(qualityLevel / 2, qualityLevel) / 2;
+		int randomBoostAmount = (qualityLevel / 2 + rng.nextInt(qualityLevel / 2)) / 5;
+		int randomPrice = (qualityLevel / 2 + rng.nextInt(qualityLevel / 2)) / 2;
 		return new Steroid(randomDescription, randomPrice, randomBoostAmount, gameEnvironment);
 	}
 

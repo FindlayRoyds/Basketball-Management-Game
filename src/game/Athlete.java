@@ -2,9 +2,7 @@ package game;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
 import java.util.Random;
-import java.util.Arrays;
 
 import enumeration.Position;
 import enumeration.Statistic;
@@ -17,7 +15,7 @@ import util.NameGenerator;
  * And has several statistics to gauge their performance
  * 
  * @author Findlay Royds, Jake van Keulen
- * @version 1.2, May 2023.
+ * @version 1.3, May 2023.
  */
 public class Athlete extends Purchasable {	
 	/**
@@ -34,7 +32,7 @@ public class Athlete extends Purchasable {
 	 * Map of statistic types (from the Statistic enum) to an integer,
 	 * ranging from 0 to 100 (inclusive)
 	 */
-	private HashMap<Statistic, Integer> statistics;
+	private Map<Statistic, Integer> statistics;
 	
 	/**
 	 * The remaining stamina of the athlete
@@ -133,6 +131,7 @@ public class Athlete extends Purchasable {
 		this.role = role;
 		this.stamina = stamina;
 		this.gameEnvironment = gameEnvironment;
+		this.statistics = new HashMap<Statistic, Integer>();
 
 		// Initialize all statistics to 0;
 		for (Statistic statistic: Statistic.values()) {
@@ -313,7 +312,7 @@ public class Athlete extends Purchasable {
 		
 		Athlete resultingAthlete = new Athlete(name, role, stamina, gameEnvironment, price);
 		for (Statistic statistic: Statistic.values()) {
-			resultingAthlete.statistics.put(statistic, rng.nextInt(qualityLevel));
+			resultingAthlete.setStatistic(statistic, rng.nextInt(qualityLevel));
 		}
 		
 		return resultingAthlete;

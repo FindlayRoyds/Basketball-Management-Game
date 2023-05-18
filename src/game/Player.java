@@ -1,13 +1,15 @@
 package game;
 
 import java.util.HashSet;
+
 import game.item.Item;
+import game.Team;
 
 /**
  * This class defines a player and the things they own and can do in the game.
  * 
  * @author Jake van Keulen, Findlay Royds
- * @version 1.2, May 2023.
+ * @version 1.3, May 2023.
  */
 public class Player {
 	/**
@@ -30,6 +32,16 @@ public class Player {
 	 * The amount of money in dollars that the player has.
 	 */
 	private int money;
+	
+	/**
+	 * Constructor for the player class
+	 */
+	public Player(GameEnvironment gameEnvironment) {
+		money = 0;
+		score = 0;
+		inventory = new HashSet<Item>();
+		team = Team.generateTeam(50, gameEnvironment);
+	}
 
 	/**
 	 * Adds an item to the Player's inventory.
@@ -54,9 +66,8 @@ public class Player {
 		if (money >= amountOfMoney) {
 			money -= amountOfMoney;
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 	
 	public void giveMoney(int amountOfMoney) {
