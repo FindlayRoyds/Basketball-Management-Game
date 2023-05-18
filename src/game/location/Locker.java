@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import game.Athlete;
+import game.GameEnvironment;
 import enumeration.Position;
 
 /**
@@ -17,6 +18,13 @@ import enumeration.Position;
  *
  */
 public class Locker extends GameLocation {
+	/**
+	 * Constructor for Locker
+	 */
+	public Locker(GameEnvironment gameEnvironment) {
+		super(gameEnvironment);
+	}
+	
 	/**
 	 * Update the week to a given week.
 	 * Does nothing in this location.

@@ -1,5 +1,6 @@
 package game.location;
 
+import game.GameEnvironment;
 import enumeration.Location;
 
 /**
@@ -11,6 +12,13 @@ import enumeration.Location;
  * @version 1.0
  */
 public class Map extends GameLocation {
+	/**
+	 * Constructor for Map
+	 */
+	public Map(GameEnvironment gameEnvironment) {
+		super(gameEnvironment);
+	}
+	
 	/**
 	 * Update the week to a given week.
 	 * Does nothing in this location.

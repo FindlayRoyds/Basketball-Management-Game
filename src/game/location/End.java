@@ -1,5 +1,7 @@
 package game.location;
 
+import game.GameEnvironment;
+
 /**
  * A class defining the End location.
  * This location is used at the end of the game to get stats about the 
@@ -9,6 +11,13 @@ package game.location;
  * @version 1.0
  */
 public class End extends GameLocation {
+	/**
+	 * Constructor for End
+	 */
+	public End(GameEnvironment gameEnvironment) {
+		super(gameEnvironment);
+	}
+	
 	/**
 	 * Update the week to a given week.
 	 * Does nothing in this location.

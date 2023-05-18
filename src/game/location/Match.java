@@ -3,6 +3,7 @@ package game.location;
 import java.util.ArrayList;
 
 import game.Athlete;
+import game.GameEnvironment;
 import game.Team;
 
 /**
@@ -25,6 +26,13 @@ public class Match extends GameLocation {
 	 * A list of Athletes that win their individual pairings in the match.
 	 */
 	private ArrayList<Athlete> individualWinners;
+	
+	/**
+	 * Constructor for Map
+	 */
+	public Match(GameEnvironment gameEnvironment) {
+		super(gameEnvironment);
+	}
 	
 	/**
 	 * Update the week to a given week.

@@ -1,9 +1,9 @@
 package game.location;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import enumeration.Location;
+import game.GameEnvironment;
 import game.Team;
 
 /**
@@ -27,12 +27,18 @@ public class MatchSelection extends GameLocation {
 	private ArrayList<Team> teams;
 	
 	/**
+	 * Constructor for Map
+	 */
+	public MatchSelection(GameEnvironment gameEnvironment) {
+		super(gameEnvironment);
+	}
+	
+	/**
 	 * Update the week to a given week.
 	 * This involves refreshing the opposition teams so that they are different each week.
 	 */
 	@Override
 	public void update(int week) {
-		Random rng = getGameEnvironment().getRng();
 		teams = new ArrayList<Team>();
 		int qualityLevel = 50;
 		for (int i = 0; i < NUMBER_OF_TEAMS; ++i) {

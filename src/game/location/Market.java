@@ -1,7 +1,6 @@
 package game.location;
 
 import java.util.Set;
-import java.util.function.Function;
 
 import game.GameEnvironment;
 import game.Purchasable;
@@ -53,6 +52,13 @@ abstract public class Market extends GameLocation {
 	 * @param purchasable		The Purchasable to be given to the Player.
 	 */
 	protected abstract void givePurchasableToPlayer(Purchasable purchasable);
+	
+	/**
+	 * Constructor for Map
+	 */
+	public Market(GameEnvironment gameEnvironment) {
+		super(gameEnvironment);
+	}
 	
 	/**
 	 * Update the week to a given week.

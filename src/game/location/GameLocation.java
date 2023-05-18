@@ -17,6 +17,14 @@ public abstract class GameLocation {
 	private GameEnvironment gameEnvironment;
 	
 	/**
+	 * Constructor for game location.
+	 * Sets the gameEnvironment property
+	 */
+	public GameLocation(GameEnvironment gameEnvironment) {
+		this.gameEnvironment = gameEnvironment;
+	}
+	
+	/**
 	 * Get the game environment object to which the location belongs
 	 * @return		A GameEnvironment object.
 	 */

@@ -2,6 +2,7 @@ package game.location;
 
 import java.util.Set;
 
+import game.GameEnvironment;
 import game.Purchasable;
 import game.item.Item;
 
@@ -21,6 +22,13 @@ public class ItemMarket extends Market {
 	 * This decides if the Player will be able to sell illegal items back to the Market or not.
 	 */
 	private boolean allowIllegalItems;
+	
+	/**
+	 * Constructor for Map
+	 */
+	public ItemMarket(GameEnvironment gameEnvironment) {
+		super(gameEnvironment);
+	}
 
 	/**
 	 * Removes an Item from the Player's inventory.

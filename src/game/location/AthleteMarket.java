@@ -4,12 +4,13 @@ import java.util.Set;
 
 import enumeration.Position;
 
-import java.util.List;
 import java.util.Map;
 
 import game.Athlete;
+import game.GameEnvironment;
 import game.Purchasable;
 import game.Team;
+import util.MiscUtil;
 
 /**
  * A class that extends the Market game location to allow for the sale of Athletes.
@@ -22,6 +23,13 @@ import game.Team;
  *
  */
 public class AthleteMarket extends Market {
+	/**
+	 * Constructor for Map
+	 */
+	public AthleteMarket(GameEnvironment gameEnvironment) {
+		super(gameEnvironment);
+	}
+	
 	/**
 	 * Removes an Athlete from the Player's Team.
 	 * 
@@ -43,8 +51,7 @@ public class AthleteMarket extends Market {
 	protected void givePurchasableToPlayer(Purchasable purchasable) {
 		final String popupMessage = "In what position would you like to place the player in the team?";
 
-		// TODO: Fill popupOptions with String values from Position enum.
-		String[] popupOptions = null;
+		String[] popupOptions = MiscUtil.getEnumerationNames(Position.class);
 		int selectedIndex = getGameEnvironment().getUIEnvironment().displayPopup(popupMessage, popupOptions);
 		Team team = getGameEnvironment().getPlayer().getTeam();
 		if (selectedIndex == popupOptions.length-1) {

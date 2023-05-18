@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import game.Athlete;
+import game.GameEnvironment;
 import game.Team;
 import game.item.Item;
 
@@ -18,6 +19,13 @@ import game.item.Item;
  *
  */
 public class Inventory extends GameLocation {
+	/**
+	 * Constructor for Inventory
+	 */
+	public Inventory(GameEnvironment gameEnvironment) {
+		super(gameEnvironment);
+	}
+	
 	/**
 	 * Update the week to a given week.
 	 * Does nothing in this location.
