@@ -87,8 +87,8 @@ public class GameEnvironment {
 		
 		// Create game locations
 		gameLocations = new EnumMap<Location, GameLocation>(Location.class);
-		gameLocations.put(Location.MAP, new game.location.Map(this));
-		gameLocations.put(Location.END, new game.location.End(this));
+		gameLocations.put(Location.MAP, new game.location.GameMap(this));
+		gameLocations.put(Location.END, new game.location.GameEnd(this));
 		
 		uiEnvironment = new CLIEnvironment(gameLocations);
 	}

@@ -1,6 +1,6 @@
 package userinterface.commandline;
 
-import game.location.Map;
+import game.location.GameMap;
 import game.location.GameLocation;
 import enumeration.Location;
 
@@ -15,7 +15,7 @@ public class CLIMap extends CLILocation {
 	 * The map game location the cli map location is linked to.
 	 * Hides the gameLocation property in the CLILocation super class.
 	 */
-	private Map gameLocation;
+	private GameMap gameLocation;
 	
 	/**
 	 * Constructor for the map CLI location.
@@ -24,7 +24,7 @@ public class CLIMap extends CLILocation {
 	 */
 	public CLIMap(GameLocation gameLocation) {
 		super(gameLocation);
-		this.gameLocation = (Map) gameLocation;
+		this.gameLocation = (GameMap) gameLocation;
 	}
 
 	@Override

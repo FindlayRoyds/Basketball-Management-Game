@@ -1,7 +1,7 @@
 package userinterface.commandline;
 
 import game.location.GameLocation;
-import game.location.End;
+import game.location.GameEnd;
 
 /**
  * 
@@ -14,14 +14,14 @@ public class CLIEnd extends CLILocation {
 	 * The end game location the cli end location is linked to.
 	 * Hides the gameLocation property in the CLILocation super class.
 	 */
-	private End gameLocation;
+	private GameEnd gameLocation;
 	
 	/**
 	 * @param gameLocation			The end screen game location
 	 */
 	public CLIEnd(GameLocation gameLocation) {
 		super(gameLocation);
-		this.gameLocation = (End) gameLocation;
+		this.gameLocation = (GameEnd) gameLocation;
 	}
 	
 	@Override

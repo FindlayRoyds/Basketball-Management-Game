@@ -17,11 +17,11 @@ import enumeration.Position;
  * @version 1.0
  *
  */
-public class Locker extends GameLocation {
+public class GameLocker extends GameLocation {
 	/**
 	 * Constructor for Locker
 	 */
-	public Locker(GameEnvironment gameEnvironment) {
+	public GameLocker(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
 	}
 	

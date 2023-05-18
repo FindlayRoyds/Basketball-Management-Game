@@ -13,7 +13,7 @@ import game.Purchasable;
  * @author Jake van Keulen
  * @version 1.0
  */
-abstract public class Market extends GameLocation {
+abstract public class GameMarket extends GameLocation {
 	@FunctionalInterface
 	interface Function3<Param1, Param2, Return> {
 	    public Return apply(Param1 param1, Param2 param2);
@@ -43,7 +43,7 @@ abstract public class Market extends GameLocation {
 	/**
 	 * Constructor
 	 */
-	public Market(GameEnvironment gameEnvironment) {
+	public GameMarket(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
 	}
 	

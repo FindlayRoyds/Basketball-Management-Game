@@ -18,11 +18,11 @@ import game.item.Item;
  * @version 1.1
  *
  */
-public class Inventory extends GameLocation {
+public class GameInventory extends GameLocation {
 	/**
 	 * Constructor for Inventory
 	 */
-	public Inventory(GameEnvironment gameEnvironment) {
+	public GameInventory(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
 	}
 	
