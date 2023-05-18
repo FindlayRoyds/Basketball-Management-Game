@@ -18,6 +18,14 @@ public class CLIMap extends CLILocation {
 	private GameMap gameLocation;
 	
 	/**
+	 * Locations the user can travel to from the map
+	 */
+	private Location[] accessableLocations = new Location[] {
+		Location.MATCH_SELECION, Location.INVENTORY, Location.LOCKER_ROOM,
+		Location.ATHLETE_MARKET, Location.ITEM_MARKET, Location.BLACK_MARKET
+	};
+	
+	/**
 	 * Constructor for the map CLI location.
 	 * 
 	 * @param gameLocation 				the map GameLocation.
@@ -30,12 +38,12 @@ public class CLIMap extends CLILocation {
 	@Override
 	public String[] display() {
 		System.out.println("Map");
-		return new String[] {"Go to end of game"};
+		return new String[] {"Stadium", "Inventory", "Locker Room", "Athlete Market", "Item Market", "Black Market"};
 	}
 
 	@Override
 	public void processOption(int selectedOption) {
-		gameLocation.changeLocation(Location.END);
+		gameLocation.changeLocation(accessableLocations[selectedOption]);
 	}
 
 }
