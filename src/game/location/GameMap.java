@@ -1,7 +1,6 @@
 package game.location;
 
 import game.GameEnvironment;
-import enumeration.Location;
 
 /**
  * A class defining the Map location.
@@ -27,15 +26,5 @@ public class GameMap extends GameLocation {
 	@Override
 	public void update(int week) {
 		// nothing needs to happen here
-	}
-	
-	/**
-	 * Changes the current game location to a new location.
-	 * Used to travel to different locations from the map.
-	 * 
-	 * @param location		The location to change to.
-	 */
-	public void changeLocation(Location location) {
-		getGameEnvironment().changeLocation(location);
 	}
 }
