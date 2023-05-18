@@ -34,15 +34,12 @@ public class CLIMap extends CLILocation {
 		super(gameLocation);
 		this.gameLocation = (GameMap) gameLocation;
 	}
-
+	
 	@Override
-	public String[] display() {
+	public void display() {
 		System.out.println("Map");
-		return new String[] {"Stadium", "Inventory", "Locker Room", "Athlete Market", "Item Market", "Black Market"};
-	}
-
-	@Override
-	public void processOption(int selectedOption) {
+		String[] options = new String[] {"Stadium", "Inventory", "Locker Room", "Athlete Market", "Item Market", "Black Market"};
+		int selectedOption = cliEnvironment.displayOptions(options);
 		gameLocation.changeLocation(accessableLocations[selectedOption]);
 	}
 
