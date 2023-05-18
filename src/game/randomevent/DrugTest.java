@@ -55,7 +55,7 @@ public class DrugTest extends RandomEvent {
 		
 		// If any athletes failed the drug test, end the game
 		if (!passedDrugTest) {
-			gameEnvironment.changeLocation(Location.END_SCREEN);
+			gameEnvironment.changeLocation(Location.END);
 			
 			final String popupMessage = "Your team failed a randomised drug test! You have been disqualified from the tournament.";
 			gameEnvironment.getUIEnvironment().displayPopup(popupMessage);
