@@ -15,7 +15,7 @@ public class AthleteQuits extends RandomEvent {
 	/**
 	 * The athlete this random event effects.
 	 */
-	Athlete athlete;
+	private Athlete athlete;
 
 	/**
 	 * The constructor for the Athlete quits random event.

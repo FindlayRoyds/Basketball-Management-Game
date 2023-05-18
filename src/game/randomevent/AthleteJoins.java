@@ -15,7 +15,7 @@ public class AthleteJoins extends RandomEvent {
 	/**
 	 * The team the random event effects
 	 */
-	Team team;
+	private Team team;
 
 	/**
 	 * @param gameEnvironment
