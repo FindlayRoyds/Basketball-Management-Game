@@ -65,7 +65,7 @@ abstract public class Market extends GameLocation {
 	public void update(int week) {
 		availablePurchasables.clear();
 		for (int i = 0; i < amountToDisplay; ++i) {
-			availablePurchasables.add(generatePurchasable.apply(null));
+			availablePurchasables.add(generatePurchasable.apply(1, getGameEnvironment()));
 		}
 	}
 	
