@@ -34,6 +34,11 @@ public abstract class Purchasable {
 	public abstract boolean purchase(Player player);
 	
 	/**
+	 * @param player				The player making the sale.
+	 */
+	public abstract void sell(Player player);
+	
+	/**
 	 * get the price of the purchasable
 	 * 
 	 * @return 						The price of the purchasable

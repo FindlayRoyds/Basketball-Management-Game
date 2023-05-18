@@ -18,6 +18,11 @@ abstract public class Market extends GameLocation {
 	interface Function3<Param1, Param2, Return> {
 	    public Return apply(Param1 param1, Param2 param2);
 	}
+	
+	/**
+	 * Whether or not illegal purchasables can be bought or sold at this location
+	 */
+	private boolean allowIllegalPurchasables;
 
 	/**
 	 * The set of Purchasables that are available for the Player to purchase from the Market.
@@ -36,25 +41,7 @@ abstract public class Market extends GameLocation {
 	private Function3<Integer, GameEnvironment, Purchasable> generatePurchasable;
 
 	/**
-	 * Remove a Purchasable from the Player.
-	 * This looks different for different types of Markets or Purchasables,
-	 * as the Player stores different Purchasables in different ways.
-	 * 
-	 * @param purchasable		The Purchasable to be removed from the Player.
-	 */
-	protected abstract void removePurchasableFromPlayer(Purchasable purchasable);
-
-	/**
-	 * Give a Purchasable to the Player.
-	 * This looks different for different types of Markets or Purchasables,
-	 * as the Player stores different Purchasables in different ways.
-	 * 
-	 * @param purchasable		The Purchasable to be given to the Player.
-	 */
-	protected abstract void givePurchasableToPlayer(Purchasable purchasable);
-	
-	/**
-	 * Constructor for Map
+	 * Constructor
 	 */
 	public Market(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
@@ -85,10 +72,7 @@ abstract public class Market extends GameLocation {
 	 * @param purchasable		The purchasable to be purchased.
 	 */
 	public void purchase(Purchasable purchasable) {
-		if (getGameEnvironment().getPlayer().chargeMoney(purchasable.getPrice())) {
-			availablePurchasables.remove(purchasable);
-			givePurchasableToPlayer(purchasable);
-		}
+		purchasable.purchase(getGameEnvironment().getPlayer());
 	}
 	
 	/**
@@ -100,8 +84,8 @@ abstract public class Market extends GameLocation {
 	 * @param purchasable		The purchasable to be sold.
 	 */
 	public void sell(Purchasable purchasable) {
-		getGameEnvironment().getPlayer().giveMoney(purchasable.getPrice());
-		removePurchasableFromPlayer(purchasable);
+		if (purchasable.getIsLegal() || allowIllegalPurchasables)
+			purchasable.sell(getGameEnvironment().getPlayer());
 		availablePurchasables.add(purchasable);
 	}
 	

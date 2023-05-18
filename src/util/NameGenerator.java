@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Defines miscellaneous utilities for use throughout the game module.
+ * Defines static methods for reading words from files and using them to generate names.
  * 
  * @author Jake van Keulen
  * @version 1.0

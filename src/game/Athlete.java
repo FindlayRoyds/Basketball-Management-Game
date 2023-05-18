@@ -166,6 +166,7 @@ public class Athlete extends Purchasable {
 	 * @param player				The player attempting to purchase the athlete
 	 * @return						Whether or not the purchase was successful
 	 */
+	@Override
 	public boolean purchase(Player player) {
 		// Check that the player has enough room in their reserves
 		if (player.getTeam().getNumberOfFreeReserveSlots() == 0) {
@@ -201,6 +202,12 @@ public class Athlete extends Purchasable {
 		return chargeSuccess;
 	}
 	
+	@Override
+	public void sell(Player player) {
+		player.getTeam().removeAthlete(this);
+		setTeam(null);
+		player.giveMoney(price);
+	}
 	
 	/**
 	 * Gets the Athlete's skill value for a given statistic.

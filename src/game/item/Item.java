@@ -58,6 +58,7 @@ public abstract class Item extends Purchasable {
 	 * @param player						The player who is purchasing the item
 	 * @return 								Whether or not the purchase was succesfull
 	 */
+	@Override
 	public boolean purchase(Player player) {
 		boolean chargeSuccess = player.chargeMoney(price);
 		
@@ -65,6 +66,12 @@ public abstract class Item extends Purchasable {
 			player.addToInventory(this);
 		}
 		return chargeSuccess;
+	}
+	
+	@Override
+	public void sell(Player player) {
+		player.removeFromInventory(this);
+		player.giveMoney(price);
 	}
 	
 	/**
