@@ -9,14 +9,27 @@ import game.location.GameLocation;
  * @author Findlay Royds
  * @version 1.0, May 2023.
  */
-public interface CLILocation {
+public abstract class CLILocation {
+	/**
+	 * The matching game location that the CLILocation is linked to
+	 */
+	protected GameLocation gameLocation;
+	
+	/**
+	 * The constructor for CLILocation
+	 * 
+	 * @param gameLocation					The GameLocation the CLILocation is linked to.
+	 */
+	public CLILocation(GameLocation gameLocation) {
+		this.gameLocation = gameLocation;
+	}
+	
 	/**
 	 * Displays text on the CLI depending on the state of the linked GameLocation.
 	 * 
-	 * @param gameLocation					The GameLocation the CLILocation is linked to.
 	 * @return								An ordered List of options to be displayed on the cli.
 	 */
-	public String[] display(GameLocation gameLocation);
+	public abstract String[] display();
 	
 	/**
 	 * Abstract method for CLILocation.
@@ -24,5 +37,5 @@ public interface CLILocation {
 	 * 
 	 * @param selectedOption				The index of the selected option
 	 */
-	public void processOption(int selectedOption);
+	public abstract void processOption(int selectedOption);
 }
