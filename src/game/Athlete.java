@@ -182,13 +182,13 @@ public class Athlete extends Purchasable {
 			
 			// Give player option to add athlete to active or reserve team
 			String popupMessage = "Please select where to add the athlete";
-			List<String> popupOptions = Arrays.asList("Active Team", "Reserve Team");
+			String[] popupOptions = {"Active Team", "Reserve Team"};
 			boolean addToActive = gameEnvironment.getUIEnvironment().displayPopup(
 					popupMessage, popupOptions) == 0;
 			
 			if (addToActive) {
 				// Create a popup with a button for each position
-				List<String> positionNames = MiscUtil.getEnumerationNames(Position.class);
+				String[] positionNames = MiscUtil.getEnumerationNames(Position.class);
 				popupMessage = "What role should the athlete be placed into?";
 				int selectedIndex = gameEnvironment.getUIEnvironment().displayPopup(
 						popupMessage, positionNames);

@@ -35,7 +35,7 @@ public interface UIEnvironment {
 	 * @return				An index i in the range [0, options.size()), such that options[i]
 	 * 						was the selected option.
 	 */
-	public int displayPopup(String message, List<String> options);
+	public int displayPopup(String message, String[] options);
 	
 	/**
 	 * Display a popup in the UI.

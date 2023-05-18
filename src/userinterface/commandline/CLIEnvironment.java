@@ -40,9 +40,9 @@ public class CLIEnvironment implements UIEnvironment {
 	 * @param options				An ordered list of options to be displayed to the user.
 	 * @return						The index of the option selected by the user in range: [0, length of options).
 	 */
-	private int displayOptions(List<String> options) {
-		for (int i = 0; i < options.size(); i++) {
-			System.out.println(i + 1 + ": " + options.get(i));
+	private int displayOptions(String[] options) {
+		for (int i = 0; i < options.length; i++) {
+			System.out.println(i + 1 + ": " + options[i]);
 		}
 		
 		Scanner scan = new Scanner(System.in);
@@ -57,7 +57,7 @@ public class CLIEnvironment implements UIEnvironment {
 		currentLocation = locations.get(location);
 		
 		clearScreen();
-		List<String> options = currentLocation.display(gameLocation);
+		String[] options = currentLocation.display(gameLocation);
 		int selectedOption = displayOptions(options);
 		
 		currentLocation.processOption(selectedOption);
@@ -67,7 +67,7 @@ public class CLIEnvironment implements UIEnvironment {
 	 * Display a message on screen and allow the user to select from a list of options.
 	*/
 	@Override
-	public int displayPopup(String message, List<String> options) {
+	public int displayPopup(String message, String[] options) {
 		System.out.println(message);
 		return displayOptions(options);
 	}

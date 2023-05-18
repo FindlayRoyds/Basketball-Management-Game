@@ -14,7 +14,7 @@ import game.item.Item;
  * which Athlete to use the Item on.
  * 
  * @author Jake van Keulen
- * @version 1.0
+ * @version 1.1
  *
  */
 public class Inventory extends GameLocation {
@@ -57,9 +57,9 @@ public class Inventory extends GameLocation {
 			athletesInTeam.add(athlete);
 		
 		// Ask the Player which Athlete in their team to use the item on.
-		ArrayList<String> popupOptions = new ArrayList<String>(athletesInTeam.size());
-		for (Athlete athlete: athletesInTeam) {
-			popupOptions.add(athlete.getName());
+		String[] popupOptions = new String[athletesInTeam.size()];
+		for (int i = 0; i < athletesInTeam.size(); i++) {
+			popupOptions[1] = athletesInTeam.get(i).getName();
 		}
 		String popupMessage = "Which athlete would you like to apply the item to?";
 		int selectedIndex = getGameEnvironment().getUIEnvironment().displayPopup(popupMessage, popupOptions);

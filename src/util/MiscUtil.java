@@ -1,7 +1,6 @@
 package util;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * A class for miscellaneous utility functions
@@ -28,7 +27,7 @@ public class MiscUtil {
 	 * @param e						The class of the enumeration
 	 * @return						an array of strings of the names of the enum
 	 */
-	public static List<String> getEnumerationNames(Class<? extends Enum<?>> e) {
-	    return Arrays.asList(Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new));
+	public static String[] getEnumerationNames(Class<? extends Enum<?>> e) {
+	    return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
 	}
 }

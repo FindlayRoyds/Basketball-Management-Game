@@ -44,10 +44,10 @@ public class AthleteMarket extends Market {
 		final String popupMessage = "In what position would you like to place the player in the team?";
 
 		// TODO: Fill popupOptions with String values from Position enum.
-		List<String> popupOptions = null;
+		String[] popupOptions = null;
 		int selectedIndex = getGameEnvironment().getUIEnvironment().displayPopup(popupMessage, popupOptions);
 		Team team = getGameEnvironment().getPlayer().getTeam();
-		if (selectedIndex == popupOptions.size()-1) {
+		if (selectedIndex == popupOptions.length-1) {
 			team.addAthleteToReserve((Athlete)purchasable);
 		}
 		else {

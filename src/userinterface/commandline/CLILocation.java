@@ -1,7 +1,5 @@
 package userinterface.commandline;
 
-import java.util.List;
-
 import game.location.GameLocation;
 
 /**
@@ -18,7 +16,7 @@ public interface CLILocation {
 	 * @param gameLocation					The GameLocation the CLILocation is linked to.
 	 * @return								An ordered List of options to be displayed on the cli.
 	 */
-	public List<String> display(GameLocation gameLocation);
+	public String[] display(GameLocation gameLocation);
 	
 	/**
 	 * Abstract method for CLILocation.

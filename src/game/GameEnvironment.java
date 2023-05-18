@@ -111,7 +111,7 @@ public class GameEnvironment {
 	 */
 	public void changeLocation(Location newLocation) {
 		this.currentLocation = newLocation;
-		this.uiEnvironment.changeLocation(getGameLocation(getCurrentLocation()));
+		this.uiEnvironment.changeLocation(newLocation, getGameLocation(getCurrentLocation()));
 	}
 
 	/**
