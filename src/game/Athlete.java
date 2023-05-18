@@ -127,7 +127,7 @@ public class Athlete extends Purchasable {
 	 * @param price					The price it costs to purchase the athlete from a market
 	 */
 	public Athlete(String name, Position role, int stamina, GameEnvironment gameEnvironment, int price) {
-		super(price);
+		super(price, true);
 
 		this.name = name;
 		this.role = role;

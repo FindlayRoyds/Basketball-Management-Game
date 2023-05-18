@@ -13,12 +13,18 @@ public abstract class Purchasable {
 	protected int price;
 	
 	/**
+	 * Whether the item is legal or illegal
+	 */
+	private boolean isLegal;
+	
+	/**
 	 * A constructor for for Purchasable
 	 * 
 	 * @param price					The price of the purchasable
 	 */
-	public Purchasable(int price) {
+	public Purchasable(int price, boolean isLegal) {
 		this.price = price;
+		this.isLegal = isLegal;
 	}
 	
 	/**
@@ -34,5 +40,14 @@ public abstract class Purchasable {
 	 */
 	public int getPrice() {
 		return price;
+	}
+	
+	/**
+	 * Get whether the item is legal or illegal
+	 * 
+	 * @return 								Whether the item is legal or illegal
+	 */
+	public boolean getIsLegal() {
+		return isLegal;
 	}
 }

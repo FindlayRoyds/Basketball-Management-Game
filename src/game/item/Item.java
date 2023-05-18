@@ -30,11 +30,6 @@ public abstract class Item extends Purchasable {
 	private String description;
 	
 	/**
-	 * Whether the item is legal or illegal
-	 */
-	private boolean isLegal;
-	
-	/**
 	 * The constructor for Item
 	 * 
 	 * @param itemName						The name of the item
@@ -43,9 +38,8 @@ public abstract class Item extends Purchasable {
 	 * @param price							The cost of purchasing the item
 	 */
 	public Item(String name, boolean isLegal, String description, int price, GameEnvironment gameEnvironment) {
-		super(price);
+		super(price, isLegal);
 		this.name = name;
-		this.isLegal = isLegal;
 		this.description = description;
 		this.gameEnvironment = gameEnvironment;
 	}
@@ -92,15 +86,6 @@ public abstract class Item extends Purchasable {
 	 */
 	public void consume() {
 		gameEnvironment.getPlayer().removeFromInventory(this);
-	}
-	
-	/**
-	 * Get whether the item is legal or illegal
-	 * 
-	 * @return 								Whether the item is legal or illegal
-	 */
-	public boolean getIsLegal() {
-		return isLegal;
 	}
 	
 	/**

@@ -36,7 +36,7 @@ public class MatchSelection extends GameLocation {
 		teams = new ArrayList<Team>();
 		int qualityLevel = 50;
 		for (int i = 0; i < NUMBER_OF_TEAMS; ++i) {
-			teams.add(Team.generateTeam(qualityLevel, rng, getGameEnvironment()));
+			teams.add(Team.generateTeam(qualityLevel, getGameEnvironment()));
 		}
 	}
 
