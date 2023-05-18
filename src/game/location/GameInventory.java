@@ -54,7 +54,7 @@ public class GameInventory extends GameLocation {
 	 * 
 	 * @param item		The Item to be used.
 	 */
-	void useItem(Item item) {
+	public void useItem(Item item) {
 		// Make a list to store all the Athletes in the Player's Team.
 		ArrayList<Athlete> athletesInTeam = new ArrayList<Athlete>();
 		Team team = getGameEnvironment().getPlayer().getTeam();

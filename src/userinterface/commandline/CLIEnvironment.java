@@ -53,7 +53,7 @@ public class CLIEnvironment implements UIEnvironment {
 	 * @param options				An ordered list of options to be displayed to the user.
 	 * @return						The index of the option selected by the user in range: [0, length of options).
 	 */
-	private int displayOptions(String[] options) {
+	public int displayOptions(String[] options) {
 		// If no options are available don't output anything or get any input
 		if (options.length == 0) {
 			return -1;

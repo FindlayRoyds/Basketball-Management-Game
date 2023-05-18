@@ -14,6 +14,11 @@ public abstract class CLILocation {
 	 * The matching game location that the CLILocation is linked to
 	 */
 	protected GameLocation gameLocation;
+
+	/**
+	 * The CLIEnvironment that the CLILocation belongs to.
+	 */
+	protected CLIEnvironment cliEnvironment;
 	
 	/**
 	 * The constructor for CLILocation
@@ -29,13 +34,5 @@ public abstract class CLILocation {
 	 * 
 	 * @return								An ordered List of options to be displayed on the cli.
 	 */
-	public abstract String[] display();
-	
-	/**
-	 * Abstract method for CLILocation.
-	 * Allows the CLILocation to do UI logic and call methods in the given gameLocation.
-	 * 
-	 * @param selectedOption				The index of the selected option
-	 */
-	public abstract void processOption(int selectedOption);
+	public abstract void display();
 }
