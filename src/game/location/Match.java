@@ -69,7 +69,7 @@ public class Match extends GameLocation {
 	 * @param athlete2			The second Athlete in the pairing.
 	 * @return					The Athlete who won the pairing.
 	 */
-	public Athlete getIndividualWinner(Athlete athlete1, Athlete athlete2) {
+	public Athlete getWinningAthlete(Athlete athlete1, Athlete athlete2) {
 		// Get the score for each athlete.
 		int athlete1Score = athlete1.getMatchScore(athlete1.getRole());
 		int athlete2Score = athlete2.getMatchScore(athlete2.getRole());
@@ -95,7 +95,7 @@ public class Match extends GameLocation {
 	 * 
 	 * @return			The Team that wins the Match overall.
 	 */
-	public Team getOverallWinner() {
+	public Team getWinningTeam() {
 		// Count how many individual wins each team got.
 		int team1Wins = 0, team2Wins = 0;
 		for (Athlete winner: individualWinners) {
