@@ -1,5 +1,6 @@
 package game.location;
 
+import enumeration.Location;
 import game.GameEnvironment;
 
 /**
@@ -39,4 +40,14 @@ public abstract class GameLocation {
 	 * @param week		The new week of the season to update to.
 	 */
 	abstract public void update(int week);
+	
+	/**
+	 * Changes the current game location to a new location.
+	 * Used to travel to different locations.
+	 * 
+	 * @param location		The location to change to.
+	 */
+	public void changeLocation(Location location) {
+		getGameEnvironment().changeLocation(location);
+	}
 }
