@@ -1,8 +1,7 @@
 package userinterface.commandline;
 
-import java.util.List;
-import java.util.Map;
 import java.util.EnumMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import game.location.GameLocation;
@@ -14,7 +13,7 @@ import enumeration.Location;
  * Handles changing location in the cli and displaying popups.
  * 
  * @author Findlay Royds
- * @version 1.0, May 2023.
+ * @version 1.2, May 2023.
  */
 public class CLIEnvironment implements UIEnvironment {
 	/**
@@ -23,13 +22,21 @@ public class CLIEnvironment implements UIEnvironment {
 	private CLILocation currentLocation;
 	
 	/**
+	 * Scanner object used to get user input
+	 */
+	Scanner scanner;
+	
+	/**
 	 * Every location enum mapped to their respective CLILocation.
 	 */
-	private EnumMap<Location, CLILocation> CLILocations;
+	private Map<Location, CLILocation> CLILocations;
 	
-	public CLIEnvironment(EnumMap<Location, GameLocation> gameLocations) {
+	public CLIEnvironment(Map<Location, GameLocation> gameLocations) {
+		scanner = new Scanner(System.in);
+		
 		CLILocations = new EnumMap<Location, CLILocation>(Location.class);
 		CLILocations.put(Location.MAP, new CLIMap(gameLocations.get(Location.MAP)));
+		CLILocations.put(Location.END, new CLIEnd(gameLocations.get(Location.END)));
 	}
 	
 	/**
@@ -47,14 +54,32 @@ public class CLIEnvironment implements UIEnvironment {
 	 * @return						The index of the option selected by the user in range: [0, length of options).
 	 */
 	private int displayOptions(String[] options) {
+		// If no options are available don't output anything or get any input
+		if (options.length == 0) {
+			return -1;
+		}
+		
+		// Display options
 		for (int i = 0; i < options.length; i++) {
 			System.out.println(i + 1 + ": " + options[i]);
 		}
 		
-		Scanner scan = new Scanner(System.in);
-		System.out.print("Select option: ");
+		// Get user input
+		int selectedOption = -1;
+		while (selectedOption >= options.length || selectedOption < 0) {
+			System.out.print("Select option: ");
+			// Catch an input mismatch exception
+			try {
+				selectedOption = scanner.nextInt() - 1;
+				// Detect an input outside the valid range and alert user
+				if (selectedOption >= options.length || selectedOption < 0) {
+					System.out.println("Please enter a valid option");
+				}
+			} catch(java.util.InputMismatchException exception) {
+				System.out.println("Please enter an integer");
+			}
+		}
 		
-		int selectedOption = scan.nextInt();
 		return selectedOption;
 	}
 	
