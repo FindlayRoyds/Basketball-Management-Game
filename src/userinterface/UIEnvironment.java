@@ -3,6 +3,7 @@ package userinterface;
 import java.util.List;
 
 import game.location.GameLocation;
+import enumeration.Location;
 
 /**
  * Defines an interface through which the game environment can
@@ -10,16 +11,17 @@ import game.location.GameLocation;
  * This includes commands for showing messages and popups,
  * as well as changing the current UI location.
  * 
- * @author Jake van Keulen
- * @version 1.0
+ * @author Jake van Keulen, Findlay Royds
+ * @version 1.1
  */
 public interface UIEnvironment {
 	/**
 	 * Change the current UI location to a given Location.
 	 * 
-	 * @param location		The Location to change to.
+	 * @param location			The location to change to.
+	 * @param gameLocation		The gameLocation the location is linked to.
 	 */
-	public void changeLocation(GameLocation location);
+	public void changeLocation(Location location, GameLocation gameLocation);
 
 	/**
 	 * Display a popup in the UI.
