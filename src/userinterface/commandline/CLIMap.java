@@ -1,6 +1,7 @@
 package userinterface.commandline;
 
 import game.location.Map;
+import game.location.GameLocation;
 import enumeration.Location;
 
 /**
@@ -21,9 +22,9 @@ public class CLIMap extends CLILocation {
 	 * 
 	 * @param gameLocation 				the map GameLocation.
 	 */
-	public CLIMap(Map gameLocation) {
+	public CLIMap(GameLocation gameLocation) {
 		super(gameLocation);
-		this.gameLocation = gameLocation;
+		this.gameLocation = (Map) gameLocation;
 	}
 
 	@Override
@@ -34,7 +35,7 @@ public class CLIMap extends CLILocation {
 
 	@Override
 	public void processOption(int selectedOption) {
-		gameLocation.changeLocation(Location.END_SCREEN);
+		gameLocation.changeLocation(Location.END);
 	}
 
 }

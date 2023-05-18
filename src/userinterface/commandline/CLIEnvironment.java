@@ -2,6 +2,7 @@ package userinterface.commandline;
 
 import java.util.List;
 import java.util.Map;
+import java.util.EnumMap;
 import java.util.Scanner;
 
 import game.location.GameLocation;
@@ -24,7 +25,12 @@ public class CLIEnvironment implements UIEnvironment {
 	/**
 	 * Every location enum mapped to their respective CLILocation.
 	 */
-	private Map<Location, CLILocation> locations;
+	private EnumMap<Location, CLILocation> CLILocations;
+	
+	public CLIEnvironment(EnumMap<Location, GameLocation> gameLocations) {
+		CLILocations = new EnumMap<Location, CLILocation>(Location.class);
+		CLILocations.put(Location.MAP, new CLIMap(gameLocations.get(Location.MAP)));
+	}
 	
 	/**
 	 * Clears all text on the console screen.
@@ -54,7 +60,7 @@ public class CLIEnvironment implements UIEnvironment {
 	
 	@Override
 	public void changeLocation(Location location, GameLocation gameLocation) {
-		currentLocation = locations.get(location);
+		currentLocation = CLILocations.get(location);
 		
 		clearScreen();
 		String[] options = currentLocation.display();
