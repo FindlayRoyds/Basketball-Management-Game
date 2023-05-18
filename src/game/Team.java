@@ -183,4 +183,14 @@ public class Team {
 
 		return resultingTeam;
 	}
+	
+	/**
+	 * Returns the number of free spaces in the team's reserves.
+	 * Calculates the total number of reserves - how many reserve athlete the team has.
+	 * 
+	 * @return					the number of free spaces in the team's reserves
+	 */
+	public int getNumberOfFreeReserveSlots() {
+		return MAX_NUMBER_OF_RESERVES - getReserveAthletes().size();
+	}
 }
