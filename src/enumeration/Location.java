@@ -15,5 +15,5 @@ public enum Location {
 	ATHLETE_MARKET,
 	ITEM_MARKET,
 	BLACK_MARKET,
-	END_SCREEN
+	END
 }
