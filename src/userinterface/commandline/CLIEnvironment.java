@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import game.location.GameLocation;
 import userinterface.UIEnvironment;
-import userinterface.CLILocation;
 import enumeration.Location;
 
 /**
@@ -53,12 +52,6 @@ public class CLIEnvironment implements UIEnvironment {
 		return selectedOption;
 	}
 	
-	/**
-	 * Update the cli to show the given location.
-	 * 
-	 * @param location				The location to change to.
-	 * @param gameLocation			The gameLocation the location is linked to.
-	 */
 	@Override
 	public void changeLocation(Location location, GameLocation gameLocation) {
 		currentLocation = locations.get(location);
@@ -72,11 +65,7 @@ public class CLIEnvironment implements UIEnvironment {
 	
 	/**
 	 * Display a message on screen and allow the user to select from a list of options.
-	 * 
-	 * @param message				The message to be displayed on screen.
-	 * @param options				An ordered list of options to be shown to the user.
-	 * @return 						The index of the option selected by the user.
-	 */
+	*/
 	@Override
 	public int displayPopup(String message, List<String> options) {
 		System.out.println(message);
@@ -85,8 +74,6 @@ public class CLIEnvironment implements UIEnvironment {
 
 	/**
 	 * displays a message on the cli with no options.
-	 * 
-	 * @param message				The message to be displayed on the cli.
 	 */
 	@Override
 	public void displayPopup(String message) {
