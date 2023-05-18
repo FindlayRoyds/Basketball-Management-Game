@@ -167,17 +167,18 @@ public class Team {
 	 * 							This is needed so that each Athlete can access the gameEnvironment.
 	 * @return					A randomly generated team.
 	 */
-	public static Team generateTeam(int qualityLevel, Random rng, GameEnvironment gameEnvironment) {
+	public static Team generateTeam(int qualityLevel, GameEnvironment gameEnvironment) {
+		Random rng = gameEnvironment.getRng();
 		Team resultingTeam = new Team(generateTeamName(rng));
 
 		// Generate the activeAthletes.
 		for (Position position: Position.values()) {
-			Athlete currentAthlete = Athlete.generateAthlete(qualityLevel, rng, resultingTeam, gameEnvironment);
+			Athlete currentAthlete = Athlete.generateAthlete(qualityLevel, gameEnvironment);
 			resultingTeam.addAthleteToActive(currentAthlete, position);
 		}
 		// Generate the reserveAthletes.
 		for (int i = 0; i < MAX_NUMBER_OF_RESERVES; ++i) {
-			Athlete currentAthlete = Athlete.generateAthlete(qualityLevel, rng, resultingTeam, gameEnvironment);
+			Athlete currentAthlete = Athlete.generateAthlete(qualityLevel, gameEnvironment);
 			resultingTeam.addAthleteToReserve(currentAthlete);
 		}
 

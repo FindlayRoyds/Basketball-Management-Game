@@ -118,18 +118,20 @@ public class Athlete extends Purchasable {
 			);
 	
 	/**
-	 * Get a specific statistic from the athlete
+	 * The constructor for the athlete class
 	 * 
-	 * @param statisticToGet		The statistic to get from the athlete
-	 * @return 						The integer value of the specific statistic
+	 * @param name					The athlete's name
+	 * @param role					The position the athlete gets a boost for playing in
+	 * @param stamina				How much stamina the athlete has left
+	 * @param gameEnvironment		The game environment the athlete is being created in
+	 * @param price					The price it costs to purchase the athlete from a market
 	 */
-	public Athlete(String name, Position role, int stamina, Team team, GameEnvironment gameEnvironment, int price) {
+	public Athlete(String name, Position role, int stamina, GameEnvironment gameEnvironment, int price) {
 		super(price);
 
 		this.name = name;
 		this.role = role;
 		this.stamina = stamina;
-		this.team = team;
 		this.gameEnvironment = gameEnvironment;
 
 		// Initialize all statistics to 0;
@@ -294,7 +296,8 @@ public class Athlete extends Purchasable {
 	 * @param gameEnvironment		The GameEnvironment object the Athlete belongs to.
 	 * @return						A randomly generated Athlete.
 	 */
-	public static Athlete generateAthlete(int qualityLevel, Random rng, Team team, GameEnvironment gameEnvironment) {
+	public static Athlete generateAthlete(int qualityLevel, GameEnvironment gameEnvironment) {
+		Random rng = gameEnvironment.getRng();
 		String name = NameGenerator.generateName("playerFirstNames", "playerLastNames", rng);
 		
 		Position[] positions = Position.values();
@@ -303,7 +306,7 @@ public class Athlete extends Purchasable {
 		int stamina = rng.nextInt(100);
 		int price = rng.nextInt(1000);
 		
-		Athlete resultingAthlete = new Athlete(name, role, stamina, team, gameEnvironment, price);
+		Athlete resultingAthlete = new Athlete(name, role, stamina, gameEnvironment, price);
 		for (Statistic statistic: Statistic.values()) {
 			resultingAthlete.statistics.put(statistic, rng.nextInt(qualityLevel));
 		}
