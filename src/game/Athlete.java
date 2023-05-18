@@ -168,6 +168,11 @@ public class Athlete extends Purchasable {
 	 * @return						Whether or not the purchase was successful
 	 */
 	public boolean purchase(Player player) {
+		// Check that the player has enough room in their reserves
+		if (player.getTeam().getNumberOfFreeReserveSlots() == 0) {
+			return false;
+		}
+		
 		boolean chargeSuccess = player.chargeMoney(price);
 		
 		// Add to player's team if charge successful
