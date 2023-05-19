@@ -10,7 +10,7 @@ import game.item.Item;
  * This class defines a player and the things they own and can do in the game.
  * 
  * @author Jake van Keulen, Findlay Royds
- * @version 1.3, May 2023.
+ * @version 1.4, May 2023.
  */
 public class Player {
 	/**
@@ -76,8 +76,22 @@ public class Player {
 		return false;
 	}
 
+	/**
+	 * Adds the specified amount of money to the player's money
+	 * 
+	 * @param amountOfMoney The amount of money to give the player
+	 */
 	public void giveMoney(int amountOfMoney) {
 		setMoney(getMoney() + amountOfMoney);
+	}
+
+	/**
+	 * Adds the specified amount of points to the player's total score
+	 * 
+	 * @param amountOfPoints The amount of points to give the player
+	 */
+	public void givePoints(int amountOfPoints) {
+		score += amountOfPoints;
 	}
 
 	/**
