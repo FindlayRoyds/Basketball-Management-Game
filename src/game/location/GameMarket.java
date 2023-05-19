@@ -87,9 +87,13 @@ public class GameMarket extends GameLocation {
 	 */
 	@Override
 	public void update(int week) {
+		float seasonProgression = getGameEnvironment().getWeek() / getGameEnvironment().getSeasonLength();
+		int gameDifficultyOffset = (3 - getGameEnvironment().getDifficulty()) * 10;
+		int qualityLevel = gameDifficultyOffset + (int) (seasonProgression * 80);
+
 		availablePurchasables.clear();
 		for (int i = 0; i < amountToDisplay; ++i) {
-			availablePurchasables.add(generatePurchasable.apply(100, getGameEnvironment()));
+			availablePurchasables.add(generatePurchasable.apply(qualityLevel, getGameEnvironment()));
 		}
 	}
 
