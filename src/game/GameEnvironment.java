@@ -268,13 +268,6 @@ public class GameEnvironment {
 	public void progressWeek() {
 		currentWeek += 1;
 
-		for (GameLocation gameLocation : gameLocations.values()) {
-			gameLocation.update(currentWeek);
-		}
-		if (hasEnded()) {
-			changeLocation(Location.END);
-		}
-
 		// Trigger random events that effect the player.
 		Team playerTeam = player.getTeam();
 		playerTeam.triggerRandomEvents();
@@ -285,5 +278,13 @@ public class GameEnvironment {
 		}
 
 		drugTestRandomEvent.trigger();
+
+		// Detect if the player is unable to progress in the game
+		for (GameLocation gameLocation : gameLocations.values()) {
+			gameLocation.update(currentWeek);
+		}
+		if (hasEnded()) {
+			changeLocation(Location.END);
+		}
 	}
 }

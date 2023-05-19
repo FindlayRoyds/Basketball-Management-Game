@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 import enumeration.Position;
+import game.randomevent.AthleteJoins;
 import game.randomevent.RandomEvent;
 import util.NameGenerator;
 
@@ -16,9 +17,14 @@ import util.NameGenerator;
  * reserves. Active players each occupy a different position on the team.
  * 
  * @author Jake van Keulen, Findlay Royds
- * @version 1.2
+ * @version 1.4
  */
 public class Team {
+	/**
+	 * The game environment the team exists in.
+	 */
+	GameEnvironment gameEnvironment;
+
 	/**
 	 * Map of Positions to the athlete that has been assigned that position on the
 	 * Team.
@@ -57,10 +63,12 @@ public class Team {
 	 * 
 	 * @param teamName The name of the team to be created.
 	 */
-	public Team(String teamName) {
+	public Team(GameEnvironment gameEnvironment, String teamName) {
+		this.gameEnvironment = gameEnvironment;
 		name = teamName;
 		activeAthletes = new EnumMap<Position, Athlete>(Position.class);
 		reserveAthletes = new HashSet<Athlete>();
+		athleteJoinsRandomEvent = new AthleteJoins(gameEnvironment, this);
 	}
 
 	/**
@@ -255,7 +263,7 @@ public class Team {
 	 */
 	public static Team generateTeam(int qualityLevel, GameEnvironment gameEnvironment) {
 		Random rng = gameEnvironment.getRng();
-		Team resultingTeam = new Team(generateTeamName(rng));
+		Team resultingTeam = new Team(gameEnvironment, generateTeamName(rng));
 
 		// Generate the activeAthletes.
 		for (Position position : Position.values()) {
