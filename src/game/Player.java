@@ -1,6 +1,8 @@
 package game;
 
 import java.util.HashSet;
+import java.util.Set;
+import java.util.function.Supplier;
 
 import game.item.Item;
 import game.Team;
@@ -18,8 +20,7 @@ public class Player {
 	private Team team;
 
 	/**
-	 * The Player's inventory.
-	 * Contains all their items.
+	 * The Player's inventory. Contains all their items.
 	 */
 	private HashSet<Item> inventory;
 
@@ -32,7 +33,13 @@ public class Player {
 	 * The amount of money in dollars that the player has.
 	 */
 	private int money;
-	
+
+	/**
+	 * Lambda function that returns the items in the Player's inventory as a set of
+	 * Purchasables.
+	 */
+	public Supplier<Set<Purchasable>> getPurchasables = () -> new HashSet<Purchasable>(inventory);
+
 	/**
 	 * Constructor for the player class
 	 */
@@ -46,7 +53,7 @@ public class Player {
 	/**
 	 * Adds an item to the Player's inventory.
 	 * 
-	 * @param item		The item to be added.
+	 * @param item The item to be added.
 	 */
 	public void addToInventory(Item item) {
 		inventory.add(item);
@@ -55,12 +62,12 @@ public class Player {
 	private void setMoney(int newMoney) {
 		money = newMoney;
 	}
-	
+
 	/**
 	 * Removes a given amount from the Player's money.
 	 * 
-	 * @param amountOfMoney		The amount of money to be removed.
-	 * @return					If the charge was successful
+	 * @param amountOfMoney The amount of money to be removed.
+	 * @return If the charge was successful
 	 */
 	public boolean chargeMoney(int amountOfMoney) {
 		if (money >= amountOfMoney) {
@@ -69,7 +76,7 @@ public class Player {
 		}
 		return false;
 	}
-	
+
 	public void giveMoney(int amountOfMoney) {
 		setMoney(getMoney() - amountOfMoney);
 	}
@@ -77,35 +84,35 @@ public class Player {
 	/**
 	 * Removes and item from the player's inventory
 	 * 
-	 * @param item				The item to remove from the inventory
+	 * @param item The item to remove from the inventory
 	 */
 	public void removeFromInventory(Item item) {
 		inventory.remove(item);
 	}
 
 	/**
-	 * @return		The Player's team.
+	 * @return The Player's team.
 	 */
 	public Team getTeam() {
 		return team;
 	}
-	
+
 	/**
-	 * @return		The amount of money in dollars that the Player has.
+	 * @return The amount of money in dollars that the Player has.
 	 */
 	public int getMoney() {
 		return money;
 	}
 
 	/**
-	 * @return		The Player's score.
+	 * @return The Player's score.
 	 */
 	public int getScore() {
 		return score;
 	}
 
 	/**
-	 * @return		A HashSet of Items owned by the player
+	 * @return A HashSet of Items owned by the player
 	 */
 	public HashSet<Item> getInventory() {
 		return inventory;
