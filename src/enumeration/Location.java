@@ -7,6 +7,7 @@
 package enumeration;
 
 public enum Location {
+	START,
 	MAP,
 	INVENTORY,
 	LOCKER_ROOM,

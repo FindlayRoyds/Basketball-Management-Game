@@ -1,15 +1,23 @@
 package game;
 
-import java.util.Random;
-import java.util.Set;
-import java.util.Map;
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 import enumeration.Location;
 import game.item.Item;
 import game.item.Steroid;
-import game.location.*;
+import game.location.GameEnd;
+import game.location.GameInventory;
+import game.location.GameLocation;
+import game.location.GameLocker;
+import game.location.GameMap;
+import game.location.GameMarket;
+import game.location.GameMatch;
+import game.location.GameMatchSelection;
+import game.location.GameStart;
 import game.randomevent.RandomEvent;
 import userinterface.UIEnvironment;
 import userinterface.commandline.CLIEnvironment;
@@ -134,6 +142,20 @@ public class GameEnvironment {
 	 */
 	public int getWeek() {
 		return currentWeek;
+	}
+
+	/**
+	 * @param length The season length in weeks.
+	 */
+	public void setSeasonLength(int length) {
+		seasonLength = length;
+	}
+
+	/**
+	 * @param seed The seed of the game. Used for random number generation.
+	 */
+	public void setSeed(int seed) {
+		this.gameSeed = seed;
 	}
 
 	/**
