@@ -2,12 +2,11 @@ package game.item;
 
 import java.util.Random;
 
+import enumeration.Statistic;
 import game.Athlete;
+import game.GameEnvironment;
 import game.Purchasable;
 import util.Function3;
-import game.Player;
-import game.GameEnvironment;
-import enumeration.Statistic;
 
 /**
  * 
@@ -50,9 +49,10 @@ public class Steroid extends Item {
 	public static Function3<Integer, GameEnvironment, Purchasable> generateSteroid = (qualityLevel,
 			gameEnvironment) -> {
 		Random rng = gameEnvironment.getRng();
+		int difficulty = gameEnvironment.getDifficulty();
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
-		int randomBoostAmount = (qualityLevel / 2 + rng.nextInt(qualityLevel / 2)) / 5;
-		int randomPrice = (qualityLevel / 2 + rng.nextInt(qualityLevel / 2)) / 2;
+		int randomBoostAmount = (rng.nextInt(qualityLevel) + qualityLevel) / 2; // In range [0, 100]
+		int randomPrice = (rng.nextInt(qualityLevel) + 3 * qualityLevel) * 5 * difficulty; // In range [0, 1500]
 		return new Steroid(randomDescription, randomPrice, randomBoostAmount, gameEnvironment);
 	};
 
