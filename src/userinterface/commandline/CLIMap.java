@@ -38,6 +38,9 @@ public class CLIMap extends CLILocation {
 	@Override
 	public Location display() {
 		System.out.println("Map");
+		System.out.println("Money: " + gameLocation.getMoney());
+		System.out.println("Current week: " + gameLocation.getWeek());
+		System.out.println("Weeks remaining: " + gameLocation.getWeeksRemaining());
 		String[] options = new String[] {"Stadium", "Inventory", "Locker Room", "Athlete Market", "Item Market", "Black Market"};
 		int selectedOption = cliEnvironment.displayOptions(options);
 		return accessibleLocations[selectedOption];
