@@ -143,7 +143,7 @@ public class CLIEnvironment implements UIEnvironment {
 
 		String input = "";
 		while (input.length() == 0 || input.length() > maxLength) {
-			input = scanner.next();
+			input = scanner.nextLine();
 			if (input.length() == 0 || input.length() > maxLength) {
 				System.out.println("Please enter a string with length between 1 and " + maxLength);
 			}
