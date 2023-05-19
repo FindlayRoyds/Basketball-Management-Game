@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 import enumeration.Position;
+import game.randomevent.RandomEvent;
 import util.NameGenerator;
 
 /**
@@ -38,6 +39,11 @@ public class Team {
 	 * The maximum number of reserve athletes permitted on a team.
 	 */
 	private final static int MAX_NUMBER_OF_RESERVES = 5;
+
+	/**
+	 * The random event that causes a new athlete to join the team.
+	 */
+	RandomEvent athleteJoinsRandomEvent;
 
 	/**
 	 * @return The maximum number of reserves that can be in a Team.
@@ -273,5 +279,12 @@ public class Team {
 	 */
 	public int getNumberOfFreeReserveSlots() {
 		return MAX_NUMBER_OF_RESERVES - getReserveAthletes().size();
+	}
+
+	/**
+	 * Triggers the athlete joins random event.
+	 */
+	public void triggerRandomEvents() {
+		athleteJoinsRandomEvent.trigger();
 	}
 }
