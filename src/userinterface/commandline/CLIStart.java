@@ -1,6 +1,11 @@
 package userinterface.commandline;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import enumeration.Location;
+import enumeration.Position;
+import game.Athlete;
 import game.location.GameLocation;
 import game.location.GameStart;
 
@@ -48,7 +53,19 @@ public class CLIStart extends CLILocation {
 	}
 
 	private void chooseStartingAthletes() {
-		// TODO
+		System.out.println("\nStarting athlete selection\n");
+
+		for (Position position : Position.values()) {
+			System.out.println("\nChoose an athlete to be your " + position.name());
+
+			List<Athlete> availableAthletes = new ArrayList<Athlete>(gameLocation.getStartingAthletes());
+			String[] availableAthleteNames = new String[availableAthletes.size()];
+			for (int i = 0; i < availableAthletes.size(); ++i)
+				availableAthleteNames[i] = availableAthletes.get(i).getName();
+
+			int selection = cliEnvironment.displayOptions(availableAthleteNames);
+			gameLocation.chooseAthlete(availableAthletes.get(selection), position);
+		}
 	}
 
 	@Override
@@ -57,6 +74,8 @@ public class CLIStart extends CLILocation {
 		chooseSeasonLength();
 		chooseSeed();
 		chooseDifficulty();
+		chooseStartingAthletes();
+		gameLocation.progressWeek();
 		return Location.MAP;
 	}
 }
