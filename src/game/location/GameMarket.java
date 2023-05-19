@@ -2,8 +2,6 @@ package game.location;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.HashSet;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 import game.GameEnvironment;
@@ -56,7 +54,7 @@ public class GameMarket extends GameLocation {
 	 */
 	public Set<Purchasable> getOwnedAndAllowed() {
 		Set<Purchasable> purchasables = getOwned.get();
-		purchasables.removeIf(purchasable -> purchasable.getIsLegal() != allowIllegalPurchasables);
+		purchasables.removeIf(purchasable -> purchasable.getIsLegal() == allowIllegalPurchasables);
 		return purchasables;
 	}
 
@@ -71,6 +69,7 @@ public class GameMarket extends GameLocation {
 		this.getOwned = getOwned;
 		this.allowIllegalPurchasables = allowIllegalPurchasables;
 		this.availablePurchasables = new HashSet<Purchasable>();
+		this.amountToDisplay = 10;
 	}
 
 	/**
@@ -83,7 +82,7 @@ public class GameMarket extends GameLocation {
 	public void update(int week) {
 		availablePurchasables.clear();
 		for (int i = 0; i < amountToDisplay; ++i) {
-			availablePurchasables.add(generatePurchasable.apply(1, getGameEnvironment()));
+			availablePurchasables.add(generatePurchasable.apply(100, getGameEnvironment()));
 		}
 	}
 

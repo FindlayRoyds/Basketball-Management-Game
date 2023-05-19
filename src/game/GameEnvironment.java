@@ -39,6 +39,11 @@ public class GameEnvironment {
 	private Map<Location, GameLocation> gameLocations;
 
 	/**
+	 * The difficulty of the game. There are 3 possible values: {0, 1, 2}. These
+	 * represent easy, medium and hard difficulty respectively.
+	 */
+	private int difficulty;
+	/**
 	 * The number of the current week in the season. Starts from 1.
 	 */
 	private int currentWeek;
@@ -76,44 +81,35 @@ public class GameEnvironment {
 	 */
 	public static void main(String[] args) {
 		GameEnvironment gameEnvironment = new GameEnvironment(1); // temporary random seed
-		gameEnvironment.changeLocation(Location.MAP);
+		gameEnvironment.changeLocation(Location.START);
 	}
 
 	/**
-	 * The constructor for game environment. Responsible for creating the objects required to start the game.
+	 * The constructor for game environment. Responsible for creating the objects
+	 * required to start the game.
 	 */
 	public GameEnvironment(int randomSeed) {
 		seasonLength = 7;
 		rng = new Random(randomSeed);
 		player = new Player(this);
-		
+		currentLocation = Location.START;
+
 		// Create game locations
 		gameLocations = new EnumMap<Location, GameLocation>(Location.class);
+		gameLocations.put(Location.START, new GameStart(this));
 		gameLocations.put(Location.MAP, new GameMap(this));
 		gameLocations.put(Location.END, new GameEnd(this));
 		gameLocations.put(Location.INVENTORY, new GameInventory(this));
 		gameLocations.put(Location.LOCKER_ROOM, new GameLocker(this));
 		gameLocations.put(Location.MATCH, new GameMatch(this));
 		gameLocations.put(Location.MATCH_SELECION, new GameMatchSelection(this));
-		gameLocations.put(Location.ATHLETE_MARKET, new GameMarket(
-				this,
-				Athlete.generateAthlete,
-				player.getTeam().getAllPurchasables,
-				false
-		));
-		gameLocations.put(Location.ITEM_MARKET, new GameMarket(
-				this,
-				Item.generateLegalItem,
-				player.getPurchasables,
-				false
-		));
-		gameLocations.put(Location.BLACK_MARKET,  new GameMarket(
-				this,
-				Steroid.generateSteroid,
-				player.getPurchasables,
-				true
-		));
-		
+		gameLocations.put(Location.ATHLETE_MARKET,
+				new GameMarket(this, Athlete.generateAthlete, player.getTeam().getAllPurchasables, false));
+		gameLocations.put(Location.ITEM_MARKET,
+				new GameMarket(this, Item.generateLegalItem, player.getPurchasables, false));
+		gameLocations.put(Location.BLACK_MARKET,
+				new GameMarket(this, Steroid.generateSteroid, player.getPurchasables, true));
+
 		uiEnvironment = new CLIEnvironment(gameLocations, this);
 		currentWeek = 0;
 		progressWeek();
@@ -138,6 +134,13 @@ public class GameEnvironment {
 	 */
 	public int getWeek() {
 		return currentWeek;
+	}
+
+	/**
+	 * @param difficulty The difficulty of the game
+	 */
+	public void setDifficulty(int difficulty) {
+		this.difficulty = difficulty;
 	}
 
 	/**
@@ -220,13 +223,13 @@ public class GameEnvironment {
 	public UIEnvironment getUIEnvironment() {
 		return this.uiEnvironment;
 	}
-	
+
 	/**
 	 * Progresses the game to the next week, and checks if the game has ended.
 	 */
 	public void progressWeek() {
 		currentWeek += 1;
-		for (GameLocation gameLocation: gameLocations.values()) {
+		for (GameLocation gameLocation : gameLocations.values()) {
 			gameLocation.update(currentWeek);
 		}
 		if (hasEnded()) {

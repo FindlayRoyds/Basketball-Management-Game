@@ -42,6 +42,7 @@ public class CLIEnvironment implements UIEnvironment {
 		scanner = new Scanner(System.in);
 		
 		CLILocations = new EnumMap<Location, CLILocation>(Location.class);
+		CLILocations.put(Location.START, new CLIStart(gameLocations.get(Location.START), this, scanner));
 		CLILocations.put(Location.MAP, new CLIMap(gameLocations.get(Location.MAP), this));
 		CLILocations.put(Location.INVENTORY, new CLIInventory(gameLocations.get(Location.INVENTORY), this));
 		CLILocations.put(Location.END, new CLIEnd(gameLocations.get(Location.END), this));

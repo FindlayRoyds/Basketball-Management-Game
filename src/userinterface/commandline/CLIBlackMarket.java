@@ -1,15 +1,14 @@
 package userinterface.commandline;
 
-import game.location.GameMarket;
-
-import java.util.Set;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import enumeration.Location;
 import game.Purchasable;
 import game.item.Item;
 import game.location.GameLocation;
+import game.location.GameMarket;
 
 /**
  * 
@@ -32,11 +31,11 @@ public class CLIBlackMarket extends CLILocation {
 	}
 
 	/**
-	 * Displays a list of item names for the user to select one from.
-	 * Returns the list index of the selected item.
+	 * Displays a list of item names for the user to select one from. Returns the
+	 * list index of the selected item.
 	 * 
-	 * @param items				List of Items that can be selected.
-	 * @return					The index of the selected Item in the items List.
+	 * @param items List of Items that can be selected.
+	 * @return The index of the selected Item in the items List.
 	 */
 	Purchasable getItemSelection(Set<Purchasable> givenItems) {
 		List<Purchasable> items = new ArrayList<Purchasable>(givenItems);
@@ -56,9 +55,15 @@ public class CLIBlackMarket extends CLILocation {
 			int selectedIndex = cliEnvironment.displayOptions(options);
 
 			if (selectedIndex == 0) {
-				gameLocation.purchase(getItemSelection(gameLocation.getAvailablePurchasables()));
+				if (gameLocation.getAvailablePurchasables().isEmpty())
+					System.out.println("You already bought everything!\n");
+				else
+					gameLocation.purchase(getItemSelection(gameLocation.getAvailablePurchasables()));
 			} else if (selectedIndex == 1) {
-				gameLocation.sell(getItemSelection(gameLocation.getOwnedAndAllowed()));
+				if (gameLocation.getOwnedAndAllowed().isEmpty())
+					System.out.println("You have no items to sell!\n");
+				else
+					gameLocation.sell(getItemSelection(gameLocation.getOwnedAndAllowed()));
 			} else if (selectedIndex == 2) {
 				return Location.MAP;
 			}
