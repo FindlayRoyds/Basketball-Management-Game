@@ -114,6 +114,8 @@ public class GameEnvironment {
 		));
 		
 		uiEnvironment = new CLIEnvironment(gameLocations, this);
+		currentWeek = 0;
+		progressWeek();
 	}
 
 	/**
@@ -223,6 +225,9 @@ public class GameEnvironment {
 	 */
 	public void progressWeek() {
 		currentWeek += 1;
+		for (GameLocation gameLocation: gameLocations.values()) {
+			gameLocation.update(currentWeek);
+		}
 		if (hasEnded()) {
 			changeLocation(Location.END);
 		}
