@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 
 import enumeration.Location;
+import game.item.Item;
 import game.location.*;
 import game.randomevent.RandomEvent;
 import userinterface.UIEnvironment;
@@ -95,7 +96,12 @@ public class GameEnvironment {
 		gameLocations.put(Location.ATHLETE_MARKET, new GameMarket(
 				this,
 				Athlete.generateAthlete,
-				player.getTeam().getAllAthletes
+				player.getTeam().getAllPurchasables
+		));
+		gameLocations.put(Location.ITEM_MARKET, new GameMarket(
+				this,
+				Item.generateLegalItem,
+				player.getPurchasables
 		));
 		
 		uiEnvironment = new CLIEnvironment(gameLocations, this);

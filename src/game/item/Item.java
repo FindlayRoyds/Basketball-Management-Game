@@ -1,6 +1,7 @@
 package game.item;
 
 import game.Purchasable;
+import util.Function3;
 import game.Player;
 import game.GameEnvironment;
 import game.Athlete;
@@ -29,6 +30,23 @@ public abstract class Item extends Purchasable {
 	 */
 	private String description;
 	
+	/**
+	 * Generate a stat boost item or a bandaid item
+	 * 
+	 * @param qualityLevel					The quality of the item in range: [0, 100]
+	 * @param GameEnvironment				The game environment to which the item belongs.
+	 * 										Used for random number generation.
+	 * 
+	 * @return								A randomly generated legal item
+	 */
+	public static Function3<Integer, GameEnvironment, Purchasable> generateLegalItem = (qualityLevel, gameEnvironment) -> {
+		int randomInteger = gameEnvironment.getRng().nextInt(10);
+		if (randomInteger == 0) {
+			return Bandaid.generateBandaid(qualityLevel, gameEnvironment);
+		}
+		return StatisticBoost.generateStatisticBoost(qualityLevel, gameEnvironment);
+	};
+
 	/**
 	 * The constructor for Item
 	 * 
@@ -74,19 +92,6 @@ public abstract class Item extends Purchasable {
 		player.giveMoney(price);
 	}
 	
-	/**
-	 * Generate a stat boost item or a bandaid item
-	 * 
-	 * @param qualityLevel					The quality of the item in range: [0, 100]
-	 * @return								A randomly generated legal item
-	 */
-	public static Purchasable generateLegalItem(int qualityLevel, GameEnvironment gameEnvironment) {
-		int randomInteger = gameEnvironment.getRng().nextInt(10);
-		if (randomInteger == 0) {
-			return Bandaid.generateBandaid(qualityLevel, gameEnvironment);
-		}
-		return StatisticBoost.generateStatisticBoost(qualityLevel, gameEnvironment);
-	}
 	
 	/**
 	 * Removes the item from the player's inventory

@@ -48,20 +48,21 @@ public class CLIAthleteMarket extends CLILocation {
 	
 	@Override
 	public Location display() {
-		System.out.println("Athlete Market");
-		System.out.println("What would you like to do?");
-		String[] options = {"Purchase an athlete", "Sell an athlete", "Return to map"};
-		int selectedIndex = cliEnvironment.displayOptions(options);
-		
-		if (selectedIndex == 0) {
-			gameLocation.purchase(getAthleteSelection(gameLocation.getAvailablePurchasables()));
+		while (true) {
+			System.out.println("Athlete Market");
+			System.out.println("What would you like to do?");
+			String[] options = {"Purchase an athlete", "Sell an athlete", "Return to map"};
+			int selectedIndex = cliEnvironment.displayOptions(options);
+			
+			if (selectedIndex == 0) {
+				gameLocation.purchase(getAthleteSelection(gameLocation.getAvailablePurchasables()));
+			}
+			else if (selectedIndex == 1) {
+				gameLocation.sell(getAthleteSelection(gameLocation.getOwnedAndAllowed()));
+			}
+			else if (selectedIndex == 2) {
+				return Location.MAP;
+			}
 		}
-		else if (selectedIndex == 1) {
-			gameLocation.sell(getAthleteSelection(gameLocation.getOwnedAndAllowed()));
-		}
-		else if (selectedIndex == 2) {
-			return Location.MAP;
-		}
-		return null;
 	}
 }
