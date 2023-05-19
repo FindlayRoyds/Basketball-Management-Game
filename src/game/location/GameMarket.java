@@ -62,10 +62,12 @@ public class GameMarket extends GameLocation {
 	 * Constructor
 	 */
 	public GameMarket(GameEnvironment gameEnvironment,
-			Function3<Integer, GameEnvironment, Purchasable> generatePurchasable, Supplier<Set<Purchasable>> getOwned) {
+			Function3<Integer, GameEnvironment, Purchasable> generatePurchasable, Supplier<Set<Purchasable>> getOwned,
+			boolean allowIllegalPurchasables) {
 		super(gameEnvironment);
 		this.generatePurchasable = generatePurchasable;
 		this.getOwned = getOwned;
+		this.allowIllegalPurchasables = allowIllegalPurchasables;
 	}
 
 	/**

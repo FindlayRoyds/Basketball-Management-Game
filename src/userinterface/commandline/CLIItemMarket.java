@@ -14,7 +14,7 @@ import game.location.GameLocation;
 /**
  * 
  * 
- * @author Findlay Royds
+ * @author Jake van Keulen
  * @version 1.0, May 2023.
  */
 public class CLIItemMarket extends CLILocation {
