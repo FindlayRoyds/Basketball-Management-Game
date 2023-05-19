@@ -317,12 +317,13 @@ public class Athlete extends Purchasable {
 		Position[] positions = Position.values();
 		Position role = positions[rng.nextInt(positions.length)];
 
-		int stamina = rng.nextInt(100);
-		int price = rng.nextInt(1000);
+		int stamina = (rng.nextInt(qualityLevel) + qualityLevel) / 2;
+		int price = (int) (rng.nextInt(qualityLevel) + qualityLevel * 3) / 4 * 10; // In range [QL * 3/4, QL] * 10
 
 		Athlete resultingAthlete = new Athlete(name, role, stamina, gameEnvironment, price);
 		for (Statistic statistic : Statistic.values()) {
-			resultingAthlete.setStatistic(statistic, rng.nextInt(qualityLevel));
+			int statisticValue = (rng.nextInt(qualityLevel) + qualityLevel) / 2;
+			resultingAthlete.setStatistic(statistic, statisticValue);
 		}
 
 		return resultingAthlete;
