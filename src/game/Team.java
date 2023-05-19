@@ -150,6 +150,7 @@ public class Team {
 		for (Position position : Position.values()) {
 			if (activeAthletes.get(position) == athlete) {
 				activeAthletes.remove(position);
+				return;
 			}
 		}
 
@@ -157,19 +158,31 @@ public class Team {
 		for (Athlete currentAthlete : reserveAthletes) {
 			if (currentAthlete == athlete) {
 				reserveAthletes.remove(currentAthlete);
+				return;
 			}
 		}
 	}
 
 	/**
-	 * First removes the given Athlete from the Team if it is found, then adds it to
-	 * the Team's reserveAthletes.
+	 * Looks for an Athlete in the active Team. If found, the Athlete is swapped
+	 * with an arbitrary Athlete from the reserves
 	 * 
 	 * @param athlete The Athlete to move.
 	 */
 	public boolean moveToReserve(Athlete athlete) {
-		removeAthlete(athlete);
-		return addAthleteToReserve(athlete);
+		// Look for athlete in activeAthletes.
+		for (Position position : Position.values()) {
+			if (activeAthletes.get(position) == athlete) {
+				if (reserveAthletes.size() > 0) {
+					Athlete swapWith = reserveAthletes.iterator().next();
+					activeAthletes.put(position, swapWith);
+					reserveAthletes.remove(swapWith);
+				}
+				reserveAthletes.add(athlete);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -179,8 +192,26 @@ public class Team {
 	 * @param athlete The Athlete to move.
 	 */
 	public void moveToActive(Athlete athlete, Position position) {
-		removeAthlete(athlete);
-		addAthleteToActive(athlete, position);
+		// Look for athlete in reserveAthletes.
+		for (Athlete currentAthlete : reserveAthletes) {
+			if (currentAthlete == athlete) {
+				reserveAthletes.remove(athlete);
+				Athlete swapWith = activeAthletes.get(position);
+				if (swapWith != null)
+					reserveAthletes.add(swapWith);
+				activeAthletes.put(position, athlete);
+				return;
+			}
+		}
+		
+		for (Position currentPosition : Position.values()) {
+			if (activeAthletes.get(currentPosition) == athlete) {
+				Athlete swapWith = activeAthletes.get(position);
+				if (swapWith != null) activeAthletes.put(currentPosition, swapWith);
+				activeAthletes.put(position, athlete);
+				return;
+			}
+		}
 	}
 
 	/**
