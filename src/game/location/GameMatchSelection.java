@@ -41,8 +41,11 @@ public class GameMatchSelection extends GameLocation {
 	 */
 	@Override
 	public void update(int week) {
+		float gameProgression = getGameEnvironment().getWeek() / getGameEnvironment().getSeasonLength();
+		int difficulty = getGameEnvironment().getDifficulty();
+		int qualityLevel = (int) (gameProgression * 70 + difficulty * 10);
+
 		teams = new ArrayList<Team>();
-		int qualityLevel = 50;
 		for (int i = 0; i < NUMBER_OF_TEAMS; ++i) {
 			teams.add(Team.generateTeam(qualityLevel, getGameEnvironment()));
 		}
