@@ -1,7 +1,10 @@
 package userinterface.commandline;
 
+import java.util.Set;
+
 import game.location.GameMap;
 import game.location.GameLocation;
+import game.Athlete;
 import enumeration.Location;
 
 /**
@@ -13,7 +16,6 @@ import enumeration.Location;
 public class CLIMap extends CLILocation {
 	/**
 	 * The map game location the cli map location is linked to.
-	 * Hides the gameLocation property in the CLILocation super class.
 	 */
 	private GameMap gameLocation;
 	
@@ -41,8 +43,18 @@ public class CLIMap extends CLILocation {
 		System.out.println("Money: " + gameLocation.getMoney());
 		System.out.println("Current week: " + gameLocation.getWeek());
 		System.out.println("Weeks remaining: " + gameLocation.getWeeksRemaining());
-		String[] options = new String[] {"Stadium", "Inventory", "Locker Room", "Athlete Market", "Item Market", "Black Market"};
+		
+		String[] options = new String[] {
+				"Stadium", "Inventory", "Locker Room", "Athlete Market",
+				"Item Market", "Black Market", "Take a bye"
+				};
 		int selectedOption = cliEnvironment.displayOptions(options);
+		
+		// Detect if user selected to take a bye
+		if (selectedOption == options.length - 1) {
+			gameLocation.takeABye();
+			return Location.MAP;
+		}
 		return accessibleLocations[selectedOption];
 	}
 
