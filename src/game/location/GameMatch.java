@@ -1,6 +1,7 @@
 package game.location;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import game.Athlete;
 import game.GameEnvironment;
@@ -25,13 +26,14 @@ public class GameMatch extends GameLocation {
 	/**
 	 * A list of Athletes that win their individual pairings in the match.
 	 */
-	private ArrayList<Athlete> individualWinners;
+	private List<Athlete> individualWinners;
 	
 	/**
 	 * Constructor for Map
 	 */
 	public GameMatch(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
+		individualWinners = new ArrayList<Athlete>();
 	}
 	
 	/**

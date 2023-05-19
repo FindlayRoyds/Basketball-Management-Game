@@ -103,7 +103,10 @@ public class CLIEnvironment implements UIEnvironment {
 		
 		clearScreen();
 		Location nextLocation = currentLocation.display();
-		gameEnvironment.changeLocation(nextLocation);
+		
+		// Handle null return to delete stack frame
+		if (nextLocation != null)
+			gameEnvironment.changeLocation(nextLocation);
 	}
 	
 	/**
