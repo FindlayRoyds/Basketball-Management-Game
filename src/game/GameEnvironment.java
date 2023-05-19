@@ -96,7 +96,7 @@ public class GameEnvironment {
 		gameLocations.put(Location.ATHLETE_MARKET, new GameMarket(
 				this,
 				Athlete.generateAthlete,
-				player.getTeam().getAllAthletes
+				player.getTeam().getAllPurchasables
 		));
 		gameLocations.put(Location.ITEM_MARKET, new GameMarket(
 				this,
