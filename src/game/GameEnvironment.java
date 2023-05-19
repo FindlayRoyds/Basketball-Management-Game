@@ -95,18 +95,16 @@ public class GameEnvironment {
 	 * @param args The command line arguments.
 	 */
 	public static void main(String[] args) {
-		GameEnvironment gameEnvironment = new GameEnvironment(1); // temporary random seed
-		gameEnvironment.changeLocation(Location.START);
+		new GameEnvironment();
 	}
 
 	/**
 	 * The constructor for game environment. Responsible for creating the objects
 	 * required to start the game.
 	 */
-	public GameEnvironment(int randomSeed) {
+	public GameEnvironment() {
 		seasonLength = 7;
 		player = new Player(this);
-		currentLocation = Location.START;
 
 		// Create game locations
 		gameLocations = new EnumMap<Location, GameLocation>(Location.class);
@@ -127,6 +125,9 @@ public class GameEnvironment {
 		uiEnvironment = new CLIEnvironment(gameLocations, this);
 		drugTestRandomEvent = new DrugTest(this);
 		currentWeek = 0;
+
+		// Let the user start up the game
+		changeLocation(Location.START);
 	}
 
 	/**
