@@ -2,10 +2,10 @@ package game;
 
 import java.util.EnumMap;
 import java.util.HashSet;
-import java.util.Set;
-import java.util.function.Supplier;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+import java.util.function.Supplier;
 
 import enumeration.Position;
 import util.NameGenerator;
@@ -64,6 +64,13 @@ public class Team {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * @param name The Team name.
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
@@ -203,11 +210,12 @@ public class Team {
 				return;
 			}
 		}
-		
+
 		for (Position currentPosition : Position.values()) {
 			if (activeAthletes.get(currentPosition) == athlete) {
 				Athlete swapWith = activeAthletes.get(position);
-				if (swapWith != null) activeAthletes.put(currentPosition, swapWith);
+				if (swapWith != null)
+					activeAthletes.put(currentPosition, swapWith);
 				activeAthletes.put(position, athlete);
 				return;
 			}
