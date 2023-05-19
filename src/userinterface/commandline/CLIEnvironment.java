@@ -96,6 +96,7 @@ public class CLIEnvironment implements UIEnvironment {
 				}
 			} catch (java.util.InputMismatchException exception) {
 				System.out.println("Please enter an integer");
+				scanner.next();
 			}
 		}
 
@@ -110,12 +111,12 @@ public class CLIEnvironment implements UIEnvironment {
 	 * @return An integer: The user's input.
 	 */
 	public Integer getIntInput(int minAllowedValue, int maxAllowedValue) {
-		System.out.print("Enter a number between " + minAllowedValue + " and " + maxAllowedValue + ": ");
 		if (minAllowedValue > maxAllowedValue)
 			return -1;
 
 		Integer input = null;
 		while (input == null || input < minAllowedValue || input > maxAllowedValue) {
+			System.out.print("Enter a number between " + minAllowedValue + " and " + maxAllowedValue + ": ");
 			try {
 				input = scanner.nextInt();
 				if (input < minAllowedValue || maxAllowedValue < input) {
@@ -123,6 +124,7 @@ public class CLIEnvironment implements UIEnvironment {
 				}
 			} catch (java.util.InputMismatchException exception) {
 				System.out.println("Please enter a number");
+				scanner.next();
 			}
 		}
 

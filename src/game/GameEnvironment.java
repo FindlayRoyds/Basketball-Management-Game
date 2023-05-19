@@ -120,7 +120,6 @@ public class GameEnvironment {
 
 		uiEnvironment = new CLIEnvironment(gameLocations, this);
 		currentWeek = 0;
-		progressWeek();
 	}
 
 	/**
@@ -156,6 +155,14 @@ public class GameEnvironment {
 	 */
 	public void setSeed(int seed) {
 		this.gameSeed = seed;
+	}
+
+	/**
+	 * @return The difficulty level of the game. Can be 1, 2, or 3, meaning easy,
+	 *         medium or hard respectively.
+	 */
+	public int getDifficulty() {
+		return this.difficulty;
 	}
 
 	/**

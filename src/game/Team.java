@@ -184,7 +184,8 @@ public class Team {
 					Athlete swapWith = reserveAthletes.iterator().next();
 					activeAthletes.put(position, swapWith);
 					reserveAthletes.remove(swapWith);
-				}
+				} else
+					activeAthletes.remove(position);
 				reserveAthletes.add(athlete);
 				return true;
 			}
