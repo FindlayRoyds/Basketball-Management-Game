@@ -3,6 +3,7 @@ package game.location;
 import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import enumeration.Statistic;
 import game.GameEnvironment;
@@ -52,15 +53,24 @@ public class GameMap extends GameLocation {
 		// Allow user to train a selected athlete
 		if (playerAthletes.size() > 0) {
 			String message = "Select an athlete to train:";
-			String[] options = playerAthletes.stream()
+			List<String> options = playerAthletes.stream()
 					.map(athlete -> athlete.getName())
-					.toArray(String[]::new);
-			int selectedAthleteIndex = getGameEnvironment().getUIEnvironment().displayPopup(message, options);
-			Athlete selectedAthlete = playerAthletes.get(selectedAthleteIndex);
-			// Increase athlete's statistics
-			for (Statistic statistic : Statistic.values()) {
-				int originalStatistic = selectedAthlete.getStatistic(statistic);
-				selectedAthlete.setStatistic(statistic, originalStatistic + 20);
+					.collect(Collectors.toList());
+			
+			//Add the option to not train any athletes
+			options.add("Don't train any athletes");
+			int selectedAthleteIndex = getGameEnvironment().getUIEnvironment().displayPopup(
+					message, options.toArray(new String[0])
+			);
+			// Only train athletes if an athlete was selected
+			if (selectedAthleteIndex != options.size() - 1) {
+				Athlete selectedAthlete = playerAthletes.get(selectedAthleteIndex);
+				
+				// Increase athlete's statistics
+				for (Statistic statistic : Statistic.values()) {
+					int originalStatistic = selectedAthlete.getStatistic(statistic);
+					selectedAthlete.setStatistic(statistic, originalStatistic + 20);
+				}
 			}
 		}
 		
