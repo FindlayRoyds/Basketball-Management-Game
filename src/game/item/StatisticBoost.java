@@ -7,6 +7,7 @@ import enumeration.Statistic;
 import game.Athlete;
 import game.GameEnvironment;
 import game.Purchasable;
+import util.MiscUtil;
 
 /**
  * The class for statistic boost. Will increase an athlete's particular
@@ -64,6 +65,10 @@ public class StatisticBoost extends Item {
 		Random rng = gameEnvironment.getRng();
 		int randomIndex = rng.nextInt(StatisticBoostTypes.size());
 		int difficulty = gameEnvironment.getDifficulty();
+
+		// Clamp the quality level in range [0, 100]
+		qualityLevel = MiscUtil.clampValue(qualityLevel);
+
 		Statistic randomStatistic = Statistic.values()[randomIndex];
 		String randomName = StatisticBoostTypes.get(randomStatistic)[0];
 		String randomDescription = StatisticBoostTypes.get(randomStatistic)[1];

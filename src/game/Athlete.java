@@ -318,6 +318,9 @@ public class Athlete extends Purchasable {
 		Random rng = gameEnvironment.getRng();
 		String name = NameGenerator.generateName("playerFirstNames", "playerLastNames", rng);
 
+		// Clamp the quality level in range [0, 100]
+		qualityLevel = MiscUtil.clampValue(qualityLevel);
+
 		Position[] positions = Position.values();
 		Position role = positions[rng.nextInt(positions.length)];
 

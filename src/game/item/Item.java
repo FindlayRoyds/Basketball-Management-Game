@@ -41,6 +41,7 @@ public abstract class Item extends Purchasable {
 	public static Function3<Integer, GameEnvironment, Purchasable> generateLegalItem = (qualityLevel,
 			gameEnvironment) -> {
 		int randomInteger = gameEnvironment.getRng().nextInt(10);
+
 		if (randomInteger == 0) {
 			return Bandaid.generateBandaid(qualityLevel, gameEnvironment);
 		}

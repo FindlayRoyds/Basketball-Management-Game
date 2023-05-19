@@ -7,6 +7,7 @@ import game.Athlete;
 import game.GameEnvironment;
 import game.Purchasable;
 import util.Function3;
+import util.MiscUtil;
 
 /**
  * 
@@ -50,6 +51,10 @@ public class Steroid extends Item {
 			gameEnvironment) -> {
 		Random rng = gameEnvironment.getRng();
 		int difficulty = gameEnvironment.getDifficulty();
+
+		// Clamp the quality level in range [0, 100]
+		qualityLevel = MiscUtil.clampValue(qualityLevel);
+
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
 		int randomBoostAmount = (rng.nextInt(qualityLevel) + qualityLevel) / 2; // In range [0, 100]
 		int randomPrice = (rng.nextInt(qualityLevel) + 3 * qualityLevel) * 5 * difficulty; // In range [0, 1500]

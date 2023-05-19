@@ -10,6 +10,7 @@ import java.util.function.Supplier;
 import enumeration.Position;
 import game.randomevent.AthleteJoins;
 import game.randomevent.RandomEvent;
+import util.MiscUtil;
 import util.NameGenerator;
 
 /**
@@ -264,6 +265,9 @@ public class Team {
 	public static Team generateTeam(int qualityLevel, GameEnvironment gameEnvironment) {
 		Random rng = gameEnvironment.getRng();
 		Team resultingTeam = new Team(gameEnvironment, generateTeamName(rng));
+
+		// Clamp the quality level in range [0, 100]
+		qualityLevel = MiscUtil.clampValue(qualityLevel);
 
 		// Generate the activeAthletes.
 		for (Position position : Position.values()) {

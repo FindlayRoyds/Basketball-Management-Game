@@ -5,6 +5,7 @@ import java.util.Random;
 import game.Athlete;
 import game.GameEnvironment;
 import game.Purchasable;
+import util.MiscUtil;
 
 /**
  * The class for bandaid. Restores an athlete's stamina if they're injured
@@ -42,6 +43,10 @@ public class Bandaid extends Item {
 	public static Purchasable generateBandaid(int qualityLevel, GameEnvironment gameEnvironment) {
 		Random rng = gameEnvironment.getRng();
 		int difficulty = gameEnvironment.getDifficulty();
+
+		// Clamp the quality level in range [0, 100]
+		qualityLevel = MiscUtil.clampValue(qualityLevel);
+
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
 		int randomPrice = (rng.nextInt(qualityLevel) + 3 * qualityLevel) / 5 * difficulty; // In range [0, 240]
 		return new Bandaid(randomDescription, randomPrice, gameEnvironment);
