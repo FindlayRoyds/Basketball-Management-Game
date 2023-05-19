@@ -41,17 +41,19 @@ public class CLIAthleteMarket extends CLILocation {
 		List<Purchasable> athletes = new ArrayList<Purchasable>(givenAthletes);
 		if (athletes.isEmpty())
 			return null;
-		String[] athleteNames = new String[athletes.size()];
+		String[] options = new String[athletes.size()];
 		for (int i = 0; i < athletes.size(); ++i) {
-			athleteNames[i] = ((Athlete) athletes.get(i)).getName();
+			Athlete athlete = (Athlete) athletes.get(i);
+			options[i] = athlete.getName() + " - $" + athlete.getPrice();
 		}
-		return athletes.get(cliEnvironment.displayOptions(athleteNames));
+		return athletes.get(cliEnvironment.displayOptions(options));
 	}
 
 	@Override
 	public Location display() {
 		while (true) {
 			System.out.println("Athlete Market");
+			System.out.println("Your money: $" + gameLocation.getPlayerMoney());
 			System.out.println("What would you like to do?");
 			String[] options = { "Return to map", "Sell an athlete", "Purchase an athlete" };
 			int selectedIndex = cliEnvironment.displayOptions(options);
