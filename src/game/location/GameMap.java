@@ -1,6 +1,8 @@
 package game.location;
 
 import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 
 import enumeration.Statistic;
 import game.GameEnvironment;
@@ -45,19 +47,24 @@ public class GameMap extends GameLocation {
 			athlete.setStamina(100);
 		}
 		
-		getGameEnvironment().progressWeek();
-	}
-	
-	/**
-	 * Take a bye and train a selected Athlete.
-	 */
-	public void takeABye(Athlete athleteToTrain) {
-		takeABye();
+		List<Athlete> playerAthletes = new ArrayList<>(playerTeam.getAllAthletes());
 		
-		for (Statistic statistic : Statistic.values()) {
-			int originalStatistic = athleteToTrain.getStatistic(statistic);
-			athleteToTrain.setStatistic(statistic, originalStatistic + 20);
+		// Allow user to train a selected athlete
+		if (playerAthletes.size() > 0) {
+			String message = "Select an athlete to train:";
+			String[] options = playerAthletes.stream()
+					.map(athlete -> athlete.getName())
+					.toArray(String[]::new);
+			int selectedAthleteIndex = getGameEnvironment().getUIEnvironment().displayPopup(message, options);
+			Athlete selectedAthlete = playerAthletes.get(selectedAthleteIndex);
+			// Increase athlete's statistics
+			for (Statistic statistic : Statistic.values()) {
+				int originalStatistic = selectedAthlete.getStatistic(statistic);
+				selectedAthlete.setStatistic(statistic, originalStatistic + 20);
+			}
 		}
+		
+		getGameEnvironment().progressWeek();
 	}
 	
 	/**
