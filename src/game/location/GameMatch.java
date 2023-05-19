@@ -138,13 +138,20 @@ public class GameMatch extends GameLocation {
 	}
 
 	/**
-	 * If the player's team won reward the player appropriately
+	 * If the player's team won reward the player appropriately. The reward given is
+	 * based on the difficulty of the
 	 */
 	public void finish() {
 		Player player = getGameEnvironment().getPlayer();
 		if (getWinningTeam() == player.getTeam()) {
-			player.giveMoney(500);
-			player.givePoints(100);
+			int difficultyMutliplier = (4 - getGameEnvironment().getDifficulty());
+			int rewardMoney = 500 * difficultyMutliplier;
+			int rewardPoints = 100 * difficultyMutliplier;
+			player.giveMoney(rewardMoney);
+			player.givePoints(rewardPoints);
+
+			getGameEnvironment().getUIEnvironment().displayPopup("You won the match! You have been awarded "
+					+ rewardMoney + " Money and " + rewardPoints + " Points.");
 		}
 	}
 }

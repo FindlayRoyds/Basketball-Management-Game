@@ -148,11 +148,14 @@ public class Athlete extends Purchasable {
 	}
 
 	/*
-	 * Uses up some of the athlete's stamina based on their fitness
+	 * Uses up some of the athlete's stamina based on their fitness and the
+	 * difficulty of the game
 	 */
 
 	public void loseStamina() {
-		setStamina(stamina - (100 - getStatistic(Statistic.FITNESS)) / 2);
+		int gameDifficultyDivider = 4 - gameEnvironment.getDifficulty();
+		int staminaDecrease = (100 - getStatistic(Statistic.FITNESS));
+		setStamina(stamina - staminaDecrease / gameDifficultyDivider);
 	}
 
 	/**
