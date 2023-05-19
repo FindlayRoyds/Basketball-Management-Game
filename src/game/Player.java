@@ -14,6 +14,11 @@ import game.item.Item;
  */
 public class Player {
 	/**
+	 * The game environment the player instance belongs to
+	 */
+	private GameEnvironment gameEnvironment;
+
+	/**
 	 * The team the Player owns.
 	 */
 	private Team team;
@@ -43,10 +48,11 @@ public class Player {
 	 * Constructor for the player class
 	 */
 	public Player(GameEnvironment gameEnvironment) {
-		money = 0;
-		score = 0;
-		inventory = new HashSet<Item>();
-		team = new Team(gameEnvironment, "");
+		this.money = 0;
+		this.score = 0;
+		this.inventory = new HashSet<Item>();
+		this.team = new Team(gameEnvironment, "");
+		this.gameEnvironment = gameEnvironment;
 	}
 
 	/**
@@ -72,8 +78,10 @@ public class Player {
 		if (money >= amountOfMoney) {
 			money -= amountOfMoney;
 			return true;
+		} else {
+			gameEnvironment.getUIEnvironment().displayPopup("You are unable to afford that!");
+			return false;
 		}
-		return false;
 	}
 
 	/**
