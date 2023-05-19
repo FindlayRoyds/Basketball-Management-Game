@@ -131,7 +131,9 @@ public class Athlete extends Purchasable {
 	 * @param value          The value to set the statistic to
 	 */
 	public void setStatistic(Statistic statisticToSet, int value) {
-		statistics.put(statisticToSet, value);
+		// Clamp value in range [0, 100]
+		int clampedValue = MiscUtil.clampValue(value);
+		statistics.put(statisticToSet, clampedValue);
 	}
 
 	/**
