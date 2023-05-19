@@ -167,7 +167,6 @@ public class Athlete extends Purchasable {
 	 */
 	@Override
 	public boolean purchase(Player player) {
-		System.out.println("Buying athlete " + this.name);
 		// Check that the player has enough room in their reserves
 		if (player.getTeam().getNumberOfFreeReserveSlots() == 0) {
 			return false;
@@ -196,13 +195,11 @@ public class Athlete extends Purchasable {
 			} else {
 				playerTeam.addAthleteToReserve(this);
 			}
-
 			// Change price of athlete to their resell price
 			// Base resell price on the difficulty
 			// Easy: 80%, Medium: 60%, Hard: 40%
 			price = (int) (price * ((5 - gameEnvironment.getDifficulty()) / 5f));
-		} else
-			gameEnvironment.getUIEnvironment().displayPopup("You don't have enough money to buy " + this.name);
+		}
 		return chargeSuccess;
 	}
 
