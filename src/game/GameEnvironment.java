@@ -83,6 +83,7 @@ public class GameEnvironment {
 	 * The constructor for game environment. Responsible for creating the objects required to start the game.
 	 */
 	public GameEnvironment(int randomSeed) {
+		seasonLength = 7;
 		rng = new Random(randomSeed);
 		player = new Player(this);
 		
