@@ -203,9 +203,13 @@ public class Athlete extends Purchasable {
 
 	@Override
 	public void sell(Player player) {
+		// Base resell price on the difficulty
+		// Easy: 80%, Medium: 60%, Hard: 40%
+		int resellPrice = (int) (price * ((5 - gameEnvironment.getDifficulty()) / 5f));
+
 		player.getTeam().removeAthlete(this);
 		setTeam(null);
-		player.giveMoney(price);
+		player.giveMoney(resellPrice);
 	}
 
 	/**
