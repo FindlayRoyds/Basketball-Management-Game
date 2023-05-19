@@ -217,4 +217,14 @@ public class GameEnvironment {
 	public UIEnvironment getUIEnvironment() {
 		return this.uiEnvironment;
 	}
+	
+	/**
+	 * Progresses the game to the next week, and checks if the game has ended.
+	 */
+	public void progressWeek() {
+		currentWeek += 1;
+		if (hasEnded()) {
+			changeLocation(Location.END);
+		}
+	}
 }

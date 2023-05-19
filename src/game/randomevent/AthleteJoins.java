@@ -27,7 +27,7 @@ public class AthleteJoins extends RandomEvent {
 
 	@Override
 	protected void occur() {
-		team.addAthleteToReserve(Athlete.generateAthlete(40, gameEnvironment));
+		team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(40, gameEnvironment));
 	}
 	
 	/**
