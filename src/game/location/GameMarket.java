@@ -1,6 +1,7 @@
 package game.location;
 
 import java.util.Set;
+import java.util.HashSet;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -68,6 +69,7 @@ public class GameMarket extends GameLocation {
 		this.generatePurchasable = generatePurchasable;
 		this.getOwned = getOwned;
 		this.allowIllegalPurchasables = allowIllegalPurchasables;
+		this.availablePurchasables = new HashSet<Purchasable>();
 	}
 
 	/**
