@@ -16,16 +16,20 @@ import game.GameEnvironment;
  */
 public class GameStart extends GameLocation {
 	/**
-	 * The starting athletes that the player can choose from to create their team.
-	 */
-	private Set<Athlete> startingAthletes;
-
-	/**
+	 * Generates and return a set of 10 athletes for the user to choose from at the
+	 * start of the game.
+	 * 
 	 * @return The starting athletes that the player can choose from to create their
 	 *         team.
 	 */
 	public Set<Athlete> getStartingAthletes() {
-		return startingAthletes;
+		Set<Athlete> athletes = new HashSet<Athlete>();
+		int qualityLevel = 100 - getGameEnvironment().getDifficulty() * 20;
+		for (int i = 0; i < 10; ++i) {
+			Athlete athlete = (Athlete) Athlete.generateAthlete.apply(qualityLevel, getGameEnvironment());
+			athletes.add(athlete);
+		}
+		return athletes;
 	}
 
 	/**
@@ -37,23 +41,6 @@ public class GameStart extends GameLocation {
 	 */
 	public void chooseAthlete(Athlete athlete, Position position) {
 		getGameEnvironment().getPlayer().getTeam().addAthleteToActive(athlete, position);
-		startingAthletes.remove(athlete);
-	}
-
-	/**
-	 * Generates a set of 10 athletes for the user to choose from at the start of
-	 * the game.
-	 * 
-	 * @return
-	 */
-	private void generateStartingAthletes() {
-		Set<Athlete> athletes = new HashSet<Athlete>();
-		int qualityLevel = 100 - getGameEnvironment().getDifficulty() * 20;
-		for (int i = 0; i < 10; ++i) {
-			Athlete athlete = (Athlete) Athlete.generateAthlete.apply(qualityLevel, getGameEnvironment());
-			athletes.add(athlete);
-		}
-		startingAthletes = athletes;
 	}
 
 	/**
@@ -61,7 +48,6 @@ public class GameStart extends GameLocation {
 	 */
 	public GameStart(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
-		generateStartingAthletes();
 	}
 
 	/**
