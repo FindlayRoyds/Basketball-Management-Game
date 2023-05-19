@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 import game.item.Item;
-import game.Team;
 
 /**
  * This class defines a player and the things they own and can do in the game.
@@ -78,7 +77,7 @@ public class Player {
 	}
 
 	public void giveMoney(int amountOfMoney) {
-		setMoney(getMoney() - amountOfMoney);
+		setMoney(getMoney() + amountOfMoney);
 	}
 
 	/**
