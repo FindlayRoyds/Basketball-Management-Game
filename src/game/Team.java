@@ -40,6 +40,13 @@ public class Team {
 	private final static int MAX_NUMBER_OF_RESERVES = 5;
 
 	/**
+	 * @return The maximum number of reserves that can be in a Team.
+	 */
+	public static int getMaxNumberOfReserves() {
+		return MAX_NUMBER_OF_RESERVES;
+	}
+
+	/**
 	 * Initializes an empty team with the given team name.
 	 * 
 	 * @param teamName The name of the team to be created.
@@ -87,7 +94,7 @@ public class Team {
 		Set<Athlete> allAthletes = getAllAthletes();
 		return new HashSet<>(allAthletes);
 	};
-	
+
 	/**
 	 * Returns all the athleletes that are reserves or active on the team
 	 * 
@@ -206,12 +213,12 @@ public class Team {
 
 		// Generate the activeAthletes.
 		for (Position position : Position.values()) {
-			Athlete currentAthlete = (Athlete)Athlete.generateAthlete.apply(qualityLevel, gameEnvironment);
+			Athlete currentAthlete = (Athlete) Athlete.generateAthlete.apply(qualityLevel, gameEnvironment);
 			resultingTeam.addAthleteToActive(currentAthlete, position);
 		}
 		// Generate the reserveAthletes.
 		for (int i = 0; i < MAX_NUMBER_OF_RESERVES; ++i) {
-			Athlete currentAthlete = (Athlete)Athlete.generateAthlete.apply(qualityLevel, gameEnvironment);
+			Athlete currentAthlete = (Athlete) Athlete.generateAthlete.apply(qualityLevel, gameEnvironment);
 			resultingTeam.addAthleteToReserve(currentAthlete);
 		}
 
