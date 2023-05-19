@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 import game.GameEnvironment;
 import game.Purchasable;
+import util.Function3;
 
 /**
  * An abstract class defining the Market location. From the Market, the Player
@@ -15,12 +16,7 @@ import game.Purchasable;
  * @author Jake van Keulen
  * @version 1.0
  */
-abstract public class GameMarket extends GameLocation {
-	@FunctionalInterface
-	interface Function3<Param1, Param2, Return> {
-		public Return apply(Param1 param1, Param2 param2);
-	}
-
+public class GameMarket extends GameLocation {
 	/**
 	 * Whether or not illegal purchasables can be bought or sold at this location
 	 */

@@ -6,6 +6,7 @@ import java.util.Random;
 
 import enumeration.Position;
 import enumeration.Statistic;
+import util.Function3;
 import util.MiscUtil;
 import util.NameGenerator;
 
@@ -307,7 +308,7 @@ public class Athlete extends Purchasable {
 	 * @param gameEnvironment		The GameEnvironment object the Athlete belongs to.
 	 * @return						A randomly generated Athlete.
 	 */
-	public static Athlete generateAthlete(int qualityLevel, GameEnvironment gameEnvironment) {
+	public static Function3<Integer, GameEnvironment, Purchasable> generateAthlete = (qualityLevel, gameEnvironment) -> {
 		Random rng = gameEnvironment.getRng();
 		String name = NameGenerator.generateName("playerFirstNames", "playerLastNames", rng);
 		
@@ -323,7 +324,7 @@ public class Athlete extends Purchasable {
 		}
 		
 		return resultingAthlete;
-	}
+	};
 	
 	
 	/**
