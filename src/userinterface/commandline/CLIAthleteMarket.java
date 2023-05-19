@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * 
  * 
- * @author Findlay Royds
+ * @author Jake van Keulen
  * @version 1.0, May 2023.
  */
 public class CLIAthleteMarket extends CLILocation {

@@ -8,6 +8,7 @@ import java.util.EnumMap;
 
 import enumeration.Location;
 import game.item.Item;
+import game.item.Steroid;
 import game.location.*;
 import game.randomevent.RandomEvent;
 import userinterface.UIEnvironment;
@@ -96,12 +97,20 @@ public class GameEnvironment {
 		gameLocations.put(Location.ATHLETE_MARKET, new GameMarket(
 				this,
 				Athlete.generateAthlete,
-				player.getTeam().getAllPurchasables
+				player.getTeam().getAllPurchasables,
+				false
 		));
 		gameLocations.put(Location.ITEM_MARKET, new GameMarket(
 				this,
 				Item.generateLegalItem,
-				player.getPurchasables
+				player.getPurchasables,
+				false
+		));
+		gameLocations.put(Location.BLACK_MARKET,  new GameMarket(
+				this,
+				Steroid.generateSteroid,
+				player.getPurchasables,
+				true
 		));
 		
 		uiEnvironment = new CLIEnvironment(gameLocations, this);
