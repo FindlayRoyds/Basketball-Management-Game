@@ -43,7 +43,6 @@ public class CLIMatch extends CLILocation {
 			Athlete athlete2 = team2Athletes.get(position);
 			Athlete winner = gameLocation.getWinningAthlete(athlete1, athlete2);
 
-			cliEnvironment.clearScreen();
 			System.out.println("---     " + position.name() + " MATCHUP---\n");
 			System.out.println(athlete1.getName() + " vs " + athlete2.getName());
 			cliEnvironment.displayOptions(new String[] { "PLAY!" });

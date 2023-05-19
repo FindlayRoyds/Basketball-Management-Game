@@ -57,14 +57,6 @@ public class CLIEnvironment implements UIEnvironment {
 	}
 
 	/**
-	 * Clears all text on the console screen.
-	 */
-	public void clearScreen() {
-		System.out.print("\033[H\033[2J");
-		System.out.flush();
-	}
-
-	/**
 	 * Displays a numbered list of options, and returns the option selected by the
 	 * user.
 	 * 
@@ -156,7 +148,6 @@ public class CLIEnvironment implements UIEnvironment {
 	public void changeLocation(Location location, GameLocation gameLocation) {
 		currentLocation = CLILocations.get(location);
 
-		clearScreen();
 		Location nextLocation = currentLocation.display();
 
 		// Handle null return to delete stack frame
