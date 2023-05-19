@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import enumeration.Location;
 import enumeration.Position;
+import enumeration.Statistic;
 import game.Athlete;
 import game.location.GameLocation;
 
@@ -50,6 +51,24 @@ public class CLILocker extends CLILocation {
 			System.out.println("Reserve #" + i + ": " + athleteName);
 		}
 	}
+	
+	private void viewAthleteDetails() {
+		System.out.println("Which athlete would you like to see?");
+
+		List<Athlete> athletes = new ArrayList<Athlete>(gameLocation.getAllAthletes());
+		String[] athleteNames = new String[athletes.size()];
+		for (int i = 0; i < athletes.size(); ++i) {
+			athleteNames[i] = athletes.get(i).getName();
+		}
+		Athlete selectedAthlete = athletes.get(cliEnvironment.displayOptions(athleteNames));
+
+		System.out.println("\nDetails for \"" + selectedAthlete.getName() + "\":");
+		System.out.println("- Role: " + selectedAthlete.getRole().name());
+		System.out.println("- Stamina: " + selectedAthlete.getStamina());
+		for (Statistic statistic: Statistic.values()) {
+			System.out.println("- " + statistic.name().toLowerCase() + ": " + selectedAthlete.getStatistic(statistic));
+		}
+	}
 
 	/**
 	 * Prompts the user to select an athlete, then a position to move them to. Then
@@ -87,13 +106,16 @@ public class CLILocker extends CLILocation {
 	public Location display() {
 		while (true) {
 			System.out.println("Locker Room");
+			System.out.println("Team: \"" + gameLocation.getTeamName() + "\"");
 			displayTeam();
 
-			String[] options = { "Move an athlete", "Exit to map" };
+			String[] options = { "Move an athlete", "View athlete details", "Exit to map" };
 			int selection = cliEnvironment.displayOptions(options);
 			if (selection == 0) {
 				moveAthlete();
-			} else if (selection == 1) {
+			}else if (selection == 1) {
+				viewAthleteDetails();
+			} else if (selection == 2) {
 				return Location.MAP;
 			}
 		}

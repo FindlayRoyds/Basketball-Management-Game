@@ -40,6 +40,13 @@ public class GameLocker extends GameLocation {
 	public int getMaxNumberOfReserves() {
 		return Team.getMaxNumberOfReserves();
 	}
+	
+	/**
+	 * @return The name of the Player's Team.
+	 */
+	public String getTeamName() {
+		return getGameEnvironment().getPlayer().getTeam().getName();
+	}
 
 	/**
 	 * Gets the reserve Athletes from the Player's Team. Accesses the Player through
