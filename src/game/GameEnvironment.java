@@ -18,6 +18,7 @@ import game.location.GameMarket;
 import game.location.GameMatch;
 import game.location.GameMatchSelection;
 import game.location.GameStart;
+import game.randomevent.DrugTest;
 import game.randomevent.RandomEvent;
 import userinterface.UIEnvironment;
 import userinterface.commandline.CLIEnvironment;
@@ -83,6 +84,12 @@ public class GameEnvironment {
 	private Random rng;
 
 	/**
+	 * drug test random event for checking if any of the player's athletes have used
+	 * steroids
+	 */
+	private RandomEvent drugTestRandomEvent;
+
+	/**
 	 * The main method of game environment. Responsible for starting the game.
 	 * 
 	 * @param args The command line arguments.
@@ -119,6 +126,7 @@ public class GameEnvironment {
 				new GameMarket(this, Steroid.generateSteroid, player.getPurchasables, true));
 
 		uiEnvironment = new CLIEnvironment(gameLocations, this);
+		drugTestRandomEvent = new DrugTest(this);
 		currentWeek = 0;
 		progressWeek();
 	}
@@ -247,15 +255,28 @@ public class GameEnvironment {
 	}
 
 	/**
-	 * Progresses the game to the next week, and checks if the game has ended.
+	 * Progresses the game to the next week, checks if the game has ended, and
+	 * triggers random events.
 	 */
 	public void progressWeek() {
 		currentWeek += 1;
+
 		for (GameLocation gameLocation : gameLocations.values()) {
 			gameLocation.update(currentWeek);
 		}
 		if (hasEnded()) {
 			changeLocation(Location.END);
 		}
+
+		// Trigger random events that effect the player.
+		Team playerTeam = player.getTeam();
+		playerTeam.triggerRandomEvents();
+
+		Set<Athlete> playerAthletes = playerTeam.getAllAthletes();
+		for (Athlete athlete : playerAthletes) {
+			athlete.triggerRandomEvents();
+		}
+
+		drugTestRandomEvent.trigger();
 	}
 }

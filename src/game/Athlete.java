@@ -6,6 +6,9 @@ import java.util.Random;
 
 import enumeration.Position;
 import enumeration.Statistic;
+import game.randomevent.AthleteQuits;
+import game.randomevent.RandomEvent;
+import game.randomevent.StatisticIncrease;
 import util.Function3;
 import util.MiscUtil;
 import util.NameGenerator;
@@ -57,6 +60,16 @@ public class Athlete extends Purchasable {
 	private boolean hasUsedSteroids;
 
 	/**
+	 * The athlete's random event for having a statistic increase
+	 */
+	private RandomEvent statisticIncreaseRandomEvent;
+
+	/**
+	 * The athlete's random event for quitting their team
+	 */
+	private RandomEvent athleteQuitsRandomEvent;
+
+	/**
 	 * How much effect each statistic has in a match based on the athlete's
 	 * position. The weight of each statistic is in the range: [0, 100]. The greater
 	 * the weight the more important the statistic is to that position
@@ -106,6 +119,9 @@ public class Athlete extends Purchasable {
 		for (Statistic statistic : Statistic.values()) {
 			statistics.put(statistic, 0);
 		}
+
+		statisticIncreaseRandomEvent = new StatisticIncrease(gameEnvironment, this);
+		athleteQuitsRandomEvent = new AthleteQuits(gameEnvironment, this);
 	}
 
 	/**
@@ -319,5 +335,13 @@ public class Athlete extends Purchasable {
 	 */
 	public void setHasUsedSteroids(boolean usedSteroids) {
 		hasUsedSteroids = usedSteroids;
+	}
+
+	/**
+	 * Triggers the stat increase and athlete quits random events
+	 */
+	public void triggerRandomEvents() {
+		statisticIncreaseRandomEvent.trigger();
+		athleteQuitsRandomEvent.trigger();
 	}
 }
