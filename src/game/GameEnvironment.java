@@ -105,7 +105,6 @@ public class GameEnvironment {
 	 */
 	public GameEnvironment(int randomSeed) {
 		seasonLength = 7;
-		rng = new Random(randomSeed);
 		player = new Player(this);
 		currentLocation = Location.START;
 
@@ -163,6 +162,7 @@ public class GameEnvironment {
 	 */
 	public void setSeed(int seed) {
 		this.gameSeed = seed;
+		rng = new Random(seed);
 	}
 
 	/**
