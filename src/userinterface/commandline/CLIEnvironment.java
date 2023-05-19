@@ -53,7 +53,7 @@ public class CLIEnvironment implements UIEnvironment {
 	/**
 	 * Clears all text on the console screen.
 	 */
-	private void clearScreen() {
+	public void clearScreen() {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 	}
