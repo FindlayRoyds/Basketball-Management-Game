@@ -63,9 +63,10 @@ public class CLILocker extends CLILocation {
 			athleteNames[i] = athletes.get(i).getName();
 		}
 		Athlete selectedAthlete = athletes.get(cliEnvironment.displayOptions(athleteNames));
+		System.out.println("Athlete selected: " + selectedAthlete.getName());
 		
-		System.out.println("Where would you like to move that athlete?");
-		String[] options = new String[Position.values().length];
+		System.out.println("Where would you like to move them?");
+		String[] options = new String[Position.values().length+1];
 		options[0] = "Reserve";
 		int i = 0;
 		for (Position position: Position.values()) {
@@ -78,7 +79,7 @@ public class CLILocker extends CLILocation {
 			gameLocation.moveToReserve(selectedAthlete);
 		}
 		else {
-			gameLocation.moveToActive(selectedAthlete, Position.values()[selection+1]);
+			gameLocation.moveToActive(selectedAthlete, Position.values()[selection-1]);
 		}
 	}
 
