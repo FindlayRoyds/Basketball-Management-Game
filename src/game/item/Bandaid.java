@@ -3,8 +3,8 @@ package game.item;
 import java.util.Random;
 
 import game.Athlete;
-import game.Purchasable;
 import game.GameEnvironment;
+import game.Purchasable;
 
 /**
  * The class for bandaid. Restores an athlete's stamina if they're injured
@@ -18,39 +18,40 @@ public class Bandaid extends Item {
 	 */
 	private final static String[] DESCRIPTIONS = {
 			"Fixes cuts, scrapes, broken bones, spinal cord trauma, and all other injuries known to human kind",
-			"Doctors hate this one simple trick",
-			"I've run out of description ideas sorry"
-	};
+			"Doctors hate this one simple trick", "I've run out of description ideas sorry" };
 
 	/**
 	 * The constructor for Bandaid
 	 * 
-	 * @param itemIsLegal					Whether the item is legal or illegal
-	 * @param itemDescription				Text describing the item
-	 * @param price							The cost of purchasing the item
+	 * @param itemIsLegal     Whether the item is legal or illegal
+	 * @param itemDescription Text describing the item
+	 * @param price           The cost of purchasing the item
 	 */
 	public Bandaid(String description, int price, GameEnvironment gameEnvironment) {
 		super("Bandaid", true, description, price, gameEnvironment);
 	}
-	
+
 	/**
 	 * 
 	 * 
-	 * @param qualityLevel						The quality level of the item. Influences randomness of generation
-	 * @param gameEnvironment					The game environment the game is being created in
-	 * @return									The randomly generated bandaid purchasable item
+	 * @param qualityLevel    The quality level of the item. Influences randomness
+	 *                        of generation
+	 * @param gameEnvironment The game environment the game is being created in
+	 * @return The randomly generated bandaid purchasable item
 	 */
 	public static Purchasable generateBandaid(int qualityLevel, GameEnvironment gameEnvironment) {
 		Random rng = gameEnvironment.getRng();
+		int difficulty = gameEnvironment.getDifficulty();
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
-		int randomPrice = (qualityLevel / 8 + rng.nextInt(qualityLevel / 8 + 1));
+		int randomPrice = (rng.nextInt(qualityLevel) + 3 * qualityLevel) / 5 * difficulty; // In range [0, 240]
 		return new Bandaid(randomDescription, randomPrice, gameEnvironment);
 	}
-	
+
 	/**
-	 * If the athlete is injured their stamina will be restored and the bandaid consumed
+	 * If the athlete is injured their stamina will be restored and the bandaid
+	 * consumed
 	 * 
-	 * @param athlete						The athlete to whom the affect is being applied
+	 * @param athlete The athlete to whom the affect is being applied
 	 */
 	@Override
 	public void applyItem(Athlete athlete) {

@@ -203,9 +203,13 @@ public class Athlete extends Purchasable {
 
 	@Override
 	public void sell(Player player) {
+		// Base resell price on the difficulty
+		// Easy: 80%, Medium: 60%, Hard: 40%
+		int resellPrice = (int) (price * ((5 - gameEnvironment.getDifficulty()) / 5f));
+
 		player.getTeam().removeAthlete(this);
 		setTeam(null);
-		player.giveMoney(price);
+		player.giveMoney(resellPrice);
 	}
 
 	/**
@@ -317,12 +321,13 @@ public class Athlete extends Purchasable {
 		Position[] positions = Position.values();
 		Position role = positions[rng.nextInt(positions.length)];
 
-		int stamina = rng.nextInt(100);
-		int price = rng.nextInt(1000);
+		int stamina = (rng.nextInt(qualityLevel) + qualityLevel) / 2;
+		int price = (int) (rng.nextInt(qualityLevel) + qualityLevel * 3) / 4 * 10; // In range [0, 1000]
 
 		Athlete resultingAthlete = new Athlete(name, role, stamina, gameEnvironment, price);
 		for (Statistic statistic : Statistic.values()) {
-			resultingAthlete.setStatistic(statistic, rng.nextInt(qualityLevel));
+			int statisticValue = (rng.nextInt(qualityLevel) + qualityLevel) / 2;
+			resultingAthlete.setStatistic(statistic, statisticValue);
 		}
 
 		return resultingAthlete;

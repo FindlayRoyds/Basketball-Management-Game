@@ -48,7 +48,7 @@ public class CLIStart extends CLILocation {
 		System.out.println("Choose a difficulty:");
 		String[] options = { "Easy", "Medium", "Hard" };
 		int selection = cliEnvironment.displayOptions(options);
-		gameLocation.setDifficulty(selection);
+		gameLocation.setDifficulty(selection + 1);
 		System.out.println("\nDifficulty set to " + options[selection] + "\n");
 	}
 

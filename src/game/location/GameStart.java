@@ -88,6 +88,9 @@ public class GameStart extends GameLocation {
 	 */
 	public void setDifficulty(int difficulty) {
 		getGameEnvironment().setDifficulty(difficulty);
+
+		// Give the player their starting money
+		getGameEnvironment().getPlayer().giveMoney((4 - difficulty) * 500); // In range: [500, 1500]
 	}
 
 	/**
