@@ -91,8 +91,9 @@ public class GameEnvironment {
 		gameLocations = new EnumMap<Location, GameLocation>(Location.class);
 		gameLocations.put(Location.MAP, new game.location.GameMap(this));
 		gameLocations.put(Location.END, new game.location.GameEnd(this));
+		gameLocations.put(Location.INVENTORY, new game.location.GameInventory(this));
 		
-		uiEnvironment = new CLIEnvironment(gameLocations);
+		uiEnvironment = new CLIEnvironment(gameLocations, this);
 	}
 	
 	/**

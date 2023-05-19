@@ -20,7 +20,7 @@ public class CLIMap extends CLILocation {
 	/**
 	 * Locations the user can travel to from the map
 	 */
-	private Location[] accessableLocations = new Location[] {
+	private Location[] accessibleLocations = new Location[] {
 		Location.MATCH_SELECION, Location.INVENTORY, Location.LOCKER_ROOM,
 		Location.ATHLETE_MARKET, Location.ITEM_MARKET, Location.BLACK_MARKET
 	};
@@ -30,17 +30,17 @@ public class CLIMap extends CLILocation {
 	 * 
 	 * @param gameLocation 				the map GameLocation.
 	 */
-	public CLIMap(GameLocation gameLocation) {
-		super(gameLocation);
+	public CLIMap(GameLocation gameLocation, CLIEnvironment cliEnvironment) {
+		super(cliEnvironment);
 		this.gameLocation = (GameMap) gameLocation;
 	}
 	
 	@Override
-	public void display() {
+	public Location display() {
 		System.out.println("Map");
 		String[] options = new String[] {"Stadium", "Inventory", "Locker Room", "Athlete Market", "Item Market", "Black Market"};
 		int selectedOption = cliEnvironment.displayOptions(options);
-		gameLocation.changeLocation(accessableLocations[selectedOption]);
+		return accessibleLocations[selectedOption];
 	}
 
 }

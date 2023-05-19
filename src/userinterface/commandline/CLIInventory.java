@@ -27,10 +27,10 @@ public class CLIInventory extends CLILocation {
 	/**
 	 * Constructor for the map CLI location.
 	 * 
-	 * @param gameLocation 				the map GameLocation.
+	 * @param gameLocation 				the inventory GameLocation.
 	 */
-	public CLIInventory(GameLocation gameLocation) {
-		super(gameLocation);
+	public CLIInventory(GameLocation gameLocation, CLIEnvironment cliEnvironment) {
+		super(cliEnvironment);
 		this.gameLocation = (GameInventory) gameLocation;
 	}
 	
@@ -64,13 +64,11 @@ public class CLIInventory extends CLILocation {
 	}
 
 	@Override
-	public void display() {
-		String[] options = {"View items", "Use an item", "Exit to map"};
-		int selectedOption = -1;
-
-		while (selectedOption != 2) {
+	public Location display() {
+		while (true) {
 			System.out.println("Inventory");
-			selectedOption = cliEnvironment.displayOptions(options);
+			String[] options = {"View items", "Use an item", "Exit to map"};
+			int selectedOption = cliEnvironment.displayOptions(options);
 
 			if (selectedOption == 0) {
 				System.out.println("Your items:");
@@ -79,6 +77,9 @@ public class CLIInventory extends CLILocation {
 			else if (selectedOption == 1) {
 				Item selectedItem = selectItem();
 				gameLocation.useItem(selectedItem);
+			}
+			else if (selectedOption == 2) {
+				return Location.MAP;
 			}
 		}
 	}

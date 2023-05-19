@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import game.GameEnvironment;
 import game.location.GameLocation;
 import userinterface.UIEnvironment;
 import enumeration.Location;
@@ -22,6 +23,11 @@ public class CLIEnvironment implements UIEnvironment {
 	private CLILocation currentLocation;
 	
 	/**
+	 * The game environment that the CLI should interact with.
+	 */
+	private GameEnvironment gameEnvironment;
+	
+	/**
 	 * Scanner object used to get user input
 	 */
 	Scanner scanner;
@@ -31,12 +37,14 @@ public class CLIEnvironment implements UIEnvironment {
 	 */
 	private Map<Location, CLILocation> CLILocations;
 	
-	public CLIEnvironment(Map<Location, GameLocation> gameLocations) {
+	public CLIEnvironment(Map<Location, GameLocation> gameLocations, GameEnvironment gameEnvironment) {
+		this.gameEnvironment = gameEnvironment;
 		scanner = new Scanner(System.in);
 		
 		CLILocations = new EnumMap<Location, CLILocation>(Location.class);
-		CLILocations.put(Location.MAP, new CLIMap(gameLocations.get(Location.MAP)));
-		CLILocations.put(Location.END, new CLIEnd(gameLocations.get(Location.END)));
+		CLILocations.put(Location.MAP, new CLIMap(gameLocations.get(Location.MAP), this));
+		CLILocations.put(Location.INVENTORY, new CLIInventory(gameLocations.get(Location.INVENTORY), this));
+		CLILocations.put(Location.END, new CLIEnd(gameLocations.get(Location.END), this));
 	}
 	
 	/**
@@ -88,7 +96,8 @@ public class CLIEnvironment implements UIEnvironment {
 		currentLocation = CLILocations.get(location);
 		
 		clearScreen();
-		currentLocation.display();
+		Location nextLocation = currentLocation.display();
+		gameEnvironment.changeLocation(nextLocation);
 	}
 	
 	/**
