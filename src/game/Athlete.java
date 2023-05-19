@@ -196,6 +196,11 @@ public class Athlete extends Purchasable {
 			} else {
 				playerTeam.addAthleteToReserve(this);
 			}
+
+			// Change price of athlete to their resell price
+			// Base resell price on the difficulty
+			// Easy: 80%, Medium: 60%, Hard: 40%
+			price = (int) (price * ((5 - gameEnvironment.getDifficulty()) / 5f));
 		} else
 			gameEnvironment.getUIEnvironment().displayPopup("You don't have enough money to buy " + this.name);
 		return chargeSuccess;
@@ -203,13 +208,9 @@ public class Athlete extends Purchasable {
 
 	@Override
 	public void sell(Player player) {
-		// Base resell price on the difficulty
-		// Easy: 80%, Medium: 60%, Hard: 40%
-		int resellPrice = (int) (price * ((5 - gameEnvironment.getDifficulty()) / 5f));
-
 		player.getTeam().removeAthlete(this);
 		setTeam(null);
-		player.giveMoney(resellPrice);
+		player.giveMoney(price);
 	}
 
 	/**

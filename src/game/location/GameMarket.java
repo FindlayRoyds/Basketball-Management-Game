@@ -70,13 +70,13 @@ public class GameMarket extends GameLocation {
 	 */
 	public GameMarket(GameEnvironment gameEnvironment,
 			Function3<Integer, GameEnvironment, Purchasable> generatePurchasable, Supplier<Set<Purchasable>> getOwned,
-			boolean allowIllegalPurchasables) {
+			boolean allowIllegalPurchasables, int amountToDisplay) {
 		super(gameEnvironment);
 		this.generatePurchasable = generatePurchasable;
 		this.getOwned = getOwned;
 		this.allowIllegalPurchasables = allowIllegalPurchasables;
 		this.availablePurchasables = new HashSet<Purchasable>();
-		this.amountToDisplay = 10;
+		this.amountToDisplay = amountToDisplay;
 	}
 
 	/**

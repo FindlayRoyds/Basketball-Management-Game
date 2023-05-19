@@ -116,11 +116,11 @@ public class GameEnvironment {
 		gameLocations.put(Location.MATCH, new GameMatch(this));
 		gameLocations.put(Location.MATCH_SELECION, new GameMatchSelection(this));
 		gameLocations.put(Location.ATHLETE_MARKET,
-				new GameMarket(this, Athlete.generateAthlete, player.getTeam().getAllPurchasables, false));
+				new GameMarket(this, Athlete.generateAthlete, player.getTeam().getAllPurchasables, false, 5));
 		gameLocations.put(Location.ITEM_MARKET,
-				new GameMarket(this, Item.generateLegalItem, player.getPurchasables, false));
+				new GameMarket(this, Item.generateLegalItem, player.getPurchasables, false, 8));
 		gameLocations.put(Location.BLACK_MARKET,
-				new GameMarket(this, Steroid.generateSteroid, player.getPurchasables, true));
+				new GameMarket(this, Steroid.generateSteroid, player.getPurchasables, true, 2));
 
 		uiEnvironment = new CLIEnvironment(gameLocations, this);
 		drugTestRandomEvent = new DrugTest(this);

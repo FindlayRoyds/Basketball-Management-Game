@@ -82,6 +82,11 @@ public abstract class Item extends Purchasable {
 
 		if (chargeSuccess) {
 			player.addToInventory(this);
+
+			// Change price of athlete to their resell price
+			// Base resell price on the difficulty
+			// Easy: 80%, Medium: 60%, Hard: 40%
+			price = (int) (price * ((5 - gameEnvironment.getDifficulty()) / 5f));
 		}
 		return chargeSuccess;
 	}
