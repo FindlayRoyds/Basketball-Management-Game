@@ -46,7 +46,7 @@ public class Player {
 		money = 0;
 		score = 0;
 		inventory = new HashSet<Item>();
-		team = new Team("");
+		team = new Team(gameEnvironment, "");
 	}
 
 	/**
