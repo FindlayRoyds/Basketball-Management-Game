@@ -46,6 +46,13 @@ public class GameMarket extends GameLocation {
 	private Supplier<Set<Purchasable>> getOwned;
 
 	/**
+	 * @return The amount of money in dollars that the Player has.
+	 */
+	public int getPlayerMoney() {
+		return getGameEnvironment().getPlayer().getMoney();
+	}
+
+	/**
 	 * Gets the set of purchasables that are allowed at the Market and owned by the
 	 * player. Allowed purchasables are those whose legality matches that of the
 	 * Market.
