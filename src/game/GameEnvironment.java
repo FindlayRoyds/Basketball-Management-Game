@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 
 import enumeration.Location;
-import game.location.GameLocation;
-import game.location.GameMarket;
+import game.location.*;
 import game.randomevent.RandomEvent;
 import userinterface.UIEnvironment;
 import userinterface.commandline.CLIEnvironment;
@@ -89,9 +88,12 @@ public class GameEnvironment {
 		
 		// Create game locations
 		gameLocations = new EnumMap<Location, GameLocation>(Location.class);
-		gameLocations.put(Location.MAP, new game.location.GameMap(this));
-		gameLocations.put(Location.END, new game.location.GameEnd(this));
-		gameLocations.put(Location.INVENTORY, new game.location.GameInventory(this));
+		gameLocations.put(Location.MAP, new GameMap(this));
+		gameLocations.put(Location.END, new GameEnd(this));
+		gameLocations.put(Location.INVENTORY, new GameInventory(this));
+		gameLocations.put(Location.LOCKER_ROOM, new GameLocker(this));
+		gameLocations.put(Location.MATCH, new GameMatch(this));
+		gameLocations.put(Location.MATCH_SELECION, new GameMatchSelection(this));
 		
 		uiEnvironment = new CLIEnvironment(gameLocations, this);
 	}
