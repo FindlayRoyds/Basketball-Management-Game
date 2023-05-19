@@ -1,8 +1,9 @@
 package util;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -30,7 +31,7 @@ public class NameGenerator {
 	 *         (capitalized).
 	 */
 	private static ArrayList<ArrayList<String>> readWordList(String filename) {
-		final String WORD_LIST_DIR = "src/game/nameGenerationWords/";
+		final String WORD_LIST_DIR = "";
 		String filepath = WORD_LIST_DIR + filename + ".txt";
 
 		// Build the empty result 2D array
@@ -41,7 +42,9 @@ public class NameGenerator {
 
 		// Attempt to read lines from the file and add them to the result.
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(filepath));
+			// InputStream in = new FileInputStream(filepath);
+			InputStream in = ClassLoader.getSystemResourceAsStream(filepath);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 			List<String> lines = new ArrayList<String>();
 			String line = reader.readLine();
 			while (line != null) {
