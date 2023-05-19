@@ -78,12 +78,23 @@ public class Team {
 	}
 
 	/**
-	 * Returns all the Athletes that are reserves or active on the team.
+	 * Returns all the Purchasables belinging to the team (Athletes)
 	 * 
-	 * @return Set of all Athletes on the Team.
+	 * @return Set of purchasables of all Athletes on the Team.
 	 */
-	public Supplier<Set<Purchasable>> getAllAthletes = () -> {
-		Set<Purchasable> allAthletes = new HashSet<Purchasable>();
+	public Supplier<Set<Purchasable>> getAllPurchasables = () -> {
+		// Cast result of getAllAthletes to a set of purchasables
+		Set<Athlete> allAthletes = getAllAthletes();
+		return new HashSet<>(allAthletes);
+	};
+	
+	/**
+	 * Returns all the athleletes that are reserves or active on the team
+	 * 
+	 * @return Set of all athletes on the team
+	 */
+	public Set<Athlete> getAllAthletes() {
+		Set<Athlete> allAthletes = new HashSet<Athlete>();
 		for (Athlete athlete : getReserveAthletes()) {
 			allAthletes.add(athlete);
 		}
@@ -91,7 +102,7 @@ public class Team {
 			allAthletes.add(athlete);
 		}
 		return allAthletes;
-	};
+	}
 
 	/**
 	 * Inserts a given Athlete at a given Position in the Team's activeAthletes.
