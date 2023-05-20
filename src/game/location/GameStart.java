@@ -15,6 +15,8 @@ import game.GameEnvironment;
  * @version 1.0
  */
 public class GameStart extends GameLocation {
+	private Set<Athlete> startingAthletes;
+
 	/**
 	 * Generates and return a set of 10 athletes for the user to choose from at the
 	 * start of the game.
@@ -23,13 +25,16 @@ public class GameStart extends GameLocation {
 	 *         team.
 	 */
 	public Set<Athlete> getStartingAthletes() {
-		Set<Athlete> athletes = new HashSet<Athlete>();
+		if (startingAthletes != null)
+			return startingAthletes;
+
+		startingAthletes = new HashSet<Athlete>();
 		int qualityLevel = 100 - getGameEnvironment().getDifficulty() * 20;
 		for (int i = 0; i < 10; ++i) {
 			Athlete athlete = (Athlete) Athlete.generateAthlete.apply(qualityLevel, getGameEnvironment());
-			athletes.add(athlete);
+			startingAthletes.add(athlete);
 		}
-		return athletes;
+		return startingAthletes;
 	}
 
 	/**
@@ -40,6 +45,7 @@ public class GameStart extends GameLocation {
 	 * @param position The Position to place the Athlete in the Team.
 	 */
 	public void chooseAthlete(Athlete athlete, Position position) {
+		startingAthletes.remove(athlete);
 		getGameEnvironment().getPlayer().getTeam().addAthleteToActive(athlete, position);
 	}
 
