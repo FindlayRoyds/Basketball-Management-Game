@@ -56,8 +56,8 @@ public class CLIEnvironment implements UIEnvironment {
 		cliLocations.put(Location.INVENTORY, new CLIInventory(gameLocations.get(Location.INVENTORY), this));
 		cliLocations.put(Location.END, new CLIEnd(gameLocations.get(Location.END), this));
 		cliLocations.put(Location.LOCKER_ROOM, new CLILocker(gameLocations.get(Location.LOCKER_ROOM), this));
-		cliLocations.put(Location.MATCH_SELECION,
-				new CLIMatchSelection(gameLocations.get(Location.MATCH_SELECION), this));
+		cliLocations.put(Location.MATCH_SELECTION,
+				new CLIMatchSelection(gameLocations.get(Location.MATCH_SELECTION), this));
 		cliLocations.put(Location.MATCH, new CLIMatch(gameLocations.get(Location.MATCH), this));
 		cliLocations.put(Location.ATHLETE_MARKET,
 				new CLIAthleteMarket(gameLocations.get(Location.ATHLETE_MARKET), this));

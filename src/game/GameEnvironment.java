@@ -105,7 +105,7 @@ public class GameEnvironment {
 		gameLocations.put(Location.INVENTORY, new GameInventory(this));
 		gameLocations.put(Location.LOCKER_ROOM, new GameLocker(this));
 		gameLocations.put(Location.MATCH, new GameMatch(this));
-		gameLocations.put(Location.MATCH_SELECION, new GameMatchSelection(this));
+		gameLocations.put(Location.MATCH_SELECTION, new GameMatchSelection(this));
 		gameLocations.put(Location.ATHLETE_MARKET,
 				new GameMarket(this, Athlete.generateAthlete, player.getTeam().getAllPurchasables, false, 5));
 		gameLocations.put(Location.ITEM_MARKET,
