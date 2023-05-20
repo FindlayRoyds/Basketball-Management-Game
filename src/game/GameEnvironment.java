@@ -269,16 +269,19 @@ public class GameEnvironment {
 	public void progressWeek() {
 		currentWeek += 1;
 
-		// Trigger random events that effect the player.
-		Team playerTeam = player.getTeam();
-		playerTeam.triggerRandomEvents();
+		// Trigger random events that effect the player. Only trigger if it isn't the
+		// first week.
+		if (currentWeek != 1) {
+			Team playerTeam = player.getTeam();
+			playerTeam.triggerRandomEvents();
 
-		Set<Athlete> playerAthletes = playerTeam.getAllAthletes();
-		for (Athlete athlete : playerAthletes) {
-			athlete.triggerRandomEvents();
+			Set<Athlete> playerAthletes = playerTeam.getAllAthletes();
+			for (Athlete athlete : playerAthletes) {
+				athlete.triggerRandomEvents();
+			}
+
+			drugTestRandomEvent.trigger();
 		}
-
-		drugTestRandomEvent.trigger();
 
 		// Detect if the player is unable to progress in the game
 		for (GameLocation gameLocation : gameLocations.values()) {

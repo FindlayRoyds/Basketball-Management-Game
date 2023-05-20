@@ -45,7 +45,7 @@ public class Bandaid extends Item {
 		int difficulty = gameEnvironment.getDifficulty();
 
 		// Clamp the quality level in range [0, 100]
-		qualityLevel = MiscUtil.clampValue(qualityLevel);
+		qualityLevel = MiscUtil.clampValue(qualityLevel, 1, 100);
 
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
 		int randomPrice = (rng.nextInt(qualityLevel) + 3 * qualityLevel) / 5 * difficulty; // In range [0, 240]

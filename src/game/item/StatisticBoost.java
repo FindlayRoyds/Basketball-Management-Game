@@ -67,7 +67,7 @@ public class StatisticBoost extends Item {
 		int difficulty = gameEnvironment.getDifficulty();
 
 		// Clamp the quality level in range [0, 100]
-		qualityLevel = MiscUtil.clampValue(qualityLevel);
+		qualityLevel = MiscUtil.clampValue(qualityLevel, 1, 100);
 
 		Statistic randomStatistic = Statistic.values()[randomIndex];
 		String randomName = StatisticBoostTypes.get(randomStatistic)[0];

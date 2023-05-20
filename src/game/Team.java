@@ -267,7 +267,7 @@ public class Team {
 		Team resultingTeam = new Team(gameEnvironment, generateTeamName(rng));
 
 		// Clamp the quality level in range [0, 100]
-		qualityLevel = MiscUtil.clampValue(qualityLevel);
+		qualityLevel = MiscUtil.clampValue(qualityLevel, 1, 100);
 
 		// Generate the activeAthletes.
 		for (Position position : Position.values()) {

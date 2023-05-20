@@ -53,7 +53,7 @@ public class Steroid extends Item {
 		int difficulty = gameEnvironment.getDifficulty();
 
 		// Clamp the quality level in range [0, 100]
-		qualityLevel = MiscUtil.clampValue(qualityLevel);
+		qualityLevel = MiscUtil.clampValue(qualityLevel, 1, 100);
 
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
 		int randomBoostAmount = (rng.nextInt(qualityLevel) + qualityLevel) / 2; // In range [0, 100]
