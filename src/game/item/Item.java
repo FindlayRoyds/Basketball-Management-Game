@@ -75,7 +75,7 @@ public abstract class Item extends Purchasable {
 	 * Purchase the item and put it into the player's inventory
 	 * 
 	 * @param player The player who is purchasing the item
-	 * @return Whether or not the purchase was succesfull
+	 * @return Whether or not the purchase was successful
 	 */
 	@Override
 	public boolean purchase(Player player) {
