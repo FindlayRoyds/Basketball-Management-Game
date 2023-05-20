@@ -1,8 +1,8 @@
 package userinterface.graphical;
 
-import javax.swing.JPanel;
+import java.awt.Dimension;
 
-import enumeration.Location;
+import javax.swing.JPanel;
 
 /**
  * 
@@ -25,12 +25,14 @@ public abstract class GUILocation extends JPanel {
 	 */
 	public GUILocation(GUIEnvironment guiEnvironment) {
 		this.guiEnvironment = guiEnvironment;
+		setLayout(null);
+		setPreferredSize(new Dimension(800, 600));
 	}
 
 	/**
 	 * Refreshes the content to display on the screen
-	 * 
-	 * @return An ordered List of options to be displayed on the gui.
 	 */
-	public abstract Location refresh();
+	public void refresh() {
+		// do nothing
+	}
 }

@@ -20,7 +20,7 @@ public class CLIMap extends CLILocation {
 	/**
 	 * Locations the user can travel to from the map
 	 */
-	private Location[] accessibleLocations = new Location[] { Location.MATCH_SELECION, Location.INVENTORY,
+	private Location[] accessibleLocations = new Location[] { Location.MATCH_SELECTION, Location.INVENTORY,
 			Location.LOCKER_ROOM, Location.ATHLETE_MARKET, Location.ITEM_MARKET, Location.BLACK_MARKET };
 
 	/**
