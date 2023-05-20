@@ -126,4 +126,9 @@ public abstract class Item extends Purchasable {
 	public String getDescription() {
 		return description;
 	}
+
+	@Override
+	public String getDetails() {
+		return "";
+	}
 }

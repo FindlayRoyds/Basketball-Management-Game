@@ -65,5 +65,4 @@ public class Bandaid extends Item {
 			this.consume();
 		}
 	}
-
 }
