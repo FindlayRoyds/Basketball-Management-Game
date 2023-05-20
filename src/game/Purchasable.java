@@ -49,8 +49,8 @@ public abstract class Purchasable {
 	public abstract String getDescription();
 
 	/**
-	 * @return A longer detailed description of the purchasable that imporant
-	 *         includes details.
+	 * @return A longer detailed description of the purchasable that includes
+	 *         important details.
 	 */
 	public abstract String getDetails();
 

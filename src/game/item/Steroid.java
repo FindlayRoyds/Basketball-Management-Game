@@ -79,4 +79,10 @@ public class Steroid extends Item {
 		this.consume();
 	}
 
+	@Override
+	public String getDetails() {
+		return "Boost amount: " + boostAmount + "\nBoosts every one of an athlete's statistics by the boost amount.\n"
+				+ "However an athlete who uses steroids can be detected by randomised drug tests.";
+	}
+
 }

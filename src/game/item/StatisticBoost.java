@@ -92,4 +92,10 @@ public class StatisticBoost extends Item {
 		this.consume();
 	}
 
+	@Override
+	public String getDetails() {
+		return "Boosted statistic: " + statisticToBoost.name() + "\nBoost amount: " + boostAmount
+				+ "\nBoosts an athlete's statistic by boost amount";
+	}
+
 }
