@@ -1,16 +1,15 @@
 package userinterface.commandline;
 
-import game.location.GameLocker;
-
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import enumeration.Location;
 import enumeration.Position;
 import enumeration.Statistic;
 import game.Athlete;
 import game.location.GameLocation;
+import game.location.GameLocker;
 
 /**
  * 
@@ -51,7 +50,7 @@ public class CLILocker extends CLILocation {
 			System.out.println("Reserve #" + i + ": " + athleteName);
 		}
 	}
-	
+
 	private void viewAthleteDetails() {
 		System.out.println("Which athlete would you like to see?");
 
@@ -65,7 +64,7 @@ public class CLILocker extends CLILocation {
 		System.out.println("\nDetails for \"" + selectedAthlete.getName() + "\":");
 		System.out.println("- Role: " + selectedAthlete.getRole().name());
 		System.out.println("- Stamina: " + selectedAthlete.getStamina());
-		for (Statistic statistic: Statistic.values()) {
+		for (Statistic statistic : Statistic.values()) {
 			System.out.println("- " + statistic.name().toLowerCase() + ": " + selectedAthlete.getStatistic(statistic));
 		}
 	}
@@ -83,22 +82,21 @@ public class CLILocker extends CLILocation {
 		}
 		Athlete selectedAthlete = athletes.get(cliEnvironment.displayOptions(athleteNames));
 		System.out.println("Athlete selected: " + selectedAthlete.getName());
-		
+
 		System.out.println("Where would you like to move them?");
-		String[] options = new String[Position.values().length+1];
+		String[] options = new String[Position.values().length + 1];
 		options[0] = "Reserve";
 		int i = 0;
-		for (Position position: Position.values()) {
-			options[i+1] = position.name();
+		for (Position position : Position.values()) {
+			options[i + 1] = position.name();
 			++i;
 		}
-		
+
 		int selection = cliEnvironment.displayOptions(options);
 		if (selection == 0) {
 			gameLocation.moveToReserve(selectedAthlete);
-		}
-		else {
-			gameLocation.moveToActive(selectedAthlete, Position.values()[selection-1]);
+		} else {
+			gameLocation.moveToActive(selectedAthlete, Position.values()[selection - 1]);
 		}
 	}
 
@@ -113,7 +111,7 @@ public class CLILocker extends CLILocation {
 			int selection = cliEnvironment.displayOptions(options);
 			if (selection == 0) {
 				moveAthlete();
-			}else if (selection == 1) {
+			} else if (selection == 1) {
 				viewAthleteDetails();
 			} else if (selection == 2) {
 				return Location.MAP;
