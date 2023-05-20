@@ -213,6 +213,25 @@ public class Athlete extends Purchasable {
 	}
 
 	/**
+	 * @return A string describing the athlete's role on the team.
+	 */
+	@Override
+	public String getDescription() {
+		return getRole().name().toLowerCase();
+	}
+
+	/**
+	 * @return A string containing information about the athlete's statistics.
+	 */
+	@Override
+	public String getDetails() {
+		String description = "Stamina: " + getStamina();
+		for (Statistic statistic : Statistic.values())
+			description += "\n" + statistic.name() + ": " + getStatistic(statistic);
+		return description;
+	}
+
+	/**
 	 * Gets the Athlete's skill value for a given statistic. This value is an
 	 * integer in the range [0, 100]
 	 * 
