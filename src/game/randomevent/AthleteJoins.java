@@ -35,7 +35,7 @@ public class AthleteJoins extends RandomEvent {
 	protected void occur() {
 		float seasonProgression = gameEnvironment.getWeek() / gameEnvironment.getSeasonLength();
 		int athleteQuality = (int) seasonProgression * 80 + 10 * (3 - gameEnvironment.getDifficulty());
-		Athlete newAthlete = (Athlete) Athlete.generateAthlete.apply(40, gameEnvironment);
+		Athlete newAthlete = (Athlete) Athlete.generateAthlete.apply(athleteQuality, gameEnvironment);
 		team.addAthleteToReserve(newAthlete);
 
 		// Alert the player that the event occured

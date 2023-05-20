@@ -63,17 +63,6 @@ public class GameEnvironment {
 	private int seasonLength;
 
 	/**
-	 * Seed used for generating random events and match outcomes.
-	 */
-	private int gameSeed;
-
-	/**
-	 * All the random events that can happen. These have a chance of occurring each
-	 * week.
-	 */
-	private Set<RandomEvent> randomEvents;
-
-	/**
 	 * Environment used for controlling the UI.
 	 */
 	private UIEnvironment uiEnvironment;
@@ -162,7 +151,6 @@ public class GameEnvironment {
 	 * @param seed The seed of the game. Used for random number generation.
 	 */
 	public void setSeed(int seed) {
-		this.gameSeed = seed;
 		rng = new Random(seed);
 	}
 
