@@ -60,10 +60,12 @@ public class Bandaid extends Item {
 	 */
 	@Override
 	public void applyItem(Athlete athlete) {
-		if (athlete.isInjured()) {
-			athlete.setStamina(100);
-			this.consume();
-		}
+		athlete.setStamina(100);
+		this.consume();
 	}
 
+	@Override
+	public String getDetails() {
+		return "Gives an athlete full stamina.";
+	}
 }
