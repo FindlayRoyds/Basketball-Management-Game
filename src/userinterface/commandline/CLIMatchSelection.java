@@ -45,9 +45,9 @@ public class CLIMatchSelection extends CLILocation {
 
 		// Start a match against the selected team if the player's team is able to play
 		// a match
-		if (gameLocation.canStartMatch())
+		if (gameLocation.canStartMatch()) {
 			gameLocation.playMatch(availableMatches.get(selectedOption));
-		else
+		} else
 			System.out.println("Your team is unable to play a match!");
 
 		// Return to map after the match.

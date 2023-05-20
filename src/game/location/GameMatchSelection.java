@@ -85,13 +85,12 @@ public class GameMatchSelection extends GameLocation {
 
 		// Make sure that the player has a full team,
 		// and not all of the athletes are injured
-		for (Athlete athlete : activeAthletes.values()) {
+		for (Position position : Position.values()) {
+			Athlete athlete = activeAthletes.get(position);
 			if (athlete == null)
 				return false;
-			if (!athlete.isInjured()) {
+			if (!athlete.isInjured())
 				canStart = true;
-				break;
-			}
 		}
 		return canStart;
 	}
