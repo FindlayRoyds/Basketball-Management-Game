@@ -39,6 +39,11 @@ public abstract class Purchasable {
 	public abstract void sell(Player player);
 
 	/**
+	 * @return The name of the Purchasable.
+	 */
+	public abstract String getName();
+
+	/**
 	 * get the price of the purchasable
 	 * 
 	 * @return The price of the purchasable
