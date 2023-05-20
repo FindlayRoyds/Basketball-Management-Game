@@ -44,6 +44,17 @@ public abstract class Purchasable {
 	public abstract String getName();
 
 	/**
+	 * @return A short text description of the purchasable
+	 */
+	public abstract String getDescription();
+
+	/**
+	 * @return A longer detailed description of the purchasable that imporant
+	 *         includes details.
+	 */
+	public abstract String getDetails();
+
+	/**
 	 * get the price of the purchasable
 	 * 
 	 * @return The price of the purchasable
