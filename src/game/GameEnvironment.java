@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
@@ -22,6 +23,7 @@ import game.randomevent.DrugTest;
 import game.randomevent.RandomEvent;
 import userinterface.UIEnvironment;
 import userinterface.commandline.CLIEnvironment;
+import userinterface.graphical.GUIEnvironment;
 
 /**
  * This class implements the game environment. It handles setting up and running
@@ -84,14 +86,14 @@ public class GameEnvironment {
 	 * @param args The command line arguments.
 	 */
 	public static void main(String[] args) {
-		new GameEnvironment();
+		new GameEnvironment(false);
 	}
 
 	/**
 	 * The constructor for game environment. Responsible for creating the objects
 	 * required to start the game.
 	 */
-	public GameEnvironment() {
+	public GameEnvironment(boolean useCLI) {
 		seasonLength = 7;
 		player = new Player(this);
 
@@ -111,12 +113,27 @@ public class GameEnvironment {
 		gameLocations.put(Location.BLACK_MARKET,
 				new GameMarket(this, Steroid.generateSteroid, player.getPurchasables, true, 2));
 
-		uiEnvironment = new CLIEnvironment(gameLocations, this);
 		drugTestRandomEvent = new DrugTest(this);
 		currentWeek = 0;
 
+		if (useCLI) {
+			uiEnvironment = new CLIEnvironment(gameLocations, this);
+		} else {
+			uiEnvironment = new GUIEnvironment(gameLocations, this);
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						((GUIEnvironment) uiEnvironment).getFrame().setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		}
+
 		// Let the user start up the game
 		changeLocation(Location.START);
+
 	}
 
 	/**

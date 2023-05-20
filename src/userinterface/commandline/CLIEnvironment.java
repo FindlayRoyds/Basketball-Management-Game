@@ -35,25 +35,34 @@ public class CLIEnvironment implements UIEnvironment {
 	/**
 	 * Every location enum mapped to their respective CLILocation.
 	 */
-	private Map<Location, CLILocation> CLILocations;
+	private Map<Location, CLILocation> cliLocations;
 
+	/**
+	 * The constructor for the CLI environment. Creates all of the CLI locations and
+	 * initialises the window.
+	 * 
+	 * @param gameLocations   A map that maps every location in the game to a game
+	 *                        location object.
+	 * @param gameEnvironment The game environment the cli environment interacts
+	 *                        with.
+	 */
 	public CLIEnvironment(Map<Location, GameLocation> gameLocations, GameEnvironment gameEnvironment) {
 		this.gameEnvironment = gameEnvironment;
 		scanner = new Scanner(System.in);
 
-		CLILocations = new EnumMap<Location, CLILocation>(Location.class);
-		CLILocations.put(Location.START, new CLIStart(gameLocations.get(Location.START), this));
-		CLILocations.put(Location.MAP, new CLIMap(gameLocations.get(Location.MAP), this));
-		CLILocations.put(Location.INVENTORY, new CLIInventory(gameLocations.get(Location.INVENTORY), this));
-		CLILocations.put(Location.END, new CLIEnd(gameLocations.get(Location.END), this));
-		CLILocations.put(Location.LOCKER_ROOM, new CLILocker(gameLocations.get(Location.LOCKER_ROOM), this));
-		CLILocations.put(Location.MATCH_SELECION,
+		cliLocations = new EnumMap<Location, CLILocation>(Location.class);
+		cliLocations.put(Location.START, new CLIStart(gameLocations.get(Location.START), this));
+		cliLocations.put(Location.MAP, new CLIMap(gameLocations.get(Location.MAP), this));
+		cliLocations.put(Location.INVENTORY, new CLIInventory(gameLocations.get(Location.INVENTORY), this));
+		cliLocations.put(Location.END, new CLIEnd(gameLocations.get(Location.END), this));
+		cliLocations.put(Location.LOCKER_ROOM, new CLILocker(gameLocations.get(Location.LOCKER_ROOM), this));
+		cliLocations.put(Location.MATCH_SELECION,
 				new CLIMatchSelection(gameLocations.get(Location.MATCH_SELECION), this));
-		CLILocations.put(Location.MATCH, new CLIMatch(gameLocations.get(Location.MATCH), this));
-		CLILocations.put(Location.ATHLETE_MARKET,
+		cliLocations.put(Location.MATCH, new CLIMatch(gameLocations.get(Location.MATCH), this));
+		cliLocations.put(Location.ATHLETE_MARKET,
 				new CLIAthleteMarket(gameLocations.get(Location.ATHLETE_MARKET), this));
-		CLILocations.put(Location.ITEM_MARKET, new CLIItemMarket(gameLocations.get(Location.ITEM_MARKET), this));
-		CLILocations.put(Location.BLACK_MARKET, new CLIBlackMarket(gameLocations.get(Location.BLACK_MARKET), this));
+		cliLocations.put(Location.ITEM_MARKET, new CLIItemMarket(gameLocations.get(Location.ITEM_MARKET), this));
+		cliLocations.put(Location.BLACK_MARKET, new CLIBlackMarket(gameLocations.get(Location.BLACK_MARKET), this));
 	}
 
 	/**
@@ -146,7 +155,7 @@ public class CLIEnvironment implements UIEnvironment {
 
 	@Override
 	public void changeLocation(Location location, GameLocation gameLocation) {
-		currentLocation = CLILocations.get(location);
+		currentLocation = cliLocations.get(location);
 
 		Location nextLocation = currentLocation.display();
 
