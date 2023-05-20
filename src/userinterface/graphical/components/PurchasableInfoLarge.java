@@ -15,7 +15,7 @@ public class PurchasableInfoLarge extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PurchasableInfoLarge(Purchasable purchasable) {
+	public PurchasableInfoLarge(Purchasable purchasable, boolean showPrice) {
 		setBackground(Color.PINK);
 		setLayout(null);
 
@@ -31,9 +31,14 @@ public class PurchasableInfoLarge extends JPanel {
 
 		JTextPane detailsLabel = new JTextPane();
 		detailsLabel.setText(purchasable.getDetails());
-		detailsLabel.setBounds(6, 109, 376, 193);
+		detailsLabel.setBounds(6, 151, 376, 193);
 		add(detailsLabel);
 
+		if (showPrice) {
+			JLabel priceLabel = new JLabel("$" + purchasable.getPrice());
+			priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			priceLabel.setBounds(6, 110, 376, 16);
+			add(priceLabel);
+		}
 	}
-
 }
