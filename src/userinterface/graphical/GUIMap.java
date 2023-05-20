@@ -32,6 +32,7 @@ public class GUIMap extends GUILocation {
 		setLayout(null);
 
 		JLabel mapTitleLabel = new JLabel("Map");
+		mapTitleLabel.setFont(new Font("Dialog", Font.BOLD, 15));
 		mapTitleLabel.setForeground(UIManager.getColor("TabbedPane.highlight"));
 		mapTitleLabel.setBounds(191, 22, 60, 17);
 		mapTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -65,10 +66,5 @@ public class GUIMap extends GUILocation {
 			currentButton.setFont(new Font("Dialog", Font.BOLD, 10));
 			panel.add(currentButton);
 		}
-	}
-
-	@Override
-	public Location refresh() {
-		return null;
 	}
 }
