@@ -25,6 +25,7 @@ class PlayerTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		ge = new GameEnvironment(false);
+		ge.setSeed(0);
 		pl = ge.getPlayer();
 	}
 
@@ -45,7 +46,6 @@ class PlayerTest {
 
 	@Test
 	void inventoryTest() {
-		ge.setSeed(0);
 		Item steroid = (Item) Steroid.generateSteroid.apply(0, ge);
 		Item statBoost = (Item) StatisticBoost.generateStatisticBoost(0, ge);
 		pl.addToInventory(statBoost);
