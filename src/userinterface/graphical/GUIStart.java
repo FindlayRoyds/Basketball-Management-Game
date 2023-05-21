@@ -1,5 +1,7 @@
 package userinterface.graphical;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JLabel;
@@ -37,15 +39,17 @@ public class GUIStart extends GUILocation {
 	public GUIStart(GameLocation gameLocation, GUIEnvironment guiEnvironment) {
 		super(guiEnvironment);
 		this.gameLocation = (GameStart) gameLocation;
-
-		JLabel startTitle = new JLabel("Game Setup");
-		startTitle.setFont(new Font("Dialog", Font.BOLD, 16));
-		startTitle.setBounds(169, 25, 107, 17);
-		startTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		add(startTitle);
+		setPreferredSize(new Dimension(800, 600));
 
 		form1 = new SetupForm1(this.gameLocation, guiEnvironment, () -> showForm2());
-		form1.setBounds(0, 50, 800, 600);
+		form1.setBounds(211, 68, 414, 600);
 		add(form1);
+
+		JLabel titleLabel = new JLabel("Game Setup");
+		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		titleLabel.setForeground(Color.BLACK);
+		titleLabel.setFont(new Font("Dialog", Font.BOLD, 24));
+		titleLabel.setBounds(12, 6, 788, 50);
+		add(titleLabel);
 	}
 }

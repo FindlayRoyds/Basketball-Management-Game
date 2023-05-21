@@ -26,7 +26,7 @@ public class SetupForm1 extends GUILocation {
 	public SetupForm1(GameStart gameLocation, GUIEnvironment guiEnvironment, Runnable onSubmit) {
 		super(guiEnvironment);
 
-		setBounds(12, 64, 764, 504);
+		setBounds(6, 64, 788, 504);
 		setLayout(new FormLayout(
 				new ColumnSpec[] { ColumnSpec.decode("58px"), ColumnSpec.decode("140px"),
 						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("146px"),
