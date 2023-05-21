@@ -3,6 +3,7 @@ package test.gametest;
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.swing.JFrame;
@@ -180,6 +181,18 @@ class AthleteTest {
 		aht.sell(player);
 		assertEquals(107, player.getMoney());
 		assertNull(team.getActiveAthletes().get(Position.SHORT_SHOOTER));
+	}
+
+	@Test
+	void descriptionTest() {
+		assertEquals(String.class, aht.getDescription().getClass());
+		assertNotEquals("", aht.getDescription());
+	}
+
+	@Test
+	void detailsTest() {
+		assertEquals(String.class, aht.getDetails().getClass());
+		assertNotEquals("", aht.getDetails());
 	}
 
 	@Test
