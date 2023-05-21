@@ -18,6 +18,8 @@ public class PurchasableInfoLarge extends JPanel {
 	public PurchasableInfoLarge(Purchasable purchasable, boolean showPrice) {
 		setBackground(Color.PINK);
 		setLayout(null);
+		if (purchasable == null)
+			return;
 
 		JLabel nameLabel = new JLabel(purchasable.getName());
 		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
