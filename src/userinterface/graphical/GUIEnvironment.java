@@ -43,6 +43,10 @@ public class GUIEnvironment implements UIEnvironment {
 		guiLocations = new EnumMap<Location, GUILocation>(Location.class);
 		guiLocations.put(Location.START, new GUIStart(gameLocations.get(Location.START), this));
 		guiLocations.put(Location.MAP, new GUIMap(gameLocations.get(Location.MAP), this));
+		guiLocations.put(Location.MATCH_SELECTION,
+				new GUIMatchSelection(gameLocations.get(Location.MATCH_SELECTION), this));
+		guiLocations.put(Location.MATCH, new GUIMatch(gameLocations.get(Location.MATCH), this));
+		guiLocations.put(Location.END, new GUIEnd(gameLocations.get(Location.END), this));
 
 		initialize();
 	}

@@ -13,10 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.UIManager;
 
+@SuppressWarnings("serial") // We aren't using serialisation in this project
 public class ComponentList extends JPanel {
-	private static final long serialVersionUID = 1L;
 	/**
 	 * The height each component in the list should be set to in pixels
 	 */
@@ -26,6 +25,40 @@ public class ComponentList extends JPanel {
 	 * The background panel each component is put into
 	 */
 	private JPanel backgroundPanel;
+
+	/**
+	 * Constructor for the Component List component. Creates the scroll pane, adds a
+	 * background panel with an absolute layout, and populates the background panel
+	 * with JPanel components.
+	 * 
+	 * @param componentsToDisplay A list containing JPanels to be displayed in the
+	 *                            component list
+	 * @param componentHeight     The height each component should be set to in
+	 *                            pixels
+	 * @param bounds              The bounds of the component list. Cannot be set
+	 *                            with setBounds().
+	 * @param onSelect            A consumer that tells the GUILocation using the
+	 *                            component what item was selected
+	 */
+	public ComponentList(List<JPanel> componentsToDisplay, int componentHeight, Rectangle bounds,
+			Consumer<Integer> onSelect) {
+		setLayout(null);
+		setBounds(bounds);
+		this.componentHeight = componentHeight;
+
+		backgroundPanel = new JPanel();
+		backgroundPanel.setBackground(new Color(0, 0, 0, 0));
+		backgroundPanel.setLayout(null);
+
+		JScrollPane scrollPanel = new JScrollPane(backgroundPanel);
+		scrollPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPanel.setBounds(0, 0, bounds.width, bounds.height);
+
+		refresh(componentsToDisplay, null, onSelect);
+
+		add(scrollPanel);
+	}
 
 	/**
 	 * Repopulates the background panel in the scroll panel with the correct
@@ -72,40 +105,6 @@ public class ComponentList extends JPanel {
 			backgroundPanel.add(listItemButton);
 			backgroundPanel.add(listItem);
 		}
-	}
-
-	/**
-	 * Constructor for the Component List component. Creates the scroll pane, adds a
-	 * background panel with an absolute layout, and populates the background panel
-	 * with JPanel components.
-	 * 
-	 * @param componentsToDisplay A list containing JPanels to be displayed in the
-	 *                            component list
-	 * @param componentHeight     The height each component should be set to in
-	 *                            pixels
-	 * @param bounds              The bounds of the component list. Cannot be set
-	 *                            with setBounds().
-	 * @param onSelect            A consumer that tells the GUILocation using the
-	 *                            component what item was selected
-	 */
-	public ComponentList(List<JPanel> componentsToDisplay, int componentHeight, Rectangle bounds,
-			Consumer<Integer> onSelect) {
-		setLayout(null);
-		setBounds(bounds);
-		this.componentHeight = componentHeight;
-
-		backgroundPanel = new JPanel();
-		backgroundPanel.setBackground(UIManager.getColor("Tree.selectionInactiveBackground"));
-		backgroundPanel.setLayout(null);
-
-		JScrollPane scrollPanel = new JScrollPane(backgroundPanel);
-		scrollPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPanel.setBounds(0, 0, bounds.width, bounds.height);
-
-		refresh(componentsToDisplay, null, onSelect);
-
-		add(scrollPanel);
 	}
 
 	/**

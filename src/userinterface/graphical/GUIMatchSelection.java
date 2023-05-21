@@ -2,6 +2,7 @@ package userinterface.graphical;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -9,7 +10,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import enumeration.Location;
 import game.Team;
@@ -22,18 +25,21 @@ public class GUIMatchSelection extends GUILocation {
 	/**
 	 * The gameLocation this gui location is linked to
 	 */
-	GameMatchSelection gameLocation;
+	private GameMatchSelection gameLocation;
 
 	/**
-	 * The panel the play buttons are stored in
+	 * The components accessed by the refresh method
 	 */
-	JPanel playButtonsPanel;
+	private JPanel playButtonsPanel;
+	private JPanel teamDisplayPanel;
+	private JLabel titleLabel;
 
 	/**
 	 * Create the panel.
 	 */
 	public GUIMatchSelection(GameLocation gameLocation, GUIEnvironment guiEnvironment) {
 		super(guiEnvironment);
+		setBackground(new Color(197, 255, 197));
 		this.gameLocation = (GameMatchSelection) gameLocation;
 		setPreferredSize(new Dimension(800, 600));
 
@@ -51,6 +57,18 @@ public class GUIMatchSelection extends GUILocation {
 		});
 		backButton.setBounds(6, 558, 117, 36);
 		add(backButton);
+
+		teamDisplayPanel = new JPanel();
+		teamDisplayPanel.setBounds(6, 68, 788, 424);
+		add(teamDisplayPanel);
+		teamDisplayPanel.setLayout(new GridLayout(0, 3, 12, 0));
+
+		titleLabel = new JLabel("Game Over");
+		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		titleLabel.setForeground(new Color(0, 0, 0));
+		titleLabel.setFont(new Font("Dialog", Font.BOLD, 24));
+		titleLabel.setBounds(6, 6, 788, 50);
+		add(titleLabel);
 	}
 
 	@Override
@@ -63,7 +81,7 @@ public class GUIMatchSelection extends GUILocation {
 			Team team = matchTeams.get(teamIndex);
 
 			TeamInfo teamDisplay = new TeamInfo(new Rectangle(6, 6 + teamIndex, 254, 538), team);
-			add(teamDisplay);
+			teamDisplayPanel.add(teamDisplay);
 
 			JButton playButton = new JButton("Play");
 			playButton.addActionListener(new ActionListener() {

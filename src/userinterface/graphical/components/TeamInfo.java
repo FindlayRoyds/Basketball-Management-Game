@@ -15,14 +15,16 @@ public class TeamInfo extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Create the panel.
+	 * Creates a team info component which shows the team's name as well as the
+	 * athletes in the team.
 	 */
 	public TeamInfo(Rectangle bounds, Team team) {
+		setBackground(new Color(173, 255, 47));
 		setLayout(null);
 
 		JLabel nameLabel = new JLabel("New label");
 		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		nameLabel.setBounds(6, 6, bounds.width - 12, 32);
+		nameLabel.setBounds(6, 6, 238, 32);
 		add(nameLabel);
 
 		JPanel athleteListPanel = new JPanel();

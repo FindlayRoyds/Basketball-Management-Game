@@ -35,12 +35,7 @@ public class GUIMatch extends GUILocation {
 	private JLabel matchupTitleLabel;
 	private JPanel athleteInfoPanel;
 	private JLabel winnerLabel;
-
-	/**
-	 * Each team's athlete's by position
-	 */
-	private Map<Position, Athlete> team1Athletes;
-	private Map<Position, Athlete> team2Athletes;
+	private JLabel titleLabel;
 
 	/**
 	 * The match position currently being shown
@@ -88,8 +83,7 @@ public class GUIMatch extends GUILocation {
 		matchupPanel.add(athleteInfoPanel);
 		athleteInfoPanel.setLayout(new GridLayout(0, 2, 0, 12));
 
-		JLabel titleLabel = new JLabel(
-				this.gameLocation.getTeam1().getName() + " vs " + this.gameLocation.getTeam2().getName());
+		titleLabel = new JLabel("<dynamic> vs <dynamic>");
 		titleLabel.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 30));
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setBounds(6, 6, 788, 50);
@@ -100,16 +94,20 @@ public class GUIMatch extends GUILocation {
 		controlButton.setBounds(306, 544, 188, 50);
 		add(controlButton);
 
-		team1Athletes = this.gameLocation.getTeam1().getActiveAthletes();
-		team2Athletes = this.gameLocation.getTeam2().getActiveAthletes();
 		positionIndex = 0;
 		matchPlayed = false;
 	}
 
 	@Override
 	public void refresh() {
+		Map<Position, Athlete> team1Athletes = this.gameLocation.getTeam1().getActiveAthletes();
+		Map<Position, Athlete> team2Athletes = this.gameLocation.getTeam2().getActiveAthletes();
+		titleLabel.setText(gameLocation.getTeam1().getName() + " vs " + this.gameLocation.getTeam2().getName());
+
 		if (positionIndex == Position.values().length + 1) { // Match has ended
 			gameLocation.finish();
+			positionIndex = 0;
+			matchPlayed = false;
 			gameLocation.changeLocation(Location.MAP);
 		} else if (positionIndex == Position.values().length) { // Display winning team
 			matchupPanel.setVisible(false);
