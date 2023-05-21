@@ -28,7 +28,7 @@ public class SetupForm1 extends GUILocation {
 
 		setBounds(12, 64, 764, 504);
 		setLayout(new FormLayout(
-				new ColumnSpec[] { ColumnSpec.decode("58px"), ColumnSpec.decode("102px"),
+				new ColumnSpec[] { ColumnSpec.decode("58px"), ColumnSpec.decode("140px"),
 						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("146px"),
 						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("114px"), },
 				new RowSpec[] { FormSpecs.LINE_GAP_ROWSPEC, RowSpec.decode("21px"), FormSpecs.RELATED_GAP_ROWSPEC,
@@ -69,6 +69,20 @@ public class SetupForm1 extends GUILocation {
 		difficultySlider.setMaximum(3);
 		add(difficultySlider, "4, 6");
 
+		JLabel weeksLabel = new JLabel("Season Length (weeks)");
+		add(weeksLabel, "2, 8, right, default");
+
+		JSlider weeksSlider = new JSlider();
+		weeksLabel.setLabelFor(weeksSlider);
+		weeksSlider.setPaintTicks(true);
+		weeksSlider.setSnapToTicks(true);
+		weeksSlider.setMinorTickSpacing(1);
+		weeksSlider.setMajorTickSpacing(5);
+		weeksSlider.setPaintLabels(true);
+		weeksSlider.setMinimum(5);
+		weeksSlider.setMaximum(15);
+		add(weeksSlider, "4, 8");
+
 		JButton submitBtn = new JButton("Submit");
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -98,6 +112,6 @@ public class SetupForm1 extends GUILocation {
 				onSubmit.run();
 			}
 		});
-		add(submitBtn, "4, 16");
+		add(submitBtn, "4, 12");
 	}
 }

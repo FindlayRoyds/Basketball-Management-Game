@@ -8,7 +8,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import enumeration.Location;
 import enumeration.Position;
 import game.Athlete;
 import game.Purchasable;
@@ -21,6 +20,7 @@ public class SetupForm2 extends GUILocation {
 
 	private JLabel remainingPositionsLabel;
 	private PurchasableExplorer purchasableExplorer;
+	private Runnable onSubmit;
 
 	private void updateRemainingPositionsLabel() {
 		int numberOfRemainingPositions = gameLocation.getUnfilledTeamPositions().size();
@@ -37,7 +37,7 @@ public class SetupForm2 extends GUILocation {
 		gameLocation.chooseAthlete(selectedAthlete, unfilledPositions.get(chosenPositionIndex));
 
 		if (unfilledPositions.size() == 1) {
-			gameLocation.changeLocation(Location.MAP);
+			onSubmit.run();
 		} else {
 			updateRemainingPositionsLabel();
 		}
@@ -47,6 +47,7 @@ public class SetupForm2 extends GUILocation {
 		super(guiEnvironment);
 		this.gameLocation = gameLocation;
 		setLayout(null);
+		this.onSubmit = onSubmit;
 
 		JButton chooseAthleteButton = new JButton("Add to team");
 		chooseAthleteButton.addActionListener(new ActionListener() {

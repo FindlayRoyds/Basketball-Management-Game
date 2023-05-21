@@ -20,7 +20,10 @@ public class GUIStart extends GUILocation {
 	 * Hides the first setup form from view and shows the second one.
 	 */
 	private void showForm2() {
-		form2 = new SetupForm2(this.gameLocation, guiEnvironment, () -> gameLocation.changeLocation(Location.MAP));
+		form2 = new SetupForm2(this.gameLocation, guiEnvironment, () -> {
+			gameLocation.progressWeek();
+			gameLocation.changeLocation(Location.MAP);
+		});
 		form2.setBounds(0, 50, 800, 600);
 		add(form2);
 

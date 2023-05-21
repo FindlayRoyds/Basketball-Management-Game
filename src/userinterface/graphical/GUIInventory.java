@@ -57,7 +57,7 @@ public class GUIInventory extends GUILocation {
 		returnToMapButton.setBounds(100, 500, 120, 27);
 		add(returnToMapButton);
 
-		JButton useItemButton = new JButton("Add to team");
+		JButton useItemButton = new JButton("Use item");
 		useItemButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				useItem();
