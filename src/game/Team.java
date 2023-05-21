@@ -208,7 +208,13 @@ public class Team {
 		for (Position position : Position.values()) {
 			if (activeAthletes.get(position) == athlete) {
 				if (reserveAthletes.size() >= MAX_NUMBER_OF_RESERVES) {
-					Athlete swapWith = reserveAthletes.iterator().next();
+					List<Athlete> swapWithOptions = new ArrayList<Athlete>(reserveAthletes);
+					String popupMessage = "Which reserve should the athlete be swapped with?";
+
+					int selectedOptionIndex = gameEnvironment.getUIEnvironment().displayPopup(popupMessage,
+							swapWithOptions.stream().map((curAthlete) -> curAthlete.getName()).toArray(String[]::new));
+					Athlete swapWith = swapWithOptions.get(selectedOptionIndex);
+
 					activeAthletes.put(position, swapWith);
 					reserveAthletes.remove(swapWith);
 				} else
