@@ -35,6 +35,11 @@ class GameEndTest {
 	}
 
 	@Test
+	void constructorTest() {
+		gameEnd = new GameEnd(ge);
+	}
+
+	@Test
 	void updateTest() {
 		gameEnd.update(0);
 	}
@@ -76,6 +81,7 @@ class GameEndTest {
 	@Test
 	void weekTest() {
 		assertEquals(ge.getWeek(), gameEnd.getWeek());
+		ge.setSeasonLength(5);
 		ge.progressWeek();
 		assertEquals(ge.getWeek(), gameEnd.getWeek());
 	}
