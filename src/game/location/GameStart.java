@@ -1,6 +1,8 @@
 package game.location;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import enumeration.Position;
@@ -65,8 +67,32 @@ public class GameStart extends GameLocation {
 		// nothing needs to happen here
 	}
 
+	/**
+	 * @return A list of Positions for which the player's team currently has no
+	 *         athlete.
+	 */
+	public List<Position> getUnfilledTeamPositions() {
+		List<Position> unfilled = new ArrayList<Position>();
+		for (Position position : Position.values()) {
+			if (getGameEnvironment().getPlayer().getTeam().getActiveAthletes().get(position) == null) {
+				unfilled.add(position);
+			}
+		}
+		return unfilled;
+	}
+
+	/**
+	 * @param name A String containing the name of the player's team.
+	 */
 	public void setTeamName(String name) {
 		getGameEnvironment().getPlayer().getTeam().setName(name);
+	}
+
+	/**
+	 * @return A String containing the name of the player's team.
+	 */
+	public String getTeamName() {
+		return getGameEnvironment().getPlayer().getTeam().getName();
 	}
 
 	/**
