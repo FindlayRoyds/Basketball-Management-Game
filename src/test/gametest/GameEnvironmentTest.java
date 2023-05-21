@@ -20,6 +20,7 @@ import game.Player;
 import game.Team;
 import game.location.GameEnd;
 import game.location.GameMarket;
+import game.location.GameMatch;
 import userinterface.UIEnvironment;
 import userinterface.commandline.CLIEnvironment;
 import userinterface.graphical.GUIEnvironment;
@@ -89,6 +90,17 @@ class GameEnvironmentTest {
 		assertTrue(gameLocation instanceof GameEnd);
 		gameLocation = ge.getGameLocation(Location.ATHLETE_MARKET);
 		assertTrue(gameLocation instanceof GameMarket);
+
+		ge.setSeasonLength(5);
+		ge.setDifficulty(1);
+		Team team = ge.getPlayer().getTeam();
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DEFENDER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DRIBBLER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DUNKER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.LONG_SHOOTER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.SHORT_SHOOTER);
+		((GameMatch) ge.getGameLocation(Location.MATCH)).setTeams(team, Team.generateTeam(100, ge));
+		ge.progressWeek();
 
 		for (Location location : Location.values()) {
 			ge.changeLocation(location);
