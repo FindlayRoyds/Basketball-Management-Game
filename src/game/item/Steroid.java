@@ -10,7 +10,8 @@ import util.Function3;
 import util.MiscUtil;
 
 /**
- * 
+ * The class for steroid item. When applied to an athlete it improves all of
+ * their statistics, but at the cost of being able to be detected by drug tests.
  * 
  * @author Findlay Royds
  * @version 1.1, May 2023.

@@ -28,6 +28,7 @@ class AthleteTest {
 	@BeforeEach
 	void setUp() {
 		ge = new GameEnvironment(false);
+		ge.setSeed(0);
 		aht = new Athlete("Test", Position.SHORT_SHOOTER, 0, ge, 0);
 	}
 
@@ -44,7 +45,16 @@ class AthleteTest {
 		assertEquals(Position.SHORT_SHOOTER, aht.getRole());
 		assertEquals(0, aht.getStamina());
 		assertEquals(0, aht.getPrice());
-		ge.setSeed(0);
+	}
+
+	@Test
+	void generatorTest() {
+		aht = (Athlete) Athlete.generateAthlete.apply(100, ge);
+		int minimum = 0;
+		for (Statistic statistic : Statistic.values()) {
+			minimum = Math.min(minimum, aht.getStatistic(statistic));
+		}
+		assertTrue(minimum == 0);
 		aht = (Athlete) Athlete.generateAthlete.apply(100, ge);
 		int maximum = 0;
 		for (Statistic statistic : Statistic.values()) {
