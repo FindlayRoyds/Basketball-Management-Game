@@ -26,7 +26,7 @@ public class PurchasableInfoSmall extends JPanel {
 		setLayout(null);
 
 		// Create a label for the name of the purchasable
-		JLabel nameLabel = new JLabel(purchasable.getName());
+		JLabel nameLabel = new JLabel("<html>" + purchasable.getName() + "</html>");
 		nameLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
 		nameLabel.setVerticalAlignment(SwingConstants.TOP);
 		nameLabel.setAlignmentY(Component.TOP_ALIGNMENT);

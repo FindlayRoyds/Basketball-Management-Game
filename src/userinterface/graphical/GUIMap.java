@@ -36,7 +36,7 @@ public class GUIMap extends GUILocation {
 	public GUIMap(GameLocation gameLocation, GUIEnvironment guiEnvironment) {
 		super(guiEnvironment);
 		this.gameLocation = (GameMap) gameLocation;
-		setBackground(UIManager.getColor("ComboBox.background"));
+		setBackground(Color.white);
 		setPreferredSize(new Dimension(800, 600));
 		setLayout(null);
 
@@ -75,7 +75,7 @@ public class GUIMap extends GUILocation {
 		add(weekNumberLabel);
 
 		JPanel locationsPanel = new JPanel();
-		locationsPanel.setBackground(UIManager.getColor("OptionPane.questionDialog.titlePane.background"));
+		locationsPanel.setBackground(Color.white);
 		locationsPanel.setBounds(6, 147, 788, 447);
 		add(locationsPanel);
 		locationsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -87,7 +87,7 @@ public class GUIMap extends GUILocation {
 					buttonData.get(buttonText).run();
 				}
 			});
-			currentButton.setPreferredSize(new Dimension(110, 30));
+			currentButton.setPreferredSize(new Dimension(200, 75));
 			currentButton.setBackground(UIManager.getColor("TabbedPane.highlight"));
 			currentButton.setForeground(UIManager.getColor("TabbedPane.focus"));
 			currentButton.setFont(new Font("Dialog", Font.BOLD, 10));
