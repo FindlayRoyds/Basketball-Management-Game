@@ -229,7 +229,7 @@ public class Athlete extends Purchasable {
 	 */
 	@Override
 	public String getDescription() {
-		return getRole().name().toLowerCase();
+		return getRole().name().toLowerCase().replace("_", " ");
 	}
 
 	/**
