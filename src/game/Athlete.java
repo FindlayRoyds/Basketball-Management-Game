@@ -1,6 +1,7 @@
 package game;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -169,8 +170,9 @@ public class Athlete extends Purchasable {
 	 */
 	@Override
 	public boolean purchase(Player player) {
-		// Check that the player has enough room in their reserves
-		if (player.getTeam().getNumberOfFreeReserveSlots() == 0) {
+		// Check that the player has enough room
+		List<Position> unfilledActivePositions = player.getTeam().getUnfilledTeamPositions();
+		if (player.getTeam().getNumberOfFreeReserveSlots() == 0 && unfilledActivePositions.isEmpty()) {
 			return false;
 		}
 
@@ -181,17 +183,27 @@ public class Athlete extends Purchasable {
 			Team playerTeam = player.getTeam();
 			// HashMap<Position, Athlete> activeAthletes = playerTeam.getActiveAthletes();
 
-			// Give player option to add athlete to active or reserve team
-			String popupMessage = "Please select where to add the athlete";
-			String[] popupOptions = { "Active Team", "Reserve Team" };
-			boolean addToActive = gameEnvironment.getUIEnvironment().displayPopup(popupMessage, popupOptions) == 0;
+			boolean addToActive;
+			if (unfilledActivePositions.isEmpty()) {
+				gameEnvironment.getUIEnvironment()
+						.displayPopup("Your active team is full. Your new player will join as a reserve.");
+				addToActive = false;
+			} else if (player.getTeam().getNumberOfFreeReserveSlots() == 0)
+				addToActive = true;
+			else {
+				// Give player option to add athlete to active or reserve team
+				String popupMessage = "Please select where to add the athlete";
+				String[] popupOptions = { "Active Team", "Reserve Team" };
+				addToActive = gameEnvironment.getUIEnvironment().displayPopup(popupMessage, popupOptions) == 0;
+			}
 
 			if (addToActive) {
 				// Create a popup with a button for each position
-				String[] positionNames = MiscUtil.getEnumerationNames(Position.class);
-				popupMessage = "What role should the athlete be placed into?";
+				String[] positionNames = unfilledActivePositions.stream().map((position) -> position.name())
+						.toArray(String[]::new);
+				String popupMessage = "What role should the athlete be placed into?";
 				int selectedIndex = gameEnvironment.getUIEnvironment().displayPopup(popupMessage, positionNames);
-				Position selectedPosition = Position.values()[selectedIndex];
+				Position selectedPosition = unfilledActivePositions.get(selectedIndex);
 
 				playerTeam.addAthleteToActive(this, selectedPosition);
 			} else {

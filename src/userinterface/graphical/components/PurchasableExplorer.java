@@ -17,10 +17,11 @@ public class PurchasableExplorer extends JPanel {
 	private ComponentList purchasableList;
 	private Integer selectedPurchasableIndex;
 	private Supplier<List<Purchasable>> purchasableSupplier;
+	private boolean showPrices;
 
 	public void displayPurchasableDetailsPanel() {
 		Purchasable selectedPurchasable = getSelected();
-		PurchasableInfoLarge purchasableDetailsPanel = new PurchasableInfoLarge(selectedPurchasable, false);
+		PurchasableInfoLarge purchasableDetailsPanel = new PurchasableInfoLarge(selectedPurchasable, showPrices);
 		purchasableDetailsPanel.setBounds(360, 0, 350, 400);
 		add(purchasableDetailsPanel);
 		purchasableDetailsPanel.revalidate();
@@ -30,7 +31,7 @@ public class PurchasableExplorer extends JPanel {
 	public void makePurchasableInfoComponents() {
 		purchasables = purchasableSupplier.get();
 		purchasableInfoComponents = purchasables.stream()
-				.map(purchasable -> (JPanel) (new PurchasableInfoSmall(purchasable, false)))
+				.map(purchasable -> (JPanel) (new PurchasableInfoSmall(purchasable, showPrices)))
 				.collect(Collectors.toList());
 	}
 
@@ -61,8 +62,9 @@ public class PurchasableExplorer extends JPanel {
 		this.purchasableSupplier = supplier;
 	}
 
-	public PurchasableExplorer(Supplier<List<Purchasable>> purchasableSupplier) {
+	public PurchasableExplorer(Supplier<List<Purchasable>> purchasableSupplier, boolean showPrices) {
 		this.purchasableSupplier = purchasableSupplier;
+		this.showPrices = showPrices;
 		setLayout(null);
 		selectedPurchasableIndex = null;
 		setBounds(0, 0, 800, 550);
@@ -75,5 +77,9 @@ public class PurchasableExplorer extends JPanel {
 		add(purchasableList);
 
 		displayPurchasableDetailsPanel();
+	}
+
+	public PurchasableExplorer(Supplier<List<Purchasable>> purchasableSupplier) {
+		this(purchasableSupplier, false);
 	}
 }
