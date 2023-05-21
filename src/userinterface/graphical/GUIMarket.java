@@ -11,39 +11,42 @@ import javax.swing.SwingConstants;
 
 import enumeration.Location;
 import game.Purchasable;
-import game.item.Item;
 import game.location.GameLocation;
 import game.location.GameMarket;
 import userinterface.graphical.components.PurchasableExplorer;
 
-public class GUIItemMarket extends GUILocation {
+public class GUIMarket extends GUILocation {
 	private static final long serialVersionUID = 1L;
 	private GameMarket gameLocation;
 
 	private PurchasableExplorer purchasableExplorer;
 	private JLabel marketTitle;
-	private JButton chooseItemButton;
+	private JButton choosePurchasableButton;
 	private boolean showSellScreen;
+	private String name;
+	private JButton swapViewButton;
 
 	private void returnToMap() {
 		gameLocation.changeLocation(Location.MAP);
 	}
 
 	public void refresh() {
-		marketTitle.setText("Item Market - " + (showSellScreen ? "Sell" : "Purchase") + " Items");
+		marketTitle.setText(name + " - " + (showSellScreen ? "Sell" : "Buy"));
 
-		chooseItemButton.setText(showSellScreen ? "Sell item" : "Buy item");
-		for (ActionListener oldListener : chooseItemButton.getActionListeners()) {
-			chooseItemButton.removeActionListener(oldListener);
+		swapViewButton.setText(showSellScreen ? "Change to buying" : "Change to selling");
+
+		choosePurchasableButton.setText(showSellScreen ? "Sell" : "Buy");
+		for (ActionListener oldListener : choosePurchasableButton.getActionListeners()) {
+			choosePurchasableButton.removeActionListener(oldListener);
 		}
-		chooseItemButton.addActionListener(new ActionListener() {
+		choosePurchasableButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Item selectedItem = (Item) purchasableExplorer.getSelected();
-				if (selectedItem != null) {
+				Purchasable selectedPurchasable = (Purchasable) purchasableExplorer.getSelected();
+				if (selectedPurchasable != null) {
 					if (showSellScreen) {
-						gameLocation.sell(selectedItem);
+						gameLocation.sell(selectedPurchasable);
 					} else {
-						gameLocation.purchase(selectedItem);
+						gameLocation.purchase(selectedPurchasable);
 					}
 				}
 				refresh();
@@ -62,26 +65,27 @@ public class GUIItemMarket extends GUILocation {
 	/**
 	 * Create the panel.
 	 */
-	public GUIItemMarket(GameLocation gameLocation, GUIEnvironment guiEnvironment) {
+	public GUIMarket(GameLocation gameLocation, GUIEnvironment guiEnvironment, String name) {
 		super(guiEnvironment);
 		this.gameLocation = (GameMarket) gameLocation;
+		this.name = name;
 		showSellScreen = false;
 		setLayout(null);
 
 		marketTitle = new JLabel("loading...");
 		marketTitle.setFont(new Font("Dialog", Font.BOLD, 16));
-		marketTitle.setBounds(169, 25, 107, 17);
+		marketTitle.setBounds(169, 25, 300, 17);
 		marketTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		add(marketTitle);
 
-		chooseItemButton = new JButton();
-		purchasableExplorer = new PurchasableExplorer(() -> new ArrayList<Purchasable>());
+		choosePurchasableButton = new JButton();
+		purchasableExplorer = new PurchasableExplorer(() -> new ArrayList<Purchasable>(), true);
 		purchasableExplorer.setBounds(0, 60, 1000, 1000);
 		add(purchasableExplorer);
 
-		chooseItemButton = new JButton("Loading...");
-		chooseItemButton.setBounds(450, 500, 120, 27);
-		add(chooseItemButton);
+		choosePurchasableButton = new JButton("Loading...");
+		choosePurchasableButton.setBounds(450, 500, 120, 27);
+		add(choosePurchasableButton);
 
 		JButton returnToMapButton = new JButton("Return to map");
 		returnToMapButton.addActionListener(new ActionListener() {
@@ -91,6 +95,16 @@ public class GUIItemMarket extends GUILocation {
 		});
 		returnToMapButton.setBounds(100, 500, 120, 27);
 		add(returnToMapButton);
+
+		swapViewButton = new JButton("Loading...");
+		swapViewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showSellScreen = !showSellScreen;
+				refresh();
+			}
+		});
+		swapViewButton.setBounds(250, 500, 200, 27);
+		add(swapViewButton);
 
 		refresh();
 	}

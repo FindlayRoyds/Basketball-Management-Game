@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -32,6 +33,14 @@ public class GUIInventory extends GUILocation {
 
 	private void returnToMap() {
 		gameLocation.changeLocation(Location.MAP);
+	}
+
+	private List<Purchasable> getItems() {
+		return new ArrayList<Purchasable>(gameLocation.getItems());
+	}
+
+	public void refresh() {
+		purchasableExplorer.refresh();
 	}
 
 	/**
@@ -66,8 +75,9 @@ public class GUIInventory extends GUILocation {
 		useItemButton.setBounds(450, 500, 120, 27);
 		add(useItemButton);
 
-		purchasableExplorer = new PurchasableExplorer(() -> new ArrayList<Purchasable>(this.gameLocation.getItems()));
+		purchasableExplorer = new PurchasableExplorer(() -> getItems());
 		purchasableExplorer.setBounds(0, 60, 1000, 1000);
+		purchasableExplorer.refresh();
 		add(purchasableExplorer);
 	}
 }

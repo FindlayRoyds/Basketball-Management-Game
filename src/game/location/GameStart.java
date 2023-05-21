@@ -1,6 +1,5 @@
 package game.location;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -72,13 +71,7 @@ public class GameStart extends GameLocation {
 	 *         athlete.
 	 */
 	public List<Position> getUnfilledTeamPositions() {
-		List<Position> unfilled = new ArrayList<Position>();
-		for (Position position : Position.values()) {
-			if (getGameEnvironment().getPlayer().getTeam().getActiveAthletes().get(position) == null) {
-				unfilled.add(position);
-			}
-		}
-		return unfilled;
+		return getGameEnvironment().getPlayer().getTeam().getUnfilledTeamPositions();
 	}
 
 	/**

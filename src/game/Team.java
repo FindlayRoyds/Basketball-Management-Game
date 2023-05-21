@@ -1,7 +1,9 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -57,6 +59,16 @@ public class Team {
 	 */
 	public static int getMaxNumberOfReserves() {
 		return MAX_NUMBER_OF_RESERVES;
+	}
+
+	public List<Position> getUnfilledTeamPositions() {
+		List<Position> unfilled = new ArrayList<Position>();
+		for (Position position : Position.values()) {
+			if (getActiveAthletes().get(position) == null) {
+				unfilled.add(position);
+			}
+		}
+		return unfilled;
 	}
 
 	/**
