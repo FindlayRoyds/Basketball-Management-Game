@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Random;
 
+import javax.swing.JFrame;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +34,14 @@ class gameEnvironmentTest {
 		gameEnvironment = new GameEnvironment(false);
 	}
 
+	@AfterEach
+	void finish() {
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
+		frame.setVisible(false); // you can't see me!
+		frame.dispose(); // Destroy the JFrame object
+		gameEnvironment = null;
+	}
+
 	@Test
 	void rngTest() {
 		gameEnvironment.setSeed(0);
@@ -54,7 +65,6 @@ class gameEnvironmentTest {
 
 	@Test
 	void weekTest() {
-		gameEnvironment = new GameEnvironment(false);
 		gameEnvironment.setSeasonLength(5);
 		gameEnvironment.setSeed(0);
 		assertEquals(0, gameEnvironment.getWeek());
@@ -83,7 +93,6 @@ class gameEnvironmentTest {
 
 	@Test
 	void hasEndedTest() {
-		gameEnvironment = new GameEnvironment(false);
 		Team team = gameEnvironment.getPlayer().getTeam();
 		gameEnvironment.setSeasonLength(5);
 		gameEnvironment.setSeed(0);
@@ -121,9 +130,8 @@ class gameEnvironmentTest {
 
 	@Test
 	void gameEnvironmentUITest() {
-		GameEnvironment guiGameEnvironment = new GameEnvironment(false);
 		GameEnvironment cliGameEnvironment = new GameEnvironment(true);
-		assertTrue(guiGameEnvironment.getUIEnvironment() instanceof GUIEnvironment);
+		assertTrue(gameEnvironment.getUIEnvironment() instanceof GUIEnvironment);
 		assertTrue(cliGameEnvironment.getUIEnvironment() instanceof CLIEnvironment);
 	}
 }

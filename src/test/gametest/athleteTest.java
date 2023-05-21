@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import javax.swing.JFrame;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +18,7 @@ import game.GameEnvironment;
 import game.Player;
 import game.Team;
 import game.item.Steroid;
+import userinterface.graphical.GUIEnvironment;
 
 class athleteTest {
 	private GameEnvironment ge;
@@ -26,12 +30,27 @@ class athleteTest {
 		aht = new Athlete("Test", Position.SHORT_SHOOTER, 0, ge, 0);
 	}
 
+	@AfterEach
+	void finish() {
+		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		frame.setVisible(false); // you can't see me!
+		frame.dispose(); // Destroy the JFrame object
+		ge = null;
+	}
+
 	@Test
 	void constructorTest() {
 		assertEquals("Test", aht.getName());
 		assertEquals(Position.SHORT_SHOOTER, aht.getRole());
 		assertEquals(0, aht.getStamina());
 		assertEquals(0, aht.getPrice());
+		ge.setSeed(0);
+		aht = (Athlete) Athlete.generateAthlete.apply(100, ge);
+		int maximum = 0;
+		for (Statistic statistic : Statistic.values()) {
+			maximum = Math.max(maximum, aht.getStatistic(statistic));
+		}
+		assertFalse(maximum == 0);
 	}
 
 	@Test
