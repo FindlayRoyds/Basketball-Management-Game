@@ -58,8 +58,8 @@ public class GUIMarket extends GUILocation {
 						: (() -> new ArrayList<Purchasable>(gameLocation.getAvailablePurchasables())));
 		purchasableExplorer.refresh();
 
-		revalidate();
-		repaint();
+		// revalidate();
+		// repaint();
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class GUIMarket extends GUILocation {
 
 		choosePurchasableButton = new JButton();
 		purchasableExplorer = new PurchasableExplorer(() -> new ArrayList<Purchasable>(), true);
-		purchasableExplorer.setBounds(0, 60, 1000, 1000);
+		purchasableExplorer.setBounds(0, 60, 800, 420);
 		add(purchasableExplorer);
 
 		choosePurchasableButton = new JButton("Loading...");

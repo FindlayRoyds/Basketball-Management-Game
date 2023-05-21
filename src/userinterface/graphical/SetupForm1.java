@@ -103,11 +103,13 @@ public class SetupForm1 extends GUILocation {
 				Integer seed = (Integer) seedSpinner.getValue();
 
 				int difficulty = difficultySlider.getValue();
+				int seasonLength = weeksSlider.getValue();
 
 				// Pass the input values to the game location.
 				gameLocation.setTeamName(teamName);
 				gameLocation.setSeed(seed);
 				gameLocation.setDifficulty(difficulty);
+				gameLocation.setSeasonLength(seasonLength);
 
 				onSubmit.run();
 			}
