@@ -52,8 +52,10 @@ public class SetupForm2 extends GUILocation {
 		chooseAthleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Athlete selectedAthlete = (Athlete) purchasableExplorer.getSelected();
-				chooseAthlete(selectedAthlete);
-				purchasableExplorer.refresh();
+				if (selectedAthlete != null) {
+					chooseAthlete(selectedAthlete);
+					purchasableExplorer.refresh();
+				}
 			}
 		});
 		chooseAthleteButton.setBounds(450, 450, 120, 27);
