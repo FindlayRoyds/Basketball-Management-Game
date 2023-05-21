@@ -20,22 +20,21 @@ import game.Team;
 import game.item.Steroid;
 import userinterface.graphical.GUIEnvironment;
 
-class athleteTest {
+class AthleteTest {
 	private GameEnvironment ge;
 	private Athlete aht;
 
 	@BeforeEach
-	void setup() {
+	void setUp() {
 		ge = new GameEnvironment(false);
 		aht = new Athlete("Test", Position.SHORT_SHOOTER, 0, ge, 0);
 	}
 
 	@AfterEach
-	void finish() {
+	void tearDown() {
 		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
-		frame.setVisible(false); // you can't see me!
-		frame.dispose(); // Destroy the JFrame object
-		ge = null;
+		frame.setVisible(false);
+		frame.dispose();
 	}
 
 	@Test

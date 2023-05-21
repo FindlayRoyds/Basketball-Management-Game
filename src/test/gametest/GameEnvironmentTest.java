@@ -24,22 +24,21 @@ import userinterface.UIEnvironment;
 import userinterface.commandline.CLIEnvironment;
 import userinterface.graphical.GUIEnvironment;
 
-class gameEnvironmentTest {
+class GameEnvironmentTest {
 
 	private GameEnvironment gameEnvironment;
 
 	@BeforeEach
-	void init() {
-		// initialise cli game environment before each test case
+	void setUp() {
+		// initialise gui game environment before each test case
 		gameEnvironment = new GameEnvironment(false);
 	}
 
 	@AfterEach
-	void finish() {
+	void tearDown() {
 		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
-		frame.setVisible(false); // you can't see me!
-		frame.dispose(); // Destroy the JFrame object
-		gameEnvironment = null;
+		frame.setVisible(false);
+		frame.dispose();
 	}
 
 	@Test
@@ -89,6 +88,10 @@ class gameEnvironmentTest {
 		assertTrue(gameLocation instanceof GameEnd);
 		gameLocation = gameEnvironment.getGameLocation(Location.ATHLETE_MARKET);
 		assertTrue(gameLocation instanceof GameMarket);
+
+		for (Location location : Location.values()) {
+			gameEnvironment.changeLocation(location);
+		}
 	}
 
 	@Test
