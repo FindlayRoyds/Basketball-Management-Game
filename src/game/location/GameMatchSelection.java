@@ -47,7 +47,12 @@ public class GameMatchSelection extends GameLocation {
 
 		teams = new ArrayList<Team>();
 		for (int i = 0; i < NUMBER_OF_TEAMS; ++i) {
+			Team generatedTeam = Team.generateTeam(qualityLevel, getGameEnvironment());
 			teams.add(Team.generateTeam(qualityLevel, getGameEnvironment()));
+
+			// Increase active athlete's stamina to balance matches
+			for (Athlete athlete : generatedTeam.getActiveAthletes().values())
+				athlete.setStamina(Math.max(40, athlete.getStamina()));
 		}
 	}
 
