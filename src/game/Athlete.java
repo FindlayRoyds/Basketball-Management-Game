@@ -173,6 +173,8 @@ public class Athlete extends Purchasable {
 		// Check that the player has enough room
 		List<Position> unfilledActivePositions = player.getTeam().getUnfilledTeamPositions();
 		if (player.getTeam().getNumberOfFreeReserveSlots() == 0 && unfilledActivePositions.isEmpty()) {
+			gameEnvironment.getUIEnvironment().displayPopup(
+					"You can't buy this athlete because your team is full! Try selling an athlete first.");
 			return false;
 		}
 
@@ -229,7 +231,7 @@ public class Athlete extends Purchasable {
 	 */
 	@Override
 	public String getDescription() {
-		return getRole().name().toLowerCase().replace("_", " ");
+		return "Specialty: " + getRole().name().toLowerCase().replace("_", " ");
 	}
 
 	/**
@@ -239,7 +241,7 @@ public class Athlete extends Purchasable {
 	public String getDetails() {
 		String description = "Stamina: " + getStamina();
 		for (Statistic statistic : Statistic.values())
-			description += "\n" + statistic.name() + ": " + getStatistic(statistic);
+			description += "\n" + statistic.name().toLowerCase().replace("_", " ") + ": " + getStatistic(statistic);
 		return description;
 	}
 

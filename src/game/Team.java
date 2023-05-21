@@ -207,7 +207,7 @@ public class Team {
 		// Look for athlete in activeAthletes.
 		for (Position position : Position.values()) {
 			if (activeAthletes.get(position) == athlete) {
-				if (reserveAthletes.size() > 0) {
+				if (reserveAthletes.size() >= MAX_NUMBER_OF_RESERVES) {
 					Athlete swapWith = reserveAthletes.iterator().next();
 					activeAthletes.put(position, swapWith);
 					reserveAthletes.remove(swapWith);

@@ -26,6 +26,7 @@ public class PurchasableInfoSmall extends JPanel {
 		setLayout(null);
 
 		// Create a label for the name of the purchasable
+		// <html> makes the text go onto a new line if it's too long
 		JLabel nameLabel = new JLabel("<html>" + purchasable.getName() + "</html>");
 		nameLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
 		nameLabel.setVerticalAlignment(SwingConstants.TOP);
@@ -38,7 +39,7 @@ public class PurchasableInfoSmall extends JPanel {
 			JLabel priceLabel = new JLabel("$" + purchasable.getPrice());
 			priceLabel.setVerticalAlignment(SwingConstants.TOP);
 			priceLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-			priceLabel.setBounds(147, 6, 47, 48);
+			priceLabel.setBounds(147, 6, 47, 20);
 			add(priceLabel);
 		}
 	}

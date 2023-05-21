@@ -54,6 +54,7 @@ public class GUIEnvironment implements UIEnvironment {
 				new GUIMarket(gameLocations.get(Location.BLACK_MARKET), this, "Black Market"));
 		guiLocations.put(Location.ATHLETE_MARKET,
 				new GUIMarket(gameLocations.get(Location.ATHLETE_MARKET), this, "Athlete Market"));
+		guiLocations.put(Location.LOCKER_ROOM, new GUILocker(gameLocations.get(Location.LOCKER_ROOM), this));
 
 		initialize();
 	}

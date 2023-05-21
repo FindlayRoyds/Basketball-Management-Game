@@ -12,12 +12,12 @@ import game.Purchasable;
 
 @SuppressWarnings("serial")
 public class PurchasableExplorer extends JPanel {
-	private List<JPanel> purchasableInfoComponents;
-	private List<Purchasable> purchasables;
+	protected List<JPanel> purchasableInfoComponents;
+	protected List<Purchasable> purchasables;
 	private ComponentList purchasableList;
 	private Integer selectedPurchasableIndex;
-	private Supplier<List<Purchasable>> purchasableSupplier;
-	private boolean showPrices;
+	protected Supplier<List<Purchasable>> purchasableSupplier;
+	protected boolean showPrices;
 
 	public void displayPurchasableDetailsPanel() {
 		Purchasable selectedPurchasable = getSelected();
@@ -71,7 +71,7 @@ public class PurchasableExplorer extends JPanel {
 		purchasableInfoComponents = new ArrayList<JPanel>();
 
 		makePurchasableInfoComponents();
-		purchasableList = new ComponentList(purchasableInfoComponents, 50, new Rectangle(0, 0, 350, 400));
+		purchasableList = new ComponentList(purchasableInfoComponents, 60, new Rectangle(0, 0, 350, 400));
 		purchasableList.refresh(purchasableInfoComponents, selectedPurchasableIndex,
 				(index) -> onPurchasableSelect(index));
 		add(purchasableList);
