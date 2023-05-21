@@ -47,7 +47,7 @@ public class ComponentList extends JPanel {
 			Rectangle listItemBounds = new Rectangle(6, 6 + (componentHeight + 6) * index, getWidth() - 12 - 19,
 					componentHeight);
 			// Create a constant of the index to use in the button event listener
-			final int listItemIndex = index;
+			final int INDEX_FINAL = index;
 
 			JPanel listItem = componentsToDisplay.get(index);
 			listItem.setBounds(listItemBounds);
@@ -61,7 +61,7 @@ public class ComponentList extends JPanel {
 			JButton listItemButton = new JButton();
 			listItemButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					onSelect.accept(listItemIndex);
+					onSelect.accept(INDEX_FINAL);
 				}
 			});
 			listItemButton.setBounds(listItemBounds);

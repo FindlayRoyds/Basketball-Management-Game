@@ -1,7 +1,5 @@
 package userinterface.graphical;
 
-import java.awt.Dimension;
-
 import javax.swing.JPanel;
 
 /**
@@ -26,7 +24,6 @@ public abstract class GUILocation extends JPanel {
 	public GUILocation(GUIEnvironment guiEnvironment) {
 		this.guiEnvironment = guiEnvironment;
 		setLayout(null);
-		setPreferredSize(new Dimension(800, 600));
 	}
 
 	/**
