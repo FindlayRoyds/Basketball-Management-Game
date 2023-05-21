@@ -36,6 +36,7 @@ class BandaidTest {
 	void constructorTest() {
 		Bandaid bandaid = new Bandaid("Test", 0, ge);
 		assertEquals("Test", bandaid.getDescription());
+		assertTrue(bandaid.getIsLegal());
 		assertEquals(0, bandaid.getPrice());
 		bandaid = new Bandaid("", 100, ge);
 		assertEquals("", bandaid.getDescription());

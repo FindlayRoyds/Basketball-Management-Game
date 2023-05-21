@@ -37,6 +37,7 @@ class SteroidTest {
 	void constructorTest() {
 		Steroid steroid = new Steroid("Test", 0, 0, ge);
 		assertEquals("Test", steroid.getDescription());
+		assertFalse(steroid.getIsLegal());
 		assertEquals(0, steroid.getPrice());
 		steroid = new Steroid("", 100, 0, ge);
 		assertEquals("", steroid.getDescription());
@@ -53,11 +54,16 @@ class SteroidTest {
 	void applyTest() {
 		Athlete athlete = new Athlete("", Position.DUNKER, 0, ge, 0);
 		athlete.setStatistic(Statistic.HEIGHT, 0);
-		Steroid steroid = (Steroid) Steroid.generateSteroid.apply(100, ge);
+		Steroid steroid = new Steroid("Test", 0, 57, ge);
 		assertEquals(0, athlete.getStatistic(Statistic.HEIGHT));
 		assertFalse(athlete.getHasUsedSteroids());
 		steroid.applyItem(athlete);
-		assertTrue(athlete.getStatistic(Statistic.HEIGHT) > 0);
+		for (Statistic statistic : Statistic.values())
+			assertEquals(57, athlete.getStatistic(statistic));
+		steroid = new Steroid("Test", 0, 3, ge);
+		steroid.applyItem(athlete);
+		for (Statistic statistic : Statistic.values())
+			assertEquals(60, athlete.getStatistic(statistic));
 		assertTrue(athlete.getHasUsedSteroids());
 	}
 
