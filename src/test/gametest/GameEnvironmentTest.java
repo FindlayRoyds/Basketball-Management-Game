@@ -90,6 +90,10 @@ class GameEnvironmentTest {
 		gameLocation = ge.getGameLocation(Location.ATHLETE_MARKET);
 		assertTrue(gameLocation instanceof GameMarket);
 
+		ge.setSeasonLength(5);
+		ge.setDifficulty(1);
+		ge.progressWeek();
+
 		for (Location location : Location.values()) {
 			ge.changeLocation(location);
 		}
