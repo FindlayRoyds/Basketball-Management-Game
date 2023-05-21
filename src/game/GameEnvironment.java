@@ -86,7 +86,10 @@ public class GameEnvironment {
 	 * @param args The command line arguments.
 	 */
 	public static void main(String[] args) {
-		new GameEnvironment(false);
+		GameEnvironment gameEnvironment = new GameEnvironment(false);
+
+		// Let the user start up the game
+		gameEnvironment.changeLocation(Location.START);
 	}
 
 	/**
@@ -94,7 +97,6 @@ public class GameEnvironment {
 	 * required to start the game.
 	 */
 	public GameEnvironment(boolean useCLI) {
-		seasonLength = 7;
 		player = new Player(this);
 
 		// Create game locations
@@ -130,9 +132,6 @@ public class GameEnvironment {
 				}
 			});
 		}
-
-		// Let the user start up the game
-		changeLocation(Location.START);
 
 	}
 
@@ -288,10 +287,10 @@ public class GameEnvironment {
 			drugTestRandomEvent.trigger();
 		}
 
-		// Detect if the player is unable to progress in the game
 		for (GameLocation gameLocation : gameLocations.values()) {
 			gameLocation.update(currentWeek);
 		}
+		// Detect if the player is unable to progress in the game
 		if (hasEnded()) {
 			changeLocation(Location.END);
 		}
