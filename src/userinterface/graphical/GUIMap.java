@@ -1,5 +1,6 @@
 package userinterface.graphical;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -18,9 +19,16 @@ import enumeration.Location;
 import game.location.GameLocation;
 import game.location.GameMap;
 
+@SuppressWarnings("serial") // We aren't using serialization in our project
 public class GUIMap extends GUILocation {
-	private static final long serialVersionUID = 1L;
 	GameMap gameLocation;
+
+	/**
+	 * The components of the GUI accessed by the refresh method
+	 */
+	JLabel moneyLabel;
+	JLabel weeksRemainingLabel;
+	JLabel weekNumberLabel;
 
 	/**
 	 * Create the panel.
@@ -28,13 +36,26 @@ public class GUIMap extends GUILocation {
 	public GUIMap(GameLocation gameLocation, GUIEnvironment guiEnvironment) {
 		super(guiEnvironment);
 		this.gameLocation = (GameMap) gameLocation;
-		setBackground(UIManager.getColor("TabbedPane.focus"));
+		setBackground(UIManager.getColor("ComboBox.background"));
+		setPreferredSize(new Dimension(800, 600));
 		setLayout(null);
 
+		moneyLabel = new JLabel("$1512");
+		moneyLabel.setForeground(new Color(0, 100, 0));
+		moneyLabel.setFont(new Font("Dialog", Font.BOLD, 18));
+		moneyLabel.setBounds(16, 8, 200, 50);
+		add(moneyLabel);
+
+		weeksRemainingLabel = new JLabel("12 weeks left");
+		weeksRemainingLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		weeksRemainingLabel.setFont(new Font("Dialog", Font.BOLD, 18));
+		weeksRemainingLabel.setBounds(588, 6, 200, 50);
+		add(weeksRemainingLabel);
+
 		JLabel mapTitleLabel = new JLabel("Map");
-		mapTitleLabel.setFont(new Font("Dialog", Font.BOLD, 15));
-		mapTitleLabel.setForeground(UIManager.getColor("TabbedPane.highlight"));
-		mapTitleLabel.setBounds(191, 22, 60, 17);
+		mapTitleLabel.setFont(new Font("Dialog", Font.BOLD, 24));
+		mapTitleLabel.setForeground(new Color(0, 0, 0));
+		mapTitleLabel.setBounds(6, 6, 788, 50);
 		mapTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(mapTitleLabel);
 
@@ -45,13 +66,19 @@ public class GUIMap extends GUILocation {
 		buttonData.put("Athlete Market", () -> this.gameLocation.changeLocation(Location.ATHLETE_MARKET));
 		buttonData.put("Item Market", () -> this.gameLocation.changeLocation(Location.ITEM_MARKET));
 		buttonData.put("Black Market", () -> this.gameLocation.changeLocation(Location.BLACK_MARKET));
-		buttonData.put("Take a Bye", () -> this.gameLocation.takeABye());
+		buttonData.put("Take a Bye", () -> this.takeABye());
 
-		JPanel panel = new JPanel();
-		panel.setBackground(UIManager.getColor("OptionPane.questionDialog.titlePane.background"));
-		panel.setBounds(12, 51, 425, 225);
-		add(panel);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		weekNumberLabel = new JLabel("Week 14");
+		weekNumberLabel.setVerticalAlignment(SwingConstants.TOP);
+		weekNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		weekNumberLabel.setBounds(6, 56, 788, 50);
+		add(weekNumberLabel);
+
+		JPanel locationsPanel = new JPanel();
+		locationsPanel.setBackground(UIManager.getColor("OptionPane.questionDialog.titlePane.background"));
+		locationsPanel.setBounds(6, 147, 788, 447);
+		add(locationsPanel);
+		locationsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		for (String buttonText : buttonData.keySet()) {
 			JButton currentButton = new JButton(buttonText);
@@ -64,7 +91,23 @@ public class GUIMap extends GUILocation {
 			currentButton.setBackground(UIManager.getColor("TabbedPane.highlight"));
 			currentButton.setForeground(UIManager.getColor("TabbedPane.focus"));
 			currentButton.setFont(new Font("Dialog", Font.BOLD, 10));
-			panel.add(currentButton);
+			locationsPanel.add(currentButton);
 		}
+	}
+
+	/**
+	 * Takes a bye. Implemented in order to call refresh() on the map after taking a
+	 * bye.
+	 */
+	private void takeABye() {
+		gameLocation.takeABye();
+		refresh();
+	}
+
+	@Override
+	public void refresh() {
+		moneyLabel.setText("$" + gameLocation.getMoney());
+		weeksRemainingLabel.setText(gameLocation.getWeeksRemaining() + " weeks remaining");
+		weekNumberLabel.setText("week " + gameLocation.getWeek());
 	}
 }
