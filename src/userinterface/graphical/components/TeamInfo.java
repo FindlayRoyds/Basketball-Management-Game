@@ -26,16 +26,11 @@ public class TeamInfo extends JPanel {
 		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		nameLabel.setBounds(6, 6, 238, 32);
 		add(nameLabel);
-
-		JPanel athleteListPanel = new JPanel();
-		athleteListPanel.setBackground(new Color(255, 228, 225));
-		athleteListPanel.setBounds(6, 50, bounds.width - 12, bounds.height - 56);
-		athleteListPanel.setLayout(null);
-		add(athleteListPanel);
-
+		
+		Rectangle listBounds = new Rectangle(6, 50, bounds.width - 12, bounds.height - 56);
 		List<JPanel> athleteInfoComponents = team.getActiveAthletes().values().stream()
 				.map(athlete -> new PurchasableInfoSmall(athlete, false)).collect(Collectors.toList());
-		ComponentList athleteList = new ComponentList(athleteInfoComponents, 100, athleteListPanel.getBounds());
+		ComponentList athleteList = new ComponentList(athleteInfoComponents, 100, listBounds);
 		add(athleteList);
 	}
 }

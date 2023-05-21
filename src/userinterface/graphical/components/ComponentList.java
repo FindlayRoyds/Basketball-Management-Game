@@ -47,7 +47,6 @@ public class ComponentList extends JPanel {
 		this.componentHeight = componentHeight;
 
 		backgroundPanel = new JPanel();
-		backgroundPanel.setBackground(new Color(0, 0, 0, 0));
 		backgroundPanel.setLayout(null);
 
 		JScrollPane scrollPanel = new JScrollPane(backgroundPanel);
