@@ -62,7 +62,7 @@ public class GUIMatchSelection extends GUILocation {
 			// Create a constant of team index to use in play button event listener
 			Team team = matchTeams.get(teamIndex);
 
-			TeamInfo teamDisplay = new TeamInfo(new Rectangle(6, 6 + teamIndex, 254, 588), team);
+			TeamInfo teamDisplay = new TeamInfo(new Rectangle(6, 6 + teamIndex, 254, 538), team);
 			add(teamDisplay);
 
 			JButton playButton = new JButton("Play");
