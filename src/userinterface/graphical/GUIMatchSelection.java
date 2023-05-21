@@ -39,7 +39,7 @@ public class GUIMatchSelection extends GUILocation {
 	 */
 	public GUIMatchSelection(GameLocation gameLocation, GUIEnvironment guiEnvironment) {
 		super(guiEnvironment);
-		setBackground(new Color(197, 255, 197));
+		setBackground(new Color(255, 255, 255));
 		this.gameLocation = (GameMatchSelection) gameLocation;
 		setPreferredSize(new Dimension(800, 600));
 
@@ -73,6 +73,8 @@ public class GUIMatchSelection extends GUILocation {
 
 	@Override
 	public void refresh() {
+		playButtonsPanel.removeAll();
+		teamDisplayPanel.removeAll();
 		List<Team> matchTeams = gameLocation.getTeams();
 
 		// Create team displays and play buttons

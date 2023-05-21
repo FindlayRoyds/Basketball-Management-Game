@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
@@ -59,7 +61,6 @@ public class GUIMatch extends GUILocation {
 
 		winnerLabel = new JLabel("<dynamic> have won the match!");
 		winnerLabel.setVisible(false);
-		winnerLabel.setForeground(new Color(218, 165, 32));
 		winnerLabel.setFont(new Font("Lucida Grande", Font.BOLD, 24));
 		winnerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		winnerLabel.setBounds(6, 300, 788, 50);
@@ -90,6 +91,11 @@ public class GUIMatch extends GUILocation {
 		add(titleLabel);
 
 		controlButton = new JButton("PLAY MATCH");
+		controlButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				refresh();
+			}
+		});
 		controlButton.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		controlButton.setBounds(306, 544, 188, 50);
 		add(controlButton);
@@ -109,23 +115,29 @@ public class GUIMatch extends GUILocation {
 			positionIndex = 0;
 			matchPlayed = false;
 			gameLocation.changeLocation(Location.MAP);
+			positionIndex += 1;
 		} else if (positionIndex == Position.values().length) { // Display winning team
 			matchupPanel.setVisible(false);
 
 			Team winningTeam = gameLocation.getWinningTeam();
 
-			winnerLabel.setText(winningTeam + " have won the match!");
+			winnerLabel.setText(winningTeam.getName() + " have won the match!");
 			winnerLabel.setVisible(true);
+			controlButton.setText("CONTINUE");
+			positionIndex += 1;
 		} else { // Play a position matchup
 			Position positionPlayed = Position.values()[positionIndex];
 			Athlete athlete1 = team1Athletes.get(positionPlayed);
 			Athlete athlete2 = team2Athletes.get(positionPlayed);
+			matchupTitleLabel.setText(positionPlayed.name().replaceAll("_", " ") + " MATCHUP");
 
 			if (matchPlayed) {
 				Athlete winner = gameLocation.getWinningAthlete(athlete1, athlete2);
 				int winnerIndex = winner == athlete1 ? 0 : 1;
 				JPanel winnerInfoPanel = (JPanel) athleteInfoPanel.getComponent(winnerIndex);
 				winnerInfoPanel.setBorder(BorderFactory.createLineBorder(Color.yellow));
+				controlButton.setText("CONTINUE");
+				positionIndex += 1;
 			} else {
 				athleteInfoPanel.removeAll();
 				PurchasableInfoLarge athlete1Info = new PurchasableInfoLarge(athlete1, false);
@@ -133,10 +145,9 @@ public class GUIMatch extends GUILocation {
 
 				athleteInfoPanel.add(athlete1Info);
 				athleteInfoPanel.add(athlete2Info);
+				controlButton.setText("PLAY MATCH");
 			}
 			matchPlayed = !matchPlayed;
 		}
-
-		positionIndex += 1;
 	}
 }
