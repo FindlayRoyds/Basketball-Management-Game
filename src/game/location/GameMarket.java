@@ -107,6 +107,7 @@ public class GameMarket extends GameLocation {
 	 */
 	public void purchase(Purchasable purchasable) {
 		purchasable.purchase(getGameEnvironment().getPlayer());
+		availablePurchasables.remove(purchasable);
 	}
 
 	/**

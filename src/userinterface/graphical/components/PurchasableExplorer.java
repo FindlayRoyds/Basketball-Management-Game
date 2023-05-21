@@ -35,7 +35,7 @@ public class PurchasableExplorer extends JPanel {
 	}
 
 	public void refresh() {
-		if (selectedPurchasableIndex >= purchasables.size())
+		if (selectedPurchasableIndex != null && selectedPurchasableIndex >= purchasables.size())
 			selectedPurchasableIndex = null;
 		makePurchasableInfoComponents();
 		purchasableList.refresh(purchasableInfoComponents, selectedPurchasableIndex, (i) -> onPurchasableSelect(i));
@@ -57,6 +57,10 @@ public class PurchasableExplorer extends JPanel {
 		return purchasables.get(selectedPurchasableIndex);
 	}
 
+	public void setSupplier(Supplier<List<Purchasable>> supplier) {
+		this.purchasableSupplier = supplier;
+	}
+
 	public PurchasableExplorer(Supplier<List<Purchasable>> purchasableSupplier) {
 		this.purchasableSupplier = purchasableSupplier;
 		setLayout(null);
@@ -65,7 +69,7 @@ public class PurchasableExplorer extends JPanel {
 		purchasableInfoComponents = new ArrayList<JPanel>();
 
 		makePurchasableInfoComponents();
-		purchasableList = new ComponentList(purchasableInfoComponents, 100, new Rectangle(0, 0, 350, 400));
+		purchasableList = new ComponentList(purchasableInfoComponents, 50, new Rectangle(0, 0, 350, 400));
 		purchasableList.refresh(purchasableInfoComponents, selectedPurchasableIndex,
 				(index) -> onPurchasableSelect(index));
 		add(purchasableList);
