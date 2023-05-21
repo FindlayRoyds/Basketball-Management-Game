@@ -47,6 +47,7 @@ public class GUIEnvironment implements UIEnvironment {
 				new GUIMatchSelection(gameLocations.get(Location.MATCH_SELECTION), this));
 		guiLocations.put(Location.MATCH, new GUIMatch(gameLocations.get(Location.MATCH), this));
 		guiLocations.put(Location.END, new GUIEnd(gameLocations.get(Location.END), this));
+		guiLocations.put(Location.INVENTORY, new GUIInventory(gameLocations.get(Location.INVENTORY), this));
 
 		initialize();
 	}
