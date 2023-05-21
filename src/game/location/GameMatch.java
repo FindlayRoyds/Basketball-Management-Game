@@ -152,6 +152,7 @@ public class GameMatch extends GameLocation {
 
 			getGameEnvironment().getUIEnvironment().displayPopup("You won the match! You have been awarded "
 					+ rewardMoney + " Money and " + rewardPoints + " Points.");
+			getGameEnvironment().progressWeek();
 		}
 	}
 }

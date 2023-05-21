@@ -110,12 +110,14 @@ public class GUIMatch extends GUILocation {
 		Map<Position, Athlete> team2Athletes = this.gameLocation.getTeam2().getActiveAthletes();
 		titleLabel.setText(gameLocation.getTeam1().getName() + " vs " + this.gameLocation.getTeam2().getName());
 
+		matchupPanel.setVisible(true);
+		winnerLabel.setVisible(false);
+
 		if (positionIndex == Position.values().length + 1) { // Match has ended
-			gameLocation.finish();
 			positionIndex = 0;
 			matchPlayed = false;
 			gameLocation.changeLocation(Location.MAP);
-			positionIndex += 1;
+			gameLocation.finish();
 		} else if (positionIndex == Position.values().length) { // Display winning team
 			matchupPanel.setVisible(false);
 

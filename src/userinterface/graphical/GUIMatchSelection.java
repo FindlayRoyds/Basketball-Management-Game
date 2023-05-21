@@ -33,6 +33,7 @@ public class GUIMatchSelection extends GUILocation {
 	private JPanel playButtonsPanel;
 	private JPanel teamDisplayPanel;
 	private JLabel titleLabel;
+	JLabel canStartWarningLabel;
 
 	/**
 	 * Create the panel.
@@ -42,6 +43,12 @@ public class GUIMatchSelection extends GUILocation {
 		setBackground(new Color(255, 255, 255));
 		this.gameLocation = (GameMatchSelection) gameLocation;
 		setPreferredSize(new Dimension(800, 600));
+
+		canStartWarningLabel = new JLabel("Your team is unable to play!");
+		canStartWarningLabel.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+		canStartWarningLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		canStartWarningLabel.setBounds(6, 504, 788, 40);
+		add(canStartWarningLabel);
 
 		playButtonsPanel = new JPanel();
 		playButtonsPanel.setBounds(106, 504, 588, 40);
@@ -76,6 +83,10 @@ public class GUIMatchSelection extends GUILocation {
 		playButtonsPanel.removeAll();
 		teamDisplayPanel.removeAll();
 		List<Team> matchTeams = gameLocation.getTeams();
+		boolean canStart = gameLocation.canStartMatch();
+
+		// Show warning if the player's team is not eligible to start
+		canStartWarningLabel.setVisible(!canStart);
 
 		// Create team displays and play buttons
 		for (int teamIndex = 0; teamIndex < matchTeams.size(); teamIndex++) {
@@ -85,13 +96,15 @@ public class GUIMatchSelection extends GUILocation {
 			TeamInfo teamDisplay = new TeamInfo(new Rectangle(6, 6 + teamIndex, 254, 538), team);
 			teamDisplayPanel.add(teamDisplay);
 
-			JButton playButton = new JButton("Play");
-			playButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					gameLocation.playMatch(team);
-				}
-			});
-			playButtonsPanel.add(playButton);
+			if (canStart) {
+				JButton playButton = new JButton("Play");
+				playButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						gameLocation.playMatch(team);
+					}
+				});
+				playButtonsPanel.add(playButton);
+			}
 		}
 	}
 }
