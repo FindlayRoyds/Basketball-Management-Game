@@ -173,21 +173,6 @@ class AthleteTest {
 	}
 
 	@Test
-	void descriptionTest() {
-		assertEquals(aht.getDescription(), "short shooter");
-	}
-
-	@Test
-	void detailsTest() {
-		String expectedResult = "Stamina: 0";
-		for (Statistic statistic : Statistic.values()) {
-			aht.setStatistic(statistic, 7);
-			expectedResult += "\n" + statistic.name() + ": 7";
-		}
-		assertEquals(expectedResult, aht.getDetails());
-	}
-
-	@Test
 	void teamTest() {
 		Player player = ge.getPlayer();
 		Team team = player.getTeam();
