@@ -41,7 +41,8 @@ class GameEndTest {
 
 	@Test
 	void updateTest() {
-		gameEnd.update(0);
+		for (int i = 0; i <= 15; ++i)
+			gameEnd.update(i);
 	}
 
 	@Test

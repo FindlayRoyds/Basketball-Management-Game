@@ -41,7 +41,8 @@ class GameInventoryTest {
 
 	@Test
 	void updateTest() {
-		gameInventory.update(10);
+		for (int i = 0; i <= 15; ++i)
+			gameInventory.update(i);
 	}
 
 	@Test
