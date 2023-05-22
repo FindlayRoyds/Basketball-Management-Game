@@ -61,4 +61,9 @@ class GameMapTest {
 		assertEquals(gameEnvironment.getPlayer().getMoney(), gameMap.getMoney());
 		gameEnvironment.getPlayer().giveMoney(60);
 	}
+
+	@Test
+	void gameEndTest() {
+		gameMap.checkForGameEnd();
+	}
 }

@@ -70,7 +70,7 @@ public class GUIMatchSelection extends GUILocation {
 		add(teamDisplayPanel);
 		teamDisplayPanel.setLayout(new GridLayout(0, 3, 12, 0));
 
-		titleLabel = new JLabel("Game Over");
+		titleLabel = new JLabel("Stadium");
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setForeground(new Color(0, 0, 0));
 		titleLabel.setFont(new Font("Dialog", Font.BOLD, 24));

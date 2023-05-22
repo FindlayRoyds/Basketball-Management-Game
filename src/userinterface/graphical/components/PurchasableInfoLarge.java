@@ -32,6 +32,7 @@ public class PurchasableInfoLarge extends JPanel {
 		add(descriptionLabel);
 
 		JTextPane detailsLabel = new JTextPane();
+		detailsLabel.setEditable(false);
 		detailsLabel.setText(purchasable.getDetails());
 		detailsLabel.setBounds(6, 151, 376, 193);
 		add(detailsLabel);

@@ -88,8 +88,8 @@ public class SetupForm1 extends GUILocation {
 			public void actionPerformed(ActionEvent event) {
 				String teamName = teamNameTextField.getText();
 				// Make sure team name isn't empty.
-				if (teamName.length() == 0) {
-					guiEnvironment.displayPopup("Please enter a team name");
+				if (teamName.length() < 3 || 15 < teamName.length()) {
+					guiEnvironment.displayPopup("Please enter a team name between 3 and 15 characters long.");
 					return;
 				}
 

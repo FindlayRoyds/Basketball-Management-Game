@@ -64,10 +64,6 @@ public class Player {
 		inventory.add(item);
 	}
 
-	private void setMoney(int newMoney) {
-		money = newMoney;
-	}
-
 	/**
 	 * Removes a given amount from the Player's money.
 	 * 
@@ -90,7 +86,7 @@ public class Player {
 	 * @param amountOfMoney The amount of money to give the player
 	 */
 	public void giveMoney(int amountOfMoney) {
-		setMoney(getMoney() + amountOfMoney);
+		money += amountOfMoney;
 	}
 
 	/**

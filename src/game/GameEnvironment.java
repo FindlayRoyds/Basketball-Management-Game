@@ -54,6 +54,7 @@ public class GameEnvironment {
 	 * represent easy, medium and hard difficulty respectively.
 	 */
 	private int difficulty;
+
 	/**
 	 * The number of the current week in the season. Starts from 1.
 	 */
@@ -95,6 +96,8 @@ public class GameEnvironment {
 	/**
 	 * The constructor for game environment. Responsible for creating the objects
 	 * required to start the game.
+	 * 
+	 * @param useCLI whether game should be played through the CLI
 	 */
 	public GameEnvironment(boolean useCLI) {
 		player = new Player(this);
@@ -219,11 +222,13 @@ public class GameEnvironment {
 	 * @return Whether or not the game is over.
 	 */
 	public boolean hasEnded() {
-		if (currentWeek > seasonLength)
+		if (currentWeek > seasonLength) {
+			uiEnvironment.displayPopup("You have reached the end of the season!");
 			return true;
+		}
 
 		Team team = getPlayer().getTeam();
-		int numberOfAthletesNeeded = 5 - (team.getReserveAthletes().size() + team.getActiveAthletes().size());
+		int numberOfAthletesNeeded = 5 - team.getAllAthletes().size();
 
 		// Get list of available athletes in the athlete market and sort by price.
 		GameMarket athleteMarket = (GameMarket) getGameLocation(Location.ATHLETE_MARKET);
@@ -242,8 +247,10 @@ public class GameEnvironment {
 		}
 
 		// Check if the player can purchase enough athletes to make a full team.
-		if (canPurchase < numberOfAthletesNeeded)
+		if (canPurchase < numberOfAthletesNeeded) {
+			uiEnvironment.displayPopup("You don't have enough athletes or money to make a full team!");
 			return true;
+		}
 
 		return false;
 	}
@@ -289,10 +296,6 @@ public class GameEnvironment {
 
 		for (GameLocation gameLocation : gameLocations.values()) {
 			gameLocation.update(currentWeek);
-		}
-		// Detect if the player is unable to progress in the game
-		if (hasEnded()) {
-			changeLocation(Location.END);
 		}
 	}
 }
