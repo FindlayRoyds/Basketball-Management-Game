@@ -43,4 +43,13 @@ class MiscUtilTest {
 		assertEquals(5, result.size());
 	}
 
+	@Test
+	void integerLerpTest() {
+		assertEquals(0, MiscUtil.integerLerp(0, 10, 0.0));
+		assertEquals(10, MiscUtil.integerLerp(0, 10, 1.0));
+		assertEquals(5, MiscUtil.integerLerp(0, 10, 0.5));
+		assertEquals(7, MiscUtil.integerLerp(0, 21, 1.0 / 3.0));
+		assertEquals(7, MiscUtil.integerLerp(0, 20, 1.0 / 3.0));
+	}
+
 }

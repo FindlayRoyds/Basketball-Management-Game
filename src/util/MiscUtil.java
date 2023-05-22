@@ -33,7 +33,7 @@ public class MiscUtil {
 	}
 
 	/**
-	 * generates an array of names for an enumeration
+	 * Generates an array of names for an enumeration
 	 * 
 	 * @author https://stackoverflow.com/users/256196/bohemian
 	 * @author Findlay Royds (edited to make lowercase and remove underscores)
@@ -43,5 +43,18 @@ public class MiscUtil {
 	public static String[] getEnumerationNames(Class<? extends Enum<?>> e) {
 		return Arrays.stream(e.getEnumConstants()).map(Enum::name).map(name -> name.replaceAll("_", " ").toLowerCase())
 				.toArray(String[]::new);
+	}
+
+	/**
+	 * Calculates a linear interpolated integer between two integers.
+	 * 
+	 * @param lower The lower bound for the interpolation
+	 * @param upper The upper bound for the interpolation
+	 * @param t     How far between lower and upper the interpolation should be in
+	 *              range: [0.0, 1.0]
+	 * @return An int interpolated between lower and upper
+	 */
+	public static int integerLerp(int lower, int upper, double t) {
+		return (int) Math.round((lower * (1.0 - t)) + (upper * t));
 	}
 }
