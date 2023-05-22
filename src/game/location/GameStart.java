@@ -30,7 +30,7 @@ public class GameStart extends GameLocation {
 			return startingAthletes;
 
 		startingAthletes = new HashSet<Athlete>();
-		int qualityLevel = 5 - getGameEnvironment().getDifficulty();
+		int qualityLevel = (5 - getGameEnvironment().getDifficulty()) * 10;
 		for (int i = 0; i < 10; ++i) {
 			Athlete athlete = (Athlete) Athlete.generateAthlete.apply(qualityLevel, getGameEnvironment());
 			startingAthletes.add(athlete);
