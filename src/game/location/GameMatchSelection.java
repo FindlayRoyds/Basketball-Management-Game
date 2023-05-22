@@ -8,6 +8,7 @@ import enumeration.Position;
 import game.Athlete;
 import game.GameEnvironment;
 import game.Team;
+import util.MiscUtil;
 
 /**
  * A class defining the MatchSelection location. The MatchSelection location
@@ -41,9 +42,10 @@ public class GameMatchSelection extends GameLocation {
 	 */
 	@Override
 	public void update(int week) {
-		float gameProgression = getGameEnvironment().getWeek() / getGameEnvironment().getSeasonLength();
-		int difficulty = getGameEnvironment().getDifficulty();
-		int qualityLevel = (int) (gameProgression * 70 + difficulty * 10);
+		float seasonProgression = getGameEnvironment().getWeek() / (float) getGameEnvironment().getSeasonLength();
+		int startQuality = getGameEnvironment().getDifficulty() * 10 + 10;
+		int endQuality = getGameEnvironment().getDifficulty() * 15 + 55;
+		int qualityLevel = MiscUtil.integerLerp(startQuality, endQuality, seasonProgression);
 
 		teams = new ArrayList<Team>();
 		for (int i = 0; i < NUMBER_OF_TEAMS; ++i) {
