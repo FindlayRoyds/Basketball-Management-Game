@@ -152,11 +152,16 @@ public class Athlete extends Purchasable {
 	/**
 	 * Uses up some of the athlete's stamina based on their fitness and the
 	 * difficulty of the game
+	 * 
+	 * @param lostMatch Whether or not the athlete lost the match. Affects the
+	 *                  stamina the athlete loses.
 	 */
-	public void loseStamina() {
-		int gameDifficultyDivider = 4 - gameEnvironment.getDifficulty();
-		int staminaDecrease = (100 - getStatistic(Statistic.FITNESS));
-		setStamina(stamina - staminaDecrease / gameDifficultyDivider);
+	public void loseStamina(boolean lostMatch) {
+		int fitnessOffset = getStatistic(Statistic.FITNESS) / 10;
+		int staminaLost = 20 - fitnessOffset;
+		if (lostMatch)
+			staminaLost += 10;
+		setStamina(stamina - staminaLost);
 	}
 
 	/**

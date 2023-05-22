@@ -45,6 +45,7 @@ public class GameMatch extends GameLocation {
 
 	/**
 	 * Updates the corresponding team member variables with the given values.
+	 * Corresponds with starting a match.
 	 * 
 	 * @param team1 The first team
 	 * @param team2 The second team
@@ -52,6 +53,8 @@ public class GameMatch extends GameLocation {
 	public void setTeams(Team team1, Team team2) {
 		this.team1 = team1;
 		this.team2 = team2;
+		team1Score = 0;
+		team2Score = 0;
 	}
 
 	/**
@@ -105,11 +108,7 @@ public class GameMatch extends GameLocation {
 		else // If the scores are equal, pick an athlete at random.
 			winner = getGameEnvironment().getRng().nextBoolean() ? athlete1 : athlete2;
 
-		// Use up some of the athletes' stamina
-		athlete1.loseStamina();
-		athlete2.loseStamina();
-
-		// Detect if athletes have been injured
+		// Detect if athletes are injured
 		if (athlete1.isInjured() && !athlete2.isInjured())
 			winner = athlete2;
 		else if (athlete2.isInjured() && !athlete1.isInjured())
@@ -120,6 +119,10 @@ public class GameMatch extends GameLocation {
 			team1Score += 1;
 		else
 			team2Score += 1;
+
+		// remove stamina from player's athlete
+		athlete1.loseStamina(athlete1 != winner);
+
 		return winner;
 	}
 
@@ -144,17 +147,31 @@ public class GameMatch extends GameLocation {
 	public void finish() {
 		Player player = getGameEnvironment().getPlayer();
 		if (getWinningTeam() == player.getTeam()) {
-			int inverseDifficulty = (4 - getGameEnvironment().getDifficulty());
-			int rewardMoney = 100 * inverseDifficulty * team1Score;
-			int rewardPoints = 20 * getGameEnvironment().getDifficulty() * team1Score;
-			player.giveMoney(rewardMoney);
-			player.givePoints(rewardPoints);
+			// Check if all of the player's athletes were injured
+			boolean allAthletesInjured = true;
+			for (Athlete athlete : player.getTeam().getActiveAthletes().values()) {
+				if (!athlete.isInjured())
+					allAthletesInjured = false;
+			}
 
-			getGameEnvironment().getUIEnvironment().displayPopup("You won the match! You have been awarded "
-					+ rewardMoney + " Money and " + rewardPoints + " Points.");
+			if (allAthletesInjured) {
+				getGameEnvironment().getUIEnvironment()
+						.displayPopup("All of your athletes were injured! You have lost the match by default.");
+			} else {
+				int inverseDifficulty = (4 - getGameEnvironment().getDifficulty());
+				int rewardMoney = 100 * inverseDifficulty * team1Score;
+				int rewardPoints = 20 * getGameEnvironment().getDifficulty() * team1Score;
+				player.giveMoney(rewardMoney);
+				player.givePoints(rewardPoints);
+
+				getGameEnvironment().getUIEnvironment()
+						.displayPopup("You won the match " + team1Score + " - " + team2Score
+								+ "! You have been awarded " + rewardMoney + " Money and " + rewardPoints + " Points.");
+			}
+		} else {
+			getGameEnvironment().getUIEnvironment()
+					.displayPopup("You lost the match " + team1Score + " - " + team2Score + ".");
 		}
-		team1Score = 0;
-		team2Score = 0;
 		getGameEnvironment().progressWeek();
 	}
 }

@@ -92,9 +92,20 @@ class AthleteTest {
 		assertEquals(100, athlete.getStamina());
 		athlete.setStamina(34);
 		assertEquals(34, athlete.getStamina());
+		athlete.setStatistic(Statistic.FITNESS, 0);
+		athlete.setStamina(100);
+		athlete.loseStamina(false);
+		assertEquals(80, athlete.getStamina());
+		athlete.loseStamina(true);
+		assertEquals(50, athlete.getStamina());
+		athlete.setStatistic(Statistic.FITNESS, 50);
+		athlete.loseStamina(false);
+		assertEquals(35, athlete.getStamina());
 		athlete.setStatistic(Statistic.FITNESS, 100);
-		athlete.loseStamina();
-		assertEquals(34, athlete.getStamina());
+		athlete.loseStamina(true);
+		assertEquals(15, athlete.getStamina());
+		athlete.loseStamina(true);
+		assertEquals(0, athlete.getStamina());
 	}
 
 	@Test

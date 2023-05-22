@@ -17,7 +17,6 @@ import javax.swing.SwingConstants;
 import enumeration.Location;
 import enumeration.Position;
 import game.Athlete;
-import game.Team;
 import game.location.GameLocation;
 import game.location.GameMatch;
 import userinterface.graphical.components.PurchasableInfoLarge;
@@ -36,7 +35,6 @@ public class GUIMatch extends GUILocation {
 	private JButton controlButton;
 	private JLabel matchupTitleLabel;
 	private JPanel athleteInfoPanel;
-	private JLabel winnerLabel;
 	private JLabel titleLabel;
 
 	/**
@@ -61,9 +59,6 @@ public class GUIMatch extends GUILocation {
 		this.gameLocation = (GameMatch) gameLocation;
 		setPreferredSize(new Dimension(800, 600));
 
-		winnerLabel = new JLabel("<dynamic> have won the match!");
-		winnerLabel.setVisible(false);
-
 		team1ScoreLabel = new JLabel();
 		team1ScoreLabel.setFont(new Font("Lucida Grande", Font.BOLD, 28));
 		team1ScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -75,10 +70,6 @@ public class GUIMatch extends GUILocation {
 		team2ScoreLabel.setFont(new Font("Lucida Grande", Font.BOLD, 28));
 		team2ScoreLabel.setBounds(719, 6, 50, 50);
 		add(team2ScoreLabel);
-		winnerLabel.setFont(new Font("Lucida Grande", Font.BOLD, 24));
-		winnerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		winnerLabel.setBounds(6, 300, 788, 50);
-		add(winnerLabel);
 
 		matchupPanel = new JPanel();
 		matchupPanel.setBackground(new Color(255, 228, 225));
@@ -127,24 +118,12 @@ public class GUIMatch extends GUILocation {
 		team1ScoreLabel.setText(Integer.toString(gameLocation.getTeam1Score()));
 		team2ScoreLabel.setText(Integer.toString(gameLocation.getTeam2Score()));
 
-		matchupPanel.setVisible(true);
-		winnerLabel.setVisible(false);
-
-		if (positionIndex == Position.values().length + 1) { // Match has ended
+		if (positionIndex == Position.values().length) { // Match has ended
 			positionIndex = 0;
 			matchPlayed = false;
 			gameLocation.changeLocation(Location.MAP);
 			gameLocation.finish();
 			gameLocation.changeLocation(Location.MAP);
-		} else if (positionIndex == Position.values().length) { // Display winning team
-			matchupPanel.setVisible(false);
-
-			Team winningTeam = gameLocation.getWinningTeam();
-
-			winnerLabel.setText(winningTeam.getName() + " have won the match!");
-			winnerLabel.setVisible(true);
-			controlButton.setText("CONTINUE");
-			positionIndex += 1;
 		} else { // Play a position matchup
 			Position positionPlayed = Position.values()[positionIndex];
 			Athlete athlete1 = team1Athletes.get(positionPlayed);
