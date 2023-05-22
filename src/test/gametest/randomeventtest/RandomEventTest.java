@@ -1,5 +1,8 @@
 package test.gametest.randomeventtest;
 
+import javax.swing.JFrame;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +14,7 @@ import game.randomevent.AthleteQuits;
 import game.randomevent.DrugTest;
 import game.randomevent.RandomEvent;
 import game.randomevent.StatisticIncrease;
+import userinterface.graphical.GUIEnvironment;
 
 class RandomEventTest {
 	GameEnvironment gameEnvironment;
@@ -22,6 +26,13 @@ class RandomEventTest {
 		gameEnvironment.setSeed(0);
 		gameEnvironment.setDifficulty(3);
 		gameEnvironment.progressWeek();
+	}
+
+	@AfterEach
+	void tearDown() {
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
+		frame.setVisible(false);
+		frame.dispose();
 	}
 
 	/**

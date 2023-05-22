@@ -1,6 +1,7 @@
 package test.gametest.locationtest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import enumeration.Location;
 import enumeration.Position;
+import enumeration.Statistic;
 import game.Athlete;
 import game.GameEnvironment;
 import game.Team;
@@ -101,5 +103,76 @@ class GameMatchTest {
 			assertTrue(gameEnvironment.getPlayer().getMoney() > money);
 			assertTrue(gameEnvironment.getPlayer().getScore() > score);
 		}
+	}
+
+	@Test
+	void allAthletesInjuredTest() {
+		Team team1 = gameEnvironment.getPlayer().getTeam();
+		Team team2 = Team.generateTeam(45, gameEnvironment);
+		for (Position position : Position.values()) {
+			Athlete newAthlete = new Athlete("", position, 10, gameEnvironment, 0);
+			for (Statistic statistic : Statistic.values()) {
+				newAthlete.setStatistic(statistic, 100);
+				team1.addAthleteToActive(newAthlete, position);
+			}
+		}
+
+		gameMatch.setTeams(team1, team2);
+		for (Position position : Position.values())
+			gameMatch.getWinningAthlete(team1.getActiveAthletes().get(position),
+					team2.getActiveAthletes().get(position));
+		int money = gameEnvironment.getPlayer().getMoney();
+		int score = gameEnvironment.getPlayer().getScore();
+		assertEquals(team1, gameMatch.getWinningTeam());
+		gameMatch.finish();
+		assertTrue(gameEnvironment.getPlayer().getMoney() == money);
+		assertTrue(gameEnvironment.getPlayer().getScore() == score);
+	}
+
+	@Test
+	void playerWinningTest() {
+		Team team1 = gameEnvironment.getPlayer().getTeam();
+		Team team2 = Team.generateTeam(0, gameEnvironment);
+		gameEnvironment.setDifficulty(2);
+		for (Position position : Position.values()) {
+			Athlete newAthlete = new Athlete("", position, 100, gameEnvironment, 0);
+			team1.addAthleteToActive(newAthlete, position);
+			for (Statistic statistic : Statistic.values()) {
+				newAthlete.setStatistic(statistic, 100);
+			}
+		}
+
+		gameMatch.setTeams(team1, team2);
+		for (Position position : Position.values())
+			gameMatch.getWinningAthlete(team1.getActiveAthletes().get(position),
+					team2.getActiveAthletes().get(position));
+		int money = gameEnvironment.getPlayer().getMoney();
+		int score = gameEnvironment.getPlayer().getScore();
+		assertEquals(team1, gameMatch.getWinningTeam());
+		gameMatch.finish();
+		assertTrue(gameEnvironment.getPlayer().getMoney() > money);
+		assertTrue(gameEnvironment.getPlayer().getScore() > score);
+	}
+
+	@Test
+	void playerLosingTest() {
+		Team team1 = gameEnvironment.getPlayer().getTeam();
+		Team team2 = Team.generateTeam(100, gameEnvironment);
+		gameEnvironment.setDifficulty(2);
+		for (Position position : Position.values()) {
+			Athlete newAthlete = new Athlete("", position, 100, gameEnvironment, 0);
+			team1.addAthleteToActive(newAthlete, position);
+		}
+
+		gameMatch.setTeams(team1, team2);
+		for (Position position : Position.values())
+			gameMatch.getWinningAthlete(team1.getActiveAthletes().get(position),
+					team2.getActiveAthletes().get(position));
+		int money = gameEnvironment.getPlayer().getMoney();
+		int score = gameEnvironment.getPlayer().getScore();
+		assertNotEquals(team1, gameMatch.getWinningTeam());
+		gameMatch.finish();
+		assertTrue(gameEnvironment.getPlayer().getMoney() == money);
+		assertTrue(gameEnvironment.getPlayer().getScore() == score);
 	}
 }
