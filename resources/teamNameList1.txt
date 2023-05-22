@@ -1,38 +1,91 @@
 Algorithmic
+Array
+Abstraction
+API
+Apache
 Bitmask
 Big O
 Binary
 BFS
 Bipartite
+Binary Search
+Bubble Sort
+Bogo Sort
+Backtracking
 Code
+C++
+Convex Hull
 DFS
 Dijkstra's
 DP
+Data
+Exception
 Eratosthenes
+Executable
+Error Handling
+Edit Distance
 Floyd-Warshall
+Foo
+Fortran
+Fenwick Tree
 Graph
 Greedy
+Git
+Graham Scan
 Heuristic
+Haskell
+Hash Map
+Heap Sort
 Iterative
+Indentation
+Iterable
 Java
+JavaScript
+JPanel
 Kruskal's
 Language
 Linear
+List
+LCS
 Multiplicative
+Machine Code
+Merge Sort
+Merge Conflict
 Number
+Null Pointer
+NFA
 Optimal
 Open Source
+Object Oriented
 Programming
 Prim's
+Python
 Performance
+Priority Queue
 Quadratic
+Queue
+Quantum
 Recursive
+Rust
+Rebase
 Shortest Path
+Stack Overflow
+Segment Tree
 Traversal
+Tim Sort
+Terminal
 Union Find
+Undefined
+UML
 Vertex
+Vector
+Vim
 Weighted Graph
+Windows
 XML
 XOR
 Yottabyte
+YAML
 Z Algorithm
+Zip File
+Zero
