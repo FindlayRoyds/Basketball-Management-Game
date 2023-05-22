@@ -41,7 +41,9 @@ public abstract class GameLocation {
 	 * 
 	 * @param week The new week of the season to update to.
 	 */
-	public abstract void update(int week);
+	public void update(int week) {
+		// Do nothing unless implemented in subclass
+	}
 
 	/**
 	 * Changes the current game location to a new location. Used to travel to

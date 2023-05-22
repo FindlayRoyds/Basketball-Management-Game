@@ -29,15 +29,6 @@ public class GameMap extends GameLocation {
 	}
 
 	/**
-	 * Update the week to a given week. Does nothing in this location. Included for
-	 * consistency with other location classes.
-	 */
-	@Override
-	public void update(int week) {
-		// nothing needs to happen here
-	}
-
-	/**
 	 * Take a bye. Skips a week and sets every athlete's stamina back to full.
 	 */
 	public void takeABye() {

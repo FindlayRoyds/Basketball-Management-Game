@@ -29,15 +29,6 @@ public class GameLocker extends GameLocation {
 	}
 
 	/**
-	 * Update the week to a given week. Does nothing in this location. Included for
-	 * consistency with other location classes.
-	 */
-	@Override
-	public void update(int week) {
-		// nothing needs to happen here
-	}
-
-	/**
 	 * @return The maximum number of reserve Athletes that can be in a Team.
 	 */
 	public int getMaxNumberOfReserves() {

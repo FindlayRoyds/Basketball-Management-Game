@@ -30,15 +30,6 @@ public class GameInventory extends GameLocation {
 	}
 
 	/**
-	 * Update the week to a given week. Does nothing in this location. Included for
-	 * consistency with other location classes.
-	 */
-	@Override
-	public void update(int week) {
-		// nothing needs to happen here
-	}
-
-	/**
 	 * Gets the Set of Items that are currently in the Player's inventory. The
 	 * Player object is accessed through the GameEnvironment.
 	 * 

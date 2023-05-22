@@ -22,15 +22,6 @@ public class GameEnd extends GameLocation {
 	}
 
 	/**
-	 * Update the week to a given week. Does nothing in this location. Included for
-	 * consistency with other location classes.
-	 */
-	@Override
-	public void update(int week) {
-		// nothing needs to happen here
-	}
-
-	/**
 	 * @return The Player's score.
 	 */
 	public int getScore() {
