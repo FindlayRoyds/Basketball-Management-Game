@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import enumeration.Position;
+import enumeration.Statistic;
 import game.Athlete;
 import game.GameEnvironment;
 import game.Player;
@@ -53,10 +54,12 @@ class BandaidTest {
 	@Test
 	void applyTest() {
 		Athlete athlete = new Athlete("", Position.DUNKER, 0, gameEnvironment, 0);
+		athlete.setStatistic(Statistic.FITNESS, 34);
 		Bandaid bandaid = (Bandaid) Bandaid.generateBandaid(100, gameEnvironment);
 		assertTrue(athlete.isInjured());
 		bandaid.applyItem(athlete);
 		assertFalse(athlete.isInjured());
+		assertEquals(34, athlete.getStamina());
 	}
 
 	@Test

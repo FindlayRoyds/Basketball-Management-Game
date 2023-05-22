@@ -2,6 +2,7 @@ package game.item;
 
 import java.util.Random;
 
+import enumeration.Statistic;
 import game.Athlete;
 import game.GameEnvironment;
 import game.Purchasable;
@@ -62,12 +63,12 @@ public class Bandaid extends Item {
 	 */
 	@Override
 	public void applyItem(Athlete athlete) {
-		athlete.setStamina(100);
+		athlete.setStamina(athlete.getStatistic(Statistic.FITNESS));
 		this.consume();
 	}
 
 	@Override
 	public String getDetails() {
-		return "Gives an athlete full stamina.";
+		return "Restores an athlete's stamina back to the level of their fitness.";
 	}
 }
