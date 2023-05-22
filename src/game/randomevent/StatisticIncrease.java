@@ -57,6 +57,9 @@ public class StatisticIncrease extends RandomEvent {
 	 */
 	@Override
 	protected float getProbability() {
+		// Athlete is not resting as the week changes
+		if (!athlete.getTeam().getReserveAthletes().contains(athlete))
+			return 0.0f;
 		return (4 - gameEnvironment.getDifficulty()) / 100f;
 	}
 
