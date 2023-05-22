@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import enumeration.Position;
 import game.Athlete;
 import game.GameEnvironment;
+import game.Player;
 import game.item.Bandaid;
 import userinterface.graphical.GUIEnvironment;
 
@@ -56,6 +57,27 @@ class BandaidTest {
 		assertTrue(athlete.isInjured());
 		bandaid.applyItem(athlete);
 		assertFalse(athlete.isInjured());
+	}
+
+	@Test
+	void purchaseTest() {
+		Bandaid bandaid = new Bandaid("Test", 100, ge);
+		Player player = ge.getPlayer();
+		player.giveMoney(99);
+		assertFalse(bandaid.purchase(player));
+		player.giveMoney(1);
+		assertTrue(bandaid.purchase(player));
+		assertEquals(0, player.getMoney());
+	}
+
+	@Test
+	void sellTest() {
+		Bandaid bandaid = new Bandaid("Test", 100, ge);
+		Player player = ge.getPlayer();
+		bandaid.sell(player);
+		assertEquals(100, player.getMoney());
+		bandaid.sell(player);
+		assertEquals(200, player.getMoney());
 	}
 
 	@Test

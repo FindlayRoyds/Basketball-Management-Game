@@ -1,6 +1,7 @@
 package test.gametest.itemtest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.swing.JFrame;
@@ -13,6 +14,7 @@ import enumeration.Position;
 import enumeration.Statistic;
 import game.Athlete;
 import game.GameEnvironment;
+import game.Player;
 import game.item.StatisticBoost;
 import userinterface.graphical.GUIEnvironment;
 
@@ -60,6 +62,27 @@ class StatisticBoostTest {
 		assertEquals(57, athlete.getStatistic(Statistic.DEFENCE));
 		statisticBoost.applyItem(athlete);
 		assertEquals(100, athlete.getStatistic(Statistic.DEFENCE));
+	}
+
+	@Test
+	void purchaseTest() {
+		StatisticBoost statisticBoost = new StatisticBoost("Test", "Test", 100, 0, Statistic.DEFENCE, ge);
+		Player player = ge.getPlayer();
+		player.giveMoney(99);
+		assertFalse(statisticBoost.purchase(player));
+		player.giveMoney(1);
+		assertTrue(statisticBoost.purchase(player));
+		assertEquals(0, player.getMoney());
+	}
+
+	@Test
+	void sellTest() {
+		StatisticBoost statisticBoost = new StatisticBoost("Test", "Test", 100, 0, Statistic.DEFENCE, ge);
+		Player player = ge.getPlayer();
+		statisticBoost.sell(player);
+		assertEquals(100, player.getMoney());
+		statisticBoost.sell(player);
+		assertEquals(200, player.getMoney());
 	}
 
 	@Test
