@@ -21,15 +21,24 @@ import game.location.GameLocation;
 import game.location.GameMatch;
 import userinterface.graphical.components.PurchasableInfoLarge;
 
+/**
+ * A class that defines the match GUI location. Displays player match ups one by
+ * one before displaying the final result of the match. Waits for user input to
+ * continue at each step of the way.
+ * 
+ * @author Jake van Keulen, Findlay Royds
+ * @version 1.0
+ */
 @SuppressWarnings("serial") // We are not using serialization in our project
 public class GUIMatch extends GUILocation {
 	/**
-	 * The gameLocation this gui location is linked to
+	 * The corresponding game location class. Acts as the point of communication for
+	 * interacting with the backend game logic.
 	 */
 	private GameMatch gameLocation;
 
 	/**
-	 * Components shown on screen in GUI match
+	 * Components shown on screen in GUI match.
 	 */
 	private JPanel matchupPanel;
 	private JButton controlButton;
@@ -51,8 +60,11 @@ public class GUIMatch extends GUILocation {
 	private JLabel team2ScoreLabel;
 
 	/**
-	 * Constructor for GUIMatchSelection. initializes the swing components for the
-	 * design and starts the match.
+	 * Constructor for GUIMatch. initializes the swing components for the design and
+	 * starts the match.
+	 * 
+	 * @param gameLocation   The GUI location's corresponding game location class.
+	 * @param guiEnvironment The GUI environment to which the GUI location belongs.
 	 */
 	public GUIMatch(GameLocation gameLocation, GUIEnvironment guiEnvironment) {
 		super(guiEnvironment);
@@ -109,6 +121,9 @@ public class GUIMatch extends GUILocation {
 		matchPlayed = false;
 	}
 
+	/**
+	 * Refreshes the content of the match screen.
+	 */
 	@Override
 	public void refresh() {
 		Map<Position, Athlete> team1Athletes = this.gameLocation.getTeam1().getActiveAthletes();

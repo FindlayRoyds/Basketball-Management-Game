@@ -18,9 +18,10 @@ import game.Team;
 public class DrugTest extends RandomEvent {
 
 	/**
-	 * The constructor for the drug test random event
+	 * The constructor for the drug test random event.
 	 * 
-	 * @param gameEnvironment
+	 * @param gameEnvironment The game environment to which the random event
+	 *                        belongs.
 	 */
 	public DrugTest(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);

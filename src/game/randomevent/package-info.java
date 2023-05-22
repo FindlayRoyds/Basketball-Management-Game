@@ -1,5 +1,5 @@
 /**
- * a package containing random event classes
+ * A package containing random event classes.
  * 
  * @author Findlay Royds
  * @version 1.0, May 2023.

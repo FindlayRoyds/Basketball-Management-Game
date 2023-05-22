@@ -20,15 +20,22 @@ import game.location.GameLocation;
 import game.location.GameMatchSelection;
 import userinterface.graphical.components.TeamInfo;
 
+/**
+ * A class that defines the match selection GUI location. It displays 3 teams
+ * for the user to select one of to play a match against.
+ * 
+ * @author Jake van Keulen, Findlay Royds
+ * @version 1.0
+ */
 @SuppressWarnings("serial") // We are not using serialization in our project
 public class GUIMatchSelection extends GUILocation {
 	/**
-	 * The gameLocation this gui location is linked to
+	 * The gameLocation this GUI location is linked to
 	 */
 	private GameMatchSelection gameLocation;
 
 	/**
-	 * The components accessed by the refresh method
+	 * The components accessed by the refresh method.
 	 */
 	private JPanel playButtonsPanel;
 	private JPanel teamDisplayPanel;
@@ -36,7 +43,11 @@ public class GUIMatchSelection extends GUILocation {
 	JLabel canStartWarningLabel;
 
 	/**
-	 * Create the panel.
+	 * Constructor for GUIMatch. initializes the swing components for the design and
+	 * starts the match.
+	 * 
+	 * @param gameLocation   The GUI location's corresponding game location class.
+	 * @param guiEnvironment The GUI environment to which the GUI location belongs.
 	 */
 	public GUIMatchSelection(GameLocation gameLocation, GUIEnvironment guiEnvironment) {
 		super(guiEnvironment);
@@ -78,6 +89,9 @@ public class GUIMatchSelection extends GUILocation {
 		add(titleLabel);
 	}
 
+	/**
+	 * Refreshes the content of the match screen.
+	 */
 	@Override
 	public void refresh() {
 		playButtonsPanel.removeAll();

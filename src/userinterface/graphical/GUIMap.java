@@ -19,9 +19,20 @@ import enumeration.Location;
 import game.location.GameLocation;
 import game.location.GameMap;
 
+/**
+ * A class that defines the map GUI location. It provides a graphical interface
+ * for choosing locations to travel to or to take a bye.
+ * 
+ * @author Jake van Keulen
+ * @version 1.0
+ */
 @SuppressWarnings("serial") // We aren't using serialization in our project
 public class GUIMap extends GUILocation {
-	GameMap gameLocation;
+	/**
+	 * The corresponding game location class. Acts as the point of communication for
+	 * interacting with the backend game logic.
+	 */
+	private GameMap gameLocation;
 
 	/**
 	 * The components of the GUI accessed by the refresh method
@@ -31,7 +42,10 @@ public class GUIMap extends GUILocation {
 	JLabel weekNumberLabel;
 
 	/**
-	 * Create the panel.
+	 * Constructor for the GUIMap component.
+	 * 
+	 * @param gameLocation   The GUI location's corresponding game location class.
+	 * @param guiEnvironment The GUI environment to which the GUI location belongs.
 	 */
 	public GUIMap(GameLocation gameLocation, GUIEnvironment guiEnvironment) {
 		super(guiEnvironment);
@@ -96,14 +110,16 @@ public class GUIMap extends GUILocation {
 	}
 
 	/**
-	 * Takes a bye. Implemented in order to call refresh() on the map after taking a
-	 * bye.
+	 * Instructs the game location to take a bye, then refreshes the GUI.
 	 */
 	private void takeABye() {
 		gameLocation.takeABye();
 		refresh();
 	}
 
+	/**
+	 * Refreshes the content of the map screen.
+	 */
 	@Override
 	public void refresh() {
 		moneyLabel.setText("$" + gameLocation.getMoney());

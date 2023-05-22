@@ -18,11 +18,23 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import game.location.GameStart;
 
+/**
+ * A class that defines the first setup form to be displayed at the start of the
+ * game. Consists of inputs for setting game preferences, including the team
+ * name, game seed, season length and difficulty.
+ * 
+ * @author Jake van Keulen
+ * @version 1.0
+ */
 @SuppressWarnings("serial")
 public class SetupForm1 extends GUILocation {
-	private JTextField teamNameTextField;
-	private JSpinner seedSpinner;
-
+	/**
+	 * Constructor for the SetupForm1 component. Provides the user with a graphical
+	 * interface to choose game preferences before the game begins.
+	 * 
+	 * @param gameLocation   The GUI location's corresponding game location class.
+	 * @param guiEnvironment The GUI environment to which the GUI location belongs.
+	 */
 	public SetupForm1(GameStart gameLocation, GUIEnvironment guiEnvironment, Runnable onSubmit) {
 		super(guiEnvironment);
 
@@ -42,6 +54,7 @@ public class SetupForm1 extends GUILocation {
 		teamNameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(teamNameLabel, "2, 2, right, center");
 
+		JTextField teamNameTextField;
 		teamNameTextField = new JTextField();
 		teamNameLabel.setLabelFor(teamNameTextField);
 		add(teamNameTextField, "4, 2, left, top");
@@ -50,6 +63,7 @@ public class SetupForm1 extends GUILocation {
 		JLabel seedLabel = new JLabel("Seed");
 		add(seedLabel, "2, 4, right, default");
 
+		JSpinner seedSpinner;
 		seedSpinner = new JSpinner();
 		seedSpinner.setPreferredSize(new Dimension(114, 22));
 		seedSpinner.setMinimumSize(new Dimension(100, 22));

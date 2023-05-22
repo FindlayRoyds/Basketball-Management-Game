@@ -3,10 +3,10 @@ package game.location;
 import java.util.Map;
 import java.util.Set;
 
+import enumeration.Position;
 import game.Athlete;
 import game.GameEnvironment;
 import game.Team;
-import enumeration.Position;
 
 /**
  * A class for defining the Locker game location. From the Locker location a
@@ -19,7 +19,10 @@ import enumeration.Position;
  */
 public class GameLocker extends GameLocation {
 	/**
-	 * Constructor for Locker
+	 * Constructor for Locker.
+	 * 
+	 * @param gameEnvironment The game environment to which the locker location
+	 *                        belongs.
 	 */
 	public GameLocker(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
@@ -40,7 +43,7 @@ public class GameLocker extends GameLocation {
 	public int getMaxNumberOfReserves() {
 		return Team.getMaxNumberOfReserves();
 	}
-	
+
 	/**
 	 * @return The name of the Player's Team.
 	 */
@@ -49,9 +52,6 @@ public class GameLocker extends GameLocation {
 	}
 
 	/**
-	 * Gets the reserve Athletes from the Player's Team. Accesses the Player through
-	 * the GameEnvironment.
-	 * 
 	 * @return The Set of reserve Athletes in the Player's Team
 	 */
 	public Set<Athlete> getReserves() {
@@ -67,7 +67,7 @@ public class GameLocker extends GameLocation {
 	public Map<Position, Athlete> getActive() {
 		return getGameEnvironment().getPlayer().getTeam().getActiveAthletes();
 	}
-	
+
 	/**
 	 * Gets all the Athletes in the Player's Team.
 	 * 

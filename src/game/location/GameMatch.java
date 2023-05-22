@@ -11,24 +11,35 @@ import game.Team;
  * then deciding who wins each individual pairing. The team that wins the most
  * pairings wins the match overall
  * 
- * @author Jake van Keulen, Findlay
+ * @author Jake van Keulen, Findlay Royds
  * @version 1.3
  */
 public class GameMatch extends GameLocation {
 	/**
-	 * The 2 teams that are playing in the match.
+	 * The first team that is playing in the match.
 	 */
 	private Team team1;
+
+	/**
+	 * The second team that is playing in the match.
+	 */
 	private Team team2;
 
 	/**
-	 * The Scores of the teams
+	 * The score of the first team playing in the match.
 	 */
 	private int team1Score;
+
+	/**
+	 * The score of the second team playing in the match.
+	 */
 	private int team2Score;
 
 	/**
-	 * Constructor for Map
+	 * Constructor for GameMatch.
+	 * 
+	 * @param gameEnvironment The game environment to which the match location
+	 *                        belongs.
 	 */
 	public GameMatch(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
@@ -142,7 +153,7 @@ public class GameMatch extends GameLocation {
 
 	/**
 	 * If the player's team won reward the player appropriately. The reward given is
-	 * based on the difficulty of the
+	 * based on the difficulty of the game.
 	 */
 	public void finish() {
 		Player player = getGameEnvironment().getPlayer();

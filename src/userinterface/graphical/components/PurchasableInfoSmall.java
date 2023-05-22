@@ -10,9 +10,16 @@ import javax.swing.SwingConstants;
 
 import game.Purchasable;
 
+/**
+ * A GUI component that displays the name (and price if relevant) of a given
+ * purchasable in a compact format.
+ * 
+ * @author Jake van Keulen
+ * @version 1.0
+ *
+ */
+@SuppressWarnings("serial")
 public class PurchasableInfoSmall extends JPanel {
-	private static final long serialVersionUID = 1L;
-
 	/**
 	 * Constructor for small purchasable info. Creates a panel with the name of the
 	 * purchasable and the price if showPrice = true.

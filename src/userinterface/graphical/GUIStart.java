@@ -12,10 +12,26 @@ import enumeration.Location;
 import game.location.GameLocation;
 import game.location.GameStart;
 
+/**
+ * A class that defines the start GUI location. It consists of two forms,
+ * displayed one after the other. The first gets game configuration input from
+ * the user, and the second allows for the selection of starting athletes to add
+ * to the team, using a purchasable explorer component.
+ * 
+ * @author Jake van Keulen, Findlay Royds
+ * @version 1.0
+ */
+@SuppressWarnings("serial")
 public class GUIStart extends GUILocation {
-	private static final long serialVersionUID = 1L;
+	/**
+	 * The corresponding game location class. Acts as the point of communication for
+	 * interacting with the backend game logic.
+	 */
 	private GameStart gameLocation;
 
+	/**
+	 * The two forms used for user input.
+	 */
 	private JPanel form1, form2;
 
 	/**
@@ -34,7 +50,11 @@ public class GUIStart extends GUILocation {
 	}
 
 	/**
-	 * Create the panel.
+	 * Constructor for the GUIStart component. Displays the first input form to
+	 * begin with.
+	 * 
+	 * @param gameLocation   The GUI location's corresponding game location class.
+	 * @param guiEnvironment The GUI environment to which the GUI location belongs.
 	 */
 	public GUIStart(GameLocation gameLocation, GUIEnvironment guiEnvironment) {
 		super(guiEnvironment);

@@ -12,12 +12,20 @@ import javax.swing.SwingConstants;
 
 import game.Team;
 
+/**
+ * A GUI component that displays the name and members of a given team.
+ * 
+ * @author Findlay Royds
+ *
+ */
+@SuppressWarnings("serial")
 public class TeamInfo extends JPanel {
-	private static final long serialVersionUID = 1L;
-
 	/**
-	 * Creates a team info component which shows the team's name as well as the
-	 * athletes in the team.
+	 * Constructor for TeamInfo. Creates a team info component which shows the
+	 * team's name as well as the athletes in the team.
+	 * 
+	 * @param bounds The position and dimensions of the component.
+	 * @param team   The team whose info is to be displayed.
 	 */
 	public TeamInfo(Rectangle bounds, Team team) {
 		setBackground(new Color(128, 128, 128));

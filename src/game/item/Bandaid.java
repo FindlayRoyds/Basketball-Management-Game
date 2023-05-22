@@ -9,7 +9,8 @@ import game.Purchasable;
 import util.MiscUtil;
 
 /**
- * The class for bandaid. Restores an athlete's stamina if they're injured
+ * The class for a bandaid item. Restores an athlete's stamina if they're
+ * injured
  * 
  * @author Findlay Royds
  * @version 1.0, May 2023.
@@ -34,7 +35,7 @@ public class Bandaid extends Item {
 	}
 
 	/**
-	 * 
+	 * Generates a bandaid item with random properties.
 	 * 
 	 * @param qualityLevel    The quality level of the item. Influences randomness
 	 *                        of generation
@@ -56,8 +57,8 @@ public class Bandaid extends Item {
 	}
 
 	/**
-	 * If the athlete is injured their stamina will be restored and the bandaid
-	 * consumed
+	 * Applies the bandaid to an athlete. If the athlete is injured their stamina
+	 * will be restored and the bandaid consumed.
 	 * 
 	 * @param athlete The athlete to whom the affect is being applied
 	 */

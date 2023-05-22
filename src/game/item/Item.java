@@ -7,7 +7,7 @@ import game.Purchasable;
 import util.Function3;
 
 /**
- * This class is the abstract class for items in game It implements purchasing
+ * This class is the abstract class for items in game. It implements purchasing
  * an item, generating items, and determining whether an item is legal
  * 
  * @author Findlay Royds
@@ -30,7 +30,7 @@ public abstract class Item extends Purchasable {
 	private String description;
 
 	/**
-	 * Generate a stat boost item or a bandaid item
+	 * Randomly generates a stat boost item or a bandaid item,
 	 * 
 	 * @param qualityLevel    The quality of the item in range: [0, 100]
 	 * @param GameEnvironment The game environment to which the item belongs. Used
@@ -49,7 +49,7 @@ public abstract class Item extends Purchasable {
 	};
 
 	/**
-	 * The constructor for Item
+	 * The constructor for Item.
 	 * 
 	 * @param itemName        The name of the item
 	 * @param itemIsLegal     Whether the item is legal or illegal
@@ -64,15 +64,15 @@ public abstract class Item extends Purchasable {
 	}
 
 	/**
-	 * The abstract apply item method Calling this method with any item will apply
-	 * the item's effects to the given athlete
+	 * The abstract apply item method. Calling this method with any item will apply
+	 * the item's effects to the given athlete.
 	 * 
 	 * @param athlete The athlete to whom the affect is being applied
 	 */
 	public abstract void applyItem(Athlete athlete);
 
 	/**
-	 * Purchase the item and put it into the player's inventory
+	 * Purchase the item and put it into the player's inventory.
 	 * 
 	 * @param player The player who is purchasing the item
 	 * @return Whether or not the purchase was successful
