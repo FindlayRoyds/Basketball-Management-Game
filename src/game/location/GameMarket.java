@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 import game.GameEnvironment;
 import game.Purchasable;
 import util.Function3;
+import util.MiscUtil;
 
 /**
  * An abstract class defining the Market location. From the Market, the Player
@@ -105,8 +106,9 @@ public class GameMarket extends GameLocation {
 	@Override
 	public void update(int week) {
 		float seasonProgression = getGameEnvironment().getWeek() / (float) getGameEnvironment().getSeasonLength();
-		int gameDifficultyOffset = (3 - getGameEnvironment().getDifficulty()) * 10;
-		int qualityLevel = gameDifficultyOffset + (int) (seasonProgression * 80);
+		int startQuality = (4 - getGameEnvironment().getDifficulty()) * 10;
+		int endQuality = 100;
+		int qualityLevel = MiscUtil.integerLerp(startQuality, endQuality, seasonProgression);
 
 		availablePurchasables.clear();
 		for (int i = 0; i < amountToDisplay; ++i) {

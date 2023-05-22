@@ -72,6 +72,7 @@ class GameBlackMarketTest {
 		gameMarket.update(1);
 		assertFalse(gameMarket.getAvailablePurchasables().isEmpty());
 
+		gameEnvironment.getPlayer().giveMoney(10000);
 		Purchasable transactionPurchasable = new ArrayList<Purchasable>(gameMarket.getAvailablePurchasables()).get(0);
 		gameMarket.purchase(transactionPurchasable);
 		assertFalse(gameMarket.getAvailablePurchasables().contains(transactionPurchasable));

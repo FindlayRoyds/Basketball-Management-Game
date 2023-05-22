@@ -57,8 +57,9 @@ public class Steroid extends Item {
 		qualityLevel = MiscUtil.clampValue(qualityLevel, 1, 100);
 
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
-		int randomBoostAmount = (rng.nextInt(qualityLevel) + qualityLevel) / 2; // In range [0, 100]
-		int randomPrice = (rng.nextInt(qualityLevel) + 3 * qualityLevel) * 5 * difficulty; // In range [0, 1500]
+		int randomBoostAmount = MiscUtil.nextIntBounds(qualityLevel / 4, qualityLevel / 2, rng);
+		int priceOffset = 12 + difficulty * 1;
+		int randomPrice = MiscUtil.nextIntBounds(qualityLevel * priceOffset * 3 / 4, qualityLevel * priceOffset, rng);
 		return new Steroid(randomDescription, randomPrice, randomBoostAmount, gameEnvironment);
 	};
 

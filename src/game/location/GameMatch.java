@@ -155,15 +155,17 @@ public class GameMatch extends GameLocation {
 	public void finish() {
 		Player player = getGameEnvironment().getPlayer();
 		if (getWinningTeam() == player.getTeam()) {
-			int difficultyMutliplier = (4 - getGameEnvironment().getDifficulty());
-			int rewardMoney = 500 * difficultyMutliplier;
-			int rewardPoints = 100 * difficultyMutliplier;
+			int inverseDifficulty = (4 - getGameEnvironment().getDifficulty());
+			int rewardMoney = 100 * inverseDifficulty * team1Score;
+			int rewardPoints = 20 * getGameEnvironment().getDifficulty() * team1Score;
 			player.giveMoney(rewardMoney);
 			player.givePoints(rewardPoints);
 
 			getGameEnvironment().getUIEnvironment().displayPopup("You won the match! You have been awarded "
 					+ rewardMoney + " Money and " + rewardPoints + " Points.");
 		}
+		team1Score = 0;
+		team2Score = 0;
 		getGameEnvironment().progressWeek();
 	}
 }

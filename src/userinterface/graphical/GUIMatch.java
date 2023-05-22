@@ -58,6 +58,8 @@ public class GUIMatch extends GUILocation {
 	 * being displayed)
 	 */
 	private boolean matchPlayed;
+	private JLabel team1ScoreLabel;
+	private JLabel team2ScoreLabel;
 
 	/**
 	 * Constructor for GUIMatch. initializes the swing components for the design and
@@ -73,6 +75,18 @@ public class GUIMatch extends GUILocation {
 
 		winnerLabel = new JLabel("<dynamic> have won the match!");
 		winnerLabel.setVisible(false);
+
+		team1ScoreLabel = new JLabel();
+		team1ScoreLabel.setFont(new Font("Lucida Grande", Font.BOLD, 28));
+		team1ScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		team1ScoreLabel.setBounds(31, 6, 50, 50);
+		add(team1ScoreLabel);
+
+		team2ScoreLabel = new JLabel();
+		team2ScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		team2ScoreLabel.setFont(new Font("Lucida Grande", Font.BOLD, 28));
+		team2ScoreLabel.setBounds(719, 6, 50, 50);
+		add(team2ScoreLabel);
 		winnerLabel.setFont(new Font("Lucida Grande", Font.BOLD, 24));
 		winnerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		winnerLabel.setBounds(6, 300, 788, 50);
@@ -125,6 +139,9 @@ public class GUIMatch extends GUILocation {
 		Map<Position, Athlete> team2Athletes = this.gameLocation.getTeam2().getActiveAthletes();
 		titleLabel.setText(gameLocation.getTeam1().getName() + " vs " + this.gameLocation.getTeam2().getName());
 
+		team1ScoreLabel.setText(Integer.toString(gameLocation.getTeam1Score()));
+		team2ScoreLabel.setText(Integer.toString(gameLocation.getTeam2Score()));
+
 		matchupPanel.setVisible(true);
 		winnerLabel.setVisible(false);
 
@@ -133,6 +150,7 @@ public class GUIMatch extends GUILocation {
 			matchPlayed = false;
 			gameLocation.changeLocation(Location.MAP);
 			gameLocation.finish();
+			gameLocation.changeLocation(Location.MAP);
 		} else if (positionIndex == Position.values().length) { // Display winning team
 			matchupPanel.setVisible(false);
 
@@ -150,6 +168,8 @@ public class GUIMatch extends GUILocation {
 
 			if (matchPlayed) {
 				Athlete winner = gameLocation.getWinningAthlete(athlete1, athlete2);
+				team1ScoreLabel.setText(Integer.toString(gameLocation.getTeam1Score()));
+				team2ScoreLabel.setText(Integer.toString(gameLocation.getTeam2Score()));
 				int winnerIndex = winner == athlete1 ? 0 : 1;
 				JPanel winnerInfoPanel = (JPanel) athleteInfoPanel.getComponent(winnerIndex);
 				winnerInfoPanel.setBorder(BorderFactory.createLineBorder(Color.yellow));

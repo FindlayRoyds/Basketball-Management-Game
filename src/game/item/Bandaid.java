@@ -45,11 +45,13 @@ public class Bandaid extends Item {
 		Random rng = gameEnvironment.getRng();
 		int difficulty = gameEnvironment.getDifficulty();
 
-		// Clamp the quality level in range [0, 100]
+		// Clamp the quality level in range [1, 100]
 		qualityLevel = MiscUtil.clampValue(qualityLevel, 1, 100);
 
 		String randomDescription = DESCRIPTIONS[rng.nextInt(DESCRIPTIONS.length)];
-		int randomPrice = (rng.nextInt(qualityLevel) + 3 * qualityLevel) / 5 * difficulty; // In range [0, 240]
+
+		int priceOffset = 1 * difficulty;
+		int randomPrice = MiscUtil.nextIntBounds(qualityLevel * priceOffset * 3 / 4, qualityLevel * priceOffset, rng);
 		return new Bandaid(randomDescription, randomPrice, gameEnvironment);
 	}
 
