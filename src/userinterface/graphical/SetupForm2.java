@@ -28,10 +28,11 @@ public class SetupForm2 extends GUILocation {
 	}
 
 	private void chooseAthlete(Athlete selectedAthlete) {
-		String popupMessage = "Which position would you like to put " + selectedAthlete.getName() + " at?";
+		String popupMessage = "Which position would you like to put " + selectedAthlete.getName() + " into?";
 
 		List<Position> unfilledPositions = gameLocation.getUnfilledTeamPositions();
-		String[] popupOptions = unfilledPositions.stream().map(Position -> Position.name()).toArray(String[]::new);
+		String[] popupOptions = unfilledPositions.stream().map(Position -> Position.name())
+				.map(name -> name.replaceAll("_", " ").toLowerCase()).toArray(String[]::new);
 
 		int chosenPositionIndex = guiEnvironment.displayPopup(popupMessage, popupOptions);
 		gameLocation.chooseAthlete(selectedAthlete, unfilledPositions.get(chosenPositionIndex));

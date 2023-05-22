@@ -36,10 +36,12 @@ public class MiscUtil {
 	 * generates an array of names for an enumeration
 	 * 
 	 * @author https://stackoverflow.com/users/256196/bohemian
+	 * @author Findlay Royds (edited to make lowercase and remove underscores)
 	 * @param e The class of the enumeration
 	 * @return an array of strings of the names of the enum
 	 */
 	public static String[] getEnumerationNames(Class<? extends Enum<?>> e) {
-		return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
+		return Arrays.stream(e.getEnumConstants()).map(Enum::name).map(name -> name.replaceAll("_", " ").toLowerCase())
+				.toArray(String[]::new);
 	}
 }
