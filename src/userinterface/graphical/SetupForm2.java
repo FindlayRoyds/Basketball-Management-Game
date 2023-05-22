@@ -59,7 +59,7 @@ public class SetupForm2 extends GUILocation {
 		String popupMessage = "Which position would you like to put " + selectedAthlete.getName() + " into?";
 
 		List<Position> unfilledPositions = gameLocation.getUnfilledTeamPositions();
-		String[] popupOptions = unfilledPositions.stream().map(Position -> Position.name())
+		String[] popupOptions = unfilledPositions.stream().map(position -> position.name())
 				.map(name -> name.replaceAll("_", " ").toLowerCase()).toArray(String[]::new);
 
 		int chosenPositionIndex = guiEnvironment.displayPopup(popupMessage, popupOptions);
