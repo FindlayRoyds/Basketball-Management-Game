@@ -87,7 +87,7 @@ public class GameMarket extends GameLocation {
 	 */
 	@Override
 	public void update(int week) {
-		float seasonProgression = getGameEnvironment().getWeek() / getGameEnvironment().getSeasonLength();
+		float seasonProgression = getGameEnvironment().getWeek() / (float) getGameEnvironment().getSeasonLength();
 		int gameDifficultyOffset = (3 - getGameEnvironment().getDifficulty()) * 10;
 		int qualityLevel = gameDifficultyOffset + (int) (seasonProgression * 80);
 
