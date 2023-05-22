@@ -1,6 +1,7 @@
 package util;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * A class for miscellaneous utility functions
@@ -56,5 +57,17 @@ public class MiscUtil {
 	 */
 	public static int integerLerp(int lower, int upper, double t) {
 		return (int) Math.round((lower * (1.0 - t)) + (upper * t));
+	}
+
+	/**
+	 * Return a random integer in the range: [lowerBound, upperBound]
+	 * 
+	 * @param lowerBound
+	 * @param upperBound
+	 * @param rng
+	 * @return
+	 */
+	public static int nextIntBounds(int lowerBound, int upperBound, Random rng) {
+		return rng.nextInt(upperBound - lowerBound + 1) + lowerBound;
 	}
 }

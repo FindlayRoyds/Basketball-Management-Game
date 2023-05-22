@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,6 +51,13 @@ class MiscUtilTest {
 		assertEquals(5, MiscUtil.integerLerp(0, 10, 0.5));
 		assertEquals(7, MiscUtil.integerLerp(0, 21, 1.0 / 3.0));
 		assertEquals(7, MiscUtil.integerLerp(0, 20, 1.0 / 3.0));
+	}
+
+	@Test
+	void nextIntBoundsTest() {
+		assertEquals(5, MiscUtil.nextIntBounds(5, 5, new Random()));
+		int random = MiscUtil.nextIntBounds(17, 18, new Random());
+		assertTrue(random == 17 || random == 18);
 	}
 
 }
