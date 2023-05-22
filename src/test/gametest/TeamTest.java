@@ -37,7 +37,7 @@ class TeamTest {
 
 	@Test
 	void maxReservesTest() {
-		assertEquals(5, tm.getMaxNumberOfReserves());
+		assertEquals(5, Team.getMaxNumberOfReserves());
 	}
 
 	@Test
@@ -62,6 +62,9 @@ class TeamTest {
 		assertEquals("123", tm.getName());
 	}
 
+	/**
+	 * Huge test case to test swapping athletes around in a team
+	 */
 	@Test
 	void athletesTest() {
 		assertNull(tm.getActiveAthletes().get(Position.DUNKER));
@@ -101,6 +104,43 @@ class TeamTest {
 		assertEquals(0, tm.getNumberOfFreeReserveSlots());
 		tm.moveToActive(activeAthlete, Position.SHORT_SHOOTER);
 		assertEquals(activeAthlete, tm.getActiveAthletes().get(Position.SHORT_SHOOTER));
+		assertTrue(tm.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge)));
+		tm.moveToReserve(activeAthlete);
+		assertTrue(tm.getReserveAthletes().contains(activeAthlete));
+		assertEquals(5, tm.getReserveAthletes().size());
+		assertFalse(tm.moveToReserve((Athlete) Athlete.generateAthlete.apply(0, ge)));
+	}
+
+	@Test
+	void swapActiveAthletesTest() {
+		Athlete activeAthlete = (Athlete) Athlete.generateAthlete.apply(100, ge);
+		tm.addAthleteToActive(activeAthlete, Position.DUNKER);
+		tm.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DEFENDER);
+		tm.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DRIBBLER);
+		tm.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.LONG_SHOOTER);
+		for (int i = 0; i < 5; i++)
+			tm.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
+
+		tm.moveToActive(activeAthlete, Position.DEFENDER);
+		assertEquals(activeAthlete, tm.getActiveAthletes().get(Position.DEFENDER));
+		assertFalse(activeAthlete == tm.getActiveAthletes().get(Position.DUNKER));
+		tm.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.SHORT_SHOOTER);
+		tm.moveToActive(activeAthlete, Position.SHORT_SHOOTER);
+		assertEquals(activeAthlete, tm.getActiveAthletes().get(Position.SHORT_SHOOTER));
+		assertFalse(activeAthlete == tm.getActiveAthletes().get(Position.DEFENDER));
+	}
+
+	@Test
+	void swapReserveAthleteIntoActiveTest() {
+		Athlete reserveAthlete = (Athlete) Athlete.generateAthlete.apply(100, ge);
+		tm.addAthleteToReserve(reserveAthlete);
+		tm.moveToActive(reserveAthlete, Position.LONG_SHOOTER);
+	}
+
+	@Test
+	void removeAthleteNotInTeamTest() {
+		Athlete athlete = (Athlete) Athlete.generateAthlete.apply(0, ge);
+		tm.removeAthlete(athlete);
 	}
 
 	@Test

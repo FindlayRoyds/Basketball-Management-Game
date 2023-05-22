@@ -14,6 +14,7 @@ import enumeration.Position;
 import enumeration.Statistic;
 import game.Athlete;
 import game.GameEnvironment;
+import game.Player;
 import game.item.Steroid;
 import userinterface.graphical.GUIEnvironment;
 
@@ -65,6 +66,27 @@ class SteroidTest {
 		for (Statistic statistic : Statistic.values())
 			assertEquals(60, athlete.getStatistic(statistic));
 		assertTrue(athlete.getHasUsedSteroids());
+	}
+
+	@Test
+	void purchaseTest() {
+		Steroid steroid = new Steroid("Test", 100, 0, ge);
+		Player player = ge.getPlayer();
+		player.giveMoney(99);
+		assertFalse(steroid.purchase(player));
+		player.giveMoney(1);
+		assertTrue(steroid.purchase(player));
+		assertEquals(0, player.getMoney());
+	}
+
+	@Test
+	void sellTest() {
+		Steroid steroid = new Steroid("Test", 100, 0, ge);
+		Player player = ge.getPlayer();
+		steroid.sell(player);
+		assertEquals(100, player.getMoney());
+		steroid.sell(player);
+		assertEquals(200, player.getMoney());
 	}
 
 	@Test

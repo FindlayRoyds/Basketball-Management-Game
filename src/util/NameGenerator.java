@@ -42,7 +42,6 @@ public class NameGenerator {
 
 		// Attempt to read lines from the file and add them to the result.
 		try {
-			// InputStream in = new FileInputStream(filepath);
 			InputStream in = ClassLoader.getSystemResourceAsStream(filepath);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 			List<String> lines = new ArrayList<String>();
@@ -60,9 +59,12 @@ public class NameGenerator {
 		} catch (IOException e) {
 			System.out.println("File " + filepath + " may not exist.");
 			e.printStackTrace();
+			return null;
+		} catch (NullPointerException e) {
+			System.out.println("File " + filepath + " may not exist.");
+			e.printStackTrace();
+			return null;
 		}
-
-		return result;
 	}
 
 	/**
@@ -79,16 +81,19 @@ public class NameGenerator {
 	public static String generateName(String wordList1, String wordList2, Random rng) {
 		ArrayList<ArrayList<String>> words1 = readWordList(wordList1);
 		ArrayList<ArrayList<String>> words2 = readWordList(wordList2);
-
-		// pick a random letter from the alphabet for the words to start with
-		int startLetterIndex = rng.nextInt(26);
-		// get all words from the two lists that start with that letter
-		ArrayList<String> word1Candidates = words1.get(startLetterIndex);
-		ArrayList<String> word2Candidates = words2.get(startLetterIndex);
-		// randomly pick a word from each
-		String word1 = word1Candidates.get(rng.nextInt(word1Candidates.size()));
-		String word2 = word2Candidates.get(rng.nextInt(word2Candidates.size()));
-
-		return word1 + " " + word2;
+		// detect bad filename
+		if (words1 != null && words2 != null) {
+			// pick a random letter from the alphabet for the words to start with
+			int startLetterIndex = rng.nextInt(26);
+			// get all words from the two lists that start with that letter
+			ArrayList<String> word1Candidates = words1.get(startLetterIndex);
+			ArrayList<String> word2Candidates = words2.get(startLetterIndex);
+			// randomly pick a word from each
+			String word1 = word1Candidates.get(rng.nextInt(word1Candidates.size()));
+			String word2 = word2Candidates.get(rng.nextInt(word2Candidates.size()));
+			return word1 + " " + word2;
+		} else {
+			return "<name generation error>";
+		}
 	}
 }
