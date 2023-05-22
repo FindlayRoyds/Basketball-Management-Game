@@ -10,7 +10,7 @@ import game.location.GameLocation;
 import game.location.GameMatch;
 
 /**
- * 
+ * This class displays a match between two teams on the CLI.
  * 
  * @author Findlay Royds
  * @version 1.0, May 2023.
@@ -22,7 +22,10 @@ public class CLIMatch extends CLILocation {
 	private GameMatch gameLocation;
 
 	/**
-	 * @param cliEnvironment
+	 * Constructor for the cli match class.
+	 * 
+	 * @param gameLocation   The game location this cli location is linked to.
+	 * @param cliEnvironment The ui environment responsible for displaying the cli.
 	 */
 	public CLIMatch(GameLocation gameLocation, CLIEnvironment cliEnvironment) {
 		super(cliEnvironment);

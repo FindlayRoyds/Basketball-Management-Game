@@ -5,7 +5,9 @@ import game.location.GameEnd;
 import game.location.GameLocation;
 
 /**
- * 
+ * This class is responsible for displaying information about the game on the
+ * end screen. Shows the team name, the season duration, the player's money, and
+ * the player's points.
  * 
  * @author Findlay Royds
  * @version 1.1, May 2023.
@@ -18,6 +20,9 @@ public class CLIEnd extends CLILocation {
 	private GameEnd gameLocation;
 
 	/**
+	 * The constructor for the CLIEnd class. Calls the constructor of CLILocation
+	 * and sets the gameLocation property.
+	 * 
 	 * @param gameLocation The end screen game location
 	 */
 	public CLIEnd(GameLocation gameLocation, CLIEnvironment cliEnvironment) {

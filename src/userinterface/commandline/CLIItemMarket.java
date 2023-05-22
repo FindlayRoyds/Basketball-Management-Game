@@ -11,7 +11,7 @@ import game.location.GameLocation;
 import game.location.GameMarket;
 
 /**
- * 
+ * The class that displays the item market on the cli.
  * 
  * @author Jake van Keulen
  * @version 1.0, May 2023.
@@ -23,7 +23,10 @@ public class CLIItemMarket extends CLILocation {
 	private GameMarket gameLocation;
 
 	/**
-	 * @param cliEnvironment
+	 * Constructor for the cli item market class.
+	 * 
+	 * @param gameLocation   The game location this cli location is linked to.
+	 * @param cliEnvironment The ui environment responsible for displaying the cli.
 	 */
 	public CLIItemMarket(GameLocation gameLocation, CLIEnvironment cliEnvironment) {
 		super(cliEnvironment);

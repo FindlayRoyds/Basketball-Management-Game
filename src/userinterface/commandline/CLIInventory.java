@@ -26,7 +26,8 @@ public class CLIInventory extends CLILocation {
 	/**
 	 * Constructor for the map CLI location.
 	 * 
-	 * @param gameLocation the inventory GameLocation.
+	 * @param gameLocation   The game location this cli location is linked to.
+	 * @param cliEnvironment The ui environment responsible for displaying the cli.
 	 */
 	public CLIInventory(GameLocation gameLocation, CLIEnvironment cliEnvironment) {
 		super(cliEnvironment);

@@ -12,9 +12,9 @@ import game.location.GameLocation;
 import game.location.GameLocker;
 
 /**
+ * The class that displays the locker screen on the cli
  * 
- * 
- * @author Findlay Royds
+ * @author Jake van Keulen
  * @version 1.0, May 2023.
  */
 public class CLILocker extends CLILocation {
@@ -24,7 +24,10 @@ public class CLILocker extends CLILocation {
 	private GameLocker gameLocation;
 
 	/**
-	 * @param cliEnvironment
+	 * Constructor for the cli locker class.
+	 * 
+	 * @param gameLocation   The game location this cli location is linked to.
+	 * @param cliEnvironment The ui environment responsible for displaying the cli.
 	 */
 	public CLILocker(GameLocation gameLocation, CLIEnvironment cliEnvironment) {
 		super(cliEnvironment);
@@ -51,6 +54,9 @@ public class CLILocker extends CLILocation {
 		}
 	}
 
+	/**
+	 * Displays details of the selected athlete on the cli
+	 */
 	private void viewAthleteDetails() {
 		System.out.println("Which athlete would you like to see?");
 

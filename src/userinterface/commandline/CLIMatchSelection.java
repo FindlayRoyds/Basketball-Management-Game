@@ -23,7 +23,10 @@ public class CLIMatchSelection extends CLILocation {
 	private GameMatchSelection gameLocation;
 
 	/**
-	 * @param gameLocation The game location this cli location is linked to.
+	 * Constructor for the cli match selection class.
+	 * 
+	 * @param gameLocation   The game location this cli location is linked to.
+	 * @param cliEnvironment The ui environment responsible for displaying the cli.
 	 */
 	public CLIMatchSelection(GameLocation gameLocation, CLIEnvironment cliEnvironment) {
 		super(cliEnvironment);

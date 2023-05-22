@@ -11,7 +11,7 @@ import game.location.GameLocation;
 import game.location.GameMarket;
 
 /**
- * 
+ * The class that displays the black market on the cli.
  * 
  * @author Jake van Keulen
  * @version 1.0, May 2023.
@@ -23,6 +23,8 @@ public class CLIBlackMarket extends CLILocation {
 	private GameMarket gameLocation;
 
 	/**
+	 * Constructor for CLIBlackMarket
+	 * 
 	 * @param cliEnvironment
 	 */
 	public CLIBlackMarket(GameLocation gameLocation, CLIEnvironment cliEnvironment) {

@@ -19,7 +19,7 @@ public abstract class CLILocation {
 	/**
 	 * The constructor for CLILocation
 	 * 
-	 * @param cliEnvironment The CLIEnvironment that the CLILocation belongs to.
+	 * @param cliEnvironment The ui environment responsible for displaying the cli.
 	 */
 	public CLILocation(CLIEnvironment cliEnvironment) {
 		this.cliEnvironment = cliEnvironment;

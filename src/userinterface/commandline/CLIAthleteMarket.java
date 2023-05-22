@@ -11,10 +11,10 @@ import game.location.GameLocation;
 import game.location.GameMarket;
 
 /**
- * 
+ * The class that displays the athlete market on the console
  * 
  * @author Jake van Keulen
- * @version 1.0, May 2023.
+ * @version 1.1, May 2023.
  */
 public class CLIAthleteMarket extends CLILocation {
 	/**
@@ -23,6 +23,8 @@ public class CLIAthleteMarket extends CLILocation {
 	private GameMarket gameLocation;
 
 	/**
+	 * Constructor for CLIAthleteMarket
+	 * 
 	 * @param cliEnvironment
 	 */
 	public CLIAthleteMarket(GameLocation gameLocation, CLIEnvironment cliEnvironment) {
@@ -37,7 +39,7 @@ public class CLIAthleteMarket extends CLILocation {
 	 * @param athletes A List of Athletes that can be selected.
 	 * @return The index of the selected Athlete in the athletes List.
 	 */
-	Purchasable getAthleteSelection(Set<Purchasable> givenAthletes) {
+	private Purchasable getAthleteSelection(Set<Purchasable> givenAthletes) {
 		List<Purchasable> athletes = new ArrayList<Purchasable>(givenAthletes);
 		if (athletes.isEmpty())
 			return null;

@@ -6,10 +6,11 @@ import game.location.GameMap;
 
 /**
  * The CLI map location. Responsible for displaying locations the player can
- * visit.
+ * visit. Also displays the current money the player has, the current week, the
+ * weeks left in the season, and allows the player to take a bye.
  * 
  * @author Findlay Royds
- * @version 1.0, May 2023.
+ * @version 1.1, May 2023.
  */
 public class CLIMap extends CLILocation {
 	/**
@@ -26,7 +27,8 @@ public class CLIMap extends CLILocation {
 	/**
 	 * Constructor for the map CLI location.
 	 * 
-	 * @param gameLocation the map GameLocation.
+	 * @param gameLocation   The game location this cli location is linked to.
+	 * @param cliEnvironment The ui environment responsible for displaying the cli.
 	 */
 	public CLIMap(GameLocation gameLocation, CLIEnvironment cliEnvironment) {
 		super(cliEnvironment);

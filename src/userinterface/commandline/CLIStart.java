@@ -22,28 +22,43 @@ public class CLIStart extends CLILocation {
 	private GameStart gameLocation;
 
 	/**
-	 * @param gameLocation The end screen game location
+	 * Constructor for the cli start location
+	 * 
+	 * @param gameLocation   The game location this cli location is linked to.
+	 * @param cliEnvironment The ui environment responsible for displaying the cli.
 	 */
 	public CLIStart(GameLocation gameLocation, CLIEnvironment cliEnvironment) {
 		super(cliEnvironment);
 		this.gameLocation = (GameStart) gameLocation;
 	}
 
+	/**
+	 * Get user input and set team name
+	 */
 	private void chooseTeamName() {
 		System.out.println("Choose a team name:");
 		gameLocation.setTeamName(cliEnvironment.getStringInput(30));
 	}
 
+	/**
+	 * Get user input and set season length
+	 */
 	private void chooseSeasonLength() {
 		System.out.println("Choose a season length:");
 		gameLocation.setSeasonLength(cliEnvironment.getIntInput(5, 15));
 	}
 
+	/**
+	 * Get user input and set game seed
+	 */
 	private void chooseSeed() {
 		System.out.println("Choose a seed:");
 		gameLocation.setSeed(cliEnvironment.getIntInput(0, 1000000));
 	}
 
+	/**
+	 * Get user input and set game difficulty
+	 */
 	private void chooseDifficulty() {
 		System.out.println("Choose a difficulty:");
 		String[] options = { "Easy", "Medium", "Hard" };
@@ -52,6 +67,9 @@ public class CLIStart extends CLILocation {
 		System.out.println("\nDifficulty set to " + options[selection] + "\n");
 	}
 
+	/**
+	 * Allow the user to choose their starting athletes for the game.
+	 */
 	private void chooseStartingAthletes() {
 		System.out.println("\nStarting athlete selection\n");
 
