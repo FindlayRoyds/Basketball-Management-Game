@@ -1,7 +1,7 @@
 package game;
 
 /**
- * abstract class for everything sold at markets in-game
+ * An abstract class for everything sold at markets in-game.
  * 
  * @author Findlay Royds
  * @version 1.4, May 2023.

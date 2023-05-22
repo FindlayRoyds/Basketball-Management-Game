@@ -1,5 +1,6 @@
 package userinterface.graphical;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,7 @@ public class GUIMarket extends GUILocation {
 	private boolean showSellScreen;
 	private String name;
 	private JButton swapViewButton;
+	private JLabel moneyLabel;
 
 	private void returnToMap() {
 		gameLocation.changeLocation(Location.MAP);
@@ -34,6 +36,8 @@ public class GUIMarket extends GUILocation {
 		marketTitle.setText(name + " - " + (showSellScreen ? "Sell" : "Buy"));
 
 		swapViewButton.setText(showSellScreen ? "Change to buying" : "Change to selling");
+
+		moneyLabel.setText("$" + gameLocation.getPlayerMoney());
 
 		choosePurchasableButton.setText(showSellScreen ? "Sell" : "Buy");
 		for (ActionListener oldListener : choosePurchasableButton.getActionListeners()) {
@@ -77,6 +81,12 @@ public class GUIMarket extends GUILocation {
 		marketTitle.setBounds(169, 25, 300, 17);
 		marketTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		add(marketTitle);
+
+		moneyLabel = new JLabel("Loading..");
+		moneyLabel.setForeground(new Color(0, 100, 0));
+		moneyLabel.setFont(new Font("Dialog", Font.BOLD, 18));
+		moneyLabel.setBounds(16, 8, 200, 50);
+		add(moneyLabel);
 
 		choosePurchasableButton = new JButton();
 		purchasableExplorer = new PurchasableExplorer(() -> new ArrayList<Purchasable>(), true);

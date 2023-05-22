@@ -27,6 +27,7 @@ public class GUILocker extends GUILocation {
 
 	PurchasableExplorer purchasableExplorer;
 	JLabel teamLayoutLabel;
+	JLabel inventoryTitleLabel;
 
 	private void moveAthlete() {
 		Athlete selectedAthlete = (Athlete) purchasableExplorer.getSelected();
@@ -53,6 +54,7 @@ public class GUILocker extends GUILocation {
 
 	public void refresh() {
 		purchasableExplorer.refresh();
+		this.inventoryTitleLabel.setText("Locker Room - " + this.gameLocation.getTeamName());
 	}
 
 	/**
@@ -64,9 +66,9 @@ public class GUILocker extends GUILocation {
 		setPreferredSize(new Dimension(800, 600));
 		setLayout(null);
 
-		JLabel inventoryTitleLabel = new JLabel("Locker Room");
+		inventoryTitleLabel = new JLabel("");
 		inventoryTitleLabel.setFont(new Font("Dialog", Font.BOLD, 15));
-		inventoryTitleLabel.setBounds(250, 15, 200, 17);
+		inventoryTitleLabel.setBounds(250, 15, 400, 17);
 		inventoryTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(inventoryTitleLabel);
 

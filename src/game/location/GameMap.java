@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import enumeration.Location;
 import enumeration.Statistic;
 import game.Athlete;
 import game.GameEnvironment;
@@ -96,5 +97,14 @@ public class GameMap extends GameLocation {
 	 */
 	public int getWeeksRemaining() {
 		return getGameEnvironment().getSeasonLength() - getGameEnvironment().getWeek();
+	}
+
+	/**
+	 * Takes the user to the game end screen if the game is over.
+	 */
+	public void checkForGameEnd() {
+		if (getGameEnvironment().hasEnded()) {
+			changeLocation(Location.END);
+		}
 	}
 }

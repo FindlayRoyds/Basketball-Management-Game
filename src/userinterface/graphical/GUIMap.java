@@ -109,5 +109,6 @@ public class GUIMap extends GUILocation {
 		moneyLabel.setText("$" + gameLocation.getMoney());
 		weeksRemainingLabel.setText(gameLocation.getWeeksRemaining() + " weeks remaining");
 		weekNumberLabel.setText("week " + gameLocation.getWeek());
+		gameLocation.checkForGameEnd();
 	}
 }

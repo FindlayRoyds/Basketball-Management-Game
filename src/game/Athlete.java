@@ -15,7 +15,7 @@ import util.MiscUtil;
 import util.NameGenerator;
 
 /**
- * This class implements an athlete An athlete belongs to a team, And has
+ * This class implements an athlete. An athlete belongs to a team, and has
  * several statistics to gauge their performance
  * 
  * @author Findlay Royds, Jake van Keulen
@@ -142,7 +142,6 @@ public class Athlete extends Purchasable {
 	 * 
 	 * @param value The value to set the athlete's stamina to
 	 */
-
 	public void setStamina(int value) {
 		int original = stamina;
 		stamina = MiscUtil.clampValue(value);
@@ -150,11 +149,10 @@ public class Athlete extends Purchasable {
 			gameEnvironment.getUIEnvironment().displayPopup(this.getName() + " was injured!");
 	}
 
-	/*
+	/**
 	 * Uses up some of the athlete's stamina based on their fitness and the
 	 * difficulty of the game
 	 */
-
 	public void loseStamina() {
 		int gameDifficultyDivider = 4 - gameEnvironment.getDifficulty();
 		int staminaDecrease = (100 - getStatistic(Statistic.FITNESS));
@@ -183,7 +181,6 @@ public class Athlete extends Purchasable {
 		// Add to player's team if charge successful
 		if (chargeSuccess) {
 			Team playerTeam = player.getTeam();
-			// HashMap<Position, Athlete> activeAthletes = playerTeam.getActiveAthletes();
 
 			boolean addToActive;
 			if (unfilledActivePositions.isEmpty()) {
@@ -219,6 +216,10 @@ public class Athlete extends Purchasable {
 		return chargeSuccess;
 	}
 
+	/**
+	 * Sells an Athlete from the Player's team. Removes that Athlete from the team
+	 * and pays the player its price in money.
+	 */
 	@Override
 	public void sell(Player player) {
 		player.getTeam().removeAthlete(this);

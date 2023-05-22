@@ -26,7 +26,7 @@ public class Team {
 	/**
 	 * The game environment the team exists in.
 	 */
-	GameEnvironment gameEnvironment;
+	private GameEnvironment gameEnvironment;
 
 	/**
 	 * Map of Positions to the athlete that has been assigned that position on the
@@ -61,6 +61,9 @@ public class Team {
 		return MAX_NUMBER_OF_RESERVES;
 	}
 
+	/**
+	 * @return A List of Positions for which the Team has no active Player.
+	 */
 	public List<Position> getUnfilledTeamPositions() {
 		List<Position> unfilled = new ArrayList<Position>();
 		for (Position position : Position.values()) {
