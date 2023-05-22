@@ -350,20 +350,23 @@ public class Athlete extends Purchasable {
 	public static Function3<Integer, GameEnvironment, Purchasable> generateAthlete = (qualityLevel,
 			gameEnvironment) -> {
 		Random rng = gameEnvironment.getRng();
+		int difficulty = gameEnvironment.getDifficulty();
 		String name = NameGenerator.generateName("playerFirstNames", "playerLastNames", rng);
 
-		// Clamp the quality level in range [0, 100]
+		// Clamp the quality level in range [1, 100]
 		qualityLevel = MiscUtil.clampValue(qualityLevel, 1, 100);
 
 		Position[] positions = Position.values();
 		Position role = positions[rng.nextInt(positions.length)];
 
-		int stamina = (rng.nextInt(qualityLevel) + qualityLevel) / 2;
-		int price = (int) (rng.nextInt(qualityLevel) + qualityLevel * 3) / 4 * 10; // In range [0, 1000]
+		int stamina = MiscUtil.nextIntBounds(qualityLevel * 3 / 4, qualityLevel, rng);
+
+		int priceOffset = 7 + difficulty * 3;
+		int price = MiscUtil.nextIntBounds(qualityLevel * priceOffset * 3 / 4, qualityLevel * priceOffset, rng);
 
 		Athlete resultingAthlete = new Athlete(name, role, stamina, gameEnvironment, price);
 		for (Statistic statistic : Statistic.values()) {
-			int statisticValue = (rng.nextInt(qualityLevel) + qualityLevel) / 2;
+			int statisticValue = MiscUtil.nextIntBounds(qualityLevel * 3 / 4, qualityLevel, rng);
 			resultingAthlete.setStatistic(statistic, statisticValue);
 		}
 
