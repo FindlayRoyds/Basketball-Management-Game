@@ -59,7 +59,7 @@ class GameMatchTest {
 		assertEquals(team2, gameMatch.getTeam2());
 
 		assertEquals(0, gameMatch.getTeam1Score());
-		assertEquals(0, gameMatch.getTeam1Score());
+		assertEquals(0, gameMatch.getTeam2Score());
 	}
 
 	@RepeatedTest(5)
@@ -82,10 +82,21 @@ class GameMatchTest {
 		assertEquals(score1 > score2, gameMatch.getWinningTeam() == team1);
 
 		int week = ge.getWeek();
+		gameMatch.finish();
+		assertEquals(week + 1, ge.getWeek());
+	}
+
+	@Test
+	void sameTeamTest() {
+		Team team = Team.generateTeam(50, ge);
+		gameMatch.setTeams(team, team);
+		for (Position position : Position.values()) {
+			Athlete athlete = team.getActiveAthletes().get(position);
+			gameMatch.getWinningAthlete(athlete, athlete);
+		}
 		int money = ge.getPlayer().getMoney();
 		int score = ge.getPlayer().getScore();
 		gameMatch.finish();
-		assertEquals(week + 1, ge.getWeek());
 		if (gameMatch.getWinningTeam() == ge.getPlayer().getTeam()) {
 			assertTrue(ge.getPlayer().getMoney() > money);
 			assertTrue(ge.getPlayer().getScore() > score);
