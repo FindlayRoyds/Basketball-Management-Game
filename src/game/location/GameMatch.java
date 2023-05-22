@@ -144,9 +144,9 @@ public class GameMatch extends GameLocation {
 	public void finish() {
 		Player player = getGameEnvironment().getPlayer();
 		if (getWinningTeam() == player.getTeam()) {
-			int difficultyMutliplier = (4 - getGameEnvironment().getDifficulty());
-			int rewardMoney = 500 * difficultyMutliplier;
-			int rewardPoints = 100 * difficultyMutliplier;
+			int inverseDifficulty = (4 - getGameEnvironment().getDifficulty());
+			int rewardMoney = 100 * inverseDifficulty * team1Score;
+			int rewardPoints = 20 * getGameEnvironment().getDifficulty() * team1Score;
 			player.giveMoney(rewardMoney);
 			player.givePoints(rewardPoints);
 
