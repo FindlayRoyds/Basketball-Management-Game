@@ -14,26 +14,26 @@ import game.location.GameMap;
 import userinterface.graphical.GUIEnvironment;
 
 class GameMapTest {
-	private GameEnvironment ge;
+	private GameEnvironment gameEnvironment;
 	private GameMap gameMap;
 
 	@BeforeEach
 	void setUp() {
-		ge = new GameEnvironment(false);
-		ge.setSeed(0);
-		gameMap = (GameMap) ge.getGameLocation(Location.MAP);
+		gameEnvironment = new GameEnvironment(false);
+		gameEnvironment.setSeed(0);
+		gameMap = (GameMap) gameEnvironment.getGameLocation(Location.MAP);
 	}
 
 	@AfterEach
 	void tearDown() {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
 
 	@Test
 	void constructorTest() {
-		gameMap = new GameMap(ge);
+		gameMap = new GameMap(gameEnvironment);
 	}
 
 	@Test
@@ -45,10 +45,10 @@ class GameMapTest {
 	@Test
 	void byeTest() {
 		int seasonLength = 5;
-		ge.setSeasonLength(seasonLength);
+		gameEnvironment.setSeasonLength(seasonLength);
 		for (int i = 0; i < seasonLength; ++i) {
 			gameMap.takeABye();
-			assertEquals(i + 1, ge.getWeek());
+			assertEquals(i + 1, gameEnvironment.getWeek());
 			assertEquals(i + 1, gameMap.getWeek());
 			assertEquals(seasonLength - i - 1, gameMap.getWeeksRemaining());
 		}
@@ -56,9 +56,9 @@ class GameMapTest {
 
 	@Test
 	void moneyTest() {
-		assertEquals(ge.getPlayer().getMoney(), gameMap.getMoney());
-		ge.getPlayer().giveMoney(10);
-		assertEquals(ge.getPlayer().getMoney(), gameMap.getMoney());
-		ge.getPlayer().giveMoney(60);
+		assertEquals(gameEnvironment.getPlayer().getMoney(), gameMap.getMoney());
+		gameEnvironment.getPlayer().giveMoney(10);
+		assertEquals(gameEnvironment.getPlayer().getMoney(), gameMap.getMoney());
+		gameEnvironment.getPlayer().giveMoney(60);
 	}
 }

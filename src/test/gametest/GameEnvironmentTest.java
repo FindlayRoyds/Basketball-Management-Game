@@ -27,126 +27,126 @@ import userinterface.graphical.GUIEnvironment;
 
 class GameEnvironmentTest {
 
-	private GameEnvironment ge;
+	private GameEnvironment gameEnvironment;
 
 	@BeforeEach
 	void setUp() {
 		// initialise gui game environment before each test case
-		ge = new GameEnvironment(false);
-		ge.setSeed(0);
+		gameEnvironment = new GameEnvironment(false);
+		gameEnvironment.setSeed(0);
 	}
 
 	@AfterEach
 	void tearDown() {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
 
 	@Test
 	void rngTest() {
-		ge.setSeed(0);
-		Object rng1 = ge.getRng();
+		gameEnvironment.setSeed(0);
+		Object rng1 = gameEnvironment.getRng();
 		assertTrue(rng1 instanceof Random);
-		ge.setSeed(999);
-		Object rng2 = ge.getRng();
+		gameEnvironment.setSeed(999);
+		Object rng2 = gameEnvironment.getRng();
 		assertTrue(rng2 instanceof Random);
 		assertTrue(rng1 != rng2);
 	}
 
 	@Test
 	void seasonLengthTest() {
-		ge.setSeasonLength(1);
-		assertEquals(1, ge.getSeasonLength());
-		ge.setSeasonLength(7);
-		assertEquals(7, ge.getSeasonLength());
-		ge.setSeasonLength(15);
-		assertEquals(15, ge.getSeasonLength());
+		gameEnvironment.setSeasonLength(1);
+		assertEquals(1, gameEnvironment.getSeasonLength());
+		gameEnvironment.setSeasonLength(7);
+		assertEquals(7, gameEnvironment.getSeasonLength());
+		gameEnvironment.setSeasonLength(15);
+		assertEquals(15, gameEnvironment.getSeasonLength());
 	}
 
 	@Test
 	void weekTest() {
-		ge.setSeasonLength(5);
-		ge.setSeed(0);
-		assertEquals(0, ge.getWeek());
-		ge.progressWeek();
-		assertEquals(1, ge.getWeek());
+		gameEnvironment.setSeasonLength(5);
+		gameEnvironment.setSeed(0);
+		assertEquals(0, gameEnvironment.getWeek());
+		gameEnvironment.progressWeek();
+		assertEquals(1, gameEnvironment.getWeek());
 	}
 
 	@Test
 	void difficultyTest() {
-		ge.setDifficulty(1);
-		assertEquals(1, ge.getDifficulty());
-		ge.setDifficulty(2);
-		assertEquals(2, ge.getDifficulty());
-		ge.setDifficulty(3);
-		assertEquals(3, ge.getDifficulty());
+		gameEnvironment.setDifficulty(1);
+		assertEquals(1, gameEnvironment.getDifficulty());
+		gameEnvironment.setDifficulty(2);
+		assertEquals(2, gameEnvironment.getDifficulty());
+		gameEnvironment.setDifficulty(3);
+		assertEquals(3, gameEnvironment.getDifficulty());
 	}
 
 	@Test
 	void gameLocationTest() {
 		Object gameLocation;
-		gameLocation = ge.getGameLocation(Location.END);
+		gameLocation = gameEnvironment.getGameLocation(Location.END);
 		assertTrue(gameLocation instanceof GameEnd);
-		gameLocation = ge.getGameLocation(Location.ATHLETE_MARKET);
+		gameLocation = gameEnvironment.getGameLocation(Location.ATHLETE_MARKET);
 		assertTrue(gameLocation instanceof GameMarket);
 
-		ge.setSeasonLength(5);
-		ge.setDifficulty(1);
-		Team team = ge.getPlayer().getTeam();
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DEFENDER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DRIBBLER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DUNKER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.LONG_SHOOTER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.SHORT_SHOOTER);
-		((GameMatch) ge.getGameLocation(Location.MATCH)).setTeams(team, Team.generateTeam(100, ge));
-		ge.progressWeek();
+		gameEnvironment.setSeasonLength(5);
+		gameEnvironment.setDifficulty(1);
+		Team team = gameEnvironment.getPlayer().getTeam();
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DEFENDER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DRIBBLER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DUNKER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.LONG_SHOOTER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.SHORT_SHOOTER);
+		((GameMatch) gameEnvironment.getGameLocation(Location.MATCH)).setTeams(team, Team.generateTeam(100, gameEnvironment));
+		gameEnvironment.progressWeek();
 
 		for (Location location : Location.values()) {
-			ge.changeLocation(location);
+			gameEnvironment.changeLocation(location);
 		}
 	}
 
 	@Test
 	void hasEndedTest() {
-		Team team = ge.getPlayer().getTeam();
-		ge.setSeasonLength(5);
-		assertTrue(ge.hasEnded());
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DEFENDER);
-		assertTrue(ge.hasEnded());
-		ge.progressWeek();
-		assertTrue(ge.hasEnded());
-		ge.getPlayer().giveMoney(10000);
-		assertFalse(ge.hasEnded());
-		ge.getPlayer().chargeMoney(10000);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DRIBBLER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DUNKER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.LONG_SHOOTER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.SHORT_SHOOTER);
-		assertFalse(ge.hasEnded());
-		ge.progressWeek();
-		ge.progressWeek();
-		ge.progressWeek();
-		ge.progressWeek();
-		assertFalse(ge.hasEnded());
-		ge.progressWeek();
-		assertTrue(ge.hasEnded());
+		Team team = gameEnvironment.getPlayer().getTeam();
+		gameEnvironment.setSeasonLength(5);
+		assertTrue(gameEnvironment.hasEnded());
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DEFENDER);
+		assertTrue(gameEnvironment.hasEnded());
+		gameEnvironment.progressWeek();
+		assertTrue(gameEnvironment.hasEnded());
+		gameEnvironment.getPlayer().giveMoney(10000);
+		assertFalse(gameEnvironment.hasEnded());
+		gameEnvironment.getPlayer().chargeMoney(10000);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DRIBBLER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DUNKER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.LONG_SHOOTER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.SHORT_SHOOTER);
+		assertFalse(gameEnvironment.hasEnded());
+		gameEnvironment.progressWeek();
+		gameEnvironment.progressWeek();
+		gameEnvironment.progressWeek();
+		gameEnvironment.progressWeek();
+		assertFalse(gameEnvironment.hasEnded());
+		gameEnvironment.progressWeek();
+		assertTrue(gameEnvironment.hasEnded());
 	}
 
 	@Test
 	void playerTest() {
-		assertTrue(ge.getPlayer() instanceof Player);
+		assertTrue(gameEnvironment.getPlayer() instanceof Player);
 	}
 
 	@Test
 	void uiEnvironmentTest() {
-		assertTrue(ge.getUIEnvironment() instanceof UIEnvironment);
+		assertTrue(gameEnvironment.getUIEnvironment() instanceof UIEnvironment);
 	}
 
 	@Test
 	void gameEnvironmentUITest() {
 		GameEnvironment cliGameEnvironment = new GameEnvironment(true);
-		assertTrue(ge.getUIEnvironment() instanceof GUIEnvironment);
+		assertTrue(gameEnvironment.getUIEnvironment() instanceof GUIEnvironment);
 		assertTrue(cliGameEnvironment.getUIEnvironment() instanceof CLIEnvironment);
 	}
 }

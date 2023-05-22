@@ -19,49 +19,49 @@ import game.item.Steroid;
 import userinterface.graphical.GUIEnvironment;
 
 class SteroidTest {
-	private GameEnvironment ge;
+	private GameEnvironment gameEnvironment;
 
 	@BeforeEach
 	void setUp() {
-		ge = new GameEnvironment(false);
-		ge.setSeed(0);
+		gameEnvironment = new GameEnvironment(false);
+		gameEnvironment.setSeed(0);
 	}
 
 	@AfterEach
 	void tearDown() {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
 
 	@Test
 	void constructorTest() {
-		Steroid steroid = new Steroid("Test", 0, 0, ge);
+		Steroid steroid = new Steroid("Test", 0, 0, gameEnvironment);
 		assertEquals("Test", steroid.getDescription());
 		assertFalse(steroid.getIsLegal());
 		assertEquals(0, steroid.getPrice());
-		steroid = new Steroid("", 100, 0, ge);
+		steroid = new Steroid("", 100, 0, gameEnvironment);
 		assertEquals("", steroid.getDescription());
 		assertEquals(100, steroid.getPrice());
 	}
 
 	@Test
 	void generatorTest() {
-		Steroid steroid = (Steroid) Steroid.generateSteroid.apply(100, ge);
+		Steroid steroid = (Steroid) Steroid.generateSteroid.apply(100, gameEnvironment);
 		assertTrue(steroid instanceof Steroid);
 	}
 
 	@Test
 	void applyTest() {
-		Athlete athlete = new Athlete("", Position.DUNKER, 0, ge, 0);
+		Athlete athlete = new Athlete("", Position.DUNKER, 0, gameEnvironment, 0);
 		athlete.setStatistic(Statistic.HEIGHT, 0);
-		Steroid steroid = new Steroid("Test", 0, 57, ge);
+		Steroid steroid = new Steroid("Test", 0, 57, gameEnvironment);
 		assertEquals(0, athlete.getStatistic(Statistic.HEIGHT));
 		assertFalse(athlete.getHasUsedSteroids());
 		steroid.applyItem(athlete);
 		for (Statistic statistic : Statistic.values())
 			assertEquals(57, athlete.getStatistic(statistic));
-		steroid = new Steroid("Test", 0, 3, ge);
+		steroid = new Steroid("Test", 0, 3, gameEnvironment);
 		steroid.applyItem(athlete);
 		for (Statistic statistic : Statistic.values())
 			assertEquals(60, athlete.getStatistic(statistic));
@@ -70,8 +70,8 @@ class SteroidTest {
 
 	@Test
 	void purchaseTest() {
-		Steroid steroid = new Steroid("Test", 100, 0, ge);
-		Player player = ge.getPlayer();
+		Steroid steroid = new Steroid("Test", 100, 0, gameEnvironment);
+		Player player = gameEnvironment.getPlayer();
 		player.giveMoney(99);
 		assertFalse(steroid.purchase(player));
 		player.giveMoney(1);
@@ -81,8 +81,8 @@ class SteroidTest {
 
 	@Test
 	void sellTest() {
-		Steroid steroid = new Steroid("Test", 100, 0, ge);
-		Player player = ge.getPlayer();
+		Steroid steroid = new Steroid("Test", 100, 0, gameEnvironment);
+		Player player = gameEnvironment.getPlayer();
 		steroid.sell(player);
 		assertEquals(100, player.getMoney());
 		steroid.sell(player);
@@ -91,7 +91,7 @@ class SteroidTest {
 
 	@Test
 	void detailsTest() {
-		Steroid steroid = (Steroid) Steroid.generateSteroid.apply(100, ge);
+		Steroid steroid = (Steroid) Steroid.generateSteroid.apply(100, gameEnvironment);
 		assertTrue(steroid.getDetails() != null);
 		assertTrue(steroid.getDetails() instanceof String);
 	}

@@ -22,77 +22,77 @@ import game.location.GameMatchSelection;
 import userinterface.graphical.GUIEnvironment;
 
 class GameMatchSelectionTest {
-	private GameEnvironment ge;
-	private GameMatchSelection ms;
-	private Team tm;
+	private GameEnvironment gameEnvironment;
+	private GameMatchSelection gameMatchSelection;
+	private Team team;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		ge = new GameEnvironment(false);
-		tm = ge.getPlayer().getTeam();
-		ge.setSeed(0);
-		ge.setSeasonLength(7);
-		ge.setDifficulty(1);
-		ms = (GameMatchSelection) ge.getGameLocation(Location.MATCH_SELECTION);
-		ge.progressWeek();
+		gameEnvironment = new GameEnvironment(false);
+		team = gameEnvironment.getPlayer().getTeam();
+		gameEnvironment.setSeed(0);
+		gameEnvironment.setSeasonLength(7);
+		gameEnvironment.setDifficulty(1);
+		gameMatchSelection = (GameMatchSelection) gameEnvironment.getGameLocation(Location.MATCH_SELECTION);
+		gameEnvironment.progressWeek();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
 
 	@Test
 	void constructorTest() {
-		assertNotNull(ms.getTeams());
-		assertNotEquals(0, ms.getTeams().size());
+		assertNotNull(gameMatchSelection.getTeams());
+		assertNotEquals(0, gameMatchSelection.getTeams().size());
 	}
 
 	@Test
 	void updateTest() {
-		ArrayList<Team> teams1 = ms.getTeams();
+		ArrayList<Team> teams1 = gameMatchSelection.getTeams();
 		Team firstTeam = teams1.get(0);
 		for (int i = 1; i < teams1.size(); i++) {
 			assertNotEquals(firstTeam, teams1.get(i));
 		}
-		ge.progressWeek();
-		ArrayList<Team> teams2 = ms.getTeams();
+		gameEnvironment.progressWeek();
+		ArrayList<Team> teams2 = gameMatchSelection.getTeams();
 		assertNotEquals(teams1, teams2);
 	}
 
 	@Test
 	void canStartMatchTest() {
-		assertFalse(ms.canStartMatch());
-		Athlete athlete = new Athlete("", Position.DUNKER, 0, ge, 0);
-		tm.addAthleteToActive(athlete, Position.DUNKER);
-		assertFalse(ms.canStartMatch());
+		assertFalse(gameMatchSelection.canStartMatch());
+		Athlete athlete = new Athlete("", Position.DUNKER, 0, gameEnvironment, 0);
+		team.addAthleteToActive(athlete, Position.DUNKER);
+		assertFalse(gameMatchSelection.canStartMatch());
 		athlete.setStamina(1);
-		assertFalse(ms.canStartMatch());
+		assertFalse(gameMatchSelection.canStartMatch());
 
-		tm.addAthleteToActive(new Athlete("", Position.DUNKER, 0, ge, 0), Position.DEFENDER);
-		tm.addAthleteToActive(new Athlete("", Position.DUNKER, 0, ge, 0), Position.DRIBBLER);
-		tm.addAthleteToActive(new Athlete("", Position.DUNKER, 0, ge, 0), Position.LONG_SHOOTER);
-		tm.addAthleteToActive(new Athlete("", Position.DUNKER, 0, ge, 0), Position.SHORT_SHOOTER);
-		assertTrue(ms.canStartMatch());
+		team.addAthleteToActive(new Athlete("", Position.DUNKER, 0, gameEnvironment, 0), Position.DEFENDER);
+		team.addAthleteToActive(new Athlete("", Position.DUNKER, 0, gameEnvironment, 0), Position.DRIBBLER);
+		team.addAthleteToActive(new Athlete("", Position.DUNKER, 0, gameEnvironment, 0), Position.LONG_SHOOTER);
+		team.addAthleteToActive(new Athlete("", Position.DUNKER, 0, gameEnvironment, 0), Position.SHORT_SHOOTER);
+		assertTrue(gameMatchSelection.canStartMatch());
 		athlete.setStamina(0);
-		assertFalse(ms.canStartMatch());
+		assertFalse(gameMatchSelection.canStartMatch());
 		for (int i = 0; i < 5; i++)
-			tm.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(100, ge));
-		assertFalse(ms.canStartMatch());
+			team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(100, gameEnvironment));
+		assertFalse(gameMatchSelection.canStartMatch());
 
 	}
 
 	@Test
 	void playMatchTest() {
-		tm.addAthleteToActive(new Athlete("", Position.DUNKER, 100, ge, 0), Position.DEFENDER);
-		tm.addAthleteToActive(new Athlete("", Position.DUNKER, 100, ge, 0), Position.DRIBBLER);
-		tm.addAthleteToActive(new Athlete("", Position.DUNKER, 100, ge, 0), Position.LONG_SHOOTER);
-		tm.addAthleteToActive(new Athlete("", Position.DUNKER, 100, ge, 0), Position.SHORT_SHOOTER);
-		tm.addAthleteToActive(new Athlete("", Position.DUNKER, 100, ge, 0), Position.DUNKER);
+		team.addAthleteToActive(new Athlete("", Position.DUNKER, 100, gameEnvironment, 0), Position.DEFENDER);
+		team.addAthleteToActive(new Athlete("", Position.DUNKER, 100, gameEnvironment, 0), Position.DRIBBLER);
+		team.addAthleteToActive(new Athlete("", Position.DUNKER, 100, gameEnvironment, 0), Position.LONG_SHOOTER);
+		team.addAthleteToActive(new Athlete("", Position.DUNKER, 100, gameEnvironment, 0), Position.SHORT_SHOOTER);
+		team.addAthleteToActive(new Athlete("", Position.DUNKER, 100, gameEnvironment, 0), Position.DUNKER);
 
-		Team opposingTeam = Team.generateTeam(100, ge);
-		ms.playMatch(opposingTeam);
+		Team opposingTeam = Team.generateTeam(100, gameEnvironment);
+		gameMatchSelection.playMatch(opposingTeam);
 	}
 }

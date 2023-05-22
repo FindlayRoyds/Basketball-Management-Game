@@ -20,27 +20,27 @@ import game.location.GameMarket;
 import userinterface.graphical.GUIEnvironment;
 
 class GameItemMarketTest {
-	private GameEnvironment ge;
+	private GameEnvironment gameEnvironment;
 	private GameMarket gameMarket;
 
 	@BeforeEach
 	void setUp() {
-		ge = new GameEnvironment(false);
-		ge.setSeasonLength(5);
-		ge.setSeed(0);
-		gameMarket = (GameMarket) ge.getGameLocation(Location.ITEM_MARKET);
+		gameEnvironment = new GameEnvironment(false);
+		gameEnvironment.setSeasonLength(5);
+		gameEnvironment.setSeed(0);
+		gameMarket = (GameMarket) gameEnvironment.getGameLocation(Location.ITEM_MARKET);
 	}
 
 	@AfterEach
 	void tearDown() {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
 
 	@Test
 	void constructorTest() {
-		new GameMarket(ge, Item.generateLegalItem, ge.getPlayer().getPurchasables, false, 8);
+		new GameMarket(gameEnvironment, Item.generateLegalItem, gameEnvironment.getPlayer().getPurchasables, false, 8);
 	}
 
 	@Test
@@ -52,18 +52,18 @@ class GameItemMarketTest {
 
 	@Test
 	void getMoneyTest() {
-		assertEquals(ge.getPlayer().getMoney(), gameMarket.getPlayerMoney());
-		ge.getPlayer().giveMoney(100);
-		assertEquals(ge.getPlayer().getMoney(), gameMarket.getPlayerMoney());
-		ge.getPlayer().giveMoney(234);
-		assertEquals(ge.getPlayer().getMoney(), gameMarket.getPlayerMoney());
+		assertEquals(gameEnvironment.getPlayer().getMoney(), gameMarket.getPlayerMoney());
+		gameEnvironment.getPlayer().giveMoney(100);
+		assertEquals(gameEnvironment.getPlayer().getMoney(), gameMarket.getPlayerMoney());
+		gameEnvironment.getPlayer().giveMoney(234);
+		assertEquals(gameEnvironment.getPlayer().getMoney(), gameMarket.getPlayerMoney());
 	}
 
 	@Test
 	void ownedAndAllowedTest() {
 		for (Purchasable purchasable : gameMarket.getOwnedAndAllowed()) {
 			assertEquals(true, purchasable.getIsLegal());
-			assertTrue(ge.getPlayer().getPurchasables.get().contains(purchasable));
+			assertTrue(gameEnvironment.getPlayer().getPurchasables.get().contains(purchasable));
 		}
 	}
 
@@ -75,12 +75,12 @@ class GameItemMarketTest {
 		Purchasable transactionPurchasable = new ArrayList<Purchasable>(gameMarket.getAvailablePurchasables()).get(0);
 		gameMarket.purchase(transactionPurchasable);
 		assertFalse(gameMarket.getAvailablePurchasables().contains(transactionPurchasable));
-		assertEquals(1, ge.getPlayer().getInventory().size());
-		assertTrue(ge.getPlayer().getInventory().contains(transactionPurchasable));
+		assertEquals(1, gameEnvironment.getPlayer().getInventory().size());
+		assertTrue(gameEnvironment.getPlayer().getInventory().contains(transactionPurchasable));
 
 		gameMarket.sell(transactionPurchasable);
 		assertTrue(gameMarket.getAvailablePurchasables().contains(transactionPurchasable));
-		assertEquals(0, ge.getPlayer().getInventory().size());
-		assertFalse(ge.getPlayer().getInventory().contains(transactionPurchasable));
+		assertEquals(0, gameEnvironment.getPlayer().getInventory().size());
+		assertFalse(gameEnvironment.getPlayer().getInventory().contains(transactionPurchasable));
 	}
 }

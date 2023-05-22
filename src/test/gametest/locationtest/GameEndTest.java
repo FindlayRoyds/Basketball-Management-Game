@@ -15,28 +15,28 @@ import game.location.GameEnd;
 import userinterface.graphical.GUIEnvironment;
 
 class GameEndTest {
-	private GameEnvironment ge;
-	private Team tm;
+	private GameEnvironment gameEnvironment;
+	private Team team;
 	private GameEnd gameEnd;
 
 	@BeforeEach
 	void setUp() {
-		ge = new GameEnvironment(false);
-		ge.setSeed(0);
-		tm = ge.getPlayer().getTeam();
-		gameEnd = (GameEnd) ge.getGameLocation(Location.END);
+		gameEnvironment = new GameEnvironment(false);
+		gameEnvironment.setSeed(0);
+		team = gameEnvironment.getPlayer().getTeam();
+		gameEnd = (GameEnd) gameEnvironment.getGameLocation(Location.END);
 	}
 
 	@AfterEach
 	void tearDown() {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
 
 	@Test
 	void constructorTest() {
-		gameEnd = new GameEnd(ge);
+		gameEnd = new GameEnd(gameEnvironment);
 	}
 
 	@Test
@@ -47,43 +47,43 @@ class GameEndTest {
 
 	@Test
 	void scoreTest() {
-		assertEquals(ge.getPlayer().getScore(), gameEnd.getScore());
-		ge.getPlayer().givePoints(123);
-		assertEquals(ge.getPlayer().getScore(), gameEnd.getScore());
-		ge.getPlayer().givePoints(2000);
-		assertEquals(ge.getPlayer().getScore(), gameEnd.getScore());
+		assertEquals(gameEnvironment.getPlayer().getScore(), gameEnd.getScore());
+		gameEnvironment.getPlayer().givePoints(123);
+		assertEquals(gameEnvironment.getPlayer().getScore(), gameEnd.getScore());
+		gameEnvironment.getPlayer().givePoints(2000);
+		assertEquals(gameEnvironment.getPlayer().getScore(), gameEnd.getScore());
 	}
 
 	@Test
 	void moneyTest() {
-		assertEquals(ge.getPlayer().getMoney(), gameEnd.getMoney());
-		ge.getPlayer().giveMoney(100);
-		assertEquals(ge.getPlayer().getMoney(), gameEnd.getMoney());
-		ge.getPlayer().chargeMoney(100);
-		assertEquals(ge.getPlayer().getMoney(), gameEnd.getMoney());
+		assertEquals(gameEnvironment.getPlayer().getMoney(), gameEnd.getMoney());
+		gameEnvironment.getPlayer().giveMoney(100);
+		assertEquals(gameEnvironment.getPlayer().getMoney(), gameEnd.getMoney());
+		gameEnvironment.getPlayer().chargeMoney(100);
+		assertEquals(gameEnvironment.getPlayer().getMoney(), gameEnd.getMoney());
 	}
 
 	@Test
 	void teamNameTest() {
-		ge.getPlayer().getTeam().setName("test name");
-		assertEquals(ge.getPlayer().getTeam().getName(), gameEnd.getTeamName());
-		ge.getPlayer().getTeam().setName("123");
-		assertEquals(ge.getPlayer().getTeam().getName(), gameEnd.getTeamName());
+		gameEnvironment.getPlayer().getTeam().setName("test name");
+		assertEquals(gameEnvironment.getPlayer().getTeam().getName(), gameEnd.getTeamName());
+		gameEnvironment.getPlayer().getTeam().setName("123");
+		assertEquals(gameEnvironment.getPlayer().getTeam().getName(), gameEnd.getTeamName());
 	}
 
 	@Test
 	void seasonLengthTest() {
-		ge.setSeasonLength(5);
-		assertEquals(ge.getSeasonLength(), gameEnd.getSeasonLength());
-		ge.setSeasonLength(15);
-		assertEquals(ge.getSeasonLength(), gameEnd.getSeasonLength());
+		gameEnvironment.setSeasonLength(5);
+		assertEquals(gameEnvironment.getSeasonLength(), gameEnd.getSeasonLength());
+		gameEnvironment.setSeasonLength(15);
+		assertEquals(gameEnvironment.getSeasonLength(), gameEnd.getSeasonLength());
 	}
 
 	@Test
 	void weekTest() {
-		assertEquals(ge.getWeek(), gameEnd.getWeek());
-		ge.setSeasonLength(5);
-		ge.progressWeek();
-		assertEquals(ge.getWeek(), gameEnd.getWeek());
+		assertEquals(gameEnvironment.getWeek(), gameEnd.getWeek());
+		gameEnvironment.setSeasonLength(5);
+		gameEnvironment.progressWeek();
+		assertEquals(gameEnvironment.getWeek(), gameEnd.getWeek());
 	}
 }

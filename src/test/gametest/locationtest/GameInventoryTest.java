@@ -17,26 +17,26 @@ import game.location.GameInventory;
 import userinterface.graphical.GUIEnvironment;
 
 class GameInventoryTest {
-	private GameEnvironment ge;
+	private GameEnvironment gameEnvironment;
 	private GameInventory gameInventory;
 
 	@BeforeEach
 	void setUp() {
-		ge = new GameEnvironment(false);
-		ge.setSeed(0);
-		gameInventory = (GameInventory) ge.getGameLocation(Location.INVENTORY);
+		gameEnvironment = new GameEnvironment(false);
+		gameEnvironment.setSeed(0);
+		gameInventory = (GameInventory) gameEnvironment.getGameLocation(Location.INVENTORY);
 	}
 
 	@AfterEach
 	void tearDown() {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
 
 	@Test
 	void constructorTest() {
-		gameInventory = new GameInventory(ge);
+		gameInventory = new GameInventory(gameEnvironment);
 	}
 
 	@Test
@@ -47,16 +47,16 @@ class GameInventoryTest {
 
 	@Test
 	void itemsTest() {
-		assertEquals(ge.getPlayer().getInventory(), gameInventory.getItems());
-		Item newItem = (Item) Item.generateLegalItem.apply(50, ge);
-		ge.getPlayer().addToInventory(newItem);
-		assertEquals(ge.getPlayer().getInventory(), gameInventory.getItems());
+		assertEquals(gameEnvironment.getPlayer().getInventory(), gameInventory.getItems());
+		Item newItem = (Item) Item.generateLegalItem.apply(50, gameEnvironment);
+		gameEnvironment.getPlayer().addToInventory(newItem);
+		assertEquals(gameEnvironment.getPlayer().getInventory(), gameInventory.getItems());
 
 		int oldInventorySize = gameInventory.getItems().size();
-		Athlete athlete = new Athlete("name", Position.DUNKER, 1, ge, 1);
-		ge.getPlayer().getTeam().addAthleteToReserve(athlete);
+		Athlete athlete = new Athlete("name", Position.DUNKER, 1, gameEnvironment, 1);
+		gameEnvironment.getPlayer().getTeam().addAthleteToReserve(athlete);
 		gameInventory.useItem(newItem);
-		assertEquals(ge.getPlayer().getInventory(), gameInventory.getItems());
+		assertEquals(gameEnvironment.getPlayer().getInventory(), gameInventory.getItems());
 		assertEquals(oldInventorySize - 1, gameInventory.getItems().size());
 	}
 }

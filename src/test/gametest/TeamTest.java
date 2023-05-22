@@ -18,19 +18,19 @@ import game.Team;
 import userinterface.graphical.GUIEnvironment;
 
 class TeamTest {
-	private GameEnvironment ge;
-	private Team tm;
+	private GameEnvironment gameEnvironment;
+	private Team team;
 
 	@BeforeEach
 	void setUp() {
-		ge = new GameEnvironment(false);
-		ge.setSeed(0);
-		tm = ge.getPlayer().getTeam();
+		gameEnvironment = new GameEnvironment(false);
+		gameEnvironment.setSeed(0);
+		team = gameEnvironment.getPlayer().getTeam();
 	}
 
 	@AfterEach
 	void tearDown() {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
@@ -42,24 +42,24 @@ class TeamTest {
 
 	@Test
 	void unfilledPositionsTest() {
-		assertEquals(5, tm.getUnfilledTeamPositions().size());
-		tm.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.SHORT_SHOOTER);
-		assertEquals(4, tm.getUnfilledTeamPositions().size());
-		assertFalse(tm.getUnfilledTeamPositions().contains(Position.SHORT_SHOOTER));
-		tm.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DUNKER);
-		assertEquals(3, tm.getUnfilledTeamPositions().size());
-		assertFalse(tm.getUnfilledTeamPositions().contains(Position.DUNKER));
-		assertTrue(tm.getUnfilledTeamPositions().contains(Position.DRIBBLER));
-		tm.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DUNKER);
-		assertEquals(3, tm.getUnfilledTeamPositions().size());
+		assertEquals(5, team.getUnfilledTeamPositions().size());
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.SHORT_SHOOTER);
+		assertEquals(4, team.getUnfilledTeamPositions().size());
+		assertFalse(team.getUnfilledTeamPositions().contains(Position.SHORT_SHOOTER));
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DUNKER);
+		assertEquals(3, team.getUnfilledTeamPositions().size());
+		assertFalse(team.getUnfilledTeamPositions().contains(Position.DUNKER));
+		assertTrue(team.getUnfilledTeamPositions().contains(Position.DRIBBLER));
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DUNKER);
+		assertEquals(3, team.getUnfilledTeamPositions().size());
 	}
 
 	@Test
 	void nameTest() {
-		tm.setName("Testing");
-		assertEquals("Testing", tm.getName());
-		tm.setName("123");
-		assertEquals("123", tm.getName());
+		team.setName("Testing");
+		assertEquals("Testing", team.getName());
+		team.setName("123");
+		assertEquals("123", team.getName());
 	}
 
 	/**
@@ -67,85 +67,85 @@ class TeamTest {
 	 */
 	@Test
 	void athletesTest() {
-		assertNull(tm.getActiveAthletes().get(Position.DUNKER));
-		assertEquals(0, tm.getReserveAthletes().size());
-		Athlete activeAthlete = (Athlete) Athlete.generateAthlete.apply(0, ge);
-		tm.addAthleteToActive(activeAthlete, Position.DUNKER);
-		assertTrue(tm.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge)));
-		assertTrue(tm.getActiveAthletes().get(Position.DUNKER) != null);
-		assertEquals(1, tm.getActiveAthletes().values().size());
-		assertEquals(1, tm.getReserveAthletes().size());
-		assertEquals(4, tm.getNumberOfFreeReserveSlots());
-		assertEquals(2, tm.getAllAthletes().size());
-		assertEquals(2, tm.getAllPurchasables.get().size());
-		assertTrue(tm.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge)));
-		assertTrue(tm.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge)));
-		assertTrue(tm.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge)));
-		Athlete reserveAthlete = (Athlete) Athlete.generateAthlete.apply(0, ge);
-		assertTrue(tm.addAthleteToReserve(reserveAthlete));
-		assertFalse(tm.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge)));
-		tm.removeAthlete(reserveAthlete);
-		assertEquals(4, tm.getReserveAthletes().size());
-		assertEquals(1, tm.getNumberOfFreeReserveSlots());
-		assertTrue(tm.addAthleteToReserve(reserveAthlete));
-		tm.removeAthlete(reserveAthlete);
-		tm.removeAthlete(activeAthlete);
-		assertEquals(0, tm.getActiveAthletes().values().size());
-		tm.addAthleteToActive(activeAthlete, Position.DUNKER);
-		assertEquals(1, tm.getActiveAthletes().values().size());
-		assertEquals(activeAthlete, tm.getActiveAthletes().get(Position.DUNKER));
-		assertEquals(4, tm.getReserveAthletes().size());
-		assertTrue(tm.getActiveAthletes().values().contains(activeAthlete));
-		tm.moveToReserve(activeAthlete);
-		assertFalse(tm.getActiveAthletes().values().contains(activeAthlete));
-		assertEquals(0, tm.getActiveAthletes().values().size());
-		assertEquals(0, tm.getActiveAthletes().values().size());
-		assertEquals(5, tm.getReserveAthletes().size());
-		assertEquals(0, tm.getNumberOfFreeReserveSlots());
-		tm.moveToActive(activeAthlete, Position.SHORT_SHOOTER);
-		assertEquals(activeAthlete, tm.getActiveAthletes().get(Position.SHORT_SHOOTER));
-		assertTrue(tm.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge)));
-		tm.moveToReserve(activeAthlete);
-		assertTrue(tm.getReserveAthletes().contains(activeAthlete));
-		assertEquals(5, tm.getReserveAthletes().size());
-		assertFalse(tm.moveToReserve((Athlete) Athlete.generateAthlete.apply(0, ge)));
+		assertNull(team.getActiveAthletes().get(Position.DUNKER));
+		assertEquals(0, team.getReserveAthletes().size());
+		Athlete activeAthlete = (Athlete) Athlete.generateAthlete.apply(0, gameEnvironment);
+		team.addAthleteToActive(activeAthlete, Position.DUNKER);
+		assertTrue(team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment)));
+		assertTrue(team.getActiveAthletes().get(Position.DUNKER) != null);
+		assertEquals(1, team.getActiveAthletes().values().size());
+		assertEquals(1, team.getReserveAthletes().size());
+		assertEquals(4, team.getNumberOfFreeReserveSlots());
+		assertEquals(2, team.getAllAthletes().size());
+		assertEquals(2, team.getAllPurchasables.get().size());
+		assertTrue(team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment)));
+		assertTrue(team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment)));
+		assertTrue(team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment)));
+		Athlete reserveAthlete = (Athlete) Athlete.generateAthlete.apply(0, gameEnvironment);
+		assertTrue(team.addAthleteToReserve(reserveAthlete));
+		assertFalse(team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment)));
+		team.removeAthlete(reserveAthlete);
+		assertEquals(4, team.getReserveAthletes().size());
+		assertEquals(1, team.getNumberOfFreeReserveSlots());
+		assertTrue(team.addAthleteToReserve(reserveAthlete));
+		team.removeAthlete(reserveAthlete);
+		team.removeAthlete(activeAthlete);
+		assertEquals(0, team.getActiveAthletes().values().size());
+		team.addAthleteToActive(activeAthlete, Position.DUNKER);
+		assertEquals(1, team.getActiveAthletes().values().size());
+		assertEquals(activeAthlete, team.getActiveAthletes().get(Position.DUNKER));
+		assertEquals(4, team.getReserveAthletes().size());
+		assertTrue(team.getActiveAthletes().values().contains(activeAthlete));
+		team.moveToReserve(activeAthlete);
+		assertFalse(team.getActiveAthletes().values().contains(activeAthlete));
+		assertEquals(0, team.getActiveAthletes().values().size());
+		assertEquals(0, team.getActiveAthletes().values().size());
+		assertEquals(5, team.getReserveAthletes().size());
+		assertEquals(0, team.getNumberOfFreeReserveSlots());
+		team.moveToActive(activeAthlete, Position.SHORT_SHOOTER);
+		assertEquals(activeAthlete, team.getActiveAthletes().get(Position.SHORT_SHOOTER));
+		assertTrue(team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment)));
+		team.moveToReserve(activeAthlete);
+		assertTrue(team.getReserveAthletes().contains(activeAthlete));
+		assertEquals(5, team.getReserveAthletes().size());
+		assertFalse(team.moveToReserve((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment)));
 	}
 
 	@Test
 	void swapActiveAthletesTest() {
-		Athlete activeAthlete = (Athlete) Athlete.generateAthlete.apply(100, ge);
-		tm.addAthleteToActive(activeAthlete, Position.DUNKER);
-		tm.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DEFENDER);
-		tm.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DRIBBLER);
-		tm.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.LONG_SHOOTER);
+		Athlete activeAthlete = (Athlete) Athlete.generateAthlete.apply(100, gameEnvironment);
+		team.addAthleteToActive(activeAthlete, Position.DUNKER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DEFENDER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DRIBBLER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.LONG_SHOOTER);
 		for (int i = 0; i < 5; i++)
-			tm.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
+			team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment));
 
-		tm.moveToActive(activeAthlete, Position.DEFENDER);
-		assertEquals(activeAthlete, tm.getActiveAthletes().get(Position.DEFENDER));
-		assertFalse(activeAthlete == tm.getActiveAthletes().get(Position.DUNKER));
-		tm.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.SHORT_SHOOTER);
-		tm.moveToActive(activeAthlete, Position.SHORT_SHOOTER);
-		assertEquals(activeAthlete, tm.getActiveAthletes().get(Position.SHORT_SHOOTER));
-		assertFalse(activeAthlete == tm.getActiveAthletes().get(Position.DEFENDER));
+		team.moveToActive(activeAthlete, Position.DEFENDER);
+		assertEquals(activeAthlete, team.getActiveAthletes().get(Position.DEFENDER));
+		assertFalse(activeAthlete == team.getActiveAthletes().get(Position.DUNKER));
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.SHORT_SHOOTER);
+		team.moveToActive(activeAthlete, Position.SHORT_SHOOTER);
+		assertEquals(activeAthlete, team.getActiveAthletes().get(Position.SHORT_SHOOTER));
+		assertFalse(activeAthlete == team.getActiveAthletes().get(Position.DEFENDER));
 	}
 
 	@Test
 	void swapReserveAthleteIntoActiveTest() {
-		Athlete reserveAthlete = (Athlete) Athlete.generateAthlete.apply(100, ge);
-		tm.addAthleteToReserve(reserveAthlete);
-		tm.moveToActive(reserveAthlete, Position.LONG_SHOOTER);
+		Athlete reserveAthlete = (Athlete) Athlete.generateAthlete.apply(100, gameEnvironment);
+		team.addAthleteToReserve(reserveAthlete);
+		team.moveToActive(reserveAthlete, Position.LONG_SHOOTER);
 	}
 
 	@Test
 	void removeAthleteNotInTeamTest() {
-		Athlete athlete = (Athlete) Athlete.generateAthlete.apply(0, ge);
-		tm.removeAthlete(athlete);
+		Athlete athlete = (Athlete) Athlete.generateAthlete.apply(0, gameEnvironment);
+		team.removeAthlete(athlete);
 	}
 
 	@Test
 	void generateTeamTest() {
-		Team randomTeam = Team.generateTeam(100, ge);
+		Team randomTeam = Team.generateTeam(100, gameEnvironment);
 		assertEquals(5, randomTeam.getReserveAthletes().size());
 		assertEquals(5, randomTeam.getActiveAthletes().values().size());
 	}
