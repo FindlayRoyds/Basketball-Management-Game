@@ -3,16 +3,19 @@ package game.location;
 import game.GameEnvironment;
 
 /**
- * A class defining the End location. This location is used at the end of the
- * game to get stats about the game and player so that they can be summarized
- * and shown to the user.
+ * A class defining the End game location. This location is used at the end of
+ * the game to get stats about the game and player so that they can be
+ * summarized and shown to the user.
  * 
  * @author Jake van Keulen
  * @version 1.0
  */
 public class GameEnd extends GameLocation {
 	/**
-	 * Constructor for End
+	 * Constructor for End.
+	 * 
+	 * @param gameEnvironment The game environment to which the end location
+	 *                        belongs.
 	 */
 	public GameEnd(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
@@ -63,7 +66,7 @@ public class GameEnd extends GameLocation {
 	}
 
 	/**
-	 * Stops execution of the program when the game is over.
+	 * Stops execution of the program. To be used when the game is over.
 	 */
 	public void endGame() {
 		System.exit(0);

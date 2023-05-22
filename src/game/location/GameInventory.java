@@ -21,6 +21,9 @@ import game.item.Item;
 public class GameInventory extends GameLocation {
 	/**
 	 * Constructor for Inventory
+	 * 
+	 * @param gameEnvironment The game environment to which the inventory location
+	 *                        belongs.
 	 */
 	public GameInventory(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);

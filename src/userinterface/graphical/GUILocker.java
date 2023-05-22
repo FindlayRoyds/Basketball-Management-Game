@@ -21,14 +21,33 @@ import userinterface.graphical.components.AthleteExplorer;
 import userinterface.graphical.components.PurchasableExplorer;
 import util.MiscUtil;
 
+/**
+ * A class that defines the locker GUI location. It contains an AthleteExplorer
+ * component displaying the athletes in the player's team and provides a
+ * graphical interface for moving players between positions within the team.
+ * 
+ * @author Jake van Keulen
+ * @version 1.0
+ */
+@SuppressWarnings("serial")
 public class GUILocker extends GUILocation {
-	private static final long serialVersionUID = 1L;
-	GameLocker gameLocation;
+	/**
+	 * The corresponding game location class. Acts as the point of communication for
+	 * interacting with the backend game logic.
+	 */
+	private GameLocker gameLocation;
 
-	PurchasableExplorer purchasableExplorer;
-	JLabel teamLayoutLabel;
-	JLabel inventoryTitleLabel;
+	/**
+	 * Components with dynamic content.
+	 */
+	private PurchasableExplorer purchasableExplorer;
+	private JLabel inventoryTitleLabel;
 
+	/**
+	 * Gets the selected athlete from the athlete explorer and prompts the user
+	 * asking what position to move them to. Then instructs the game location to
+	 * handle moving the athlete to that position.
+	 */
 	private void moveAthlete() {
 		Athlete selectedAthlete = (Athlete) purchasableExplorer.getSelected();
 		if (selectedAthlete != null) {
@@ -44,21 +63,33 @@ public class GUILocker extends GUILocation {
 		}
 	}
 
+	/**
+	 * Instructs the game location to change the current location to the map.
+	 */
 	private void returnToMap() {
 		gameLocation.changeLocation(Location.MAP);
 	}
 
+	/**
+	 * @return A list of the athletes in the player's team.
+	 */
 	private List<Purchasable> getAthletes() {
 		return new ArrayList<Purchasable>(gameLocation.getAllAthletes());
 	}
 
+	/**
+	 * Refreshes the athlete explorer to use the latest athlete data.
+	 */
 	public void refresh() {
 		purchasableExplorer.refresh();
 		this.inventoryTitleLabel.setText("Locker Room - " + this.gameLocation.getTeamName());
 	}
 
 	/**
-	 * Create the panel.
+	 * Constructor for the GUILocker component.
+	 * 
+	 * @param gameLocation   The GUI location's corresponding game location class.
+	 * @param guiEnvironment The GUI environment to which the GUI location belongs.
 	 */
 	public GUILocker(GameLocation gameLocation, GUIEnvironment guiEnvironment) {
 		super(guiEnvironment);

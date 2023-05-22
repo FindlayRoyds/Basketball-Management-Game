@@ -14,12 +14,16 @@ import game.Team;
  */
 public class AthleteJoins extends RandomEvent {
 	/**
-	 * The team the random event effects.
+	 * The team the random event affects.
 	 */
 	private Team team;
 
 	/**
-	 * @param gameEnvironment
+	 * Constructor for AthleteJoins.
+	 * 
+	 * @param gameEnvironment The game environment to which the random event
+	 *                        belongs.
+	 * @param team            The team the random event affects.
 	 */
 	public AthleteJoins(GameEnvironment gameEnvironment, Team team) {
 		super(gameEnvironment);

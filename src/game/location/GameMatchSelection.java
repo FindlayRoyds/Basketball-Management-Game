@@ -21,7 +21,7 @@ public class GameMatchSelection extends GameLocation {
 	/**
 	 * The number of teams to be generated and shown.
 	 */
-	static final int NUMBER_OF_TEAMS = 3;
+	private static final int NUMBER_OF_TEAMS = 3;
 
 	/**
 	 * The list of Teams that are available to play a match against.
@@ -29,7 +29,10 @@ public class GameMatchSelection extends GameLocation {
 	private ArrayList<Team> teams;
 
 	/**
-	 * Constructor for Map
+	 * Constructor for Map.
+	 * 
+	 * @param gameEnvironment The game environment to which the map location
+	 *                        belongs.
 	 */
 	public GameMatchSelection(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
@@ -38,6 +41,8 @@ public class GameMatchSelection extends GameLocation {
 	/**
 	 * Update the week to a given week. This involves refreshing the opposition
 	 * teams so that they are different each week.
+	 * 
+	 * @param week The current week at the time of update.
 	 */
 	@Override
 	public void update(int week) {
@@ -82,6 +87,8 @@ public class GameMatchSelection extends GameLocation {
 	/**
 	 * Get whether a match is able to start. A match can only start when the
 	 * player's team has 5 active athletes,
+	 * 
+	 * @return Whether or not a match is able to start.
 	 */
 	public boolean canStartMatch() {
 		Team playerTeam = getGameEnvironment().getPlayer().getTeam();

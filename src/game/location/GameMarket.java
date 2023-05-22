@@ -66,7 +66,24 @@ public class GameMarket extends GameLocation {
 	}
 
 	/**
-	 * Constructor
+	 * Constructor for GameMarket.
+	 * 
+	 * @param gameEnvironment          The game environment to which the market
+	 *                                 location belongs.
+	 * @param generatePurchasable      A function that generates a single
+	 *                                 purchasable. This is used to create the items
+	 *                                 sold in the market.
+	 * @param getOwned                 A function to get the purchasables relevant
+	 *                                 to the market that are owned by the player.
+	 *                                 Determines what items can be sold from the
+	 *                                 player to the market.
+	 * @param allowIllegalPurchasables Whether or not illegal purchasables are
+	 *                                 permitted at the market. If true, only legal
+	 *                                 purchasables are allowed. If false, only
+	 *                                 illegal purchasables are allowed.
+	 * @param amountToDisplay          The number of purchasables that will be
+	 *                                 generated to be sold when the market is
+	 *                                 updated.
 	 */
 	public GameMarket(GameEnvironment gameEnvironment,
 			Function3<Integer, GameEnvironment, Purchasable> generatePurchasable, Supplier<Set<Purchasable>> getOwned,
@@ -106,8 +123,8 @@ public class GameMarket extends GameLocation {
 	 * @param purchasable The purchasable to be purchased.
 	 */
 	public void purchase(Purchasable purchasable) {
-		purchasable.purchase(getGameEnvironment().getPlayer());
-		availablePurchasables.remove(purchasable);
+		if (purchasable.purchase(getGameEnvironment().getPlayer()))
+			availablePurchasables.remove(purchasable);
 	}
 
 	/**

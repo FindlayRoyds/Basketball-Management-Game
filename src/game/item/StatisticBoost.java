@@ -27,6 +27,10 @@ public class StatisticBoost extends Item {
 	 */
 	private int boostAmount;
 
+	/**
+	 * A Map of Statistic types to the names and descriptions of statistic boosts
+	 * that boost those statistics.
+	 */
 	private static final Map<Statistic, String[]> StatisticBoostTypes = Map.of(Statistic.HEIGHT,
 			new String[] { "Insole", "A height increasing shoe insole" }, Statistic.SHOOTING_POWER,
 			new String[] { "Dumbbell", "A one pound weight to improve shooting power" }, Statistic.SHOOTING_ACCURACY,
@@ -41,6 +45,8 @@ public class StatisticBoost extends Item {
 			Statistic.OFFENCE, new String[] { "Sword", "A medieval weapon to improve offensive capabilities" });
 
 	/**
+	 * The constructor for StatisticBoost
+	 * 
 	 * @param name            The name of the statistic boost item
 	 * @param description     The text description given to the statistic boost item
 	 * @param price           The price the player gets charged to purchase the item
@@ -54,12 +60,12 @@ public class StatisticBoost extends Item {
 	}
 
 	/**
-	 * 
+	 * Generates a statistic boost item with random properties.
 	 * 
 	 * @param qualityLevel    The quality level of the item. Influences randomness
 	 *                        of generation
 	 * @param gameEnvironment The game environment the game is being created in
-	 * @return The randomly generated steroid purchasable item
+	 * @return The randomly generated statistic boost item
 	 */
 	public static Purchasable generateStatisticBoost(int qualityLevel, GameEnvironment gameEnvironment) {
 		Random rng = gameEnvironment.getRng();
@@ -81,7 +87,8 @@ public class StatisticBoost extends Item {
 	}
 
 	/**
-	 * increases one of the athlete's statistics and consumes the item
+	 * Applies the statisticBoost to a given athlete. Increases one of the athlete's
+	 * statistics and consumes the item
 	 * 
 	 * @param athlete The athlete to whom the affect is being applied
 	 */
@@ -92,6 +99,9 @@ public class StatisticBoost extends Item {
 		this.consume();
 	}
 
+	/**
+	 * Gets a string describing the statistic boost and what it does.
+	 */
 	@Override
 	public String getDetails() {
 		return "Boosted statistic: " + statisticToBoost.name() + "\nBoost amount: " + boostAmount

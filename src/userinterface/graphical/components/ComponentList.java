@@ -14,6 +14,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+/**
+ * A component that displays a vertical, scrollable list of equally sized child
+ * components, of which one at a time can be selected by clicking on that
+ * component.
+ * 
+ * @author Findlay Royds
+ * @version 1.0
+ */
 @SuppressWarnings("serial") // We aren't using serialisation in this project
 public class ComponentList extends JPanel {
 	/**

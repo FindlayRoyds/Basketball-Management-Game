@@ -14,16 +14,16 @@ import game.GameEnvironment;
  */
 public class StatisticIncrease extends RandomEvent {
 	/**
-	 * The athlete this random event effects
+	 * The athlete this random event affects
 	 */
 	private Athlete athlete;
 
 	/**
-	 * Constructor for the stat increase random event. Sets the athlete that the
-	 * random event effects.
+	 * Constructor for the statistic increase random event. Sets the athlete that
+	 * the random event effects.
 	 * 
 	 * @param gameEnvironment The game environment that the athlete belongs to.
-	 * @param athlete         The athlete the random event effects.
+	 * @param athlete         The athlete the random event affects.
 	 */
 	public StatisticIncrease(GameEnvironment gameEnvironment, Athlete athlete) {
 		super(gameEnvironment);

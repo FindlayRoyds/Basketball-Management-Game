@@ -16,6 +16,10 @@ import game.GameEnvironment;
  * @version 1.0
  */
 public class GameStart extends GameLocation {
+	/**
+	 * A Set of athletes that are available for the player to choose from to build
+	 * their team at the start of the game.
+	 */
 	private Set<Athlete> startingAthletes;
 
 	/**

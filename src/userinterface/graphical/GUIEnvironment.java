@@ -12,16 +12,20 @@ import game.location.GameLocation;
 import userinterface.UIEnvironment;
 
 /**
+ * A class defining the environment controlling all GUI displays. Handles
+ * swapping JPanels to switch between locations.
  * 
- * 
- * @author Findlay Royds
+ * @author Findlay Royds, Jake van Keulen
  * @version 1.1, May 2023.
  */
 public class GUIEnvironment implements UIEnvironment {
+	/**
+	 * The container frame in which the different UI panels are swapped in and out.
+	 */
 	private JFrame frame;
 
 	/**
-	 * The location currently being displayed on the gui.
+	 * The location currently being displayed on the GUI.
 	 */
 	private GUILocation currentLocation;
 
@@ -32,7 +36,7 @@ public class GUIEnvironment implements UIEnvironment {
 
 	/**
 	 * The constructor for the GUI environment. Creates all of the GUI locations and
-	 * initialises the window.
+	 * initializes the window.
 	 * 
 	 * @param gameLocations   A map that maps every location in the game to a game
 	 *                        location object.
@@ -59,6 +63,10 @@ public class GUIEnvironment implements UIEnvironment {
 		initialize();
 	}
 
+	/**
+	 * Swaps out the current location panel to change between GUI locations. Also
+	 * calls the refresh method of the new location to update its content.
+	 */
 	@Override
 	public void changeLocation(Location location, GameLocation gameLocation) {
 		currentLocation = guiLocations.get(location);
@@ -69,12 +77,20 @@ public class GUIEnvironment implements UIEnvironment {
 		frame.repaint();
 	}
 
+	/**
+	 * Display a popup box on the screen, consisting of a given message and options
+	 * for the user to click one of.
+	 */
 	@Override
 	public int displayPopup(String message, String[] options) {
 		return JOptionPane.showOptionDialog(null, message, "", JOptionPane.DEFAULT_OPTION,
 				JOptionPane.INFORMATION_MESSAGE, null, options, null);
 	}
 
+	/**
+	 * Display a popup box on the screen, consisting of a given message and a
+	 * default "close" button.
+	 */
 	@Override
 	public void displayPopup(String message) {
 		displayPopup(message, new String[] { "Close" });
@@ -91,6 +107,10 @@ public class GUIEnvironment implements UIEnvironment {
 		frame.getContentPane().setLayout(null);
 	}
 
+	/**
+	 * @return The GUIEnvironment's main content frame, used for containing the
+	 *         currently visible GUI location.
+	 */
 	public JFrame getFrame() {
 		return frame;
 	}

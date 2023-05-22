@@ -9,11 +9,22 @@ import javax.swing.SwingConstants;
 
 import game.Purchasable;
 
+/**
+ * A GUI component that displays details about a given purchasable in a large,
+ * spacious format.
+ * 
+ * @author Jake van Keulen
+ * @version 1.0
+ *
+ */
+@SuppressWarnings("serial")
 public class PurchasableInfoLarge extends JPanel {
-	private static final long serialVersionUID = 1L;
-
 	/**
-	 * Create the panel.
+	 * Constructor for PurchasableInfoLarge. Creates and renders all involved
+	 * components.
+	 * 
+	 * @param purchasable The purchasable whose info is to be displayed.
+	 * @param showPrice   Whether or not to display the price of the purchasable.
 	 */
 	public PurchasableInfoLarge(Purchasable purchasable, boolean showPrice) {
 		setBackground(Color.PINK);

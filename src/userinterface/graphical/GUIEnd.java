@@ -10,12 +10,23 @@ import javax.swing.SwingConstants;
 import game.location.GameEnd;
 import game.location.GameLocation;
 
+/**
+ * A class that defines the end GUI location. It creates and displays a summary
+ * of information about a season, suitable for use at the end of the game.
+ * 
+ * @author Jake van Keulen, Findlay Royds
+ * @version 1.0
+ */
 @SuppressWarnings("serial") // We aren't using serialization in this project
 public class GUIEnd extends GUILocation {
-	GameEnd gameLocation;
+	/**
+	 * The corresponding game location class. Acts as the point of communication for
+	 * interacting with the backend game logic.
+	 */
+	private GameEnd gameLocation;
 
 	/**
-	 * Components accessed by the refresh method
+	 * Components accessed by the refresh method.
 	 */
 	private JLabel teamNameLabel;
 	private JLabel pointsLabel;
@@ -23,7 +34,10 @@ public class GUIEnd extends GUILocation {
 	private JLabel seasonLengthLabel;
 
 	/**
-	 * Creates the GUIEnd component.
+	 * Constructor for the GUIEnd component.
+	 * 
+	 * @param gameLocation   The GUI location's corresponding game location class.
+	 * @param guiEnvironment The GUI environment to which the GUI location belongs.
 	 */
 	public GUIEnd(GameLocation gameLocation, GUIEnvironment guiEnvironment) {
 		super(guiEnvironment);
@@ -71,6 +85,9 @@ public class GUIEnd extends GUILocation {
 		add(seasonLengthLabel);
 	}
 
+	/**
+	 * Refreshes the content of the end screen.
+	 */
 	@Override
 	public void refresh() {
 		teamNameLabel.setText(gameLocation.getTeamName());

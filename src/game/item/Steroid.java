@@ -41,7 +41,7 @@ public class Steroid extends Item {
 	}
 
 	/**
-	 * 
+	 * Generates a Steroid item with random properties.
 	 * 
 	 * @param qualityLevel    The quality level of the item. Influences randomness
 	 *                        of generation
@@ -63,7 +63,8 @@ public class Steroid extends Item {
 	};
 
 	/**
-	 * Applys the steroid to the selected athlete
+	 * Applys the steroid to the selected athlete. Boosts all the athlete's
+	 * statistics by the boost amount.
 	 * 
 	 * @param athlete The athlete to whom the steroid is applied
 	 */

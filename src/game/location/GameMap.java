@@ -19,7 +19,10 @@ import game.Team;
  */
 public class GameMap extends GameLocation {
 	/**
-	 * Constructor for Map
+	 * Constructor for Map.
+	 * 
+	 * @param gameEnvironment The game environment to which the map location
+	 *                        belongs.
 	 */
 	public GameMap(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);
@@ -84,7 +87,7 @@ public class GameMap extends GameLocation {
 	}
 
 	/**
-	 * @return current week number
+	 * @return The number of the current week. Weeks start from 1.
 	 */
 	public int getWeek() {
 		return getGameEnvironment().getWeek();

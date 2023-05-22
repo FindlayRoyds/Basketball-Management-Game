@@ -5,9 +5,9 @@ package util;
  * 
  * @author Jake van Keulen
  *
- * @param <Param1>
- * @param <Param2>
- * @param <Return>
+ * @param <Param1> The type of the first parameter
+ * @param <Param2> The type of the second parameter
+ * @param <Return> The return type
  */
 @FunctionalInterface
 public interface Function3<Param1, Param2, Return> {

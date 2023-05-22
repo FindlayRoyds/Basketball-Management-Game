@@ -16,10 +16,26 @@ import game.location.GameLocation;
 import game.location.GameMarket;
 import userinterface.graphical.components.PurchasableExplorer;
 
+/**
+ * A class that defines the market GUI location. It contains a
+ * PurchasableExplorer component displaying purchasables that can be either (1)
+ * bought or (2) sold, and a graphical interface to switch between these
+ * options.
+ * 
+ * @author Jake van Keulen
+ * @version 1.0
+ */
+@SuppressWarnings("serial")
 public class GUIMarket extends GUILocation {
-	private static final long serialVersionUID = 1L;
+	/**
+	 * The corresponding game location class. Acts as the point of communication for
+	 * interacting with the backend game logic.
+	 */
 	private GameMarket gameLocation;
 
+	/**
+	 * Components with dynamic content.
+	 */
 	private PurchasableExplorer purchasableExplorer;
 	private JLabel marketTitle;
 	private JButton choosePurchasableButton;
@@ -28,10 +44,16 @@ public class GUIMarket extends GUILocation {
 	private JButton swapViewButton;
 	private JLabel moneyLabel;
 
+	/**
+	 * instructs the game location to change the current location to the map.
+	 */
 	private void returnToMap() {
 		gameLocation.changeLocation(Location.MAP);
 	}
 
+	/**
+	 * Refreshes the purchasable explorer to use the latest purchasable data.
+	 */
 	public void refresh() {
 		marketTitle.setText(name + " - " + (showSellScreen ? "Sell" : "Buy"));
 
@@ -61,13 +83,13 @@ public class GUIMarket extends GUILocation {
 				.setSupplier(showSellScreen ? (() -> new ArrayList<Purchasable>(gameLocation.getOwnedAndAllowed()))
 						: (() -> new ArrayList<Purchasable>(gameLocation.getAvailablePurchasables())));
 		purchasableExplorer.refresh();
-
-		// revalidate();
-		// repaint();
 	}
 
 	/**
-	 * Create the panel.
+	 * Constructor for the GUIMarket component.
+	 * 
+	 * @param gameLocation   The GUI location's corresponding game location class.
+	 * @param guiEnvironment The GUI environment to which the GUI location belongs.
 	 */
 	public GUIMarket(GameLocation gameLocation, GUIEnvironment guiEnvironment, String name) {
 		super(guiEnvironment);
