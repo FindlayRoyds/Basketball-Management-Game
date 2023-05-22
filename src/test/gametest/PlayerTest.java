@@ -19,65 +19,65 @@ import game.item.Steroid;
 import userinterface.graphical.GUIEnvironment;
 
 class PlayerTest {
-	private GameEnvironment ge;
-	private Player pl;
+	private GameEnvironment gameEnvironment;
+	private Player player;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		ge = new GameEnvironment(false);
-		ge.setSeed(0);
-		pl = ge.getPlayer();
+		gameEnvironment = new GameEnvironment(false);
+		gameEnvironment.setSeed(0);
+		player = gameEnvironment.getPlayer();
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
 
 	@Test
 	void ConstructorTest() {
-		assertEquals(0, pl.getMoney());
-		assertEquals(0, pl.getScore());
-		assertTrue(pl.getInventory().size() == 0);
-		assertTrue(pl.getTeam() instanceof Team);
+		assertEquals(0, player.getMoney());
+		assertEquals(0, player.getScore());
+		assertTrue(player.getInventory().size() == 0);
+		assertTrue(player.getTeam() instanceof Team);
 	}
 
 	@Test
 	void inventoryTest() {
-		Item steroid = (Item) Steroid.generateSteroid.apply(0, ge);
-		Item statBoost = (Item) StatisticBoost.generateStatisticBoost(0, ge);
-		pl.addToInventory(statBoost);
-		assertEquals(1, pl.getInventory().size());
-		pl.addToInventory(statBoost);
-		assertEquals(1, pl.getInventory().size());
-		pl.addToInventory(steroid);
-		assertEquals(2, pl.getInventory().size());
-		pl.removeFromInventory(statBoost);
-		assertEquals(1, pl.getInventory().size());
-		pl.removeFromInventory(steroid);
-		assertEquals(0, pl.getInventory().size());
+		Item steroid = (Item) Steroid.generateSteroid.apply(0, gameEnvironment);
+		Item statBoost = (Item) StatisticBoost.generateStatisticBoost(0, gameEnvironment);
+		player.addToInventory(statBoost);
+		assertEquals(1, player.getInventory().size());
+		player.addToInventory(statBoost);
+		assertEquals(1, player.getInventory().size());
+		player.addToInventory(steroid);
+		assertEquals(2, player.getInventory().size());
+		player.removeFromInventory(statBoost);
+		assertEquals(1, player.getInventory().size());
+		player.removeFromInventory(steroid);
+		assertEquals(0, player.getInventory().size());
 	}
 
 	@Test
 	void moneyTest() {
-		assertEquals(0, pl.getMoney());
-		pl.giveMoney(100);
-		assertEquals(100, pl.getMoney());
-		assertTrue(pl.chargeMoney(99));
-		assertTrue(pl.chargeMoney(1));
-		assertFalse(pl.chargeMoney(1));
-		assertTrue(pl.chargeMoney(0));
-		assertEquals(0, pl.getMoney());
+		assertEquals(0, player.getMoney());
+		player.giveMoney(100);
+		assertEquals(100, player.getMoney());
+		assertTrue(player.chargeMoney(99));
+		assertTrue(player.chargeMoney(1));
+		assertFalse(player.chargeMoney(1));
+		assertTrue(player.chargeMoney(0));
+		assertEquals(0, player.getMoney());
 	}
 
 	@Test
 	void pointsTest() {
-		assertEquals(0, pl.getScore());
-		pl.givePoints(100);
-		assertEquals(100, pl.getScore());
-		pl.givePoints(99);
-		assertEquals(199, pl.getScore());
+		assertEquals(0, player.getScore());
+		player.givePoints(100);
+		assertEquals(100, player.getScore());
+		player.givePoints(99);
+		assertEquals(199, player.getScore());
 	}
 }

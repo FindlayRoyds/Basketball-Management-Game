@@ -22,26 +22,26 @@ import game.location.GameStart;
 import userinterface.graphical.GUIEnvironment;
 
 class GameStartTest {
-	private GameEnvironment ge;
+	private GameEnvironment gameEnvironment;
 	private GameStart gameStart;
 
 	@BeforeEach
 	void setUp() {
-		ge = new GameEnvironment(false);
-		ge.setSeed(0);
-		gameStart = (GameStart) ge.getGameLocation(Location.START);
+		gameEnvironment = new GameEnvironment(false);
+		gameEnvironment.setSeed(0);
+		gameStart = (GameStart) gameEnvironment.getGameLocation(Location.START);
 	}
 
 	@AfterEach
 	void tearDown() {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
 
 	@Test
 	void constructorTest() {
-		gameStart = new GameStart(ge);
+		gameStart = new GameStart(gameEnvironment);
 	}
 
 	@Test
@@ -59,13 +59,13 @@ class GameStartTest {
 		gameStart.chooseAthlete(chosenAthlete, Position.DUNKER);
 		assertEquals(9, gameStart.getStartingAthletes().size());
 		assertFalse(gameStart.getStartingAthletes().contains(chosenAthlete));
-		assertTrue(ge.getPlayer().getTeam().getAllAthletes().contains(chosenAthlete));
+		assertTrue(gameEnvironment.getPlayer().getTeam().getAllAthletes().contains(chosenAthlete));
 	}
 
 	@Test
 	void positionTest() {
 		for (Position position : gameStart.getUnfilledTeamPositions()) {
-			assertNull(ge.getPlayer().getTeam().getActiveAthletes().get(position));
+			assertNull(gameEnvironment.getPlayer().getTeam().getActiveAthletes().get(position));
 		}
 	}
 
@@ -74,14 +74,14 @@ class GameStartTest {
 		String name = "My name";
 		gameStart.setTeamName(name);
 		assertEquals(name, gameStart.getTeamName());
-		assertEquals(name, ge.getPlayer().getTeam().getName());
+		assertEquals(name, gameEnvironment.getPlayer().getTeam().getName());
 	}
 
 	@Test
 	void seasonLengthTest() {
 		for (int length = 5; length <= 15; ++length) {
 			gameStart.setSeasonLength(length);
-			assertEquals(length, ge.getSeasonLength());
+			assertEquals(length, gameEnvironment.getSeasonLength());
 		}
 	}
 
@@ -95,16 +95,16 @@ class GameStartTest {
 	void difficultyTest() {
 		for (int difficulty = 1; difficulty <= 3; ++difficulty) {
 			gameStart.setDifficulty(difficulty);
-			assertEquals(difficulty, ge.getDifficulty());
+			assertEquals(difficulty, gameEnvironment.getDifficulty());
 		}
 	}
 
 	@Test
 	void progressWeek() {
-		ge.setSeasonLength(5);
+		gameEnvironment.setSeasonLength(5);
 		for (int i = 0; i < 5; ++i) {
 			gameStart.progressWeek();
-			assertEquals(i + 1, ge.getWeek());
+			assertEquals(i + 1, gameEnvironment.getWeek());
 		}
 	}
 }

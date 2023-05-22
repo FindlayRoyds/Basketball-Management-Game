@@ -20,27 +20,27 @@ import game.location.GameMatch;
 import userinterface.graphical.GUIEnvironment;
 
 class GameMatchTest {
-	private GameEnvironment ge;
+	private GameEnvironment gameEnvironment;
 	private GameMatch gameMatch;
 
 	@BeforeEach
 	void setUp() {
-		ge = new GameEnvironment(false);
-		ge.setSeed(0);
-		ge.setSeasonLength(5);
-		gameMatch = (GameMatch) ge.getGameLocation(Location.MATCH);
+		gameEnvironment = new GameEnvironment(false);
+		gameEnvironment.setSeed(0);
+		gameEnvironment.setSeasonLength(5);
+		gameMatch = (GameMatch) gameEnvironment.getGameLocation(Location.MATCH);
 	}
 
 	@AfterEach
 	void tearDown() {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
 
 	@Test
 	void constructorTest() {
-		gameMatch = new GameMatch(ge);
+		gameMatch = new GameMatch(gameEnvironment);
 	}
 
 	@Test
@@ -51,8 +51,8 @@ class GameMatchTest {
 
 	@Test
 	void teamsTest() {
-		Team team1 = Team.generateTeam(50, ge);
-		Team team2 = Team.generateTeam(50, ge);
+		Team team1 = Team.generateTeam(50, gameEnvironment);
+		Team team2 = Team.generateTeam(50, gameEnvironment);
 		gameMatch.setTeams(team1, team2);
 
 		assertEquals(team1, gameMatch.getTeam1());
@@ -64,8 +64,8 @@ class GameMatchTest {
 
 	@RepeatedTest(5)
 	void playTest() {
-		Team team1 = Team.generateTeam(50, ge);
-		Team team2 = Team.generateTeam(50, ge);
+		Team team1 = Team.generateTeam(50, gameEnvironment);
+		Team team2 = Team.generateTeam(50, gameEnvironment);
 		gameMatch.setTeams(team1, team2);
 
 		int score1 = 0, score2 = 0;
@@ -81,25 +81,25 @@ class GameMatchTest {
 
 		assertEquals(score1 > score2, gameMatch.getWinningTeam() == team1);
 
-		int week = ge.getWeek();
+		int week = gameEnvironment.getWeek();
 		gameMatch.finish();
-		assertEquals(week + 1, ge.getWeek());
+		assertEquals(week + 1, gameEnvironment.getWeek());
 	}
 
 	@Test
 	void sameTeamTest() {
-		Team team = Team.generateTeam(50, ge);
+		Team team = Team.generateTeam(50, gameEnvironment);
 		gameMatch.setTeams(team, team);
 		for (Position position : Position.values()) {
 			Athlete athlete = team.getActiveAthletes().get(position);
 			gameMatch.getWinningAthlete(athlete, athlete);
 		}
-		int money = ge.getPlayer().getMoney();
-		int score = ge.getPlayer().getScore();
+		int money = gameEnvironment.getPlayer().getMoney();
+		int score = gameEnvironment.getPlayer().getScore();
 		gameMatch.finish();
-		if (gameMatch.getWinningTeam() == ge.getPlayer().getTeam()) {
-			assertTrue(ge.getPlayer().getMoney() > money);
-			assertTrue(ge.getPlayer().getScore() > score);
+		if (gameMatch.getWinningTeam() == gameEnvironment.getPlayer().getTeam()) {
+			assertTrue(gameEnvironment.getPlayer().getMoney() > money);
+			assertTrue(gameEnvironment.getPlayer().getScore() > score);
 		}
 	}
 }

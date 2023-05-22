@@ -18,42 +18,42 @@ import game.item.Bandaid;
 import userinterface.graphical.GUIEnvironment;
 
 class BandaidTest {
-	private GameEnvironment ge;
+	private GameEnvironment gameEnvironment;
 
 	@BeforeEach
 	void setUp() {
-		ge = new GameEnvironment(false);
-		ge.setSeed(0);
+		gameEnvironment = new GameEnvironment(false);
+		gameEnvironment.setSeed(0);
 	}
 
 	@AfterEach
 	void tearDown() {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
 
 	@Test
 	void constructorTest() {
-		Bandaid bandaid = new Bandaid("Test", 0, ge);
+		Bandaid bandaid = new Bandaid("Test", 0, gameEnvironment);
 		assertEquals("Test", bandaid.getDescription());
 		assertTrue(bandaid.getIsLegal());
 		assertEquals(0, bandaid.getPrice());
-		bandaid = new Bandaid("", 100, ge);
+		bandaid = new Bandaid("", 100, gameEnvironment);
 		assertEquals("", bandaid.getDescription());
 		assertEquals(100, bandaid.getPrice());
 	}
 
 	@Test
 	void generatorTest() {
-		Bandaid bandaid = (Bandaid) Bandaid.generateBandaid(100, ge);
+		Bandaid bandaid = (Bandaid) Bandaid.generateBandaid(100, gameEnvironment);
 		assertTrue(bandaid instanceof Bandaid);
 	}
 
 	@Test
 	void applyTest() {
-		Athlete athlete = new Athlete("", Position.DUNKER, 0, ge, 0);
-		Bandaid bandaid = (Bandaid) Bandaid.generateBandaid(100, ge);
+		Athlete athlete = new Athlete("", Position.DUNKER, 0, gameEnvironment, 0);
+		Bandaid bandaid = (Bandaid) Bandaid.generateBandaid(100, gameEnvironment);
 		assertTrue(athlete.isInjured());
 		bandaid.applyItem(athlete);
 		assertFalse(athlete.isInjured());
@@ -61,8 +61,8 @@ class BandaidTest {
 
 	@Test
 	void purchaseTest() {
-		Bandaid bandaid = new Bandaid("Test", 100, ge);
-		Player player = ge.getPlayer();
+		Bandaid bandaid = new Bandaid("Test", 100, gameEnvironment);
+		Player player = gameEnvironment.getPlayer();
 		player.giveMoney(99);
 		assertFalse(bandaid.purchase(player));
 		player.giveMoney(1);
@@ -72,8 +72,8 @@ class BandaidTest {
 
 	@Test
 	void sellTest() {
-		Bandaid bandaid = new Bandaid("Test", 100, ge);
-		Player player = ge.getPlayer();
+		Bandaid bandaid = new Bandaid("Test", 100, gameEnvironment);
+		Player player = gameEnvironment.getPlayer();
 		bandaid.sell(player);
 		assertEquals(100, player.getMoney());
 		bandaid.sell(player);
@@ -82,7 +82,7 @@ class BandaidTest {
 
 	@Test
 	void detailsTest() {
-		Bandaid bandaid = (Bandaid) Bandaid.generateBandaid(100, ge);
+		Bandaid bandaid = (Bandaid) Bandaid.generateBandaid(100, gameEnvironment);
 		assertTrue(bandaid.getDetails() != null);
 		assertTrue(bandaid.getDetails() instanceof String);
 	}

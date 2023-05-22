@@ -22,197 +22,197 @@ import game.item.Steroid;
 import userinterface.graphical.GUIEnvironment;
 
 class AthleteTest {
-	private GameEnvironment ge;
-	private Athlete aht;
+	private GameEnvironment gameEnvironment;
+	private Athlete athlete;
 
 	@BeforeEach
 	void setUp() {
-		ge = new GameEnvironment(false);
-		ge.setSeed(0);
-		aht = new Athlete("Test", Position.SHORT_SHOOTER, 0, ge, 0);
+		gameEnvironment = new GameEnvironment(false);
+		gameEnvironment.setSeed(0);
+		athlete = new Athlete("Test", Position.SHORT_SHOOTER, 0, gameEnvironment, 0);
 	}
 
 	@AfterEach
 	void tearDown() {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
 
 	@Test
 	void constructorTest() {
-		assertEquals("Test", aht.getName());
-		assertEquals(Position.SHORT_SHOOTER, aht.getRole());
-		assertEquals(0, aht.getStamina());
-		assertEquals(0, aht.getPrice());
+		assertEquals("Test", athlete.getName());
+		assertEquals(Position.SHORT_SHOOTER, athlete.getRole());
+		assertEquals(0, athlete.getStamina());
+		assertEquals(0, athlete.getPrice());
 	}
 
 	@Test
 	void generatorTest() {
-		aht = (Athlete) Athlete.generateAthlete.apply(100, ge);
+		athlete = (Athlete) Athlete.generateAthlete.apply(100, gameEnvironment);
 		int minimum = 0;
 		for (Statistic statistic : Statistic.values()) {
-			minimum = Math.min(minimum, aht.getStatistic(statistic));
+			minimum = Math.min(minimum, athlete.getStatistic(statistic));
 		}
 		assertTrue(minimum == 0);
-		aht = (Athlete) Athlete.generateAthlete.apply(100, ge);
+		athlete = (Athlete) Athlete.generateAthlete.apply(100, gameEnvironment);
 		int maximum = 0;
 		for (Statistic statistic : Statistic.values()) {
-			maximum = Math.max(maximum, aht.getStatistic(statistic));
+			maximum = Math.max(maximum, athlete.getStatistic(statistic));
 		}
 		assertFalse(maximum == 0);
 	}
 
 	@Test
 	void statisticTest() {
-		aht.setStatistic(Statistic.DEFENCE, 0);
-		assertEquals(aht.getStatistic(Statistic.DEFENCE), 0);
-		aht.setStatistic(Statistic.DEFENCE, 100);
-		assertEquals(aht.getStatistic(Statistic.DEFENCE), 100);
-		aht.setStatistic(Statistic.DEFENCE, -1);
-		assertEquals(aht.getStatistic(Statistic.DEFENCE), 0);
-		aht.setStatistic(Statistic.DEFENCE, 101);
-		assertEquals(aht.getStatistic(Statistic.DEFENCE), 100);
-		aht.setStatistic(Statistic.DEFENCE, 57);
-		assertEquals(aht.getStatistic(Statistic.DEFENCE), 57);
+		athlete.setStatistic(Statistic.DEFENCE, 0);
+		assertEquals(athlete.getStatistic(Statistic.DEFENCE), 0);
+		athlete.setStatistic(Statistic.DEFENCE, 100);
+		assertEquals(athlete.getStatistic(Statistic.DEFENCE), 100);
+		athlete.setStatistic(Statistic.DEFENCE, -1);
+		assertEquals(athlete.getStatistic(Statistic.DEFENCE), 0);
+		athlete.setStatistic(Statistic.DEFENCE, 101);
+		assertEquals(athlete.getStatistic(Statistic.DEFENCE), 100);
+		athlete.setStatistic(Statistic.DEFENCE, 57);
+		assertEquals(athlete.getStatistic(Statistic.DEFENCE), 57);
 	}
 
 	@Test
 	void staminaTest() {
-		aht.setStamina(0);
-		assertEquals(0, aht.getStamina());
-		assertTrue(aht.isInjured());
-		aht.setStamina(1);
-		assertFalse(aht.isInjured());
-		aht.setStamina(100);
-		assertEquals(100, aht.getStamina());
-		aht.setStamina(-1);
-		assertEquals(0, aht.getStamina());
-		aht.setStamina(101);
-		assertEquals(100, aht.getStamina());
-		aht.setStamina(34);
-		assertEquals(34, aht.getStamina());
-		aht.setStatistic(Statistic.FITNESS, 100);
-		aht.loseStamina();
-		assertEquals(34, aht.getStamina());
+		athlete.setStamina(0);
+		assertEquals(0, athlete.getStamina());
+		assertTrue(athlete.isInjured());
+		athlete.setStamina(1);
+		assertFalse(athlete.isInjured());
+		athlete.setStamina(100);
+		assertEquals(100, athlete.getStamina());
+		athlete.setStamina(-1);
+		assertEquals(0, athlete.getStamina());
+		athlete.setStamina(101);
+		assertEquals(100, athlete.getStamina());
+		athlete.setStamina(34);
+		assertEquals(34, athlete.getStamina());
+		athlete.setStatistic(Statistic.FITNESS, 100);
+		athlete.loseStamina();
+		assertEquals(34, athlete.getStamina());
 	}
 
 	@Test
 	void purchaseTest() {
-		aht.setPrice(100);
-		Player player = ge.getPlayer();
-		assertFalse(aht.purchase(player));
+		athlete.setPrice(100);
+		Player player = gameEnvironment.getPlayer();
+		assertFalse(athlete.purchase(player));
 		player.giveMoney(99);
-		assertFalse(aht.purchase(player));
+		assertFalse(athlete.purchase(player));
 		player.giveMoney(1);
-		assertTrue(aht.purchase(player));
+		assertTrue(athlete.purchase(player));
 		assertEquals(0, player.getMoney());
-		aht.sell(player);
+		athlete.sell(player);
 		player.giveMoney(10000);
-		aht.purchase(player);
+		athlete.purchase(player);
 	}
 
 	@Test
 	void purchaseFullActiveTest() {
-		ge.setSeed(0);
-		Player player = ge.getPlayer();
+		gameEnvironment.setSeed(0);
+		Player player = gameEnvironment.getPlayer();
 		Team team = player.getTeam();
 
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DEFENDER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DRIBBLER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DUNKER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.LONG_SHOOTER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.SHORT_SHOOTER);
-		assertTrue(aht.purchase(player));
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DEFENDER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DRIBBLER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DUNKER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.LONG_SHOOTER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.SHORT_SHOOTER);
+		assertTrue(athlete.purchase(player));
 		assertFalse(team.getReserveAthletes().isEmpty());
 	}
 
 	@Test
 	void purchaseFullReserveTest() {
-		ge.setSeed(0);
-		Player player = ge.getPlayer();
+		gameEnvironment.setSeed(0);
+		Player player = gameEnvironment.getPlayer();
 		Team team = player.getTeam();
 
 		for (int i = 0; i < 5; i++)
-			team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
+			team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment));
 
 		assertEquals(5, team.getReserveAthletes().size());
-		assertTrue(aht.purchase(player));
+		assertTrue(athlete.purchase(player));
 		assertEquals(5, team.getReserveAthletes().size());
 	}
 
 	@Test
 	void purchaseFullTeamTest() {
-		ge.setSeed(0);
-		Player player = ge.getPlayer();
+		gameEnvironment.setSeed(0);
+		Player player = gameEnvironment.getPlayer();
 		Team team = player.getTeam();
 
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DEFENDER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DRIBBLER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DUNKER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.LONG_SHOOTER);
-		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.SHORT_SHOOTER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DEFENDER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DRIBBLER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.DUNKER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.LONG_SHOOTER);
+		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment), Position.SHORT_SHOOTER);
 		for (int i = 0; i < 5; i++)
-			team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
+			team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, gameEnvironment));
 
-		assertFalse(aht.purchase(player));
+		assertFalse(athlete.purchase(player));
 		assertEquals(5, team.getReserveAthletes().size());
 	}
 
 	@Test
 	void sellTest() {
-		Player player = ge.getPlayer();
+		Player player = gameEnvironment.getPlayer();
 		Team team = player.getTeam();
 
-		team.addAthleteToReserve(aht);
-		aht.setPrice(107);
-		aht.sell(player);
+		team.addAthleteToReserve(athlete);
+		athlete.setPrice(107);
+		athlete.sell(player);
 		assertEquals(0, team.getReserveAthletes().size());
 		assertEquals(107, player.getMoney());
 		player.chargeMoney(107);
 
-		team.addAthleteToActive(aht, Position.SHORT_SHOOTER);
-		aht.sell(player);
+		team.addAthleteToActive(athlete, Position.SHORT_SHOOTER);
+		athlete.sell(player);
 		assertEquals(107, player.getMoney());
 		assertNull(team.getActiveAthletes().get(Position.SHORT_SHOOTER));
 	}
 
 	@Test
 	void descriptionTest() {
-		assertEquals(String.class, aht.getDescription().getClass());
-		assertNotEquals("", aht.getDescription());
+		assertEquals(String.class, athlete.getDescription().getClass());
+		assertNotEquals("", athlete.getDescription());
 	}
 
 	@Test
 	void detailsTest() {
-		assertEquals(String.class, aht.getDetails().getClass());
-		assertNotEquals("", aht.getDetails());
+		assertEquals(String.class, athlete.getDetails().getClass());
+		assertNotEquals("", athlete.getDetails());
 	}
 
 	@Test
 	void teamTest() {
-		Player player = ge.getPlayer();
+		Player player = gameEnvironment.getPlayer();
 		Team team = player.getTeam();
-		assertNull(aht.getTeam());
-		team.addAthleteToReserve(aht);
-		assertEquals(team, aht.getTeam());
-		aht.sell(player);
-		team.addAthleteToActive(aht, Position.SHORT_SHOOTER);
-		assertEquals(team, aht.getTeam());
+		assertNull(athlete.getTeam());
+		team.addAthleteToReserve(athlete);
+		assertEquals(team, athlete.getTeam());
+		athlete.sell(player);
+		team.addAthleteToActive(athlete, Position.SHORT_SHOOTER);
+		assertEquals(team, athlete.getTeam());
 	}
 
 	@Test
 	void matchScoreTest() {
 		for (Statistic statistic : Statistic.values()) {
-			aht.setStatistic(statistic, 0);
+			athlete.setStatistic(statistic, 0);
 		}
-		assertEquals(0, aht.getMatchScore(Position.SHORT_SHOOTER));
+		assertEquals(0, athlete.getMatchScore(Position.SHORT_SHOOTER));
 		for (Statistic statistic : Statistic.values()) {
-			aht.setStatistic(statistic, 100);
+			athlete.setStatistic(statistic, 100);
 		}
 
-		int boostedScore = aht.getMatchScore(Position.SHORT_SHOOTER);
-		Athlete athlete2 = new Athlete("", Position.DUNKER, 0, ge, 0);
+		int boostedScore = athlete.getMatchScore(Position.SHORT_SHOOTER);
+		Athlete athlete2 = new Athlete("", Position.DUNKER, 0, gameEnvironment, 0);
 		for (Statistic statistic : Statistic.values()) {
 			athlete2.setStatistic(statistic, 100);
 		}
@@ -224,12 +224,12 @@ class AthleteTest {
 
 	@Test
 	void steroidTest() {
-		assertFalse(aht.getHasUsedSteroids());
-		aht.setHasUsedSteroids(true);
-		assertTrue(aht.getHasUsedSteroids());
-		aht.setHasUsedSteroids(false);
-		Steroid steroid = new Steroid("", 0, 0, ge);
-		steroid.applyItem(aht);
-		assertTrue(aht.getHasUsedSteroids());
+		assertFalse(athlete.getHasUsedSteroids());
+		athlete.setHasUsedSteroids(true);
+		assertTrue(athlete.getHasUsedSteroids());
+		athlete.setHasUsedSteroids(false);
+		Steroid steroid = new Steroid("", 0, 0, gameEnvironment);
+		steroid.applyItem(athlete);
+		assertTrue(athlete.getHasUsedSteroids());
 	}
 }

@@ -19,26 +19,26 @@ import game.location.GameLocker;
 import userinterface.graphical.GUIEnvironment;
 
 class GameLockerTest {
-	private GameEnvironment ge;
+	private GameEnvironment gameEnvironment;
 	private GameLocker gameLocker;
 
 	@BeforeEach
 	void setUp() {
-		ge = new GameEnvironment(false);
-		ge.setSeed(0);
-		gameLocker = (GameLocker) ge.getGameLocation(Location.LOCKER_ROOM);
+		gameEnvironment = new GameEnvironment(false);
+		gameEnvironment.setSeed(0);
+		gameLocker = (GameLocker) gameEnvironment.getGameLocation(Location.LOCKER_ROOM);
 	}
 
 	@AfterEach
 	void tearDown() {
-		JFrame frame = ((GUIEnvironment) ge.getUIEnvironment()).getFrame();
+		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
 		frame.setVisible(false);
 		frame.dispose();
 	}
 
 	@Test
 	void constructorTest() {
-		gameLocker = new GameLocker(ge);
+		gameLocker = new GameLocker(gameEnvironment);
 	}
 
 	@Test
@@ -54,49 +54,49 @@ class GameLockerTest {
 
 	@Test
 	void teamNameTest() {
-		assertEquals(ge.getPlayer().getTeam().getName(), gameLocker.getTeamName());
-		ge.getPlayer().getTeam().setName("New name");
-		assertEquals(ge.getPlayer().getTeam().getName(), gameLocker.getTeamName());
-		ge.getPlayer().getTeam().setName("123");
-		assertEquals(ge.getPlayer().getTeam().getName(), gameLocker.getTeamName());
+		assertEquals(gameEnvironment.getPlayer().getTeam().getName(), gameLocker.getTeamName());
+		gameEnvironment.getPlayer().getTeam().setName("New name");
+		assertEquals(gameEnvironment.getPlayer().getTeam().getName(), gameLocker.getTeamName());
+		gameEnvironment.getPlayer().getTeam().setName("123");
+		assertEquals(gameEnvironment.getPlayer().getTeam().getName(), gameLocker.getTeamName());
 	}
 
 	@Test
 	void reservesTest() {
-		assertEquals(ge.getPlayer().getTeam().getReserveAthletes(), gameLocker.getReserves());
-		ge.getPlayer().getTeam().addAthleteToReserve(new Athlete("name", Position.DUNKER, 1, ge, 1));
-		assertEquals(ge.getPlayer().getTeam().getReserveAthletes(), gameLocker.getReserves());
+		assertEquals(gameEnvironment.getPlayer().getTeam().getReserveAthletes(), gameLocker.getReserves());
+		gameEnvironment.getPlayer().getTeam().addAthleteToReserve(new Athlete("name", Position.DUNKER, 1, gameEnvironment, 1));
+		assertEquals(gameEnvironment.getPlayer().getTeam().getReserveAthletes(), gameLocker.getReserves());
 	}
 
 	@Test
 	void activeTest() {
-		assertEquals(ge.getPlayer().getTeam().getActiveAthletes(), gameLocker.getActive());
-		ge.getPlayer().getTeam().addAthleteToActive(new Athlete("name", Position.DUNKER, 1, ge, 1), Position.DUNKER);
-		assertEquals(ge.getPlayer().getTeam().getActiveAthletes(), gameLocker.getActive());
+		assertEquals(gameEnvironment.getPlayer().getTeam().getActiveAthletes(), gameLocker.getActive());
+		gameEnvironment.getPlayer().getTeam().addAthleteToActive(new Athlete("name", Position.DUNKER, 1, gameEnvironment, 1), Position.DUNKER);
+		assertEquals(gameEnvironment.getPlayer().getTeam().getActiveAthletes(), gameLocker.getActive());
 	}
 
 	@Test
 	void allAthletesTest() {
-		assertEquals(ge.getPlayer().getTeam().getAllAthletes(), gameLocker.getAllAthletes());
-		ge.getPlayer().getTeam().addAthleteToActive(new Athlete("name", Position.DUNKER, 1, ge, 1), Position.DUNKER);
-		assertEquals(ge.getPlayer().getTeam().getAllAthletes(), gameLocker.getAllAthletes());
-		ge.getPlayer().getTeam().addAthleteToReserve(new Athlete("name", Position.DUNKER, 1, ge, 1));
-		assertEquals(ge.getPlayer().getTeam().getAllAthletes(), gameLocker.getAllAthletes());
+		assertEquals(gameEnvironment.getPlayer().getTeam().getAllAthletes(), gameLocker.getAllAthletes());
+		gameEnvironment.getPlayer().getTeam().addAthleteToActive(new Athlete("name", Position.DUNKER, 1, gameEnvironment, 1), Position.DUNKER);
+		assertEquals(gameEnvironment.getPlayer().getTeam().getAllAthletes(), gameLocker.getAllAthletes());
+		gameEnvironment.getPlayer().getTeam().addAthleteToReserve(new Athlete("name", Position.DUNKER, 1, gameEnvironment, 1));
+		assertEquals(gameEnvironment.getPlayer().getTeam().getAllAthletes(), gameLocker.getAllAthletes());
 	}
 
 	@Test
 	void moveTest() {
 		assertNull(gameLocker.getActive().get(Position.DUNKER));
 		assertEquals(0, gameLocker.getReserves().size());
-		Athlete activeAthlete = (Athlete) Athlete.generateAthlete.apply(0, ge);
-		ge.getPlayer().getTeam().addAthleteToActive(activeAthlete, Position.DUNKER);
+		Athlete activeAthlete = (Athlete) Athlete.generateAthlete.apply(0, gameEnvironment);
+		gameEnvironment.getPlayer().getTeam().addAthleteToActive(activeAthlete, Position.DUNKER);
 		assertTrue(gameLocker.getActive().get(Position.DUNKER) != null);
 		assertEquals(1, gameLocker.getActive().values().size());
 		gameLocker.moveToReserve(activeAthlete);
 		assertFalse(gameLocker.getActive().values().contains(activeAthlete));
 		assertEquals(0, gameLocker.getActive().values().size());
 		assertEquals(1, gameLocker.getReserves().size());
-		ge.getPlayer().getTeam().moveToActive(activeAthlete, Position.SHORT_SHOOTER);
+		gameEnvironment.getPlayer().getTeam().moveToActive(activeAthlete, Position.SHORT_SHOOTER);
 		assertEquals(activeAthlete, gameLocker.getActive().get(Position.SHORT_SHOOTER));
 	}
 }
