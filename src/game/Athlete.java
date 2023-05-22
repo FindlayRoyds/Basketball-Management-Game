@@ -202,7 +202,7 @@ public class Athlete extends Purchasable {
 			if (addToActive) {
 				// Create a popup with a button for each position
 				String[] positionNames = unfilledActivePositions.stream().map((position) -> position.name())
-						.toArray(String[]::new);
+						.map(name -> name.replaceAll("_", " ").toLowerCase()).toArray(String[]::new);
 				String popupMessage = "What role should the athlete be placed into?";
 				int selectedIndex = gameEnvironment.getUIEnvironment().displayPopup(popupMessage, positionNames);
 				Position selectedPosition = unfilledActivePositions.get(selectedIndex);
