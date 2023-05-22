@@ -69,6 +69,6 @@ public class DrugTest extends RandomEvent {
 	@Override
 	protected float getProbability() {
 		final float tournamentProgression = gameEnvironment.getWeek() / gameEnvironment.getSeasonLength();
-		return 0.1f * tournamentProgression * gameEnvironment.getDifficulty();
+		return 0.2f * tournamentProgression * gameEnvironment.getDifficulty();
 	}
 }
