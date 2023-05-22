@@ -133,11 +133,8 @@ class AthleteTest {
 		Player player = ge.getPlayer();
 		Team team = player.getTeam();
 
-		team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
-		team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
-		team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
-		team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
-		team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
+		for (int i = 0; i < 5; i++)
+			team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
 
 		assertEquals(5, team.getReserveAthletes().size());
 		assertTrue(aht.purchase(player));
@@ -155,11 +152,8 @@ class AthleteTest {
 		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.DUNKER);
 		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.LONG_SHOOTER);
 		team.addAthleteToActive((Athlete) Athlete.generateAthlete.apply(0, ge), Position.SHORT_SHOOTER);
-		team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
-		team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
-		team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
-		team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
-		team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
+		for (int i = 0; i < 5; i++)
+			team.addAthleteToReserve((Athlete) Athlete.generateAthlete.apply(0, ge));
 
 		assertFalse(aht.purchase(player));
 		assertEquals(5, team.getReserveAthletes().size());
