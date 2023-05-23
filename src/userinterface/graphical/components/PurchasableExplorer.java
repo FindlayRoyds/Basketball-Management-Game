@@ -121,14 +121,15 @@ public class PurchasableExplorer extends JPanel {
 		this.purchasableSupplier = purchasableSupplier;
 		this.showPrices = showPrices;
 		setLayout(null);
+		setOpaque(false);
 		selectedPurchasableIndex = null;
-		setBounds(0, 0, 800, 550);
 		purchasableInfoComponents = new ArrayList<JPanel>();
 
 		makePurchasableInfoComponents();
 		purchasableList = new ComponentList(purchasableInfoComponents, 80, new Rectangle(6, 6, 394, 450));
 		purchasableList.refresh(purchasableInfoComponents, selectedPurchasableIndex,
 				(index) -> onPurchasableSelect(index));
+		setBounds(0, 65, 800, 550);
 		add(purchasableList);
 
 		displayPurchasableDetailsPanel();

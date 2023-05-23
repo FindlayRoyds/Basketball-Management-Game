@@ -13,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 
 import enumeration.Location;
 import game.location.GameLocation;
@@ -93,15 +92,14 @@ public class GUIMap extends GUILocation {
 
 		for (String buttonText : buttonData.keySet()) {
 			JButton currentButton = new JButton(buttonText.substring(3));
+			currentButton.setBackground(new Color(225, 222, 222));
 			currentButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					buttonData.get(buttonText).run();
 				}
 			});
 			currentButton.setPreferredSize(new Dimension(200, 75));
-			currentButton.setBackground(UIManager.getColor("TabbedPane.highlight"));
-			currentButton.setForeground(UIManager.getColor("TabbedPane.focus"));
-			currentButton.setFont(new Font("Dialog", Font.BOLD, 10));
+			currentButton.setFont(new Font("Dialog", Font.BOLD, 18));
 			locationsPanel.add(currentButton);
 		}
 	}

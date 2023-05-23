@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import enumeration.Location;
 import game.Purchasable;
 import game.location.GameLocation;
 import game.location.GameMarket;
@@ -44,13 +43,6 @@ public class GUIMarket extends GUILocation {
 	private String name;
 	private JButton swapViewButton;
 	private JLabel moneyLabel;
-
-	/**
-	 * instructs the game location to change the current location to the map.
-	 */
-	private void returnToMap() {
-		gameLocation.changeLocation(Location.MAP);
-	}
 
 	/**
 	 * Refreshes the purchasable explorer to use the latest purchasable data.
@@ -110,11 +102,11 @@ public class GUIMarket extends GUILocation {
 
 		choosePurchasableButton = new JButton();
 		purchasableExplorer = new PurchasableExplorer(() -> new ArrayList<Purchasable>(), true);
-		purchasableExplorer.setBounds(0, 60, 800, 420);
 		add(purchasableExplorer);
 
 		choosePurchasableButton = new JButton("Loading...");
-		choosePurchasableButton.setBounds(450, 500, 120, 27);
+		choosePurchasableButton.setBounds(510, 558, 170, 36);
+		choosePurchasableButton.setBackground(new Color(225, 222, 222));
 		add(choosePurchasableButton);
 
 		ReturnToMapButton backButton = new ReturnToMapButton(gameLocation);
@@ -127,7 +119,8 @@ public class GUIMarket extends GUILocation {
 				refresh();
 			}
 		});
-		swapViewButton.setBounds(250, 500, 200, 27);
+		swapViewButton.setBounds(300, 558, 170, 36);
+		swapViewButton.setBackground(new Color(225, 222, 222));
 		add(swapViewButton);
 
 		refresh();

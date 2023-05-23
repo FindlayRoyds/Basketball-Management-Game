@@ -1,5 +1,6 @@
 package userinterface.graphical;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -96,11 +97,11 @@ public class GUIInventory extends GUILocation {
 				useItem();
 			}
 		});
-		useItemButton.setBounds(450, 500, 120, 27);
+		useItemButton.setBounds(510, 558, 170, 36);
+		useItemButton.setBackground(new Color(225, 222, 222));
 		add(useItemButton);
 
 		purchasableExplorer = new PurchasableExplorer(() -> getItems());
-		purchasableExplorer.setBounds(0, 60, 1000, 1000);
 		purchasableExplorer.refresh();
 		add(purchasableExplorer);
 	}
