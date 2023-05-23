@@ -8,11 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import enumeration.Location;
 import enumeration.Position;
@@ -151,7 +151,7 @@ public class GUIMatch extends GUILocation {
 				team2ScoreLabel.setText(Integer.toString(gameLocation.getTeam2Score()));
 				int winnerIndex = winner == athlete1 ? 0 : 1;
 				JPanel winnerInfoPanel = (JPanel) athleteInfoPanel.getComponent(winnerIndex);
-				winnerInfoPanel.setBorder(BorderFactory.createLineBorder(Color.yellow));
+				winnerInfoPanel.setBorder(new LineBorder(new Color(184, 134, 11), 6, true));
 				controlButton.setText("CONTINUE");
 				positionIndex += 1;
 			} else {
