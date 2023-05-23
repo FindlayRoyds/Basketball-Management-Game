@@ -18,6 +18,7 @@ import javax.swing.UIManager;
 import enumeration.Location;
 import game.location.GameLocation;
 import game.location.GameMap;
+import userinterface.graphical.components.Title;
 
 /**
  * A class that defines the map GUI location. It provides a graphical interface
@@ -66,11 +67,7 @@ public class GUIMap extends GUILocation {
 		weeksRemainingLabel.setBounds(538, 6, 250, 50);
 		add(weeksRemainingLabel);
 
-		JLabel mapTitleLabel = new JLabel("Map");
-		mapTitleLabel.setFont(new Font("Dialog", Font.BOLD, 24));
-		mapTitleLabel.setForeground(new Color(0, 0, 0));
-		mapTitleLabel.setBounds(6, 6, 788, 50);
-		mapTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		Title mapTitleLabel = new Title("Map");
 		add(mapTitleLabel);
 
 		Map<String, Runnable> buttonData = new TreeMap<String, Runnable>();

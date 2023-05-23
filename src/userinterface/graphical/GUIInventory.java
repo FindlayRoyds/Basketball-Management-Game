@@ -1,14 +1,11 @@
 package userinterface.graphical;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 import enumeration.Location;
 import game.Purchasable;
@@ -17,6 +14,7 @@ import game.location.GameInventory;
 import game.location.GameLocation;
 import userinterface.graphical.components.PurchasableExplorer;
 import userinterface.graphical.components.ReturnToMapButton;
+import userinterface.graphical.components.Title;
 
 /**
  * A class that defines the inventory GUI location. It contains a
@@ -86,10 +84,7 @@ public class GUIInventory extends GUILocation {
 		this.gameLocation = (GameInventory) gameLocation;
 		setLayout(null);
 
-		JLabel inventoryTitleLabel = new JLabel("Inventory");
-		inventoryTitleLabel.setFont(new Font("Dialog", Font.BOLD, 15));
-		inventoryTitleLabel.setBounds(250, 15, 200, 17);
-		inventoryTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		Title inventoryTitleLabel = new Title("Inventory");
 		add(inventoryTitleLabel);
 
 		ReturnToMapButton backButton = new ReturnToMapButton(gameLocation);
