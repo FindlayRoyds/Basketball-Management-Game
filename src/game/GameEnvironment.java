@@ -87,7 +87,10 @@ public class GameEnvironment {
 	 * @param args The command line arguments.
 	 */
 	public static void main(String[] args) {
-		GameEnvironment gameEnvironment = new GameEnvironment(false);
+		boolean useCli = false;
+		if (args.length > 0)
+			useCli = args[0] == "-cli";
+		GameEnvironment gameEnvironment = new GameEnvironment(useCli);
 
 		// Let the user start up the game
 		gameEnvironment.changeLocation(Location.START);
