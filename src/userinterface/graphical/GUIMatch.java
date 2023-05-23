@@ -106,6 +106,7 @@ public class GUIMatch extends GUILocation {
 		add(titleLabel);
 
 		controlButton = new JButton("PLAY MATCH");
+		controlButton.setBackground(new Color(225, 222, 222));
 		controlButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				refresh();

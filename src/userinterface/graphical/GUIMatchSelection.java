@@ -106,6 +106,7 @@ public class GUIMatchSelection extends GUILocation {
 
 			if (canStart) {
 				JButton playButton = new JButton("Play");
+				playButton.setBackground(new Color(225, 222, 222));
 				playButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						gameLocation.playMatch(team);
