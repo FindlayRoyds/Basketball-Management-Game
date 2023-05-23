@@ -3,6 +3,7 @@ package game.randomevent;
 import game.Athlete;
 import game.GameEnvironment;
 import game.Team;
+import util.MiscUtil;
 
 /**
  * A weekly random event that adds a new randomly generated athlete to the
@@ -38,8 +39,10 @@ public class AthleteJoins extends RandomEvent {
 	@Override
 	protected void occur() {
 		float seasonProgression = gameEnvironment.getWeek() / gameEnvironment.getSeasonLength();
-		int athleteQuality = (int) seasonProgression * 80 + 10 * (3 - gameEnvironment.getDifficulty());
-		Athlete newAthlete = (Athlete) Athlete.generateAthlete.apply(athleteQuality, gameEnvironment);
+		int startQuality = (4 - gameEnvironment.getDifficulty()) * 10;
+		int endQuality = 100;
+		int qualityLevel = MiscUtil.integerLerp(startQuality, endQuality, seasonProgression);
+		Athlete newAthlete = (Athlete) Athlete.generateAthlete.apply(qualityLevel, gameEnvironment);
 		team.addAthleteToReserve(newAthlete);
 
 		// Alert the player that the event occured
