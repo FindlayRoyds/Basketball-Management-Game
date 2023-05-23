@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 
 import enumeration.Location;
@@ -41,9 +42,7 @@ public class GUIMatch extends GUILocation {
 	/**
 	 * Components shown on screen in GUI match.
 	 */
-	private JPanel matchupPanel;
 	private JButton controlButton;
-	private JLabel matchupTitleLabel;
 	private JPanel athleteInfoPanel;
 	private Title titleLabel;
 
@@ -59,6 +58,16 @@ public class GUIMatch extends GUILocation {
 	private boolean matchPlayed;
 	private JLabel team1ScoreLabel;
 	private JLabel team2ScoreLabel;
+
+	/**
+	 * A timer for making the winner border flash
+	 */
+	private Timer flashTimer;
+
+	/**
+	 * Count the number of times the winner's border has flashed
+	 */
+	private int flashCount;
 
 	/**
 	 * Constructor for GUIMatch. initializes the swing components for the design and
@@ -84,23 +93,12 @@ public class GUIMatch extends GUILocation {
 		team2ScoreLabel.setBounds(719, 6, 50, 50);
 		add(team2ScoreLabel);
 
-		matchupPanel = new JPanel();
-		matchupPanel.setBackground(new Color(255, 228, 225));
-		matchupPanel.setBounds(6, 68, 788, 470);
-		add(matchupPanel);
-		matchupPanel.setLayout(null);
-
-		matchupTitleLabel = new JLabel("<dynamic> MATCHUP");
-		matchupTitleLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		matchupTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		matchupTitleLabel.setBounds(6, 6, 776, 50);
-		matchupPanel.add(matchupTitleLabel);
-
 		athleteInfoPanel = new JPanel();
-		athleteInfoPanel.setBackground(new Color(224, 255, 255));
-		athleteInfoPanel.setBounds(0, 68, 788, 402);
-		matchupPanel.add(athleteInfoPanel);
-		athleteInfoPanel.setLayout(new GridLayout(0, 2, 0, 12));
+		athleteInfoPanel.setBackground(new Color(0, 0, 0, 0));
+		athleteInfoPanel.setOpaque(false);
+		athleteInfoPanel.setBounds(6, 68, 788, 470);
+		add(athleteInfoPanel);
+		athleteInfoPanel.setLayout(new GridLayout(0, 2, 6, 0));
 
 		titleLabel = new Title("<dynamic> vs <dynamic>");
 		add(titleLabel);
@@ -108,7 +106,8 @@ public class GUIMatch extends GUILocation {
 		controlButton = new JButton("PLAY MATCH");
 		controlButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				refresh();
+				if (flashCount == 0)
+					refresh();
 			}
 		});
 		controlButton.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
@@ -141,7 +140,7 @@ public class GUIMatch extends GUILocation {
 			Position positionPlayed = Position.values()[positionIndex];
 			Athlete athlete1 = team1Athletes.get(positionPlayed);
 			Athlete athlete2 = team2Athletes.get(positionPlayed);
-			matchupTitleLabel.setText(positionPlayed.name().replaceAll("_", " ") + " MATCHUP");
+			titleLabel.setText(positionPlayed.name().replaceAll("_", " ") + " MATCHUP");
 
 			if (matchPlayed) {
 				Athlete winner = gameLocation.getWinningAthlete(athlete1, athlete2);
@@ -149,7 +148,26 @@ public class GUIMatch extends GUILocation {
 				team2ScoreLabel.setText(Integer.toString(gameLocation.getTeam2Score()));
 				int winnerIndex = winner == athlete1 ? 0 : 1;
 				JPanel winnerInfoPanel = (JPanel) athleteInfoPanel.getComponent(winnerIndex);
-				winnerInfoPanel.setBorder(new LineBorder(new Color(184, 134, 11), 6, true));
+
+				ActionListener flashBorder = new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						if (winnerInfoPanel.getBorder() == null)
+							winnerInfoPanel.setBorder(new LineBorder(new Color(184, 134, 11), 3, true));
+						else
+							winnerInfoPanel.setBorder(null);
+						flashCount++;
+						if (flashCount > 5) {
+							flashCount = 0;
+							flashTimer.stop();
+							controlButton.setEnabled(true);
+						}
+					}
+				};
+
+				controlButton.setEnabled(false);
+				flashTimer = new Timer(250, flashBorder);
+				flashTimer.start();
+
 				controlButton.setText("CONTINUE");
 				positionIndex += 1;
 			} else {
