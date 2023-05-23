@@ -56,10 +56,13 @@ public class ComponentList extends JPanel {
 
 		backgroundPanel = new JPanel();
 		backgroundPanel.setLayout(null);
+		backgroundPanel.setBackground(Color.white);
+		backgroundPanel.setBorder(null);
 
 		JScrollPane scrollPanel = new JScrollPane(backgroundPanel);
 		scrollPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPanel.setBorder(null);
 		scrollPanel.setBounds(0, 0, bounds.width, bounds.height);
 
 		refresh(componentsToDisplay, null, onSelect);

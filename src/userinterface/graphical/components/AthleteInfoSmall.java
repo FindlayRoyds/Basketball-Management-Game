@@ -1,8 +1,10 @@
 package userinterface.graphical.components;
 
+import java.awt.Font;
 import java.util.Map;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import enumeration.Position;
 import game.Athlete;
@@ -48,12 +50,9 @@ public class AthleteInfoSmall extends PurchasableInfoSmall {
 	public AthleteInfoSmall(Athlete athlete, boolean showPrice) {
 		super((Purchasable) athlete, showPrice);
 
-		JLabel positionDescriptionLabel = new JLabel("Position:");
-		positionDescriptionLabel.setBounds(6, 16, 129, 48);
-		add(positionDescriptionLabel);
-
-		JLabel positionLabel = new JLabel(getPositionName(athlete));
-		positionLabel.setBounds(65, 16, 129, 48);
+		JLabel positionLabel = new JLabel("   Position: " + getPositionName(athlete));
+		positionLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		positionLabel.setVerticalAlignment(SwingConstants.CENTER);
 		add(positionLabel);
 	}
 

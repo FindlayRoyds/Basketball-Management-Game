@@ -63,15 +63,19 @@ public class GUIMatchSelection extends GUILocation {
 		add(canStartWarningLabel);
 
 		playButtonsPanel = new JPanel();
-		playButtonsPanel.setBounds(106, 504, 588, 40);
+		playButtonsPanel.setBounds(66, 504, 628, 40);
+		playButtonsPanel.setBackground(new Color(0, 0, 0, 0));
+		playButtonsPanel.setOpaque(false);
 		add(playButtonsPanel);
-		playButtonsPanel.setLayout(new GridLayout(0, 3, 112, 0));
+		playButtonsPanel.setLayout(new GridLayout(0, 3, 122, 0));
 
 		ReturnToMapButton backButton = new ReturnToMapButton(gameLocation);
 		add(backButton);
 
 		teamDisplayPanel = new JPanel();
 		teamDisplayPanel.setBounds(6, 68, 788, 424);
+		teamDisplayPanel.setBackground(new Color(0, 0, 0, 0));
+		teamDisplayPanel.setOpaque(false);
 		add(teamDisplayPanel);
 		teamDisplayPanel.setLayout(new GridLayout(0, 3, 12, 0));
 
