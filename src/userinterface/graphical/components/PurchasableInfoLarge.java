@@ -1,11 +1,15 @@
 package userinterface.graphical.components;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Insets;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import game.Purchasable;
 
@@ -27,26 +31,39 @@ public class PurchasableInfoLarge extends JPanel {
 	 * @param showPrice   Whether or not to display the price of the purchasable.
 	 */
 	public PurchasableInfoLarge(Purchasable purchasable, boolean showPrice) {
-		setBackground(Color.PINK);
+		setBackground(new Color(255, 255, 255));
+		setPreferredSize(new Dimension(388, 450));
 		setLayout(null);
 		if (purchasable == null)
 			return;
 
 		JLabel nameLabel = new JLabel(purchasable.getName());
+		nameLabel.setFont(new Font("Lucida Grande", Font.BOLD, 30));
 		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		nameLabel.setBounds(6, 28, 376, 16);
+		nameLabel.setBounds(6, 6, 376, 47);
 		add(nameLabel);
 
 		JLabel descriptionLabel = new JLabel(purchasable.getDescription());
+		descriptionLabel.setFont(new Font("Lucida Grande", Font.ITALIC, 18));
 		descriptionLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		descriptionLabel.setBounds(6, 71, 376, 16);
+		descriptionLabel.setBounds(6, 53, 376, 25);
 		add(descriptionLabel);
 
 		JTextPane detailsLabel = new JTextPane();
+		detailsLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		detailsLabel.setMargin(new Insets(6, 6, 6, 6));
+		detailsLabel.setBorder(null);
 		detailsLabel.setEditable(false);
 		detailsLabel.setText(purchasable.getDetails());
-		detailsLabel.setBounds(6, 151, 376, 193);
+		detailsLabel.setBounds(18, 114, 352, 318);
 		add(detailsLabel);
+
+		JPanel borderPanel = new JPanel();
+		borderPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		borderPanel.setBounds(6, 102, 376, 342);
+		borderPanel.setBackground(new Color(0, 0, 0, 0));
+		borderPanel.setOpaque(false);
+		add(borderPanel);
 
 		if (showPrice) {
 			JLabel priceLabel = new JLabel("$" + purchasable.getPrice());
