@@ -6,8 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -63,7 +63,7 @@ public class GUIMap extends GUILocation {
 		weeksRemainingLabel = new JLabel("12 weeks left");
 		weeksRemainingLabel.setHorizontalAlignment(SwingConstants.TRAILING);
 		weeksRemainingLabel.setFont(new Font("Dialog", Font.BOLD, 18));
-		weeksRemainingLabel.setBounds(588, 6, 200, 50);
+		weeksRemainingLabel.setBounds(538, 6, 250, 50);
 		add(weeksRemainingLabel);
 
 		JLabel mapTitleLabel = new JLabel("Map");
@@ -73,14 +73,14 @@ public class GUIMap extends GUILocation {
 		mapTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(mapTitleLabel);
 
-		Map<String, Runnable> buttonData = new HashMap<String, Runnable>();
-		buttonData.put("Stadium", () -> this.gameLocation.changeLocation(Location.MATCH_SELECTION));
-		buttonData.put("Inventory", () -> this.gameLocation.changeLocation(Location.INVENTORY));
-		buttonData.put("Locker Room", () -> this.gameLocation.changeLocation(Location.LOCKER_ROOM));
-		buttonData.put("Athlete Market", () -> this.gameLocation.changeLocation(Location.ATHLETE_MARKET));
-		buttonData.put("Item Market", () -> this.gameLocation.changeLocation(Location.ITEM_MARKET));
-		buttonData.put("Black Market", () -> this.gameLocation.changeLocation(Location.BLACK_MARKET));
-		buttonData.put("Take a Bye", () -> this.takeABye());
+		Map<String, Runnable> buttonData = new TreeMap<String, Runnable>();
+		buttonData.put("1. Stadium", () -> this.gameLocation.changeLocation(Location.MATCH_SELECTION));
+		buttonData.put("2. Inventory", () -> this.gameLocation.changeLocation(Location.INVENTORY));
+		buttonData.put("3. Locker Room", () -> this.gameLocation.changeLocation(Location.LOCKER_ROOM));
+		buttonData.put("4. Athlete Market", () -> this.gameLocation.changeLocation(Location.ATHLETE_MARKET));
+		buttonData.put("5. Item Market", () -> this.gameLocation.changeLocation(Location.ITEM_MARKET));
+		buttonData.put("6. Black Market", () -> this.gameLocation.changeLocation(Location.BLACK_MARKET));
+		buttonData.put("7. Take a Bye", () -> this.takeABye());
 
 		weekNumberLabel = new JLabel("Week 14");
 		weekNumberLabel.setVerticalAlignment(SwingConstants.TOP);
@@ -95,7 +95,7 @@ public class GUIMap extends GUILocation {
 		locationsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		for (String buttonText : buttonData.keySet()) {
-			JButton currentButton = new JButton(buttonText);
+			JButton currentButton = new JButton(buttonText.substring(3));
 			currentButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					buttonData.get(buttonText).run();

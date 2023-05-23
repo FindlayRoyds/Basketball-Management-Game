@@ -15,6 +15,7 @@ import game.Purchasable;
 import game.location.GameLocation;
 import game.location.GameMarket;
 import userinterface.graphical.components.PurchasableExplorer;
+import userinterface.graphical.components.ReturnToMapButton;
 
 /**
  * A class that defines the market GUI location. It contains a
@@ -119,14 +120,8 @@ public class GUIMarket extends GUILocation {
 		choosePurchasableButton.setBounds(450, 500, 120, 27);
 		add(choosePurchasableButton);
 
-		JButton returnToMapButton = new JButton("Return to map");
-		returnToMapButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				returnToMap();
-			}
-		});
-		returnToMapButton.setBounds(100, 500, 120, 27);
-		add(returnToMapButton);
+		ReturnToMapButton backButton = new ReturnToMapButton(gameLocation);
+		add(backButton);
 
 		swapViewButton = new JButton("Loading...");
 		swapViewButton.addActionListener(new ActionListener() {

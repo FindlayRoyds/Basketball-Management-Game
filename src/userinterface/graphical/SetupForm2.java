@@ -97,11 +97,11 @@ public class SetupForm2 extends GUILocation {
 				}
 			}
 		});
-		chooseAthleteButton.setBounds(450, 450, 120, 27);
+		chooseAthleteButton.setBounds(550, 475, 120, 27);
 		add(chooseAthleteButton);
 
 		remainingPositionsLabel = new JLabel();
-		remainingPositionsLabel.setBounds(200, 450, 500, 27);
+		remainingPositionsLabel.setBounds(265, 475, 500, 27);
 		updateRemainingPositionsLabel();
 		add(remainingPositionsLabel);
 

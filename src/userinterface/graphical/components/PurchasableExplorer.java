@@ -47,7 +47,7 @@ public class PurchasableExplorer extends JPanel {
 	public void displayPurchasableDetailsPanel() {
 		Purchasable selectedPurchasable = getSelected();
 		PurchasableInfoLarge purchasableDetailsPanel = new PurchasableInfoLarge(selectedPurchasable, showPrices);
-		purchasableDetailsPanel.setBounds(360, 0, 350, 400);
+		purchasableDetailsPanel.setBounds(406, 6, 388, 450);
 		add(purchasableDetailsPanel);
 		purchasableDetailsPanel.revalidate();
 		purchasableDetailsPanel.repaint();
@@ -126,7 +126,7 @@ public class PurchasableExplorer extends JPanel {
 		purchasableInfoComponents = new ArrayList<JPanel>();
 
 		makePurchasableInfoComponents();
-		purchasableList = new ComponentList(purchasableInfoComponents, 60, new Rectangle(0, 0, 350, 400));
+		purchasableList = new ComponentList(purchasableInfoComponents, 80, new Rectangle(6, 6, 394, 450));
 		purchasableList.refresh(purchasableInfoComponents, selectedPurchasableIndex,
 				(index) -> onPurchasableSelect(index));
 		add(purchasableList);

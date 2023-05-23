@@ -19,6 +19,7 @@ import game.location.GameLocation;
 import game.location.GameLocker;
 import userinterface.graphical.components.AthleteExplorer;
 import userinterface.graphical.components.PurchasableExplorer;
+import userinterface.graphical.components.ReturnToMapButton;
 import util.MiscUtil;
 
 /**
@@ -103,14 +104,8 @@ public class GUILocker extends GUILocation {
 		inventoryTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(inventoryTitleLabel);
 
-		JButton returnToMapButton = new JButton("Return to map");
-		returnToMapButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				returnToMap();
-			}
-		});
-		returnToMapButton.setBounds(70, 500, 120, 27);
-		add(returnToMapButton);
+		ReturnToMapButton backButton = new ReturnToMapButton(gameLocation);
+		add(backButton);
 
 		JButton moveAthleteButton = new JButton("Move Athlete");
 		moveAthleteButton.addActionListener(new ActionListener() {
