@@ -49,8 +49,8 @@ public class GUIEnd extends GUILocation {
 		JLabel titleLabel = new JLabel("Game Over");
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setForeground(new Color(255, 255, 255));
-		titleLabel.setFont(new Font("Dialog", Font.BOLD, 24));
-		titleLabel.setBounds(6, 6, 788, 50);
+		titleLabel.setFont(new Font("Dialog", Font.BOLD, 45));
+		titleLabel.setBounds(6, 6, 788, 110);
 		add(titleLabel);
 
 		teamNameLabel = new JLabel();

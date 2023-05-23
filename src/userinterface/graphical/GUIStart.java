@@ -1,16 +1,13 @@
 package userinterface.graphical;
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 import enumeration.Location;
 import game.location.GameLocation;
 import game.location.GameStart;
+import userinterface.graphical.components.Title;
 
 /**
  * A class that defines the start GUI location. It consists of two forms,
@@ -65,11 +62,7 @@ public class GUIStart extends GUILocation {
 		form1.setBounds(0, 70, 800, 550);
 		add(form1);
 
-		JLabel titleLabel = new JLabel("Game Setup");
-		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setForeground(Color.BLACK);
-		titleLabel.setFont(new Font("Dialog", Font.BOLD, 24));
-		titleLabel.setBounds(12, 6, 788, 50);
+		Title titleLabel = new Title("Game Setup");
 		add(titleLabel);
 	}
 }

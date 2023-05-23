@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 import enumeration.Location;
 import game.Purchasable;
@@ -16,6 +15,7 @@ import game.location.GameLocation;
 import game.location.GameMarket;
 import userinterface.graphical.components.PurchasableExplorer;
 import userinterface.graphical.components.ReturnToMapButton;
+import userinterface.graphical.components.Title;
 
 /**
  * A class that defines the market GUI location. It contains a
@@ -38,7 +38,7 @@ public class GUIMarket extends GUILocation {
 	 * Components with dynamic content.
 	 */
 	private PurchasableExplorer purchasableExplorer;
-	private JLabel marketTitle;
+	private Title marketTitle;
 	private JButton choosePurchasableButton;
 	private boolean showSellScreen;
 	private String name;
@@ -99,10 +99,7 @@ public class GUIMarket extends GUILocation {
 		showSellScreen = false;
 		setLayout(null);
 
-		marketTitle = new JLabel("loading...");
-		marketTitle.setFont(new Font("Dialog", Font.BOLD, 16));
-		marketTitle.setBounds(169, 25, 300, 17);
-		marketTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		marketTitle = new Title("loading...");
 		add(marketTitle);
 
 		moneyLabel = new JLabel("Loading..");

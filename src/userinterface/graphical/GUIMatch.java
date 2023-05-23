@@ -20,6 +20,7 @@ import game.Athlete;
 import game.location.GameLocation;
 import game.location.GameMatch;
 import userinterface.graphical.components.PurchasableInfoLarge;
+import userinterface.graphical.components.Title;
 
 /**
  * A class that defines the match GUI location. Displays player match ups one by
@@ -44,7 +45,7 @@ public class GUIMatch extends GUILocation {
 	private JButton controlButton;
 	private JLabel matchupTitleLabel;
 	private JPanel athleteInfoPanel;
-	private JLabel titleLabel;
+	private Title titleLabel;
 
 	/**
 	 * The match position currently being shown
@@ -101,10 +102,7 @@ public class GUIMatch extends GUILocation {
 		matchupPanel.add(athleteInfoPanel);
 		athleteInfoPanel.setLayout(new GridLayout(0, 2, 0, 12));
 
-		titleLabel = new JLabel("<dynamic> vs <dynamic>");
-		titleLabel.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 30));
-		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setBounds(6, 6, 788, 50);
+		titleLabel = new Title("<dynamic> vs <dynamic>");
 		add(titleLabel);
 
 		controlButton = new JButton("PLAY MATCH");

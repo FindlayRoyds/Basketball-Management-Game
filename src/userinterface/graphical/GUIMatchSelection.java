@@ -19,6 +19,7 @@ import game.location.GameLocation;
 import game.location.GameMatchSelection;
 import userinterface.graphical.components.ReturnToMapButton;
 import userinterface.graphical.components.TeamInfo;
+import userinterface.graphical.components.Title;
 
 /**
  * A class that defines the match selection GUI location. It displays 3 teams
@@ -39,7 +40,7 @@ public class GUIMatchSelection extends GUILocation {
 	 */
 	private JPanel playButtonsPanel;
 	private JPanel teamDisplayPanel;
-	private JLabel titleLabel;
+	private Title titleLabel;
 	JLabel canStartWarningLabel;
 
 	/**
@@ -78,11 +79,7 @@ public class GUIMatchSelection extends GUILocation {
 		add(teamDisplayPanel);
 		teamDisplayPanel.setLayout(new GridLayout(0, 3, 12, 0));
 
-		titleLabel = new JLabel("Stadium");
-		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		titleLabel.setForeground(new Color(0, 0, 0));
-		titleLabel.setFont(new Font("Dialog", Font.BOLD, 24));
-		titleLabel.setBounds(6, 6, 788, 50);
+		titleLabel = new Title("Stadium");
 		add(titleLabel);
 	}
 

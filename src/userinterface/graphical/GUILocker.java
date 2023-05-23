@@ -1,15 +1,12 @@
 package userinterface.graphical;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 import enumeration.Location;
 import enumeration.Position;
@@ -20,6 +17,7 @@ import game.location.GameLocker;
 import userinterface.graphical.components.AthleteExplorer;
 import userinterface.graphical.components.PurchasableExplorer;
 import userinterface.graphical.components.ReturnToMapButton;
+import userinterface.graphical.components.Title;
 import util.MiscUtil;
 
 /**
@@ -42,7 +40,7 @@ public class GUILocker extends GUILocation {
 	 * Components with dynamic content.
 	 */
 	private PurchasableExplorer purchasableExplorer;
-	private JLabel inventoryTitleLabel;
+	private Title inventoryTitleLabel;
 
 	/**
 	 * Gets the selected athlete from the athlete explorer and prompts the user
@@ -98,10 +96,7 @@ public class GUILocker extends GUILocation {
 		setPreferredSize(new Dimension(800, 600));
 		setLayout(null);
 
-		inventoryTitleLabel = new JLabel("");
-		inventoryTitleLabel.setFont(new Font("Dialog", Font.BOLD, 15));
-		inventoryTitleLabel.setBounds(250, 15, 400, 17);
-		inventoryTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		inventoryTitleLabel = new Title("");
 		add(inventoryTitleLabel);
 
 		ReturnToMapButton backButton = new ReturnToMapButton(gameLocation);
