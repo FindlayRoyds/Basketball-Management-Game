@@ -38,7 +38,7 @@ public class PurchasableInfoLarge extends JPanel {
 			return;
 
 		JLabel nameLabel = new JLabel(purchasable.getName());
-		nameLabel.setFont(new Font("Lucida Grande", Font.BOLD, 26));
+		nameLabel.setFont(new Font("Lucida Grande", Font.BOLD, 30));
 		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		nameLabel.setBounds(6, 6, 376, 47);
 		add(nameLabel);
@@ -46,7 +46,7 @@ public class PurchasableInfoLarge extends JPanel {
 		JLabel descriptionLabel = new JLabel(purchasable.getDescription());
 		descriptionLabel.setFont(new Font("Lucida Grande", Font.ITALIC, 18));
 		descriptionLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		descriptionLabel.setBounds(6, 65, 376, 25);
+		descriptionLabel.setBounds(6, 53, 376, 25);
 		add(descriptionLabel);
 
 		JTextPane detailsLabel = new JTextPane();
