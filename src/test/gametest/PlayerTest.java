@@ -37,7 +37,7 @@ class PlayerTest {
 	}
 
 	@Test
-	void ConstructorTest() {
+	void constructorTest() {
 		assertEquals(0, player.getMoney());
 		assertEquals(0, player.getScore());
 		assertTrue(player.getInventory().size() == 0);
