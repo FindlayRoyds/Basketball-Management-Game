@@ -38,6 +38,7 @@ public class SetupForm1 extends GUILocation {
 	 * 
 	 * @param gameLocation   The GUI location's corresponding game location class.
 	 * @param guiEnvironment The GUI environment to which the GUI location belongs.
+	 * @param onSubmit       A runnable that fires when the form is submitted
 	 */
 	public SetupForm1(GameStart gameLocation, GUIEnvironment guiEnvironment, Runnable onSubmit) {
 		super(guiEnvironment);

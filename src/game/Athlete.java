@@ -343,14 +343,11 @@ public class Athlete extends Purchasable {
 	/**
 	 * Generates and returns an Athlete with pseudo-random properties.
 	 * 
-	 * @param qualityLevel    The "quality" of the Athlete's statistics. A higher
-	 *                        quality level makes higher statistics more likely to
-	 *                        be generated.
-	 * @param rng             An instance of Random; Used to generate random stats,
-	 *                        roles, and names
-	 * @param team            The team to which the Athlete belongs.
-	 * @param gameEnvironment The GameEnvironment object the Athlete belongs to.
-	 * @return A randomly generated Athlete.
+	 * qualityLevel: The "quality" of the Athlete's statistics. A higher quality
+	 * level makes higher statistics more likely to be generated. rng: An instance
+	 * of Random; Used to generate random stats, roles, and names team: The team to
+	 * which the Athlete belongs. gameEnvironment: The GameEnvironment object the
+	 * Athlete belongs to. returns A randomly generated Athlete.
 	 */
 	public static Function3<Integer, GameEnvironment, Purchasable> generateAthlete = (qualityLevel,
 			gameEnvironment) -> {
@@ -386,7 +383,7 @@ public class Athlete extends Purchasable {
 	}
 
 	/**
-	 * @param Whether or not the athlete has used steroids
+	 * @param usedSteroids Whether or not the athlete has used steroids
 	 */
 	public void setHasUsedSteroids(boolean usedSteroids) {
 		hasUsedSteroids = usedSteroids;

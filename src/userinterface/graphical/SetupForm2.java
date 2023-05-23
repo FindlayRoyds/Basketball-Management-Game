@@ -35,6 +35,10 @@ public class SetupForm2 extends GUILocation {
 	 * Components with dynamic content.
 	 */
 	private JLabel remainingPositionsLabel;
+
+	/**
+	 * The purchasable explorer component that displays the available athletes
+	 */
 	private PurchasableExplorer purchasableExplorer;
 
 	/**

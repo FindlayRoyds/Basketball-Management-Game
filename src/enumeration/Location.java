@@ -7,5 +7,44 @@ package enumeration;
  * @version 1.0, May 2023.
  */
 public enum Location {
-	START, MAP, INVENTORY, LOCKER_ROOM, MATCH_SELECTION, MATCH, ATHLETE_MARKET, ITEM_MARKET, BLACK_MARKET, END
+	/**
+	 * The game setup
+	 */
+	START,
+	/**
+	 * The game map
+	 */
+	MAP,
+	/**
+	 * The player's inventory
+	 */
+	INVENTORY,
+	/**
+	 * The player's athletes
+	 */
+	LOCKER_ROOM,
+	/**
+	 * Allows the user to select a match to play against
+	 */
+	MATCH_SELECTION,
+	/**
+	 * A match between two teams
+	 */
+	MATCH,
+	/**
+	 * Allows the user to purchase new athletes
+	 */
+	ATHLETE_MARKET,
+	/**
+	 * Allows the user to purchase new items
+	 */
+	ITEM_MARKET,
+	/**
+	 * Allows the user to purchase steroid items
+	 */
+	BLACK_MARKET,
+	/**
+	 * Displays the game's stats at the end of the game
+	 */
+	END
 }

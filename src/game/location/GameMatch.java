@@ -16,15 +16,23 @@ import game.Team;
  */
 public class GameMatch extends GameLocation {
 	/**
-	 * The two teams that are playing in the match.
+	 * The first team that is playing in the match.
 	 */
 	private Team team1;
+
+	/**
+	 * The second team that is playing in the match
+	 */
 	private Team team2;
 
 	/**
-	 * The score of the two teams playing in the match.
+	 * The score of the first team playing in the match.
 	 */
 	private int team1Score;
+
+	/**
+	 * The score of the second team playing in the match
+	 */
 	private int team2Score;
 
 	/**

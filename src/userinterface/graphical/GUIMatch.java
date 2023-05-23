@@ -43,7 +43,15 @@ public class GUIMatch extends GUILocation {
 	 * Components shown on screen in GUI match.
 	 */
 	private JButton controlButton;
+
+	/**
+	 * The panel that shows the information about the two athletes in the match
+	 */
 	private JPanel athleteInfoPanel;
+
+	/**
+	 * The title that displays the current matchup
+	 */
 	private Title titleLabel;
 
 	/**

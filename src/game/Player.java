@@ -46,6 +46,8 @@ public class Player {
 
 	/**
 	 * Constructor for the player class
+	 * 
+	 * @param gameEnvironment The game environment the player object exists in
 	 */
 	public Player(GameEnvironment gameEnvironment) {
 		this.money = 0;

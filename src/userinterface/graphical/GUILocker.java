@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.swing.JButton;
 
-import enumeration.Location;
 import enumeration.Position;
 import game.Athlete;
 import game.Purchasable;
@@ -38,9 +37,13 @@ public class GUILocker extends GUILocation {
 	private GameLocker gameLocation;
 
 	/**
-	 * Components with dynamic content.
+	 * The explorer component that displays the player's athletes
 	 */
 	private PurchasableExplorer purchasableExplorer;
+
+	/**
+	 * The title of the locker gui
+	 */
 	private Title inventoryTitleLabel;
 
 	/**
@@ -61,13 +64,6 @@ public class GUILocker extends GUILocation {
 			}
 			purchasableExplorer.refresh();
 		}
-	}
-
-	/**
-	 * Instructs the game location to change the current location to the map.
-	 */
-	private void returnToMap() {
-		gameLocation.changeLocation(Location.MAP);
 	}
 
 	/**

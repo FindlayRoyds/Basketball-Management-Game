@@ -7,5 +7,24 @@ package enumeration;
  * @version 1.0, May 2023.
  */
 public enum Position {
-	SHORT_SHOOTER, LONG_SHOOTER, DUNKER, DRIBBLER, DEFENDER
+	/**
+	 * Specialises in layups
+	 */
+	SHORT_SHOOTER,
+	/**
+	 * Specialises in 3 pointers
+	 */
+	LONG_SHOOTER,
+	/**
+	 * Specialises in slam dunks
+	 */
+	DUNKER,
+	/**
+	 * Specialises in dribbling
+	 */
+	DRIBBLER,
+	/**
+	 * Specialises in defending against other athletes
+	 */
+	DEFENDER
 }

@@ -74,9 +74,8 @@ public class ComponentList extends JPanel {
 	 * Repopulates the background panel in the scroll panel with the correct
 	 * components
 	 * 
-	 * @param componentsToDisplay A list containing JPanels to be displayed in the
-	 *                            component list
-	 * @param indexToHighlight    The
+	 * componentsToDisplay: A list containing JPanels to be displayed in the
+	 * component list indexToHighlight: The
 	 */
 	public void refresh(List<JPanel> componentsToDisplay, Integer indexToHighlight, Consumer<Integer> onSelect) {
 		backgroundPanel.removeAll();

@@ -26,11 +26,23 @@ public class GUIEnd extends GUILocation {
 	private GameEnd gameLocation;
 
 	/**
-	 * Components accessed by the refresh method.
+	 * Displays the team name
 	 */
 	private JLabel teamNameLabel;
+
+	/**
+	 * Displays the player's final points
+	 */
 	private JLabel pointsLabel;
+
+	/**
+	 * Displays the player's final money
+	 */
 	private JLabel moneyLabel;
+
+	/**
+	 * Displays the length of the season played
+	 */
 	private JLabel seasonLengthLabel;
 
 	/**

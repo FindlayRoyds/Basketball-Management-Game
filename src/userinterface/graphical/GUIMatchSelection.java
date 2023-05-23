@@ -39,9 +39,21 @@ public class GUIMatchSelection extends GUILocation {
 	 * The components accessed by the refresh method.
 	 */
 	private JPanel playButtonsPanel;
+
+	/**
+	 * The panel that displays the teams the player can select from
+	 */
 	private JPanel teamDisplayPanel;
+
+	/**
+	 * The title of the gui
+	 */
 	private Title titleLabel;
-	JLabel canStartWarningLabel;
+
+	/**
+	 * The label that tells the user that they are unable to play
+	 */
+	private JLabel canStartWarningLabel;
 
 	/**
 	 * Constructor for GUIMatch. initializes the swing components for the design and

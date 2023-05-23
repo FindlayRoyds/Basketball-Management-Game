@@ -23,11 +23,23 @@ import game.Purchasable;
 @SuppressWarnings("serial")
 public class PurchasableExplorer extends JPanel {
 	/**
-	 * Components with dynamic content.
+	 * Components displaying information about the purchasables
 	 */
 	protected List<JPanel> purchasableInfoComponents;
+
+	/**
+	 * The list of available purchasables
+	 */
 	protected List<Purchasable> purchasables;
+
+	/**
+	 * The component list that displays the purchasables
+	 */
 	private ComponentList purchasableList;
+
+	/**
+	 * The supplier that returns the purchasables to display
+	 */
 	protected Supplier<List<Purchasable>> purchasableSupplier;
 
 	/**

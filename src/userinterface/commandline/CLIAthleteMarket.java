@@ -25,7 +25,9 @@ public class CLIAthleteMarket extends CLILocation {
 	/**
 	 * Constructor for CLIAthleteMarket
 	 * 
-	 * @param cliEnvironment
+	 * @param cliEnvironment The command line environment this cli location
+	 *                       interacts with
+	 * @param gameLocation   The game location this cli location is linked with
 	 */
 	public CLIAthleteMarket(GameLocation gameLocation, CLIEnvironment cliEnvironment) {
 		super(cliEnvironment);
@@ -36,8 +38,8 @@ public class CLIAthleteMarket extends CLILocation {
 	 * Displays a list of athlete names for the user to select one from. Returns the
 	 * list index of the selected athlete.
 	 * 
-	 * @param athletes A List of Athletes that can be selected.
-	 * @return The index of the selected Athlete in the athletes List.
+	 * athletes: A List of Athletes that can be selected. returns The index of the
+	 * selected Athlete in the athletes List.
 	 */
 	private Purchasable getAthleteSelection(Set<Purchasable> givenAthletes) {
 		List<Purchasable> athletes = new ArrayList<Purchasable>(givenAthletes);

@@ -35,10 +35,18 @@ public class GUIMap extends GUILocation {
 	private GameMap gameLocation;
 
 	/**
-	 * The components of the GUI accessed by the refresh method
+	 * The label that displays the player's money
 	 */
 	JLabel moneyLabel;
+
+	/**
+	 * The component that displays the number of weeks remaining
+	 */
 	JLabel weeksRemainingLabel;
+
+	/**
+	 * The component that displays the week number
+	 */
 	JLabel weekNumberLabel;
 
 	/**

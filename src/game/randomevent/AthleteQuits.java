@@ -20,7 +20,7 @@ public class AthleteQuits extends RandomEvent {
 	 * The constructor for the Athlete quits random event.
 	 * 
 	 * @param gameEnvironment The game environment the athlete belongs to
-	 * @param Athlete         The athlete the random event affects.
+	 * @param athlete         The athlete the random event affects.
 	 */
 	public AthleteQuits(GameEnvironment gameEnvironment, Athlete athlete) {
 		super(gameEnvironment);

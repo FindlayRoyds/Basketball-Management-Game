@@ -25,7 +25,8 @@ public class CLIBlackMarket extends CLILocation {
 	/**
 	 * Constructor for CLIBlackMarket
 	 * 
-	 * @param cliEnvironment
+	 * @param cliEnvironment The cli environment this cli location interacts with
+	 * @param gameLocation   The game location this cli location is linked with
 	 */
 	public CLIBlackMarket(GameLocation gameLocation, CLIEnvironment cliEnvironment) {
 		super(cliEnvironment);
@@ -36,7 +37,7 @@ public class CLIBlackMarket extends CLILocation {
 	 * Displays a list of item names for the user to select one from. Returns the
 	 * list index of the selected item.
 	 * 
-	 * @param items List of Items that can be selected.
+	 * @param givenItems List of Items that can be selected.
 	 * @return The index of the selected Item in the items List.
 	 */
 	Purchasable getItemSelection(Set<Purchasable> givenItems) {

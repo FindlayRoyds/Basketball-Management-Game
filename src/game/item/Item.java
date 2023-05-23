@@ -32,11 +32,11 @@ public abstract class Item extends Purchasable {
 	/**
 	 * Randomly generates a stat boost item or a bandaid item,
 	 * 
-	 * @param qualityLevel    The quality of the item in range: [0, 100]
-	 * @param GameEnvironment The game environment to which the item belongs. Used
-	 *                        for random number generation.
+	 * qualityLevel: The quality of the item in range: [0, 100] GameEnvironment: The
+	 * game environment to which the item belongs. Used for random number
+	 * generation.
 	 * 
-	 * @return A randomly generated legal item
+	 * returns A randomly generated legal item
 	 */
 	public static Function3<Integer, GameEnvironment, Purchasable> generateLegalItem = (qualityLevel,
 			gameEnvironment) -> {
@@ -51,10 +51,11 @@ public abstract class Item extends Purchasable {
 	/**
 	 * The constructor for Item.
 	 * 
-	 * @param itemName        The name of the item
-	 * @param itemIsLegal     Whether the item is legal or illegal
-	 * @param itemDescription Text describing the item
+	 * @param name            The name of the item
+	 * @param ssLegal         Whether the item is legal or illegal
+	 * @param description     Text describing the item
 	 * @param price           The cost of purchasing the item
+	 * @param gameEnvironment The game environment the item exists in
 	 */
 	public Item(String name, boolean isLegal, String description, int price, GameEnvironment gameEnvironment) {
 		super(price, isLegal);

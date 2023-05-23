@@ -15,6 +15,11 @@ import javax.swing.SwingConstants;
  */
 @SuppressWarnings("serial")
 public class Title extends JLabel {
+	/**
+	 * Component for displaying a title on a gui location
+	 * 
+	 * @param text The title to be displayed
+	 */
 	public Title(String text) {
 		setText(text);
 		setHorizontalAlignment(SwingConstants.CENTER);

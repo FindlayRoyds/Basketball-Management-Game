@@ -56,6 +56,8 @@ public class GameStart extends GameLocation {
 
 	/**
 	 * Constructor for Start
+	 * 
+	 * @param gamEnvironment The gameEnvironment the game location belongs to
 	 */
 	public GameStart(GameEnvironment gameEnvironment) {
 		super(gameEnvironment);

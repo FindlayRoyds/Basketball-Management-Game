@@ -21,10 +21,22 @@ import game.Team;
 import game.item.Steroid;
 import userinterface.graphical.GUIEnvironment;
 
+/**
+ * Tests the athlete class
+ */
 class AthleteTest {
+	/**
+	 * The game environment used for testing
+	 */
 	private GameEnvironment gameEnvironment;
+	/**
+	 * The athlete used for testing
+	 */
 	private Athlete athlete;
 
+	/**
+	 * Sets up a game environment and an athlete
+	 */
 	@BeforeEach
 	void setUp() {
 		gameEnvironment = new GameEnvironment(false);
@@ -32,6 +44,9 @@ class AthleteTest {
 		athlete = new Athlete("Test", Position.SHORT_SHOOTER, 0, gameEnvironment, 0);
 	}
 
+	/**
+	 * removes gui
+	 */
 	@AfterEach
 	void tearDown() {
 		JFrame frame = ((GUIEnvironment) gameEnvironment.getUIEnvironment()).getFrame();
@@ -39,6 +54,9 @@ class AthleteTest {
 		frame.dispose();
 	}
 
+	/**
+	 * test the constructor
+	 */
 	@Test
 	void constructorTest() {
 		assertEquals("Test", athlete.getName());
@@ -47,6 +65,9 @@ class AthleteTest {
 		assertEquals(0, athlete.getPrice());
 	}
 
+	/**
+	 * test generating athletes
+	 */
 	@Test
 	void generatorTest() {
 		athlete = (Athlete) Athlete.generateAthlete.apply(100, gameEnvironment);
@@ -63,6 +84,9 @@ class AthleteTest {
 		assertFalse(maximum == 0);
 	}
 
+	/**
+	 * test an athlete's description
+	 */
 	@Test
 	void statisticTest() {
 		athlete.setStatistic(Statistic.DEFENCE, 0);
@@ -77,6 +101,9 @@ class AthleteTest {
 		assertEquals(athlete.getStatistic(Statistic.DEFENCE), 57);
 	}
 
+	/**
+	 * test an athlete's description
+	 */
 	@Test
 	void staminaTest() {
 		athlete.setStamina(0);
@@ -108,6 +135,9 @@ class AthleteTest {
 		assertEquals(0, athlete.getStamina());
 	}
 
+	/**
+	 * test purchasing an athlete
+	 */
 	@Test
 	void purchaseTest() {
 		athlete.setPrice(100);
@@ -123,6 +153,9 @@ class AthleteTest {
 		athlete.purchase(player);
 	}
 
+	/**
+	 * test purchasing with full active team
+	 */
 	@Test
 	void purchaseFullActiveTest() {
 		gameEnvironment.setSeed(0);
@@ -138,6 +171,9 @@ class AthleteTest {
 		assertFalse(team.getReserveAthletes().isEmpty());
 	}
 
+	/**
+	 * test purchasing with full reserve team
+	 */
 	@Test
 	void purchaseFullReserveTest() {
 		gameEnvironment.setSeed(0);
@@ -152,6 +188,9 @@ class AthleteTest {
 		assertEquals(5, team.getReserveAthletes().size());
 	}
 
+	/**
+	 * test purchasing with a full team
+	 */
 	@Test
 	void purchaseFullTeamTest() {
 		gameEnvironment.setSeed(0);
@@ -170,6 +209,9 @@ class AthleteTest {
 		assertEquals(5, team.getReserveAthletes().size());
 	}
 
+	/**
+	 * test selling an athlete
+	 */
 	@Test
 	void sellTest() {
 		Player player = gameEnvironment.getPlayer();
@@ -188,18 +230,27 @@ class AthleteTest {
 		assertNull(team.getActiveAthletes().get(Position.SHORT_SHOOTER));
 	}
 
+	/**
+	 * test the athlete's description
+	 */
 	@Test
 	void descriptionTest() {
 		assertEquals(String.class, athlete.getDescription().getClass());
 		assertNotEquals("", athlete.getDescription());
 	}
 
+	/**
+	 * test getting the athlete's details
+	 */
 	@Test
 	void detailsTest() {
 		assertEquals(String.class, athlete.getDetails().getClass());
 		assertNotEquals("", athlete.getDetails());
 	}
 
+	/**
+	 * test getting the athlete's team
+	 */
 	@Test
 	void teamTest() {
 		Player player = gameEnvironment.getPlayer();
@@ -212,6 +263,9 @@ class AthleteTest {
 		assertEquals(team, athlete.getTeam());
 	}
 
+	/**
+	 * test getting the athlete's score during a match
+	 */
 	@Test
 	void matchScoreTest() {
 		for (Statistic statistic : Statistic.values()) {
@@ -233,6 +287,9 @@ class AthleteTest {
 		assertTrue(boostedScore > normalScore);
 	}
 
+	/**
+	 * test applying a steroid item to an athlete
+	 */
 	@Test
 	void steroidTest() {
 		assertFalse(athlete.getHasUsedSteroids());

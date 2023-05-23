@@ -34,14 +34,38 @@ public class GUIMarket extends GUILocation {
 	private GameMarket gameLocation;
 
 	/**
-	 * Components with dynamic content.
+	 * The explorer that displays the purchasables available to buy
 	 */
 	private PurchasableExplorer purchasableExplorer;
+
+	/**
+	 * The component that displays the market's name
+	 */
 	private Title marketTitle;
+
+	/**
+	 * The button to select a purchasable
+	 */
 	private JButton choosePurchasableButton;
+
+	/**
+	 * Whether the sell screen is being shown
+	 */
 	private boolean showSellScreen;
+
+	/**
+	 * The name of the market
+	 */
 	private String name;
+
+	/**
+	 * The button that swaps between sell and buy mode
+	 */
 	private JButton swapViewButton;
+
+	/**
+	 * The label that displays the player's money
+	 */
 	private JLabel moneyLabel;
 
 	/**
@@ -83,6 +107,7 @@ public class GUIMarket extends GUILocation {
 	 * 
 	 * @param gameLocation   The GUI location's corresponding game location class.
 	 * @param guiEnvironment The GUI environment to which the GUI location belongs.
+	 * @param name           The name of the gui market to be displayed
 	 */
 	public GUIMarket(GameLocation gameLocation, GUIEnvironment guiEnvironment, String name) {
 		super(guiEnvironment);

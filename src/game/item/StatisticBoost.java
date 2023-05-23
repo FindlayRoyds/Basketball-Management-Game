@@ -47,10 +47,14 @@ public class StatisticBoost extends Item {
 	/**
 	 * The constructor for StatisticBoost
 	 * 
-	 * @param name            The name of the statistic boost item
-	 * @param description     The text description given to the statistic boost item
-	 * @param price           The price the player gets charged to purchase the item
-	 * @param gameEnvironment The game environment the item exists in
+	 * @param name             The name of the statistic boost item
+	 * @param description      The text description given to the statistic boost
+	 *                         item
+	 * @param price            The price the player gets charged to purchase the
+	 *                         item
+	 * @param gameEnvironment  The game environment the item exists in
+	 * @param boostAmount      How much the item will boost an athlete's statistics
+	 * @param statisticToBoost The statistic the item boosts
 	 */
 	public StatisticBoost(String name, String description, int price, int boostAmount, Statistic statisticToBoost,
 			GameEnvironment gameEnvironment) {

@@ -23,7 +23,8 @@ public class CLIEnd extends CLILocation {
 	 * The constructor for the CLIEnd class. Calls the constructor of CLILocation
 	 * and sets the gameLocation property.
 	 * 
-	 * @param gameLocation The end screen game location
+	 * @param cliEnvironment The cli environment this cli location interacts with
+	 * @param gameLocation   The game location this cli location is linked with
 	 */
 	public CLIEnd(GameLocation gameLocation, CLIEnvironment cliEnvironment) {
 		super(cliEnvironment);

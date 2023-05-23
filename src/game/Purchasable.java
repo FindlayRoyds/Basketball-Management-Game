@@ -20,7 +20,9 @@ public abstract class Purchasable {
 	/**
 	 * A constructor for for Purchasable
 	 * 
-	 * @param price The price of the purchasable
+	 * @param price   The price of the purchasable
+	 * @param isLegal Whether the purchasable is legel (affacts what markets it is
+	 *                displayed in)
 	 */
 	public Purchasable(int price, boolean isLegal) {
 		this.price = price;

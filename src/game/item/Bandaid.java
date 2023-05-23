@@ -26,9 +26,9 @@ public class Bandaid extends Item {
 	/**
 	 * The constructor for Bandaid
 	 * 
-	 * @param itemIsLegal     Whether the item is legal or illegal
-	 * @param itemDescription Text describing the item
+	 * @param description     Text describing the item
 	 * @param price           The cost of purchasing the item
+	 * @param gameEnvironment The game environment the bandaid exists in
 	 */
 	public Bandaid(String description, int price, GameEnvironment gameEnvironment) {
 		super("Bandaid", true, description, price, gameEnvironment);

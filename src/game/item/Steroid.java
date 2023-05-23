@@ -32,8 +32,10 @@ public class Steroid extends Item {
 	/**
 	 * The constructor for Steroid
 	 * 
-	 * @param itemDescription The text description displayed with the item
+	 * @param description     The text description displayed with the item
 	 * @param price           The price it costs the player to purchase the steroid
+	 * @param boostAmount     How much the athlete's statistics are boosted
+	 * @param gameEnvironment The game environment the item exists in
 	 */
 	public Steroid(String description, int price, int boostAmount, GameEnvironment gameEnvironment) {
 		super("Steroid", false, description, price, gameEnvironment);
@@ -43,10 +45,9 @@ public class Steroid extends Item {
 	/**
 	 * Generates a Steroid item with random properties.
 	 * 
-	 * @param qualityLevel    The quality level of the item. Influences randomness
-	 *                        of generation
-	 * @param gameEnvironment The game environment the game is being created in
-	 * @return The randomly generated steroid purchasable item
+	 * qualityLevel: The quality level of the item. Influences randomness of
+	 * generation gameEnvironment: The game environment the game is being created in
+	 * returnd: The randomly generated steroid purchasable item
 	 */
 	public static Function3<Integer, GameEnvironment, Purchasable> generateSteroid = (qualityLevel,
 			gameEnvironment) -> {

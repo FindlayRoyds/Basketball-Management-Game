@@ -13,7 +13,7 @@ public class MiscUtil {
 	/**
 	 * Clamp an integer to the range: [lowerBound, upperBound]
 	 * 
-	 * @param Value      The value to be clamped
+	 * @param value      The value to be clamped
 	 * @param lowerBound The inclusive lower bound to clamp to
 	 * @param upperBound The inclusive upper bound to clamp to
 	 * @return The value clamped in range: [lowerBound, upperBound]
@@ -62,10 +62,10 @@ public class MiscUtil {
 	/**
 	 * Return a random integer in the range: [lowerBound, upperBound]
 	 * 
-	 * @param lowerBound
-	 * @param upperBound
-	 * @param rng
-	 * @return
+	 * @param lowerBound The lower bound for the returned integer
+	 * @param upperBound The upper bound for the returned integer
+	 * @param rng        The Random object to generate an integer
+	 * @return A randomly generated integer in range: [lowerBound, upperBound]
 	 */
 	public static int nextIntBounds(int lowerBound, int upperBound, Random rng) {
 		return rng.nextInt(upperBound - lowerBound + 1) + lowerBound;

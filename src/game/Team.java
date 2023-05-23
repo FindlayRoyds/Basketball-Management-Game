@@ -77,7 +77,8 @@ public class Team {
 	/**
 	 * Initializes an empty team with the given team name.
 	 * 
-	 * @param teamName The name of the team to be created.
+	 * @param teamName        The name of the team to be created.
+	 * @param gameEnvironment The game environment the team exists in
 	 */
 	public Team(GameEnvironment gameEnvironment, String teamName) {
 		this.gameEnvironment = gameEnvironment;
@@ -123,8 +124,6 @@ public class Team {
 
 	/**
 	 * Returns all the Purchasables belinging to the team (Athletes)
-	 * 
-	 * @return Set of purchasables of all Athletes on the Team.
 	 */
 	public Supplier<Set<Purchasable>> getAllPurchasables = () -> {
 		// Cast result of getAllAthletes to a set of purchasables
@@ -165,6 +164,8 @@ public class Team {
 	 * Athlete's team property to this Team.
 	 * 
 	 * @param athlete The Athlete to be added.
+	 * 
+	 * @return Whether or not the athlete was added
 	 */
 	public boolean addAthleteToReserve(Athlete athlete) {
 		if (reserveAthletes.size() < MAX_NUMBER_OF_RESERVES) {
@@ -205,6 +206,7 @@ public class Team {
 	 * with an arbitrary Athlete from the reserves
 	 * 
 	 * @param athlete The Athlete to move.
+	 * @return Whether or not the athlete was moved
 	 */
 	public boolean moveToReserve(Athlete athlete) {
 		// Look for athlete in activeAthletes.
@@ -233,7 +235,8 @@ public class Team {
 	 * First removes the given Athlete from the Team if it is found, then adds it to
 	 * the Team's activeAthletes.
 	 * 
-	 * @param athlete The Athlete to move.
+	 * @param athlete  The Athlete to move.
+	 * @param position The position the athlete is moved into
 	 */
 	public void moveToActive(Athlete athlete, Position position) {
 		// Look for athlete in reserveAthletes.
@@ -263,7 +266,7 @@ public class Team {
 	 * Generates a random Team name. Generated names combine random words from two
 	 * word lists such that they are alliterative.
 	 * 
-	 * @param seed The random seed used for picking random words.
+	 * @param rng The Random object used for generating the name
 	 * @return A randomly generated Team name.
 	 */
 	private static String generateTeamName(Random rng) {
@@ -277,7 +280,6 @@ public class Team {
 	 * @param qualityLevel    A float in the range 0-1 inclusive. A higher
 	 *                        qualityLevel will make Athletes more likely to get
 	 *                        higher stats.
-	 * @param seed            The random seed used for generating Athletes.
 	 * @param gameEnvironment The GameEnvironment to which the Team will belong.
 	 *                        This is needed so that each Athlete can access the
 	 *                        gameEnvironment.
