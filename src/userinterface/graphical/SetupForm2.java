@@ -1,5 +1,6 @@
 package userinterface.graphical;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -97,16 +98,18 @@ public class SetupForm2 extends GUILocation {
 				}
 			}
 		});
-		chooseAthleteButton.setBounds(550, 475, 120, 27);
+		chooseAthleteButton.setBounds(510, 480, 170, 36);
+		chooseAthleteButton.setBackground(new Color(225, 222, 222));
 		add(chooseAthleteButton);
 
 		remainingPositionsLabel = new JLabel();
-		remainingPositionsLabel.setBounds(265, 475, 500, 27);
+		remainingPositionsLabel.setBounds(220, 485, 500, 27);
 		updateRemainingPositionsLabel();
 		add(remainingPositionsLabel);
 
 		purchasableExplorer = new PurchasableExplorer(
 				() -> new ArrayList<Purchasable>(gameLocation.getStartingAthletes()));
+		purchasableExplorer.setBounds(0, 0, 800, 550);
 		add(purchasableExplorer);
 	}
 }

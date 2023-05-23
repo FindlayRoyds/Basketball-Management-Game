@@ -1,5 +1,6 @@
 package userinterface.graphical;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -108,11 +109,12 @@ public class GUILocker extends GUILocation {
 				moveAthlete();
 			}
 		});
-		moveAthleteButton.setBounds(450, 500, 120, 27);
+		moveAthleteButton.setBounds(510, 558, 170, 36);
+		moveAthleteButton.setBackground(new Color(225, 222, 222));
+
 		add(moveAthleteButton);
 
 		purchasableExplorer = new AthleteExplorer(() -> getAthletes());
-		purchasableExplorer.setBounds(0, 60, 800, 420);
 		refresh();
 		add(purchasableExplorer);
 	}

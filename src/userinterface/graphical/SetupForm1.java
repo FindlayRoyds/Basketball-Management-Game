@@ -135,6 +135,7 @@ public class SetupForm1 extends GUILocation {
 
 		JButton submitBtn = new JButton("Submit");
 		submitBtn.setFont(new Font("Dialog", Font.BOLD, 16));
+		submitBtn.setBackground(new Color(225, 222, 222));
 		submitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				String teamName = teamNameTextField.getText();
