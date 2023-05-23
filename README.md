@@ -4,7 +4,7 @@ A basketball team management game written in Java by Findlay Royds and Jake van 
 ### Running the game
 1. Ensure Java 17 is installed on the machine
 1. Open the project zip folder in a terminal window
-1. Run `java -jar fro33_jva83_BasketballGame.jar`
+1. Run `java -jar fro33_jva83_SportsTournament.jar`
 1. If you wish to run the game in CLI mode, add the `-cli` flag to the above command
 
 ### Loading the project into Eclipse
