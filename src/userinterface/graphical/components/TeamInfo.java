@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -28,20 +29,21 @@ public class TeamInfo extends JPanel {
 	 * @param team   The team whose info is to be displayed.
 	 */
 	public TeamInfo(Rectangle bounds, Team team) {
-		setBackground(new Color(128, 128, 128));
+		setBackground(new Color(238, 238, 238));
+		setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
 		setLayout(null);
 
-		JLabel nameLabel = new JLabel(team.getName());
+		JLabel nameLabel = new JLabel("<html><center>" + team.getName() + "</center></html>");
 		nameLabel.setFont(new Font("Lucida Grande", Font.BOLD, 18));
-		nameLabel.setForeground(new Color(255, 255, 255));
+		nameLabel.setForeground(new Color(60, 60, 60));
 		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		nameLabel.setBounds(6, 6, 238, 32);
+		nameLabel.setBounds(6, 6, 238, 64);
 		add(nameLabel);
 
-		Rectangle listBounds = new Rectangle(6, 50, bounds.width - 12, 62 * 5);
+		Rectangle listBounds = new Rectangle(6, 86, bounds.width - 12, 330);
 		List<JPanel> athleteInfoComponents = team.getActiveAthletes().values().stream()
-				.map(athlete -> new PurchasableInfoSmall(athlete, false)).collect(Collectors.toList());
-		ComponentList athleteList = new ComponentList(athleteInfoComponents, 50, listBounds);
+				.map(athlete -> new AthleteInfoSmall(athlete, false)).collect(Collectors.toList());
+		ComponentList athleteList = new ComponentList(athleteInfoComponents, 80, listBounds);
 		add(athleteList);
 	}
 }

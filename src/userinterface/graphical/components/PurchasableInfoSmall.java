@@ -31,23 +31,22 @@ public class PurchasableInfoSmall extends JPanel {
 	 */
 	public PurchasableInfoSmall(Purchasable purchasable, boolean showPrice) {
 		setBackground(new Color(225, 222, 222));
-		setLayout(new GridLayout(0, 1, 0, 0));
+		setLayout(new GridLayout(0, 1, 3, 3));
 
 		// Create a label for the name of the purchasable
-		// <html> makes the text go onto a new line if it's too long
-		JLabel nameLabel = new JLabel("<html>" + purchasable.getName() + "</html>");
+		JLabel nameLabel = new JLabel(purchasable.getName());
 		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		nameLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		nameLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 		nameLabel.setAlignmentY(Component.TOP_ALIGNMENT);
 		add(nameLabel);
 
 		// Only create price label if the price of the purchasable should be shown
-		// if (showPrice) {
-		JLabel priceLabel = new JLabel("$" + purchasable.getPrice());
-		priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		priceLabel.setForeground(new Color(0, 100, 0));
-		priceLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		add(priceLabel);
-		// }
+		if (showPrice) {
+			JLabel priceLabel = new JLabel("$" + purchasable.getPrice() + "   ");
+			priceLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+			priceLabel.setForeground(new Color(0, 100, 0));
+			priceLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+			add(priceLabel);
+		}
 	}
 }
