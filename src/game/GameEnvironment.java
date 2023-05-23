@@ -87,9 +87,7 @@ public class GameEnvironment {
 	 * @param args The command line arguments.
 	 */
 	public static void main(String[] args) {
-		boolean useCli = false;
-		if (args.length > 0)
-			useCli = args[0] == "-cli";
+		boolean useCli = args.length > 0 && args[0].equals("-cli");
 		GameEnvironment gameEnvironment = new GameEnvironment(useCli);
 
 		// Let the user start up the game
