@@ -16,6 +16,7 @@ import game.item.Item;
 import game.location.GameInventory;
 import game.location.GameLocation;
 import userinterface.graphical.components.PurchasableExplorer;
+import userinterface.graphical.components.ReturnToMapButton;
 
 /**
  * A class that defines the inventory GUI location. It contains a
@@ -91,14 +92,8 @@ public class GUIInventory extends GUILocation {
 		inventoryTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(inventoryTitleLabel);
 
-		JButton returnToMapButton = new JButton("Return to map");
-		returnToMapButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				returnToMap();
-			}
-		});
-		returnToMapButton.setBounds(100, 500, 120, 27);
-		add(returnToMapButton);
+		ReturnToMapButton backButton = new ReturnToMapButton(gameLocation);
+		add(backButton);
 
 		JButton useItemButton = new JButton("Use item");
 		useItemButton.addActionListener(new ActionListener() {

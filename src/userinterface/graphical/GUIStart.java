@@ -42,7 +42,7 @@ public class GUIStart extends GUILocation {
 			gameLocation.progressWeek();
 			gameLocation.changeLocation(Location.MAP);
 		});
-		form2.setBounds(0, 50, 800, 600);
+		form2.setBounds(0, 65, 800, 550);
 		add(form2);
 
 		form2.setVisible(true);
@@ -62,7 +62,7 @@ public class GUIStart extends GUILocation {
 		setPreferredSize(new Dimension(800, 600));
 
 		form1 = new SetupForm1(this.gameLocation, guiEnvironment, () -> showForm2());
-		form1.setBounds(211, 68, 414, 600);
+		form1.setBounds(0, 70, 800, 550);
 		add(form1);
 
 		JLabel titleLabel = new JLabel("Game Setup");

@@ -102,7 +102,7 @@ public class GUIEnvironment implements UIEnvironment {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 800, 600);
+		frame.setBounds(100, 100, 800, 630);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 	}

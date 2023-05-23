@@ -14,10 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import enumeration.Location;
 import game.Team;
 import game.location.GameLocation;
 import game.location.GameMatchSelection;
+import userinterface.graphical.components.ReturnToMapButton;
 import userinterface.graphical.components.TeamInfo;
 
 /**
@@ -66,14 +66,7 @@ public class GUIMatchSelection extends GUILocation {
 		add(playButtonsPanel);
 		playButtonsPanel.setLayout(new GridLayout(0, 3, 112, 0));
 
-		JButton backButton = new JButton("Map");
-		backButton.setBackground(new Color(139, 0, 0));
-		backButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				gameLocation.changeLocation(Location.MAP);
-			}
-		});
-		backButton.setBounds(6, 558, 117, 36);
+		ReturnToMapButton backButton = new ReturnToMapButton(gameLocation);
 		add(backButton);
 
 		teamDisplayPanel = new JPanel();
