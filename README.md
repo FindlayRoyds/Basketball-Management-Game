@@ -16,7 +16,7 @@ The documentation for the project is generated using Javadoc and can be found in
 ## Testing
 This project utilizes unit testing with JUnit 5 to ensure the quality and correctness of the code.
 
-### Loading the project into Eclipse
+## Loading the project into Eclipse
 1. Ensure Eclipse and Java 17 are installed
 1. Clone the repository into a new directory
 1. Open Eclipse
